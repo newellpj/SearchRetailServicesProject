@@ -88,6 +88,10 @@
 	font-style: italic ;
 }
 
+option { 
+    /* Whatever color  you want */
+    background-color: white;
+}
 
 #myMenu ul {
     list-style-type: none;
