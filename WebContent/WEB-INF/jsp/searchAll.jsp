@@ -62,22 +62,14 @@
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
 	
 		<table style="width:100%;">
-			<tr><td>Search a Book to Review</td></tr>		
+		
 				<tr>
 					<td>
 						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 7px 0px 0px 7px !important;" id="searchAllSelect"></select>
 						<input id="searchText" style="width:80% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='searchText'>
-						<span class="glyphicon glyphicon-search iconspan2" style="margin-left:-4px;"></span>
-						
-						<button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" 
-								style="color: width: 100px; height: 32px; padding:7px !important; background-color: #A2C5D0" value="Search.." > 
-								<span class="glyphicon glyphicon-eye-open" ></span>Search...
-						</button>
-						
-						<button id="resetSearch" class="resetSearch"style="color:white; width: 100px; height: 32px; padding:7px !important; background-color: #A2C5D0" 
-									name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
-									<span class="glyphicon glyphicon-erase"></span>Reset
-						</button>
+						<button id="searchAllBtn" style="margin-left: -3px; margin-bottom: -12px; background-color: #A2C5D0; padding-top: 7px !important; color: #3D3C3A; border-radius: 0px 7px 7px 0px;" > 
+						<span class="glyphicon glyphicon-search" style="padding-top: 1px !important;"></span></button>
+				
 						
 					</td>
 		
