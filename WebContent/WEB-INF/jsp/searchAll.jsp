@@ -9,12 +9,15 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/jquery.bxslider.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
 <script type="text/javascript" src="./presentationResources/js/reviews.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery.bxslider.min.js"></script>
+
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Search all</title>
@@ -29,7 +32,7 @@
 	
 		populateSearchAllOptions();
 
-		
+		$('.bxslider').bxSlider();
 		   
 	});
 	
@@ -80,6 +83,14 @@
 
 			
 		</form:form>
+		
+		<ul class="bxslider">
+  <li><img src="./presentationResources/images/pic1.jpg" /></li>
+  <li><img src="./presentationResources/images/pic2.jpg" /></li>
+  <li><img src="./presentationResources/images/pic3.jpg" /></li>
+  <li><img src="./presentationResources/images/pic4.jpg" /></li>
+</ul>
+		
 </div>	
 <div id="resultsSection" class="resultsSection">
 		<form:form id="searchResults" class="searchResults">
