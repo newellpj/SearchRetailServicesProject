@@ -5,10 +5,26 @@
     },
     "outline": {
       
+    },
+    "lint": {
+      "config": {
+        
+      }
+    },
+    "eslint": {
+      "config": {
+        
+      }
+    },
+    "jscs": {
+      "config": {
+        
+      }
     }
   },
   "libs": [
     "ecma5",
     "browser"
-  ]
+  ],
+  "ecmaVersion": 6
 }
