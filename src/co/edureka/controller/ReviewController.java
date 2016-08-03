@@ -1,7 +1,6 @@
 package co.edureka.controller;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +47,14 @@ public class ReviewController {
 		log.info("we getting in here reviewsAddBook?");
 		ModelAndView model = new ModelAndView();		
 		model.setViewName("reviewsAddBook");
+		return model;
+	}
+	
+	@RequestMapping(value = { "/searchAll"}, method = RequestMethod.GET)
+	public ModelAndView addSearchAllPage() {
+		log.info("we getting in here add search all page?");
+		ModelAndView model = new ModelAndView();		
+		model.setViewName("searchAll");
 		return model;
 	}
 
