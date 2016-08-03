@@ -24,21 +24,10 @@
 	$(document).ready(function() {
 
 	
-var html = $(".bookRevList").html();
+	   var html = $(".bookRevList").html();
 		 
-	//  if(html != 'undefined' && html != null){
-	//		
-		//  $('.search-box').jscroll({		  
-		//	loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
-		//  });
-	//	  
-		 // $('.search').jscroll();
-	//	  
-	//   }
-
 	
-	
-		searchPageReadyInit();
+		populateSearchAllOptions();
 
 		
 		   
@@ -76,16 +65,12 @@ var html = $(".bookRevList").html();
 		<table style="width:100%;">
 			<tr><td>Search a Book to Review</td></tr>		
 				<tr>
-					<td>Search:
-					<input id="titleText" style="width:80% !important;"  type='text' name='titleText'><span class="glyphicon glyphicon-search iconspan2"></span>
-					
-					<select style="width:140px;" id="genreSelect"></select></td>
-							
-					
+					<td>
+						<select style="width:40px; height:32px; background-color: #A2C5D0; border-radius: 7px 0px 0px 7px !important;" id="searchAllSelect"></select>
+						<input id="titleText" style="width:85% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='titleText'><span class="glyphicon glyphicon-search iconspan2"></span>
+					</td>
+		
 				</tr>
-				
-						
-			
 			</table>
 			
 			  <div class="tagSearches" style="margin-left:200px !important;"> 
