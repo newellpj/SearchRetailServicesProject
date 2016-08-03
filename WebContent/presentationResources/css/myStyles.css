@@ -155,8 +155,13 @@ select {
 	border-left: 0.5px solid #c3c3c3;
 <!--	border-bottom: 0.5px solid #c3c3c3; -->
 	
-	
-	
+}
+
+
+.bxslider li{
+	max-height: auto !important; 
+	width: 520px !important;
+	position:relative;
 }
 
 
