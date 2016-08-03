@@ -271,14 +271,14 @@ function noBookToReview(){
     }
 
 	function populateSearchAllOptions(){
-					myOptions = [{ text: 'All', value: 'All'}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
+		
+		myOptions = [{ text: 'All', value: 'All'}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
 							 {text : 'Biography', value: 'Biography'}, {text : 'Philosophy', value: 'Philosophy'},
 							 {text : 'Romance', value: 'Romance'}];		
 		
-		
 		$.each(myOptions, function(i, el) { 
 		      
-			   $('#searchAllSelect').append( new Option(el.text,el.value) );
+			   $('#searchAllSelect').append( new Option(el.text, el.value));
 		});	
 	}
 	

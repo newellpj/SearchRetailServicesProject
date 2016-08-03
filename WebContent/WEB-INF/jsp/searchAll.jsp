@@ -49,7 +49,6 @@
 </head>
 <body background="./presentationResources/images/bgimg.jpg" >
 
-<br/>
 	<div id="all-search-box" class="all-search-box">
 
 
@@ -66,28 +65,25 @@
 			<tr><td>Search a Book to Review</td></tr>		
 				<tr>
 					<td>
-						<select style="width:40px; height:32px; background-color: #A2C5D0; border-radius: 7px 0px 0px 7px !important;" id="searchAllSelect"></select>
-						<input id="titleText" style="width:85% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='titleText'><span class="glyphicon glyphicon-search iconspan2"></span>
+						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 7px 0px 0px 7px !important;" id="searchAllSelect"></select>
+						<input id="searchText" style="width:80% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='searchText'>
+						<span class="glyphicon glyphicon-search iconspan2" style="margin-left:-4px;"></span>
+						
+						<button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" 
+								style="color: width: 100px; height: 32px; padding:7px !important; background-color: #A2C5D0" value="Search.." > 
+								<span class="glyphicon glyphicon-eye-open" ></span>Search...
+						</button>
+						
+						<button id="resetSearch" class="resetSearch"style="color:white; width: 100px; height: 32px; padding:7px !important; background-color: #A2C5D0" 
+									name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
+									<span class="glyphicon glyphicon-erase"></span>Reset
+						</button>
+						
 					</td>
 		
 				</tr>
 			</table>
-			
-			  <div class="tagSearches" style="margin-left:200px !important;"> 
-						<table width="100%">
-							<tr>
-								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 
-								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
-								</button>
-								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
-										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
-								</button>
-								</td>
-									
-	
-							</tr>
-						</table>
-					</div>		
+		
 			<br/>
 
 			
