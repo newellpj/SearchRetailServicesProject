@@ -305,7 +305,27 @@ function noBookToReview(){
 				success:  function(feedMessageArr) {
 				    $(dlg).dialog("close");
 					//window.location.href = 'reviewsReviewBook';
-					alert("The feed message array : "+feedMessageArr);
+					
+	//private String title;
+	//private String description;
+	//private String link;
+	//private String url;
+	//private String author;
+	//private String guid;
+					
+					//alert("feedMessageArr.length : "+feedMessageArr.length);
+					
+					for(var i = 0; feedMessageArr.length > i ;i++){
+						//alert("### The feed message array : "+feedMessageArr[i]['title']);
+						$("#feedsSliderSegment ul").append("<li><p><b>"+feedMessageArr[i]['title']+"</b></p><p>"+feedMessageArr[i]['description']+"</p></li>");	
+					}
+					
+					document.getElementById('feedsSliderSegment').style.visibility = "visible";
+					
+					$('.bxslider2').bxSlider({
+						captions: true
+					});
+					//alert("The feed message array : "+feedMessageArr[0]['title']);
 				 },
 
 			 error: function(e){
@@ -324,7 +344,7 @@ function noBookToReview(){
 								'class': 'btn btn-primary',
 								click: function(e) {
 									
-									alert();
+								
 									
 									$(this).dialog("close");
 									

@@ -120,6 +120,9 @@ select {
    border-radius: 8px;
 }
 
+
+<!-- button:focus {outline:0; border-radius: 7px;} -->
+
 #reviews {
  	font-style: italic;
 }
@@ -164,6 +167,11 @@ select {
 	position:relative;
 }
 
+.bxslider2 li{
+	max-height: auto !important; 
+	width: 520px !important;
+	position:relative;
+}
 
 
 #myMenu{

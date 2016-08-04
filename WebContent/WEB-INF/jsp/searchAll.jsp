@@ -78,9 +78,9 @@
 		
 				<tr>
 					<td>
-						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 7px 0px 0px 7px !important;" id="searchAllSelect"></select>
+						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 0px 0px 0px 0px !important;" id="searchAllSelect"></select>
 						<input id="searchText" style="width:85% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='searchText'>
-						<button id="searchAllBtn" style="margin-left: -4px; margin-bottom: -12px; background-color: #A2C5D0; padding-top: 6px !important; 
+						<button id="searchAllBtn" style="margin-left: -4px; background-color: #A2C5D0; padding-top: 6px !important; padding-bottom: 11px !important; 
 						        color: #3D3C3A; border-radius: 0px 7px 7px 0px;" type="button" onclick="getRSSFeed();" > 
 						<span class="glyphicon glyphicon-search" style="padding-top: 1px !important;"></span></button>
 				
@@ -94,15 +94,21 @@
 
 			
 		</form:form>
-		
-  <ul class="bxslider">
+	
+	<div id="feedsSliderSegment" style="visibility:hidden;">
+	   <ul id="feedsSlider" class="bxslider2" >
+		 
+	  </ul>
+	</div>	
+	
+  <ul id="suggestedSlider" class="bxslider">
 	  <li><img src="./presentationResources/images/pic1.jpg" width="500" title="Test picture caption 1" /></li>
 	  <li><img src="./presentationResources/images/pic2.jpg" width="500" title="Test picture caption 2" /></li>
 	  <li><img src="./presentationResources/images/pic3.jpg" width="500" title="Test picture caption 3" /></li>
 	  <li><img src="./presentationResources/images/pic4.jpg" width="500" title="Test picture caption 4" /></li>
 	  <li><img src="./presentationResources/images/pic5.jpg" width="500" title="Test picture caption 5" /></li>
   </ul>
-		
+
 </div>	
 <div id="resultsSection" class="resultsSection">
 		<form:form id="searchResults" class="searchResults">
