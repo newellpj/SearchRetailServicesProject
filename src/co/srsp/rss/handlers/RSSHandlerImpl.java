@@ -31,22 +31,27 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 		FeedMessage feedMsg = null;		
 				
 		try{
-			SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
 			
+			SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
+	         System.out.println("The feed is "+feed);
+	         System.out.println("The feed is "+feed.getEntries().size());
 			feedArr = new FeedMessage[feed.getEntries().size()];
 			
 			int count = 0;
 			
 			for(SyndEntry syndEntry : feed.getEntries()){
-				feedArr[count].setAuthor(syndEntry.getAuthor());
-				feedArr[count].setTitle(syndEntry.getTitle());
-				feedArr[count].setDescription(syndEntry.getDescription().getValue());
-				feedArr[count].setLink(syndEntry.getLink());
 				
+				feedMsg = new FeedMessage();
+				feedMsg.setAuthor(syndEntry.getAuthor());
+				feedMsg.setTitle(syndEntry.getTitle());
+				feedMsg.setDescription(syndEntry.getDescription().getValue());
+				feedMsg.setLink(syndEntry.getLink());
+
 				if(syndEntry.getEnclosures() != null && syndEntry.getEnclosures().size() > 0){
-					feedArr[count].setUrl(syndEntry.getEnclosures().get(0).getUrl());
+					feedMsg.setUrl(syndEntry.getEnclosures().get(0).getUrl());
 				}
 				
+				feedArr[count] = feedMsg;		
 				count++;
 			}
 			
