@@ -38,6 +38,11 @@
 		$('.bxslider').bxSlider({
 			 captions: true
 		});
+		
+		$('#searchAllSelect').change(function(){	
+			var width = getSearchAllSelectOptionsToPixelsMapping($('select option:selected').text());			
+			document.getElementById('searchAllSelect').style.width = width;
+		});
 		   
 	});
 	

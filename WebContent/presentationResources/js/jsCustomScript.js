@@ -1,4 +1,6 @@
 
+var searchAllMap = {};
+
 function jscroller(){
  $('.infinite-scroll').jscroll({
      loadingHtml: "<div class='ajax-loader-2 help-inline pull-right'> Loading...'</div>",
@@ -353,16 +355,37 @@ function noBookToReview(){
 			});  
 	}
 	
+	function getSearchAllSelectOptionsToPixelsMapping(selectedText){
+		return searchAllMap[selectedText];
+	}
+	
 	function populateSearchAllOptions(){
 		
-		myOptions = [{ text: 'All', value: 'All'}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
-							 {text : 'Biography', value: 'Biography'}, {text : 'Philosophy', value: 'Philosophy'},
-							 {text : 'Romance', value: 'Romance'}];		
+		myOptions = [{ text: 'All', value: 'All'}, 
+							 {text: 'Image of Day', value: 'https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss'}, 
+							 {text : 'Education', value: 'https://www.nasa.gov/rss/dyn/educationnews.rss'},
+							 {text : 'Breaking News', value: 'https://www.nasa.gov/rss/dyn/breaking_news.rss'}, 
+							 {text : 'Earth', value: 'https://www.nasa.gov/rss/dyn/earth.rss'},
+							 {text : 'Solar System', value: 'https://www.nasa.gov/rss/dyn/solar_system.rss'},
+							 {text : 'Shuttle Station', value: 'https://www.nasa.gov/rss/dyn/shuttle_station.rss'},
+							 {text : 'Aeronautics', value: 'https://www.nasa.gov/rss/dyn/aeronautics.rss'}];		
 		
 		$.each(myOptions, function(i, el) { 
 		      
 			   $('#searchAllSelect').append( new Option(el.text, el.value));
 		});	
+		
+		
+		
+		searchAllMap['All'] = '40px';
+		searchAllMap['Image of Day'] = '110px';
+		searchAllMap['Education'] = '90px';
+		searchAllMap['Breaking News'] = '120px';
+		searchAllMap['Earth'] = '60px';
+		searchAllMap['Solar System'] = '112px';
+		searchAllMap['Shuttle Station'] = '120px';
+		searchAllMap['Aeronautics'] = '100px';
+	
 	}
 	
 function renderTagList(obj){
