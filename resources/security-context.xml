@@ -59,6 +59,6 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-<beans:bean id="myAuthenticationSuccessHandler"  class="co.edureka.config.SimpleUrlAuthenticationSuccessHandler" />
+<beans:bean id="myAuthenticationSuccessHandler"  class="co.srsp.config.SimpleUrlAuthenticationSuccessHandler" />
 
 </beans>
