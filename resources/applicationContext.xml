@@ -61,6 +61,10 @@
    
    		<bean id="reviewsController" class="co.srsp.controller.ReviewController">  
 	    </bean>
+	    
+	    <bean id="reviewsController" class="co.srsp.controller.FeedsController">  
+	    </bean>
+	    
 	   
 	   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
 	   		<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />

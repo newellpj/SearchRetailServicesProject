@@ -271,15 +271,83 @@ function noBookToReview(){
     }
 
 	function getRSSFeed(){
-		$.getFeed({
-		   url: 'http://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss',
-		   success: function(feed) {
-			  alert(feed.title);
-		   },
-		   error: function(err){
-			   alert("error occured");
-		   }
-		});
+		
+		var rssFeedURL = $('#searchAllSelect').val();
+		var rssFeedName = $('#searchAllSelect option:selected').text();
+		
+		//.attr('label')
+
+		var dlg = $("<div></div>").dialog({
+				hide: 'fade',
+				maxWidth: 300,
+				modal: true,
+				show: 'fade',
+				title: 'Retrieving '+rssFeedName+' feeds',
+				width: ( ('__proto__' in {}) ? '300' : 300 )
+			});
+
+			$(dlg).parent().find('button').remove();
+			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Adding a book review </p></div>");	
+			$(dlg).dialog("open");
+			
+			$.ajax({
+				url: rssFeed,
+				dataType: 'JSON',
+				data: { 
+					rssFeedURL: rssFeedURL,
+					rssFeedName: rssFeedName
+				},
+				processData: true,
+				contentType: 'application/json; charset=utf-8',
+				type: 'GET',
+				success:  function(feedMessageArr) {
+				    $(dlg).dialog("close");
+					//window.location.href = 'reviewsReviewBook';
+					alert("The feed message array : "+feedMessageArr);
+				 },
+
+			 error: function(e){
+
+		
+					$(dlg).dialog("close");
+
+					var errorDialog = $("<div></div>").dialog({
+							hide: 'fade',
+							maxWidth: 300,
+							modal: true,
+							show: 'fade',
+							open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+								buttons: [
+							{
+								'class': 'btn btn-primary',
+								click: function(e) {
+									$(this).dialog("close");
+									
+								
+								},
+								text: 'OK'
+							}
+						
+						],	
+							title: 'Could NOT add book review!',
+							width: ( 300 )
+						});
+
+						
+						
+						var msg = e.errorMessage;
+						
+						if('undefined' == msg || msg == null){
+								msg = "There was an error adding the book review";
+						}
+						
+						$(errorDialog).html('<p>'+msg+'</p>');
+				        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
+				        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
+						 $(errorDialog).dialog("open");
+				         window.parent.location.href = 'logout'; 
+			 }
+			});  
 	}
 	
 	function populateSearchAllOptions(){
