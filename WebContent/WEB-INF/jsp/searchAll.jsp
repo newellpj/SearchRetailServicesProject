@@ -13,10 +13,13 @@
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
-<script type="text/javascript" src="./presentationResources/js/reviews.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jsCustomScript.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.bxslider.min.js"></script>
+
+
+
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -32,7 +35,9 @@
 	
 		populateSearchAllOptions();
 
-		$('.bxslider').bxSlider();
+		$('.bxslider').bxSlider({
+			 captions: true
+		});
 		   
 	});
 	
@@ -70,7 +75,8 @@
 					<td>
 						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 7px 0px 0px 7px !important;" id="searchAllSelect"></select>
 						<input id="searchText" style="width:80% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='searchText'>
-						<button id="searchAllBtn" style="margin-left: -3px; margin-bottom: -12px; background-color: #A2C5D0; padding-top: 7px !important; color: #3D3C3A; border-radius: 0px 7px 7px 0px;" > 
+						<button id="searchAllBtn" style="margin-left: -3px; margin-bottom: -12px; background-color: #A2C5D0; padding-top: 7px !important; 
+						        color: #3D3C3A; border-radius: 0px 7px 7px 0px;" type="button" onclick="getRSSFeed();" > 
 						<span class="glyphicon glyphicon-search" style="padding-top: 1px !important;"></span></button>
 				
 						
@@ -84,12 +90,13 @@
 			
 		</form:form>
 		
-		<ul class="bxslider">
-  <li><img src="./presentationResources/images/pic1.jpg" /></li>
-  <li><img src="./presentationResources/images/pic2.jpg" /></li>
-  <li><img src="./presentationResources/images/pic3.jpg" /></li>
-  <li><img src="./presentationResources/images/pic4.jpg" /></li>
-</ul>
+  <ul class="bxslider">
+	  <li><img src="./presentationResources/images/pic1.jpg" width="500" /></li>
+	  <li><img src="./presentationResources/images/pic2.jpg" width="500" /></li>
+	  <li><img src="./presentationResources/images/pic3.jpg" width="500" /></li>
+	  <li><img src="./presentationResources/images/pic4.jpg" title="Jam it in homes" width="500" /></li>
+	  <li><img src="./presentationResources/images/pic5.jpg" title="Jam it in homes" width="500" /></li>
+  </ul>
 		
 </div>	
 <div id="resultsSection" class="resultsSection">

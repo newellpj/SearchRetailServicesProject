@@ -14,8 +14,7 @@
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
-<script type="text/javascript" src="./presentationResources/js/reviews.js"></script>
-<script type="text/javascript" src="./presentationResources/js/reviews.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jsCustomScript.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
 

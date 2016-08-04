@@ -270,6 +270,18 @@ function noBookToReview(){
         });
     }
 
+	function getRSSFeed(){
+		$.getFeed({
+		   url: 'http://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss',
+		   success: function(feed) {
+			  alert(feed.title);
+		   },
+		   error: function(err){
+			   alert("error occured");
+		   }
+		});
+	}
+	
 	function populateSearchAllOptions(){
 		
 		myOptions = [{ text: 'All', value: 'All'}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
