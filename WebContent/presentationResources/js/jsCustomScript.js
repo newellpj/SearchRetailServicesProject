@@ -287,11 +287,11 @@ function noBookToReview(){
 			});
 
 			$(dlg).parent().find('button').remove();
-			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Adding a book review </p></div>");	
+			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>finding feeds... </p></div>");	
 			$(dlg).dialog("open");
 			
 			$.ajax({
-				url: rssFeed,
+				url: 'getFeeds',
 				dataType: 'JSON',
 				data: { 
 					rssFeedURL: rssFeedURL,
@@ -321,6 +321,9 @@ function noBookToReview(){
 							{
 								'class': 'btn btn-primary',
 								click: function(e) {
+									
+									alert();
+									
 									$(this).dialog("close");
 									
 								

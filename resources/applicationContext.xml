@@ -62,7 +62,7 @@
    		<bean id="reviewsController" class="co.srsp.controller.ReviewController">  
 	    </bean>
 	    
-	    <bean id="reviewsController" class="co.srsp.controller.FeedsController">  
+	    <bean id="feedsController" class="co.srsp.controller.FeedsController">  
 	    </bean>
 	    
 	   
