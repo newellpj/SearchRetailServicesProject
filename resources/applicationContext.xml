@@ -22,7 +22,7 @@
 	   
 	   <bean id="bookReviewsHibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 	   		<property name="dataSource" ref="dataSource" />
-	   		<property name="packagesToScan" value="co.edureka.hibernate"/>
+	   		<property name="packagesToScan" value="co.srsp.hibernate"/>
 	   		<property name="mappingResources">
 	   			<list>
 	   				<value>hibernate/Users.hbm.xml</value>
@@ -43,7 +43,7 @@
 	   		</property>
 	   </bean>
 	   
-	   <bean id="solrSearchManager" class="co.edureka.solr.SolrSearchManager">
+	   <bean id="solrSearchManager" class="co.srsp.solr.SolrSearchManager">
 	   		<property name="connectionString" value="http://localhost:8983/solr/booksandreviews" />
 	   		<property name="solrFieldsList" value="author:title:id:stream_content_type" />
 	   </bean>
@@ -52,40 +52,40 @@
 		  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
 	    </bean>
    
-		<bean id="authenticationSuccessHandler" class="co.edureka.controller.LoginController">  
+		<bean id="authenticationSuccessHandler" class="co.srsp.controller.LoginController">  
 		    <property name="defaultTargetUrl" value="/reviews" />
 	    </bean>
    
-   		<bean id="myAuthenticationSuccessHandler"  class="co.edureka.config.SimpleUrlAuthenticationSuccessHandler" />
+   		<bean id="myAuthenticationSuccessHandler"  class="co.srsp.config.SimpleUrlAuthenticationSuccessHandler" />
  
    
-   		<bean id="reviewsController" class="co.edureka.controller.ReviewController">  
+   		<bean id="reviewsController" class="co.srsp.controller.ReviewController">  
 	    </bean>
 	   
 	   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
 	   		<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
 	   </bean>
 	   
-	   <bean id="usersBusinessObject" class="co.edureka.hibernate.UsersBusinessObjectImpl">
+	   <bean id="usersBusinessObject" class="co.srsp.hibernate.UsersBusinessObjectImpl">
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
 	   
-	    <bean id="authoritiesBusinessObject" class="co.edureka.hibernate.AuthoritiesBusinessObjectImpl">
+	    <bean id="authoritiesBusinessObject" class="co.srsp.hibernate.AuthoritiesBusinessObjectImpl">
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
 	   
-	    <bean id="booksBusinessObject" class="co.edureka.hibernate.BooksBusinessObjectImpl">
+	    <bean id="booksBusinessObject" class="co.srsp.hibernate.BooksBusinessObjectImpl">
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
-	    <bean id="booksReviewsBusinessObject" class="co.edureka.hibernate.BookReviewsBusinessObjectImpl">
-	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
-	   </bean>
-	   
-	   <bean id="tagsBusinessObject" class="co.edureka.hibernate.TagsBusinessObjectImpl">
+	    <bean id="booksReviewsBusinessObject" class="co.srsp.hibernate.BookReviewsBusinessObjectImpl">
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
 	   
- <bean id="myAspect" class="co.edureka.aop.MethodBeforeAdvisor">
+	   <bean id="tagsBusinessObject" class="co.srsp.hibernate.TagsBusinessObjectImpl">
+	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
+	   </bean>
+	   
+ <bean id="myAspect" class="co.srsp.aop.MethodBeforeAdvisor">
 </bean>
 	   
 	   
