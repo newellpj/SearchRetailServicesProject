@@ -11,6 +11,8 @@ import co.srsp.webservices.books.model.BooksReviewsWSModel;
 @WebService(endpointInterface = "co.srsp.webservices.books.QueryBooks")
 public class QueryBooksImpl implements QueryBooks {
 
+	//http://localhost:8080/SearchRetailServicesProject/queryBooks?wsdl
+	
 	@Override
 	public BooksReviewsWSModel[] queryAuthor(String author) {
 		 return queryBooks(null, author);

@@ -15,6 +15,8 @@ import co.srsp.solr.SolrSearchData;
 @WebService(endpointInterface = "co.srsp.webservices.documents.QueryDocs")
 public class QueryDocsImpl implements QueryDocs {
 
+	//http://localhost:8080/SearchRetailServicesProject/queryDocs?wsdl
+	
 	private final static Logger log = Logger.getLogger(QueryDocsImpl.class); 
 	
 	private SolrSearchService sss;
