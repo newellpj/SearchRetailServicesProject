@@ -341,14 +341,14 @@ function noBookToReview(){
 						var msg = e.errorMessage;
 						
 						if('undefined' == msg || msg == null){
-								msg = "There was an error adding the book review";
+								msg = "There was an error retrieving the feed";
 						}
 						
 						$(errorDialog).html('<p>'+msg+'</p>');
 				        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
 				        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 						 $(errorDialog).dialog("open");
-				         window.parent.location.href = 'logout'; 
+				        // window.parent.location.href = 'logout'; 
 			 }
 			});  
 	}

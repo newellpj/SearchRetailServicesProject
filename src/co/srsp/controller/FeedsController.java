@@ -20,7 +20,8 @@ public class FeedsController {
 	
 	@RequestMapping(value = { "/getFeeds"}, method = RequestMethod.GET)
 	public @ResponseBody FeedMessage[] getFeeds(HttpServletRequest request, HttpServletResponse response){
-		log.info("in getFeeds....");
+		log.info("in getFeeds...."+request.getParameter("rssFeedURL"));
+		System.out.println("in getFeeds...."+request.getParameter("rssFeedURL"));
 		RSSHandlerInterface rssHandler = new RSSHandlerImpl();
 		return rssHandler.readRSSFeed(request.getParameter("rssFeedURL"));
 	}

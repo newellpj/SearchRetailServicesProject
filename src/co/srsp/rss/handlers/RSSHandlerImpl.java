@@ -50,14 +50,14 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				count++;
 			}
 			
-	
 			return feedArr;
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			log.error(e.getMessage());
 		}
 		
-		return null;
+		return feedArr = new FeedMessage[0];
 	}
 
 	@Override
