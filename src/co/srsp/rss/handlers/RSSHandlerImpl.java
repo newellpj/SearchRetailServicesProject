@@ -63,6 +63,22 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 					log.info("imgWidth : "+imgWidth);
 					log.info("imgHeight : "+imgHeight);
 					
+					if(imgWidth > imgHeight){
+						double result = new Double(imgHeight)/ new Double(imgWidth);
+						log.info("result : "+result);
+						imgHeight = (int)(result * new Double(imgHeight));
+						imgWidth = 320;
+					}else if(imgWidth < imgHeight){
+						double result = new Double(imgWidth)/ new Double(imgHeight);
+						imgWidth = (int)(result * new Double(imgWidth));
+						imgHeight = 320;
+					}else{
+						imgHeight = 320;
+						imgWidth  = 320;
+					}
+
+					log.info("imgWidth 2 : "+imgWidth);
+					log.info("imgHeight 2: "+imgHeight);
 					feedMsg.setImageWidth(String.valueOf(imgWidth));
 					feedMsg.setImageHeight(String.valueOf(imgHeight));
 					

@@ -306,14 +306,9 @@ function noBookToReview(){
 				    $(dlg).dialog("close");
 					//window.location.href = 'reviewsReviewBook';
 					
-	//private String title;
-	//private String description;
-	//private String link;
-	//private String url;
-	//private String author;
-	//private String guid;
+
 					
-					//alert("feedMessageArr.length : "+feedMessageArr.length);
+					alert("feedMessageArr : "+feedMessageArr[0]);
 				//	document.getElementById("feedsSliderSegment").innerHTML = "";
 			
 					$( "#feedsSliderSegment" ).html(""); //these are the search result divs that get added upon pagination of search results
@@ -325,9 +320,9 @@ function noBookToReview(){
 						//alert("### The feed message array : "+feedMessageArr[i]['title']);
 						
 						$("#feedsSliderSegment ul").append("<li><p>"+
-						"<img src='"+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
-						+feedMessageArr[i]['description']+"</p></li>");
-		
+						"<img height="+feedMessageArr[i]['imageHeight']+" width="+feedMessageArr[i]['imageWidth']+" src='"+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
+						feedMessageArr[i]['description']+"</p></li>");
+						alert(feedMessageArr[i]['imageHeight']);
 					}
 					
 					$( "#feedsSliderSegment" ).append("</ul>");
