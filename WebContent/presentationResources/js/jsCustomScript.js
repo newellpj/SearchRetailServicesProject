@@ -304,11 +304,8 @@ function noBookToReview(){
 				type: 'GET',
 				success:  function(feedMessageArr) {
 				    $(dlg).dialog("close");
-					//window.location.href = 'reviewsReviewBook';
-					
 
-					
-					alert("feedMessageArr : "+feedMessageArr[0]);
+					//alert("feedMessageArr : "+feedMessageArr.length);
 				//	document.getElementById("feedsSliderSegment").innerHTML = "";
 			
 					$( "#feedsSliderSegment" ).html(""); //these are the search result divs that get added upon pagination of search results
@@ -316,27 +313,24 @@ function noBookToReview(){
 						
 					$( "#feedsSliderSegment" ).append("<ul id='feedsSlider' class='bxslider2'>");
 	
-					for(var i = 0; feedMessageArr.length > i ;i++){
-						//alert("### The feed message array : "+feedMessageArr[i]['title']);
-						
+					for(var i = 0; (feedMessageArr.length) > i; i++){
+					
+					//	alert(i);
+					//	alert(" : "+feedMessageArr[i]['imageHeight']);
 						$("#feedsSliderSegment ul").append("<li><p>"+
-						"<img height="+feedMessageArr[i]['imageHeight']+" width="+feedMessageArr[i]['imageWidth']+" src='"+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
-						feedMessageArr[i]['description']+"</p></li>");
-						alert(feedMessageArr[i]['imageHeight']);
+						"<img height='"+feedMessageArr[i]['imageHeight']+"' width='"+feedMessageArr[i]['imageWidth']+"' src='"+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
+						feedMessageArr[i]['description']+"</p><p><a href="+feedMessageArr[i]['link']+" target='_blank' >See More...</a>"+"</p></li>");
+
 					}
 					
 					$( "#feedsSliderSegment" ).append("</ul>");
 					
-					 $('#feedsSliderSegment ul li').each(function(){
-						// $('li').width(500);
-					 });
-					
-						document.getElementById('feedsSliderSegment').style.visibility = "visible";
+					document.getElementById('feedsSliderSegment').style.visibility = "visible";
 						
-						$('.bxslider2').bxSlider({
-							captions: true,
-							auto:false
-						});
+					$('.bxslider2').bxSlider({
+						captions: true,
+						auto:false
+					});
 					//}
 					//alert("The feed message array : "+feedMessageArr[0]['title']);
 				 },

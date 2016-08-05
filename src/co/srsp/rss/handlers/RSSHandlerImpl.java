@@ -38,7 +38,16 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 			SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
 	         System.out.println("The feed is "+feed);
 	         System.out.println("The feed is "+feed.getEntries().size());
-			feedArr = new FeedMessage[feed.getEntries().size()];
+	         
+	         int size = 0;
+	         
+	         if(feed.getEntries().size() > 10){
+	        	 size = 10;
+	         }else{
+	        	 size = feed.getEntries().size();
+	         }
+	         
+			feedArr = new FeedMessage[size];
 			
 			int count = 0;
 			
