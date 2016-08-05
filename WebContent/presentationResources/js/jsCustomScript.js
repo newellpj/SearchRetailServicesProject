@@ -314,17 +314,35 @@ function noBookToReview(){
 	//private String guid;
 					
 					//alert("feedMessageArr.length : "+feedMessageArr.length);
-					
+				//	document.getElementById("feedsSliderSegment").innerHTML = "";
+			
+					$( "#feedsSliderSegment" ).html(""); //these are the search result divs that get added upon pagination of search results
+						//alert('here : '+this);
+						
+					$( "#feedsSliderSegment" ).append("<ul id='feedsSlider' class='bxslider2'>");
+	
 					for(var i = 0; feedMessageArr.length > i ;i++){
 						//alert("### The feed message array : "+feedMessageArr[i]['title']);
-						$("#feedsSliderSegment ul").append("<li><p><b>"+feedMessageArr[i]['title']+"</b></p><p>"+feedMessageArr[i]['description']+"</p></li>");	
+						
+						$("#feedsSliderSegment ul").append("<li><p>"+
+						"<img src='"+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
+						+feedMessageArr[i]['description']+"</p></li>");
+		
 					}
 					
-					document.getElementById('feedsSliderSegment').style.visibility = "visible";
+					$( "#feedsSliderSegment" ).append("</ul>");
 					
-					$('.bxslider2').bxSlider({
-						captions: true
-					});
+					 $('#feedsSliderSegment ul li').each(function(){
+						// $('li').width(500);
+					 });
+					
+						document.getElementById('feedsSliderSegment').style.visibility = "visible";
+						
+						$('.bxslider2').bxSlider({
+							captions: true,
+							auto:false
+						});
+					//}
 					//alert("The feed message array : "+feedMessageArr[0]['title']);
 				 },
 

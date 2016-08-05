@@ -104,7 +104,12 @@
     <version>9.7.0-4</version>
 </dependency>
 
-<!-- https://mvnrepository.com/artifact/com.rometools/rome -->
+<dependency>
+    <groupId>net.sf.jtidy</groupId>
+    <artifactId>jtidy</artifactId>
+    <version>r938</version>
+</dependency>
+
 <dependency>
     <groupId>com.rometools</groupId>
     <artifactId>rome</artifactId>

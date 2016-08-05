@@ -1,6 +1,9 @@
 package co.srsp.rss.handlers;
 
+import java.awt.Image;
 import java.net.URL;
+
+import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
 
@@ -44,15 +47,33 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				feedMsg = new FeedMessage();
 				feedMsg.setAuthor(syndEntry.getAuthor());
 				feedMsg.setTitle(syndEntry.getTitle());
+				
+				log.info("description value is : "+syndEntry.getDescription().getValue());
+				
 				feedMsg.setDescription(syndEntry.getDescription().getValue());
 				feedMsg.setLink(syndEntry.getLink());
 
 				if(syndEntry.getEnclosures() != null && syndEntry.getEnclosures().size() > 0){
 					feedMsg.setUrl(syndEntry.getEnclosures().get(0).getUrl());
+					
+					Image image = new ImageIcon(new URL(feedMsg.getUrl())).getImage();
+					int imgWidth = image.getWidth(null);
+					int imgHeight = image.getHeight(null);
+					
+					log.info("imgWidth : "+imgWidth);
+					log.info("imgHeight : "+imgHeight);
+					
+					feedMsg.setImageWidth(String.valueOf(imgWidth));
+					feedMsg.setImageHeight(String.valueOf(imgHeight));
+					
 				}
+				
+				
 				
 				feedArr[count] = feedMsg;		
 				count++;
+				
+				if(count == 10) break;
 			}
 			
 			return feedArr;

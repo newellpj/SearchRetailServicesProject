@@ -7,8 +7,29 @@ public class FeedMessage {
 	private String url;
 	private String author;
 	private String guid;
+	private String imageWidth;
+	private String imageHeight;
+	
 
-    public String getTitle() {
+	
+	
+    public String getImageWidth() {
+		return imageWidth;
+	}
+
+	public void setImageWidth(String imageWidth) {
+		this.imageWidth = imageWidth;
+	}
+
+	public String getImageHeight() {
+		return imageHeight;
+	}
+
+	public void setImageHeight(String imageHeight) {
+		this.imageHeight = imageHeight;
+	}
+
+	public String getTitle() {
             return title;
     }
 
