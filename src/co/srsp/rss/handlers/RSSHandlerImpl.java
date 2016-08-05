@@ -66,11 +66,11 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 					if(imgWidth > imgHeight){
 						double result = new Double(imgHeight)/ new Double(imgWidth);
 						log.info("result : "+result);
-						imgHeight = (int)(result * new Double(imgHeight));
+						imgHeight = (int)(result * new Double(320));
 						imgWidth = 320;
 					}else if(imgWidth < imgHeight){
 						double result = new Double(imgWidth)/ new Double(imgHeight);
-						imgWidth = (int)(result * new Double(imgWidth));
+						imgWidth = (int)(result * new Double(320));
 						imgHeight = 320;
 					}else{
 						imgHeight = 320;
