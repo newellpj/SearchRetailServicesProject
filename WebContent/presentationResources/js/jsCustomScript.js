@@ -262,12 +262,19 @@ function noBookToReview(){
 	function switchActive(obj){
 		var id = $(obj).attr("id");	
 		document.getElementById(id).style.backgroundColor="#f6f6f6";
+	    document.getElementById(id).style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
+        document.getElementById(id).style.backgroundRepeat="no-repeat";
+		document.getElementById(id).style.backgroundPosition="center bottom";		 
+
+		
 		
         $('#myMenu ul li').each(function(){
 			var idFound = $(this).attr("id");
 			
 			if(idFound != id){
 				document.getElementById(idFound).style.backgroundColor="#e9e9e9";
+				document.getElementById(idFound).style.backgroundImage="";
+				
 			}  
         });
     }
@@ -397,7 +404,8 @@ function noBookToReview(){
 							 {text : 'Shuttle Station', value: 'https://www.nasa.gov/rss/dyn/shuttle_station.rss'},
 							 {text : 'Aeronautics', value: 'https://www.nasa.gov/rss/dyn/aeronautics.rss'},
 							 {text : 'Hurricane Update', value: 'https://www.nasa.gov/rss/dyn/hurricaneupdate.rss'},
-							 {text : 'Keppler Mission', value: 'https://www.nasa.gov/rss/dyn/mission_pages/kepler/news/kepler-newsandfeatures-RSS.rss'}];	
+							 {text : 'Keppler Mission', value: 'https://www.nasa.gov/rss/dyn/mission_pages/kepler/news/kepler-newsandfeatures-RSS.rss'},
+							 {text : 'Chandra Mission', value: 'http://www.nasa.gov/rss/dyn/chandra_images.rss'}];	
 							 
 		
 		$.each(myOptions, function(i, el) { 
@@ -417,6 +425,7 @@ function noBookToReview(){
 		searchAllMap['Aeronautics'] = '100px';
 	    searchAllMap['Hurricane Update'] = '140px';
 		searchAllMap['Keppler Mission'] = '130px';
+		searchAllMap['Chandra Mission'] = '130px';
 	}
 	
 function renderTagList(obj){
