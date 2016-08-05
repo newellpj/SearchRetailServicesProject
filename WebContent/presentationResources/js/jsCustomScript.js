@@ -284,12 +284,12 @@ function noBookToReview(){
 				maxWidth: 300,
 				modal: true,
 				show: 'fade',
-				title: 'Retrieving '+rssFeedName+' feeds',
+				title: 'Retrieving feeds',
 				width: ( ('__proto__' in {}) ? '300' : 300 )
 			});
 
 			$(dlg).parent().find('button').remove();
-			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>finding feeds... </p></div>");	
+			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Finding "+rssFeedName+" feeds... </p></div>");	
 			$(dlg).dialog("open");
 			
 			$.ajax({
@@ -395,7 +395,10 @@ function noBookToReview(){
 							 {text : 'Earth', value: 'https://www.nasa.gov/rss/dyn/earth.rss'},
 							 {text : 'Solar System', value: 'https://www.nasa.gov/rss/dyn/solar_system.rss'},
 							 {text : 'Shuttle Station', value: 'https://www.nasa.gov/rss/dyn/shuttle_station.rss'},
-							 {text : 'Aeronautics', value: 'https://www.nasa.gov/rss/dyn/aeronautics.rss'}];		
+							 {text : 'Aeronautics', value: 'https://www.nasa.gov/rss/dyn/aeronautics.rss'},
+							 {text : 'Hurricane Update', value: 'https://www.nasa.gov/rss/dyn/hurricaneupdate.rss'},
+							 {text : 'Keppler Mission', value: 'https://www.nasa.gov/rss/dyn/mission_pages/kepler/news/kepler-newsandfeatures-RSS.rss'}];	
+							 
 		
 		$.each(myOptions, function(i, el) { 
 		      
@@ -412,7 +415,8 @@ function noBookToReview(){
 		searchAllMap['Solar System'] = '112px';
 		searchAllMap['Shuttle Station'] = '120px';
 		searchAllMap['Aeronautics'] = '100px';
-	
+	    searchAllMap['Hurricane Update'] = '140px';
+		searchAllMap['Keppler Mission'] = '130px';
 	}
 	
 function renderTagList(obj){
