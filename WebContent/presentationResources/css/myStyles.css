@@ -165,12 +165,14 @@ select {
 	max-height: auto !important; 
 	width: 520px !important;
 	position:relative;
+	padding-left:10px;
 }
 
 .bxslider2 li{
 	max-height: auto !important; 
 	width: 520px !important;
 	position:relative;
+	padding-left:10px;
 }
 
 
@@ -211,6 +213,7 @@ select {
 	font-weight: normal;
 	text-shadow: 0.5px 0.5px #a8a8a8;
 	border-radius: 10px;
+
  }
 
  
