@@ -23,6 +23,14 @@ public class FeedsController {
 		log.info("in getFeeds...."+request.getParameter("rssFeedURL"));
 		System.out.println("in getFeeds...."+request.getParameter("rssFeedURL"));
 		RSSHandlerInterface rssHandler = new RSSHandlerImpl();
-		return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession());
+		return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), true);
+	}
+	
+	@RequestMapping(value = { "/getPaginatedFeed"}, method = RequestMethod.GET)
+	public @ResponseBody FeedMessage[] getPaginatedFeed(HttpServletRequest request, HttpServletResponse response){
+		log.info("in getPaginatedFeed...."+request.getParameter("rssFeedURL"));
+		System.out.println("in getPaginatedFeed...."+request.getParameter("rssFeedURL"));
+		RSSHandlerInterface rssHandler = new RSSHandlerImpl();
+		return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), false);
 	}
 }

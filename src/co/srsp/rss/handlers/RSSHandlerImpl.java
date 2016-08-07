@@ -21,7 +21,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 	
 	@Override
 	
-	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session){
+	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch){
 		SyndFeedInput input = new SyndFeedInput();
 		FeedMessage[] feedArr = null;
 		FeedMessage feedMsg = null;		
@@ -40,15 +40,15 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 			
 			 SyndFeed feed = null;
 			
-			if(session.getAttribute("feed") != null){ //this if for paginating large feeds
-				log.info("feed found in session!!!!!@@");
+			if(!newSearch){ //this if for paginating large feeds
+				log.info("feed found in session!!!!!@@ NOT a NEW SEARCH");
 				rssPaginationOffset = (session.getAttribute("rssPaginationOffset") != null) ? Integer.parseInt(session.getAttribute("rssPaginationOffset").toString()) : 0;
 				feed = (SyndFeed)session.getAttribute("feed");
 				int feedSize = feed.getEntries().size(); 
 				size = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
 				feedArr = new FeedMessage[size];
 			}else{
-				log.info("feed NOTTTTTTTTTTTTT found in session?!?!?!?");
+				log.info(" THIS IS A new search");
 				rssPaginationOffset = 0;
 				feed = input.build(new XmlReader(new URL(feedUrl)));
 				
@@ -128,7 +128,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 	}
 	
 	public FeedMessage[] readRSSFeed(String feedUrl) {
-		return readRSSFeedPaginated(feedUrl, null);
+		return readRSSFeedPaginated(feedUrl, null, true);
 	}
 
 	@Override
