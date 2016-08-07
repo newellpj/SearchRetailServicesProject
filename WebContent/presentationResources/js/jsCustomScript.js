@@ -279,7 +279,13 @@ function noBookToReview(){
         });
     }
 
-	function getRSSFeed(){
+	function LastSlide() {
+		//fetch more objects
+		
+		getRSSFeed(true);
+	}
+	
+	function getRSSFeed(paginating){
 		
 		var rssFeedURL = $('#searchAllSelect').val();
 		var rssFeedName = $('#searchAllSelect option:selected').text();
@@ -300,8 +306,10 @@ function noBookToReview(){
 			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Finding "+rssFeedName+" feeds... </p></div>");	
 			$(dlg).dialog("open");
 			
+			var requestURL = (paginating) ? 'getPaginatedFeed': 'getFeeds';
+			
 			$.ajax({
-				url: 'getFeeds',
+				url: requestURL,
 				dataType: 'JSON',
 				data: { 
 					rssFeedURL: rssFeedURL,
@@ -336,10 +344,22 @@ function noBookToReview(){
 					
 					document.getElementById('feedsSliderSegment').style.visibility = "visible";
 						
-					$('.bxslider2').bxSlider({
+					var slider = $('.bxslider2').bxSlider({
 						captions: true,
 						auto:false
 					});
+					
+					$('.bx-next').click(function () {
+						
+						var current = slider.getCurrentSlide() + 1;
+						if(current >= 10){
+							LastSlide();
+						}else{
+							slider.goToNextSlide();
+						}
+						
+					});
+					
 					//}
 					//alert("The feed message array : "+feedMessageArr[0]['title']);
 				 },

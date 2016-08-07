@@ -32,7 +32,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 	        // System.out.println("The feed is "+feed);
 	        // System.out.println("The feed is "+feed.getEntries().size());
 	         
-	         int size = 0;
+	         int sizeOfArrayToReturn = 0;
 	         
 			 int count = 0;
 			
@@ -45,22 +45,22 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				rssPaginationOffset = (session.getAttribute("rssPaginationOffset") != null) ? Integer.parseInt(session.getAttribute("rssPaginationOffset").toString()) : 0;
 				feed = (SyndFeed)session.getAttribute("feed");
 				int feedSize = feed.getEntries().size(); 
-				size = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
-				feedArr = new FeedMessage[size];
+				sizeOfArrayToReturn = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
+				feedArr = new FeedMessage[sizeOfArrayToReturn];
 			}else{
 				log.info(" THIS IS A new search");
 				rssPaginationOffset = 0;
 				feed = input.build(new XmlReader(new URL(feedUrl)));
 				
 				if(feed.getEntries().size() > 10){
-		        	 size = 10;
+					sizeOfArrayToReturn = 10;
 		         }else{
-		        	 size = feed.getEntries().size();
+		        	 sizeOfArrayToReturn = feed.getEntries().size();
 		         }
-				feedArr = new FeedMessage[size];
+				feedArr = new FeedMessage[sizeOfArrayToReturn];
 			}
 			
-			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, rssPaginationOffset+10)){
+			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, sizeOfArrayToReturn)){
 				
 				feedMsg = new FeedMessage();
 				feedMsg.setAuthor(syndEntry.getAuthor());
@@ -72,6 +72,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				feedMsg.setLink(syndEntry.getLink());
 
 				if(syndEntry.getEnclosures() != null && syndEntry.getEnclosures().size() > 0){
+					
 					feedMsg.setUrl(syndEntry.getEnclosures().get(0).getUrl());
 					
 					Image image = new ImageIcon(new URL(feedMsg.getUrl())).getImage();
