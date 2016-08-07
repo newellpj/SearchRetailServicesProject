@@ -344,8 +344,12 @@ function noBookToReview(){
 					});
 
 					if(feedMessageArr.length >= 10 && totalFeedsSize > 10 && totalFeedsSize > currentPaginationOffset){ //only paginating function if this set is equal to 10 and there is more to paginate
-						alert('gotten in here');
-						$('.bx-next').click(function () {						
+
+						$('#feedsSliderSegment .bx-next').click(function () {	
+						
+							//alert($('#feedsSliderSegment').closest('.bx-next').html());
+							
+							//alert('gotten in here');							
 							var current = slider.getCurrentSlide() + 1;
 							if(current == 1){
 								LastSlide(true);
@@ -353,11 +357,12 @@ function noBookToReview(){
 								slider.goToNextSlide();
 							}
 						});
+						
 					}
 					
 					if(totalFeedsSize > 10 && currentPaginationOffset >= 20){ //only paginating function if this set is equal to 10 and there is more to paginate
-						alert('gotten in here previous');
-						$('.bx-prev').click(function () {						
+					//	alert('gotten in here previous');
+						$('#feedsSliderSegment .bx-prev').click(function () {						
 							var current = slider.getCurrentSlide() + 1;
 							if(current == 10){
 								LastSlide(false);
@@ -443,8 +448,6 @@ function noBookToReview(){
 			   $('#searchAllSelect').append( new Option(el.text, el.value));
 		});	
 		
-		
-		
 		searchAllMap['All'] = '40px';
 		searchAllMap['Image of Day'] = '110px';
 		searchAllMap['Education'] = '90px';
@@ -520,8 +523,6 @@ function renderTagList(obj){
 		var authorTextVal = $('#bookAuthorReview').val();
 		var titleTextVal = $('#bookTitleReview').val(); 
 		var reviewTextVal = $('#reviewText').val();
-		
-		
 		
 		$.ajax({
 			url: 'addBookReview',
