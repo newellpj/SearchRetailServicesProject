@@ -9,11 +9,27 @@ public class FeedMessage {
 	private String guid;
 	private String imageWidth;
 	private String imageHeight;
+	private int totalFeedCount;
+	private int currentPaginationOffset;
 	
+	
+    public int getCurrentPaginationOffset() {
+		return currentPaginationOffset;
+	}
 
-	
-	
-    public String getImageWidth() {
+	public void setCurrentPaginationOffset(int currentPaginationOffset) {
+		this.currentPaginationOffset = currentPaginationOffset;
+	}
+
+	public int getTotalFeedCount() {
+		return totalFeedCount;
+	}
+
+	public void setTotalFeedCount(int totalFeedCount) {
+		this.totalFeedCount = totalFeedCount;
+	}
+
+	public String getImageWidth() {
 		return imageWidth;
 	}
 

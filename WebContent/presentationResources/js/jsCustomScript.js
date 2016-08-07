@@ -279,18 +279,16 @@ function noBookToReview(){
         });
     }
 
-	function LastSlide() {
+	function LastSlide(paginateForward) {
 		//fetch more objects
 		
-		getRSSFeed(true);
+		getRSSFeed(true, paginateForward);
 	}
 	
-	function getRSSFeed(paginating){
+	function getRSSFeed(paginating, paginateForward){
 		
 		var rssFeedURL = $('#searchAllSelect').val();
 		var rssFeedName = $('#searchAllSelect option:selected').text();
-		
-		//.attr('label')
 
 		var dlg = $("<div></div>").dialog({
 				hide: 'fade',
@@ -313,26 +311,22 @@ function noBookToReview(){
 				dataType: 'JSON',
 				data: { 
 					rssFeedURL: rssFeedURL,
-					rssFeedName: rssFeedName
+					rssFeedName: rssFeedName,
+					_paginateForward: paginateForward
 				},
 				processData: true,
 				contentType: 'application/json; charset=utf-8',
 				type: 'GET',
 				success:  function(feedMessageArr) {
-				    $(dlg).dialog("close");
 
-					//alert("feedMessageArr : "+feedMessageArr.length);
-				//	document.getElementById("feedsSliderSegment").innerHTML = "";
-			
-					$( "#feedsSliderSegment" ).html(""); //these are the search result divs that get added upon pagination of search results
-						//alert('here : '+this);
-						
+				    $(dlg).dialog("close");
+					$( "#feedsSliderSegment" ).html(""); //these are the search result divs that get added upon pagination of search results	
 					$( "#feedsSliderSegment" ).append("<ul id='feedsSlider' class='bxslider2'>");
 	
-					for(var i = 0; (feedMessageArr.length) > i; i++){
+					var totalFeedsSize = feedMessageArr[0]['totalFeedCount'];
+					var currentPaginationOffset = feedMessageArr[0]['currentPaginationOffset'];	  
 					
-					//	alert(i);
-					//	alert(" : "+feedMessageArr[i]['imageHeight']);
+					for(var i = 0; (feedMessageArr.length) > i; i++){
 						$("#feedsSliderSegment ul").append("<li><p>"+
 						"<img height='"+feedMessageArr[i]['imageHeight']+"' width='"+feedMessageArr[i]['imageWidth']+"' src='"
 						+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
@@ -348,17 +342,30 @@ function noBookToReview(){
 						captions: true,
 						auto:false
 					});
+
+					if(feedMessageArr.length >= 10 && totalFeedsSize > 10 && totalFeedsSize > currentPaginationOffset){ //only paginating function if this set is equal to 10 and there is more to paginate
+						alert('gotten in here');
+						$('.bx-next').click(function () {						
+							var current = slider.getCurrentSlide() + 1;
+							if(current == 1){
+								LastSlide(true);
+							}else{
+								slider.goToNextSlide();
+							}
+						});
+					}
 					
-					$('.bx-next').click(function () {
-						
-						var current = slider.getCurrentSlide() + 1;
-						if(current >= 10){
-							LastSlide();
-						}else{
-							slider.goToNextSlide();
-						}
-						
-					});
+					if(totalFeedsSize > 10 && currentPaginationOffset >= 20){ //only paginating function if this set is equal to 10 and there is more to paginate
+						alert('gotten in here previous');
+						$('.bx-prev').click(function () {						
+							var current = slider.getCurrentSlide() + 1;
+							if(current == 10){
+								LastSlide(false);
+							}else{
+								slider.goToPrevSlide();
+							}
+						});
+					}
 					
 					//}
 					//alert("The feed message array : "+feedMessageArr[0]['title']);
@@ -394,7 +401,7 @@ function noBookToReview(){
 							width: ( 300 )
 						});
 
-						
+						alert('we in error?');
 						
 						var msg = e.errorMessage;
 						
@@ -427,7 +434,8 @@ function noBookToReview(){
 							 {text : 'Aeronautics', value: 'https://www.nasa.gov/rss/dyn/aeronautics.rss'},
 							 {text : 'Hurricane Update', value: 'https://www.nasa.gov/rss/dyn/hurricaneupdate.rss'},
 							 {text : 'Keppler Mission', value: 'https://www.nasa.gov/rss/dyn/mission_pages/kepler/news/kepler-newsandfeatures-RSS.rss'},
-							 {text : 'Chandra Mission', value: 'http://www.nasa.gov/rss/dyn/chandra_images.rss'}];	
+							 {text : 'Chandra Mission', value: 'http://www.nasa.gov/rss/dyn/chandra_images.rss'},
+							 {text : 'Goddard Space Center', value: 'https://www.nasa.gov/rss/dyn/goddard-NewsFeature.rss'}];	
 							 
 		
 		$.each(myOptions, function(i, el) { 
@@ -448,6 +456,7 @@ function noBookToReview(){
 	    searchAllMap['Hurricane Update'] = '140px';
 		searchAllMap['Keppler Mission'] = '130px';
 		searchAllMap['Chandra Mission'] = '130px';
+		searchAllMap['Goddard Space Center'] = '175px';
 	}
 	
 function renderTagList(obj){

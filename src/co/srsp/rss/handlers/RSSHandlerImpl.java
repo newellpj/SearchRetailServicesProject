@@ -21,7 +21,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 	
 	@Override
 	
-	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch){
+	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward){
 		SyndFeedInput input = new SyndFeedInput();
 		FeedMessage[] feedArr = null;
 		FeedMessage feedMsg = null;		
@@ -44,6 +44,12 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				log.info("feed found in session!!!!!@@ NOT a NEW SEARCH");
 				rssPaginationOffset = (session.getAttribute("rssPaginationOffset") != null) ? Integer.parseInt(session.getAttribute("rssPaginationOffset").toString()) : 0;
 				feed = (SyndFeed)session.getAttribute("feed");
+				
+				if(!paginateForward && rssPaginationOffset >= 20){
+					rssPaginationOffset = rssPaginationOffset - 20;
+				}
+				
+				
 				int feedSize = feed.getEntries().size(); 
 				sizeOfArrayToReturn = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
 				feedArr = new FeedMessage[sizeOfArrayToReturn];
@@ -60,7 +66,11 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				feedArr = new FeedMessage[sizeOfArrayToReturn];
 			}
 			
-			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, sizeOfArrayToReturn)){
+			log.info("rss pagination offset : "+rssPaginationOffset);
+			log.info("size of array : "+sizeOfArrayToReturn);
+			log.info(feed.getEntries().subList(rssPaginationOffset, rssPaginationOffset+sizeOfArrayToReturn).size());
+			
+			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, rssPaginationOffset+sizeOfArrayToReturn)){
 				
 				feedMsg = new FeedMessage();
 				feedMsg.setAuthor(syndEntry.getAuthor());
@@ -100,24 +110,17 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 					log.info("imgHeight 2: "+imgHeight);
 					feedMsg.setImageWidth(String.valueOf(imgWidth));
 					feedMsg.setImageHeight(String.valueOf(imgHeight));
-					
+					feedMsg.setTotalFeedCount(feed.getEntries().size());
+					feedMsg.setCurrentPaginationOffset(rssPaginationOffset+10);
 				}
 				
 				feedArr[count] = feedMsg;		
 				count++;
-				
-//				if(count % 10 == 0){
-//					if(session != null){
-//						
-//					}
-//					
-//					break;
-//				}
 			}
 			
-			session.setAttribute("rssPaginationOffset", count);
+			session.setAttribute("rssPaginationOffset", rssPaginationOffset+10);
 			session.setAttribute("feed", feed);
-			
+			log.info("return ing feed array");
 			return feedArr;
 			
 		}catch(Exception e){
@@ -129,7 +132,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 	}
 	
 	public FeedMessage[] readRSSFeed(String feedUrl) {
-		return readRSSFeedPaginated(feedUrl, null, true);
+		return readRSSFeedPaginated(feedUrl, null, true, true);
 	}
 
 	@Override
