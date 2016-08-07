@@ -40,15 +40,15 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 			
 			 SyndFeed feed = null;
 			
-			if(session != null){ //this if for paginating large feeds
-				
+			if(session.getAttribute("feed") != null){ //this if for paginating large feeds
+				log.info("feed found in session!!!!!@@");
 				rssPaginationOffset = (session.getAttribute("rssPaginationOffset") != null) ? Integer.parseInt(session.getAttribute("rssPaginationOffset").toString()) : 0;
 				feed = (SyndFeed)session.getAttribute("feed");
 				int feedSize = feed.getEntries().size(); 
 				size = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
 				feedArr = new FeedMessage[size];
 			}else{
-				
+				log.info("feed NOTTTTTTTTTTTTT found in session?!?!?!?");
 				rssPaginationOffset = 0;
 				feed = input.build(new XmlReader(new URL(feedUrl)));
 				

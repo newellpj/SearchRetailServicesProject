@@ -23,6 +23,6 @@ public class FeedsController {
 		log.info("in getFeeds...."+request.getParameter("rssFeedURL"));
 		System.out.println("in getFeeds...."+request.getParameter("rssFeedURL"));
 		RSSHandlerInterface rssHandler = new RSSHandlerImpl();
-		return rssHandler.readRSSFeed(request.getParameter("rssFeedURL"));
+		return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession());
 	}
 }

@@ -27,6 +27,9 @@
   $(document).ready(function(){
 	  
 	  document.getElementById("activeSel").style.backgroundColor="#f6f6f6";
+	  document.getElementById("activeSel").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
+      document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
+	  document.getElementById("activeSel").style.backgroundPosition="center bottom";	
 	  
 	    $("myMenu li a").click(function(e) {
 	        e.preventDefault();
