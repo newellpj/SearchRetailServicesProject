@@ -3,6 +3,7 @@ package co.srsp.rss.handlers;
 import java.awt.Image;
 import java.net.URL;
 
+import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
@@ -18,40 +19,48 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 
 	private final static Logger log = Logger.getLogger(RSSHandlerImpl.class); 
 	
-	//https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss
-	//https://www.nasa.gov/rss/dyn/educationnews.rss
-	//https://www.nasa.gov/rss/dyn/breaking_news.rss
-	//https://www.nasa.gov/rss/dyn/earth.rss
-	//https://www.nasa.gov/rss/dyn/solar_system.rss
-	//https://www.nasa.gov/rss/dyn/shuttle_station.rss
-	//https://www.nasa.gov/rss/dyn/aeronautics.rss
-	
 	@Override
-	public FeedMessage[] readRSSFeed(String feedUrl) {
+	
+	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session){
 		SyndFeedInput input = new SyndFeedInput();
-		
 		FeedMessage[] feedArr = null;
 		FeedMessage feedMsg = null;		
 				
 		try{
 			
-			SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
-	         System.out.println("The feed is "+feed);
-	         System.out.println("The feed is "+feed.getEntries().size());
+			 //SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
+	        // System.out.println("The feed is "+feed);
+	        // System.out.println("The feed is "+feed.getEntries().size());
 	         
 	         int size = 0;
 	         
-	         if(feed.getEntries().size() > 10){
-	        	 size = 10;
-	         }else{
-	        	 size = feed.getEntries().size();
-	         }
-	         
-			feedArr = new FeedMessage[size];
+			 int count = 0;
 			
-			int count = 0;
+			 int rssPaginationOffset = -1;
 			
-			for(SyndEntry syndEntry : feed.getEntries()){
+			 SyndFeed feed = null;
+			
+			if(session != null){ //this if for paginating large feeds
+				
+				rssPaginationOffset = (session.getAttribute("rssPaginationOffset") != null) ? Integer.parseInt(session.getAttribute("rssPaginationOffset").toString()) : 0;
+				feed = (SyndFeed)session.getAttribute("feed");
+				int feedSize = feed.getEntries().size(); 
+				size = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
+				feedArr = new FeedMessage[size];
+			}else{
+				
+				rssPaginationOffset = 0;
+				feed = input.build(new XmlReader(new URL(feedUrl)));
+				
+				if(feed.getEntries().size() > 10){
+		        	 size = 10;
+		         }else{
+		        	 size = feed.getEntries().size();
+		         }
+				feedArr = new FeedMessage[size];
+			}
+			
+			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, rssPaginationOffset+10)){
 				
 				feedMsg = new FeedMessage();
 				feedMsg.setAuthor(syndEntry.getAuthor());
@@ -93,13 +102,20 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 					
 				}
 				
-				
-				
 				feedArr[count] = feedMsg;		
 				count++;
 				
-				if(count == 10) break;
+//				if(count % 10 == 0){
+//					if(session != null){
+//						
+//					}
+//					
+//					break;
+//				}
 			}
+			
+			session.setAttribute("rssPaginationOffset", count);
+			session.setAttribute("feed", feed);
 			
 			return feedArr;
 			
@@ -109,6 +125,10 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 		}
 		
 		return feedArr = new FeedMessage[0];
+	}
+	
+	public FeedMessage[] readRSSFeed(String feedUrl) {
+		return readRSSFeedPaginated(feedUrl, null);
 	}
 
 	@Override

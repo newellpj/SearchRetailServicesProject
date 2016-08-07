@@ -288,11 +288,12 @@ function noBookToReview(){
 
 		var dlg = $("<div></div>").dialog({
 				hide: 'fade',
-				maxWidth: 300,
+				maxWidth: 500,
 				modal: true,
 				show: 'fade',
+				height: 200,
 				title: 'Retrieving feeds',
-				width: ( ('__proto__' in {}) ? '300' : 300 )
+				width: ( ('__proto__' in {}) ? '600' : 600 )
 			});
 
 			$(dlg).parent().find('button').remove();
@@ -325,7 +326,8 @@ function noBookToReview(){
 					//	alert(i);
 					//	alert(" : "+feedMessageArr[i]['imageHeight']);
 						$("#feedsSliderSegment ul").append("<li><p>"+
-						"<img height='"+feedMessageArr[i]['imageHeight']+"' width='"+feedMessageArr[i]['imageWidth']+"' src='"+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
+						"<img height='"+feedMessageArr[i]['imageHeight']+"' width='"+feedMessageArr[i]['imageWidth']+"' src='"
+						+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
 						feedMessageArr[i]['description']+"</p><p><a href="+feedMessageArr[i]['link']+" target='_blank' >See More...</a>"+"</p></li>");
 
 					}
@@ -384,7 +386,7 @@ function noBookToReview(){
 				        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
 				        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 						 $(errorDialog).dialog("open");
-				        // window.parent.location.href = 'logout'; 
+				         window.parent.location.href = 'logout'; 
 			 }
 			});  
 	}
@@ -474,11 +476,11 @@ function renderTagList(obj){
 	 
 	 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
-			maxWidth: 300,
+			maxWidth: 600,
 			modal: true,
 			show: 'fade',
 			title: 'Submitting Review....',
-			width: ( ('__proto__' in {}) ? '300' : 300 )
+			width: ( ('__proto__' in {}) ? '600' : 600 )
 		});
 
 		$(dlg).parent().find('button').remove();
@@ -559,11 +561,12 @@ function renderTagList(obj){
 	 
 	 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
-			maxWidth: 300,
+			maxWidth: 600,
 			modal: true,
+			height: 200,
 			show: 'fade',
 			title: 'Submitting Book....',
-			width: ( ('__proto__' in {}) ? '300' : 300 )
+			width: ( ('__proto__' in {}) ? '600' : 600 )
 		});
 
 		$(dlg).parent().find('button').remove();
@@ -722,11 +725,12 @@ function renderTagList(obj){
 	 
 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
-			maxWidth: 300,
+			maxWidth: 600,
 			modal: true,
 			show: 'fade',
+			height: 200,
 			title: 'Searching Docs....',
-			width: ( ('__proto__' in {}) ? '300' : 300 )
+			width: ( ('__proto__' in {}) ? '600' : 600 )
 		});
 
 		$(dlg).parent().find('button').remove();
@@ -880,11 +884,12 @@ function renderTagList(obj){
 	 
 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
-			maxWidth: 300,
+			maxWidth: 600,
 			modal: true,
+			height: 200,
 			show: 'fade',
 			title: 'Searching Books....',
-			width: ( ('__proto__' in {}) ? '300' : 300 )
+			width: ( ('__proto__' in {}) ? '600' : 600 )
 		});
 
 		$(dlg).parent().find('button').remove();
