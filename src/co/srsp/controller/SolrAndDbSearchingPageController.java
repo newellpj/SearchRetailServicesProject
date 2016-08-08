@@ -28,9 +28,9 @@ import co.srsp.solr.SolrSearchData;
 import co.srsp.viewmodel.BookReviewsModel;
 
 @Controller
-public class ReviewController {
+public class SolrAndDbSearchingPageController {
 
-	private final static Logger log = Logger.getLogger(ReviewController.class); 
+	private final static Logger log = Logger.getLogger(SolrAndDbSearchingPageController.class); 
 	
 	@RequestMapping(value = { "/reviews"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {

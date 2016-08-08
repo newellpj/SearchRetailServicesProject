@@ -59,7 +59,7 @@
    		<bean id="myAuthenticationSuccessHandler"  class="co.srsp.config.SimpleUrlAuthenticationSuccessHandler" />
  
    
-   		<bean id="reviewsController" class="co.srsp.controller.ReviewController">  
+   		<bean id="reviewsController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
 	    </bean>
 	    
 	    <bean id="feedsController" class="co.srsp.controller.FeedsController">  
