@@ -2,13 +2,17 @@ package co.srsp.rss.handlers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedList;
+
+import org.apache.log4j.Logger;
 
 import co.srsp.rss.model.FeedMessage;
 import co.srsp.rss.model.ReturnMessageInterface;
 
 public class SearchFilter {
 
+	private final static Logger log = Logger.getLogger(SearchFilter.class); 
+	
 	public static final String SEARCH_TYPE_FEEDS = "SEARCH_TYPE_FEEDS";
 	
 	private String searchCriteria;
@@ -21,38 +25,36 @@ public class SearchFilter {
 		searchTypeToReturnObjectMapping = new HashMap<String, Object>();
 		searchTypeToReturnObjectMapping.put(SEARCH_TYPE_FEEDS, FeedMessage.class);
 	}
+
 	
-	public ReturnMessageInterface[] filterData(ReturnMessageInterface[] dataToFilter){
-		
-		switch(searchType){
-			case SEARCH_TYPE_FEEDS:
-				return filterFeedData((FeedMessage[])dataToFilter);
-			default:
-				break;
-		}
-		
-		return dataToFilter;
-	}
-	
-	private FeedMessage[] filterFeedData(FeedMessage[] dataToFilter){
+	public boolean addFeedData(FeedMessage dataToTest){
 		//searchCriteria;
 		
-		List<FeedMessage> filteredFeedMessageArr = new ArrayList<FeedMessage>();
+		//log.info("filter array size to FILTER : "+dataToFilter.length);
+		log.info("searchCriteria.toLowerCase().trim() : "+searchCriteria.toLowerCase().trim());
+		//FeedMessage[] filteredFeedMessageArray = new FeedMessage[dataToFilter.length];
 		
-		for(FeedMessage feedMessage : dataToFilter){
+		int count = 0;
+		
+		//for(FeedMessage feedMessage : dataToFilter){
 			
 			boolean addItem = false;
 			
-			if(feedMessage.getTitle().toLowerCase().contains(searchCriteria.toLowerCase())){
-				filteredFeedMessageArr.add(feedMessage);
-			}else if(feedMessage.getDescription().toLowerCase().contains(searchCriteria.toLowerCase())){
-				filteredFeedMessageArr.add(feedMessage);
-			}else if(feedMessage.getAuthor().toLowerCase().contains(searchCriteria.toLowerCase())){
-				filteredFeedMessageArr.add(feedMessage);
+			if(dataToTest.getTitle().toLowerCase().contains(searchCriteria.toLowerCase().trim())){
+				//filteredFeedMessageArray[count] = feedMessage;
+				//count++;
+				return true;
+			}else if(dataToTest.getDescription().toLowerCase().contains(searchCriteria.toLowerCase().trim())){
+				//filteredFeedMessageArray[count] = feedMessage;
+				//count++;
+				return true;
+			}else if(dataToTest.getAuthor().toLowerCase().contains(searchCriteria.toLowerCase().trim())){
+				//filteredFeedMessageArray[count] = feedMessage;
+				//count++;
+				return true;
+			}else{
+				return false;
 			}
-		}
-		
-		
-		return (FeedMessage[])filteredFeedMessageArr.toArray();
+			
 	}
 }

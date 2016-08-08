@@ -31,10 +31,9 @@ public class FeedsController {
 			log.info("in here for search criteria value: "+searchCriteria);
 			
 			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);
-			return (FeedMessage[])searchFilter.filterData(rssHandler.readRSSFeedPaginated
-					(request.getParameter("rssFeedURL"), request.getSession(), true, true));
+			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), true, true, searchFilter);
 		}else{
-			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), true, true);
+			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), true, true, null);
 		}
 		
 		
@@ -53,10 +52,9 @@ public class FeedsController {
 			log.info("in here for search criteria value: "+searchCriteria);
 			
 			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);		
-			return (FeedMessage[])searchFilter.filterData(rssHandler.readRSSFeedPaginated
-					(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward));
+			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward, searchFilter);
 		}else{
-			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward);
+			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward, null);
 		}
 		
 		

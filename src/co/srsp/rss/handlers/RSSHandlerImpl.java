@@ -20,9 +20,11 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 
 	private final static Logger log = Logger.getLogger(RSSHandlerImpl.class); 
 	
-	@Override
 	
-	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward){
+	
+	
+	@Override
+	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter){
 		SyndFeedInput input = new SyndFeedInput();
 		FeedMessage[] feedArr = null;
 		FeedMessage feedMsg = null;		
@@ -35,7 +37,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 	         
 	         int sizeOfArrayToReturn = 0;
 	         
-			 int count = 0;
+			
 			
 			 int rssPaginationOffset = -1;
 			
@@ -53,6 +55,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				int feedSize = feed.getEntries().size(); 
 				sizeOfArrayToReturn = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
 				feedArr = new FeedMessage[sizeOfArrayToReturn];
+				
 			}else{
 				log.info(" THIS IS A new search");
 				rssPaginationOffset = 0;
@@ -87,7 +90,12 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 			log.info("size of array : "+sizeOfArrayToReturn);
 			log.info(feed.getEntries().subList(rssPaginationOffset, rssPaginationOffset+sizeOfArrayToReturn).size());
 			
-			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, rssPaginationOffset+sizeOfArrayToReturn)){
+			
+			//TODO overall count and found count
+			//TODO match items then add overall count to offset
+			int overallCount = 0;
+			 int matchedCount = 0;
+			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, feed.getEntries().size())){
 				
 				feedMsg = new FeedMessage();
 				feedMsg.setAuthor(syndEntry.getAuthor());
@@ -134,13 +142,26 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 					feedMsg.setCurrentPaginationOffset(rssPaginationOffset+10);
 				}
 				
-				feedArr[count] = feedMsg;		
-				count++;
+				//apply for search filter
+				
+				if(searchFilter != null && searchFilter.addFeedData(feedMsg)){ //user has enetered text so need to match records
+					feedArr[matchedCount] = feedMsg;		
+					matchedCount++;
+				}else if(searchFilter == null){ //no search criteria entered return all that exist either 10 or total size of feed list returned.
+					feedArr[matchedCount] = feedMsg;		
+					matchedCount++;
+				}
+				
+				overallCount++;
+				
+				if(matchedCount >= 10){ //found 10 that match search criteria
+					break;
+				}
 			}
 			
-			session.setAttribute("rssPaginationOffset", rssPaginationOffset+10);
+			session.setAttribute("rssPaginationOffset", rssPaginationOffset+overallCount);
 			session.setAttribute("feed", feed);
-			log.info("return ing feed array");
+			log.info("returning feed array");
 			return feedArr;
 			
 		}catch(Exception e){
@@ -151,12 +172,9 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 		return feedArr = new FeedMessage[0];
 	}
 	
-	private void filterOnSearchCriteria(HashMap searchCriteria){
-		
-	}
 	
 	public FeedMessage[] readRSSFeed(String feedUrl) {
-		return readRSSFeedPaginated(feedUrl, null, true, true);
+		return readRSSFeedPaginated(feedUrl, null, true, true, null);
 	}
 
 	@Override
