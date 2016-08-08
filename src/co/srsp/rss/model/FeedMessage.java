@@ -1,6 +1,6 @@
 package co.srsp.rss.model;
 
-public class FeedMessage {
+public class FeedMessage implements ReturnMessageInterface{
 	private String title;
 	private String description;
 	private String link;

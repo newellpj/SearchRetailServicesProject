@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.srsp.rss.handlers.RSSHandlerImpl;
 import co.srsp.rss.handlers.RSSHandlerInterface;
+import co.srsp.rss.handlers.SearchFilter;
 import co.srsp.rss.model.FeedMessage;
 
 @Controller
@@ -23,7 +24,20 @@ public class FeedsController {
 		log.info("in getFeeds...."+request.getParameter("rssFeedURL"));
 		System.out.println("in getFeeds...."+request.getParameter("rssFeedURL"));
 		RSSHandlerInterface rssHandler = new RSSHandlerImpl();
-		return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), true, true);
+		String searchCriteria = request.getParameter("searchCriteria");
+		log.info("search criteria : "+searchCriteria);
+		if(searchCriteria != null && !"".equals(searchCriteria)){
+			
+			log.info("in here for search criteria value: "+searchCriteria);
+			
+			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);
+			return (FeedMessage[])searchFilter.filterData(rssHandler.readRSSFeedPaginated
+					(request.getParameter("rssFeedURL"), request.getSession(), true, true));
+		}else{
+			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), true, true);
+		}
+		
+		
 	}
 	
 	@RequestMapping(value = { "/getPaginatedFeed"}, method = RequestMethod.GET)
@@ -32,6 +46,19 @@ public class FeedsController {
 		System.out.println("in getPaginatedFeed...."+request.getParameter("rssFeedURL"));
 		RSSHandlerInterface rssHandler = new RSSHandlerImpl();
 		boolean paginateForward = Boolean.parseBoolean(request.getParameter("_paginateForward").toString());
-		return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward);
+		String searchCriteria = request.getParameter("searchCriteria");
+		
+		if(searchCriteria != null && !"".equals(searchCriteria)){
+			
+			log.info("in here for search criteria value: "+searchCriteria);
+			
+			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);		
+			return (FeedMessage[])searchFilter.filterData(rssHandler.readRSSFeedPaginated
+					(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward));
+		}else{
+			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward);
+		}
+		
+		
 	}
 }

@@ -298,18 +298,22 @@ function noBookToReview(){
 	//	$('#searchText').val();	
 		
 		if("All" == rssFeedName){ //append all feed urls excl image of day
-				rssFeedURL = "";
+			rssFeedURL = "";
 				
-				$('#searchAllSelect option').each(function(){
-					var textVal = this.text;
-						if(textVal != "Image of Day"){
-							rssFeedURL = rssFeedURL +"|"+ this.value;
+			$('#searchAllSelect option').each(function(){
+				var textVal = this.text;
+					if(textVal != "Image of Day" && textVal != "All"){
+						
+						if("" == rssFeedURL){
+							rssFeedURL = this.value;
+						}else{
+							rssFeedURL =  rssFeedURL+","+this.value;
 						}
-				});
-				
-			}
+					}
+			});
+		}
 		
-		alert(rssFeedURL);
+		
 		
 		var dlg = $("<div></div>").dialog({
 				hide: 'fade',

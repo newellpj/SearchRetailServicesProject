@@ -57,8 +57,10 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				log.info(" THIS IS A new search");
 				rssPaginationOffset = 0;
 				
-				if(feedUrl.contains("|")){ //is an ALL search
-					String[] feedURLArr = feedUrl.split("|");
+				if(feedUrl.contains(",")){ //is an ALL search
+					String[] feedURLArr = feedUrl.split(",");
+					
+					log.info("feed url in array "+feedURLArr[0]);
 					
 					for(int i=0; feedURLArr.length > i; i++){
 						SyndFeed tempFeed = input.build(new XmlReader(new URL(feedURLArr[i])));
@@ -72,8 +74,6 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				}else{
 					feed = input.build(new XmlReader(new URL(feedUrl)));
 				}
-				
-				
 				
 				if(feed.getEntries().size() > 10){
 					sizeOfArrayToReturn = 10;
@@ -125,6 +125,9 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 
 					log.info("imgWidth 2 : "+imgWidth);
 					log.info("imgHeight 2: "+imgHeight);
+					
+					log.info("feed entries size ::: "+feed.getEntries().size());
+					
 					feedMsg.setImageWidth(String.valueOf(imgWidth));
 					feedMsg.setImageHeight(String.valueOf(imgHeight));
 					feedMsg.setTotalFeedCount(feed.getEntries().size());
