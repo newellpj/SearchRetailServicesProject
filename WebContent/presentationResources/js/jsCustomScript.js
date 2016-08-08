@@ -290,6 +290,13 @@ function noBookToReview(){
 		var rssFeedURL = $('#searchAllSelect').val();
 		var rssFeedName = $('#searchAllSelect option:selected').text();
 
+		//$('.bxslider2 .bx-next').attr("disabled", true);
+		//	$('.bxslider2 .bx-prev').attr("disabled", true);
+		
+			$('#all-search-box').find('input, textarea, button, select').attr("disabled", true);
+			$('.bx-controls-direction').css("visibility", "hidden");
+			$('.bx-pager').css("visibility", "hidden");
+		
 		var dlg = $("<div></div>").dialog({
 				hide: 'fade',
 				maxWidth: 500,
@@ -303,6 +310,9 @@ function noBookToReview(){
 			$(dlg).parent().find('button').remove();
 			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Finding "+rssFeedName+" feeds... </p></div>");	
 			$(dlg).dialog( "option", "modal", true );
+			
+		
+			
 			$(dlg).dialog("open");
 			
 			var requestURL = (paginating) ? 'getPaginatedFeed': 'getFeeds';
@@ -319,8 +329,13 @@ function noBookToReview(){
 				contentType: 'application/json; charset=utf-8',
 				type: 'GET',
 				success:  function(feedMessageArr) {
-
+					
 				    $(dlg).dialog("close");
+					
+					$('#all-search-box').find('input, textarea, button, select').attr("disabled", false);
+					$('.bx-controls-direction').css("visibility", "visible");
+					$('.bx-pager').css("visibility", "visible");
+					
 					$( "#feedsSliderSegment" ).html(""); //these are the search result divs that get added upon pagination of search results	
 					$( "#feedsSliderSegment" ).append("<ul id='feedsSlider' class='bxslider2'>");
 	
@@ -423,7 +438,7 @@ function noBookToReview(){
 						if('undefined' == msg || msg == null){
 								msg = "There was an error retrieving the feed";
 						}
-						
+						$('#mask').hide();
 						$(errorDialog).html('<p>'+msg+'</p>');
 				        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
 				        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
