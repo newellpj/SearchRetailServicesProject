@@ -302,6 +302,7 @@ function noBookToReview(){
 
 			$(dlg).parent().find('button').remove();
 			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Finding "+rssFeedName+" feeds... </p></div>");	
+			$(dlg).dialog( "option", "modal", true );
 			$(dlg).dialog("open");
 			
 			var requestURL = (paginating) ? 'getPaginatedFeed': 'getFeeds';
@@ -331,17 +332,26 @@ function noBookToReview(){
 						"<img height='"+feedMessageArr[i]['imageHeight']+"' width='"+feedMessageArr[i]['imageWidth']+"' src='"
 						+feedMessageArr[i]['url']+"'></img><p><b>"+feedMessageArr[i]['title']+"</b></p>"+
 						feedMessageArr[i]['description']+"</p><p><a href="+feedMessageArr[i]['link']+" target='_blank' >See More...</a>"+"</p></li>");
-
 					}
 					
 					$( "#feedsSliderSegment" ).append("</ul>");
 					
 					document.getElementById('feedsSliderSegment').style.visibility = "visible";
+					
+					var startSlideVal = 0;	
 						
+					if(!paginateForward){
+						startSlideVal = 9;
+					}	
+					
+					
 					var slider = $('.bxslider2').bxSlider({
 						captions: true,
-						auto:false
+						auto:false,
+						startSlide:startSlideVal
 					});
+					
+					
 
 					if(feedMessageArr.length >= 10 && totalFeedsSize > 10 && totalFeedsSize > currentPaginationOffset){ //only paginating function if this set is equal to 10 and there is more to paginate
 

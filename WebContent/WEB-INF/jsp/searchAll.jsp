@@ -81,7 +81,7 @@
 						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 0px 0px 0px 0px !important;" id="searchAllSelect"></select>
 						<input id="searchText" style="width:85% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='searchText'>
 						<button id="searchAllBtn" style="margin-left: -4px; background-color: #A2C5D0; padding-top: 6px !important; padding-bottom: 11px !important; 
-						        color: #3D3C3A; border-radius: 0px 7px 7px 0px;" type="button" onclick="getRSSFeed(false);" > 
+						        color: #3D3C3A; border-radius: 0px 7px 7px 0px;" type="button" onclick="getRSSFeed(false, true);" > 
 						<span class="glyphicon glyphicon-search" style="padding-top: 1px !important;"></span></button>
 				
 						
