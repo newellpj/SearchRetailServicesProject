@@ -2,6 +2,7 @@ package co.srsp.rss.handlers;
 
 import java.awt.Image;
 import java.net.URL;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
@@ -48,15 +49,31 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				if(!paginateForward && rssPaginationOffset >= 20){
 					rssPaginationOffset = rssPaginationOffset - 20;
 				}
-				
-				
+
 				int feedSize = feed.getEntries().size(); 
 				sizeOfArrayToReturn = ((feedSize - rssPaginationOffset) < 10 ) ? (feedSize - rssPaginationOffset) : 10;
 				feedArr = new FeedMessage[sizeOfArrayToReturn];
 			}else{
 				log.info(" THIS IS A new search");
 				rssPaginationOffset = 0;
-				feed = input.build(new XmlReader(new URL(feedUrl)));
+				
+				if(feedUrl.contains("|")){ //is an ALL search
+					String[] feedURLArr = feedUrl.split("|");
+					
+					for(int i=0; feedURLArr.length > i; i++){
+						SyndFeed tempFeed = input.build(new XmlReader(new URL(feedURLArr[i])));
+						
+						if(i == 0){
+							feed = tempFeed;
+						}else{
+							feed.getEntries().addAll(tempFeed.getEntries());
+						}
+					}
+				}else{
+					feed = input.build(new XmlReader(new URL(feedUrl)));
+				}
+				
+				
 				
 				if(feed.getEntries().size() > 10){
 					sizeOfArrayToReturn = 10;
@@ -131,7 +148,7 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 		return feedArr = new FeedMessage[0];
 	}
 	
-	public void filterOnSearchCriteria(HashMap searchCriteria){
+	private void filterOnSearchCriteria(HashMap searchCriteria){
 		
 	}
 	

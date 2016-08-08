@@ -289,13 +289,27 @@ function noBookToReview(){
 		
 		var rssFeedURL = $('#searchAllSelect').val();
 		var rssFeedName = $('#searchAllSelect option:selected').text();
-
-		//$('.bxslider2 .bx-next').attr("disabled", true);
-		//	$('.bxslider2 .bx-prev').attr("disabled", true);
+		var searchText = $('#searchText').val();
 		
 			$('#all-search-box').find('input, textarea, button, select').attr("disabled", true);
 			$('.bx-controls-direction').css("visibility", "hidden");
 			$('.bx-pager').css("visibility", "hidden");
+			
+	//	$('#searchText').val();	
+		
+		if("All" == rssFeedName){ //append all feed urls excl image of day
+				rssFeedURL = "";
+				
+				$('#searchAllSelect option').each(function(){
+					var textVal = this.text;
+						if(textVal != "Image of Day"){
+							rssFeedURL = rssFeedURL +"|"+ this.value;
+						}
+				});
+				
+			}
+		
+		alert(rssFeedURL);
 		
 		var dlg = $("<div></div>").dialog({
 				hide: 'fade',
@@ -311,7 +325,6 @@ function noBookToReview(){
 			$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Finding "+rssFeedName+" feeds... </p></div>");	
 			$(dlg).dialog( "option", "modal", true );
 			
-		
 			
 			$(dlg).dialog("open");
 			
@@ -323,7 +336,8 @@ function noBookToReview(){
 				data: { 
 					rssFeedURL: rssFeedURL,
 					rssFeedName: rssFeedName,
-					_paginateForward: paginateForward
+					_paginateForward: paginateForward,
+					searchCriteria: searchText
 				},
 				processData: true,
 				contentType: 'application/json; charset=utf-8',
