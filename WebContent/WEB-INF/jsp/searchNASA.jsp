@@ -73,7 +73,7 @@
 		</c:if>
 
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
-	
+	<span style="font-style: italic; font-size:small; margin-left:10px;"> Type keywords or phrases to be searched. You can also select the specific category in which you wish to search.</span>
 		<table style="width:100%;">
 		
 				<tr>

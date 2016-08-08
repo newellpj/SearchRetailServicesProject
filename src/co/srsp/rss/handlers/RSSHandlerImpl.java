@@ -131,6 +131,10 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 		return feedArr = new FeedMessage[0];
 	}
 	
+	public void filterOnSearchCriteria(HashMap searchCriteria){
+		
+	}
+	
 	public FeedMessage[] readRSSFeed(String feedUrl) {
 		return readRSSFeedPaginated(feedUrl, null, true, true);
 	}

@@ -50,11 +50,11 @@ public class SolrAndDbSearchingPageController {
 		return model;
 	}
 	
-	@RequestMapping(value = { "/searchAll"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/searchNASA"}, method = RequestMethod.GET)
 	public ModelAndView addSearchAllPage() {
 		log.info("we getting in here add search all page?");
 		ModelAndView model = new ModelAndView();		
-		model.setViewName("searchAll");
+		model.setViewName("searchNASA");
 		return model;
 	}
 

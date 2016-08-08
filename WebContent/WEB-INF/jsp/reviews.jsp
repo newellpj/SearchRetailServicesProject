@@ -67,7 +67,7 @@
 		
 		  <li id="activeSel"  onclick="switchActive($(this));"><a href="reviewsSearchBook" target="theI_Frame">Search book</a></li>
 		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame">Search documents</a></li>
-		  <li id="activeSel1"  onclick="switchActive($(this));"><a href="searchAll" target="theI_Frame">Search All</a></li>
+		  <li id="activeSel1"  onclick="switchActive($(this));"><a href="searchNASA" target="theI_Frame">Search NASA</a></li>
 		  <li id="activeSel2" onclick="switchActive($(this));"><a href="reviewsAddBook" target="theI_Frame">Add book</a></li>
 		  <li id="activeSel3" onclick="switchActive($(this));"><a href="reviewsReviewBook" target="theI_Frame">Review book</a></li>
 		  <li id="logout"><a href="logout">Logout</a></li>
