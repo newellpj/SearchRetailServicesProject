@@ -17,6 +17,8 @@
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="./presentationResources/js/highlighter.js"></script>
+
 
 
 
@@ -73,7 +75,7 @@
 		</c:if>
 
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
-	<span style="font-style: italic; font-size:small; margin-left:10px;"> Type keywords or phrases to be searched. You can also select the specific category in which you wish to search.</span>
+	<span style="font-weight: normal; font-size:small; margin-left:10px;"> Type keywords or phrases to be searched. You can also select the specific category in which you wish to search.</span>
 		<table style="width:100%;">
 		
 				<tr>

@@ -371,6 +371,11 @@ function noBookToReview(){
 						
 						$( "#feedsSliderSegment" ).append("</ul>");
 						
+						//search words highlight scripts
+						var myHilitor = new Hilitor("#feedsSliderSegment ul");
+						myHilitor.apply(searchText);
+						
+						
 						document.getElementById('feedsSliderSegment').style.visibility = "visible";
 						
 						var startSlideVal = 0;	
@@ -427,7 +432,8 @@ function noBookToReview(){
 							$("#noneFound").remove();
 						}
 						
-				    	$( "#feedsSliderSegment" ).append("<div id='noneFound' style='margin-left:100px; font-style:italic; margin-bottom:20px; font-size:medium;'></div>");
+				    	$( "#feedsSliderSegment" ).append("<div id='noneFound' style='padding-left:100px; padding-top:20px; min-height:150px; border: 1px solid black;"+
+						"background-color:white !important; border-radius: 7px 7px 7px 7px; font-style:italic; margin-bottom:20px; font-size:medium;'></div>");
 				    	
 				    	if(searchText != null && searchText != ''){
 				    		$( "#noneFound" ).append("No items found for "+searchText+" in the category of "+rssFeedName);
