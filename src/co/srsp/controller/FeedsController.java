@@ -26,10 +26,8 @@ public class FeedsController {
 		RSSHandlerInterface rssHandler = new RSSHandlerImpl();
 		String searchCriteria = request.getParameter("searchCriteria");
 		log.info("search criteria : "+searchCriteria);
-		if(searchCriteria != null && !"".equals(searchCriteria)){
-			
+		if(searchCriteria != null && !"".equals(searchCriteria)){		
 			log.info("in here for search criteria value: "+searchCriteria);
-			
 			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);
 			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), true, true, searchFilter);
 		}else{
@@ -48,9 +46,7 @@ public class FeedsController {
 		String searchCriteria = request.getParameter("searchCriteria");
 		
 		if(searchCriteria != null && !"".equals(searchCriteria)){
-			
 			log.info("in here for search criteria value: "+searchCriteria);
-			
 			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);		
 			return rssHandler.readRSSFeedPaginated(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward, searchFilter);
 		}else{

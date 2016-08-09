@@ -109,7 +109,6 @@ option {
 }
 
 
-
 select {
    height: 34px;
    background: white;
@@ -177,9 +176,10 @@ select {
 
 
 #myMenu{
-	 background-color: #e9e9e9;
+	background-color: #e9e9e9;
 	height: 35px !important;
 	max-width: 100% !important;
+	box-shadow: 2px 2px 4px  5px #888888;
 }
 
 #theI_Frame {
@@ -596,7 +596,7 @@ display: inline-block;
     z-index: 1;
     padding: 5px;
     margin-top : -15px; /* according to application */ 
-   opacity: 0;
+    opacity: 0;
     transition: opacity 1s;
 }
 .tooltip .tooltiptext::after {

@@ -30,15 +30,9 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 		FeedMessage feedMsg = null;		
 				
 		try{
-			
-			 //SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
-	        // System.out.println("The feed is "+feed);
-	        // System.out.println("The feed is "+feed.getEntries().size());
 	         
 	         int sizeOfArrayToReturn = 0;
 	         
-			
-			
 			 int rssPaginationOffset = -1;
 			
 			 SyndFeed feed = null;
@@ -159,10 +153,30 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				}
 			}
 			
+			//now remove any null entries in the array
+			
+			int removalCountIndex = -1;
+			
+			for(int i=0; feedArr.length > i; i++){
+				if(feedArr[i] == null){
+					removalCountIndex = i;
+					break;
+				}
+			}
+			
+			FeedMessage[] feedMessageArrayToReturn = null;
+			
+			if(removalCountIndex > -1){
+				feedMessageArrayToReturn = new FeedMessage[removalCountIndex];
+				System.arraycopy(feedArr, 0, feedMessageArrayToReturn, 0, removalCountIndex);
+			}else{
+				feedMessageArrayToReturn = feedArr;
+			}
+			
 			session.setAttribute("rssPaginationOffset", rssPaginationOffset+overallCount);
 			session.setAttribute("feed", feed);
 			log.info("returning feed array");
-			return feedArr;
+			return feedMessageArrayToReturn;
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -195,8 +209,6 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 
             System.out.println("The feed is "+feed);
             System.out.println("The feed is "+feed.getEntries().size());
-            
-            
             ok = true;
         }
         catch (Exception ex) {
