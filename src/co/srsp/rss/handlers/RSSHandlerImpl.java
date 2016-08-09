@@ -139,6 +139,8 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 				//apply for search filter
 				
 				if(searchFilter != null && searchFilter.addFeedData(feedMsg)){ //user has enetered text so need to match records
+
+					feedMsg.setSearchCriteriaMatched(searchFilter.getSearchTermsMatchedArray());
 					feedArr[matchedCount] = feedMsg;		
 					matchedCount++;
 				}else if(searchFilter == null){ //no search criteria entered return all that exist either 10 or total size of feed list returned.

@@ -11,9 +11,17 @@ public class FeedMessage implements ReturnMessageInterface{
 	private String imageHeight;
 	private int totalFeedCount;
 	private int currentPaginationOffset;
+	private String[] searchCriteriaMatched;
 	
-	
-    public int getCurrentPaginationOffset() {
+    public String[] getSearchCriteriaMatched() {
+		return searchCriteriaMatched;
+	}
+
+	public void setSearchCriteriaMatched(String[] searchCriteriaMatched) {
+		this.searchCriteriaMatched = searchCriteriaMatched;
+	}
+
+	public int getCurrentPaginationOffset() {
 		return currentPaginationOffset;
 	}
 

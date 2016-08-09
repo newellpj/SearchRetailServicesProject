@@ -432,13 +432,13 @@ function noBookToReview(){
 							$("#noneFound").remove();
 						}
 						
-				    	$( "#feedsSliderSegment" ).append("<div id='noneFound' style='padding-left:100px; padding-top:20px; min-height:150px; border: 1px solid black;"+
+				    	$( "#feedsSliderSegment" ).append("<div id='noneFound' style='padding-left:100px; padding-top:20px; padding-bottom:20px; min-height:60px; border: 1px solid #e1e5e5;"+
 						"background-color:white !important; border-radius: 7px 7px 7px 7px; font-style:italic; margin-bottom:20px; font-size:medium;'></div>");
 				    	
 				    	if(searchText != null && searchText != ''){
-				    		$( "#noneFound" ).append("No items found for "+searchText+" in the category of "+rssFeedName);
+				    		$( "#noneFound" ).append("No items found for <b>"+searchText+"</b> in the category of <b>"+rssFeedName+"</b>");
 				    	}else{
-				    		$( "#noneFound" ).append("No items found in in the category of "+rssFeedName);
+				    		$( "#noneFound" ).append("No items found in in the category of <b>"+rssFeedName+"</b>");
 				    	}
 				    }
 				 },
