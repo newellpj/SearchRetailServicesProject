@@ -427,7 +427,7 @@ function noBookToReview(){
 							$("#noneFound").remove();
 						}
 						
-				    	$( "#feedsSliderSegment" ).append("<div id='noneFound' style='margin-left:100px; font-style:italic; margin-bottom:20px; font-size:small;'></div>");
+				    	$( "#feedsSliderSegment" ).append("<div id='noneFound' style='margin-left:100px; font-style:italic; margin-bottom:20px; font-size:medium;'></div>");
 				    	
 				    	if(searchText != null && searchText != ''){
 				    		$( "#noneFound" ).append("No items found for "+searchText+" in the category of "+rssFeedName);
