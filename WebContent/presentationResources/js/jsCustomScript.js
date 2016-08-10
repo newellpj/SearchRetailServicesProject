@@ -372,10 +372,16 @@ function noBookToReview(){
 						$( "#feedsSliderSegment" ).append("</ul>");
 						
 						//search words highlight scripts
+						
+						var searchTermsArr = feedMessageArr[0]['searchCriteriaMatched'];
+						
+						alert('searchTermsArr : '+searchTermsArr);
+						
+						//searchTermsArr.replace(",")
+						
 						var myHilitor = new Hilitor("#feedsSliderSegment ul");
-						myHilitor.apply(searchText);
-						
-						
+						myHilitor.apply(searchTermsArr);
+
 						document.getElementById('feedsSliderSegment').style.visibility = "visible";
 						
 						var startSlideVal = 0;	

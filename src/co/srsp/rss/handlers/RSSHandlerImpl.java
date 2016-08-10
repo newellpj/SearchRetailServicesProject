@@ -88,7 +88,8 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 			//TODO overall count and found count
 			//TODO match items then add overall count to offset
 			int overallCount = 0;
-			 int matchedCount = 0;
+			int matchedCount = 0;
+			
 			for(SyndEntry syndEntry : feed.getEntries().subList(rssPaginationOffset, feed.getEntries().size())){
 				
 				feedMsg = new FeedMessage();
