@@ -20,7 +20,7 @@ public class SearchFilter {
 	private String searchTermsMatched = "";
 	private String searchType;
 	private HashMap<String, Object> searchTypeToReturnObjectMapping;
-	private List<String> stopWordsList = new ArrayList<Srring>();
+	private List<String> stopWordsList = new ArrayList<String>();
 	
 	public SearchFilter(String searchCriteria, String searchType){
 		this.searchCriteria = searchCriteria;
