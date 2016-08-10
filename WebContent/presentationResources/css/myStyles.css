@@ -94,19 +94,27 @@ option {
 	color: gray !important;
 }
 
+#myMenu{
+	height: 65px !important;
+	position: fixed;
+	max-width: 100% !important;
+}
+
 #myMenu ul {
     list-style-type: none;
     margin: 0;
-	margin-left: 25%;
     overflow: hidden;
 	position: fixed;
     top: 0;
+	padding-left: 350px;
 	vertical-align: top;
-	 display: inline;
+	display: inline;
     width: 100%;
 	height: 35px;
     background-color: #e9e9e9;
+	box-shadow: 2px 2px 4px  5px #888888;
 }
+
 
 
 select {
@@ -175,17 +183,11 @@ select {
 }
 
 
-#myMenu{
-	background-color: #e9e9e9;
-	height: 35px !important;
-	max-width: 100% !important;
-	box-shadow: 2px 2px 4px  5px #888888;
-}
-
 #theI_Frame {
   height: 800px !important;
   width: 100% !important;
   resize: none;
+  margin-top: 50px;
   overflow-x: scroll;
   overflow-y: hidden !important;
 }
@@ -487,10 +489,9 @@ tr:nth-child(even)		{ background-color:#e9e9e9; }
 }
 
 #search-box{
-	
 	width: 766px !important;
 	padding: 20px;
-	margin: 40px auto;
+	margin-left:400px;
 	background: #fff;
 	background-color: #ededed;
 	-webkit-border-radius: 2px;
@@ -516,7 +517,9 @@ tr:nth-child(even)		{ background-color:#e9e9e9; }
 	visibility:hidden;
 	width: 766px !important;
 	padding: 20px;
-	margin: 40px auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left:400px;
 	background: #fff;
 	background-color: white;
 	-webkit-border-radius: 2px;

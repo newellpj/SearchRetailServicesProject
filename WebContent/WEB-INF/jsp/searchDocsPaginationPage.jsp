@@ -27,11 +27,11 @@
 
 
 $(document).ready(function() {
-//	  $('.add-reviews-box').jscroll({
-//		 loadingHtml: "<div class='ajax-loader-2'> Loading...</div>"  	  
-//	  });
-	  
-     //		alert('hello doc read');	     
+
+	$('a').click( function(e) {
+		e.preventDefault();
+	});
+	      
 });
 
 window.onerror = function(msg, url, line, col, error) {

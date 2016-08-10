@@ -805,6 +805,7 @@ function renderTagList(obj){
 		
 		$(dlg).html("<div class='dialogStyles'  style='padding:10px; text-shadow:none!important;'>"+$(fullTextDiv).html()+"<div>");			
 		$(dlg).dialog("open");
+		
  }
  
  function performAjaxDocSearch(){
@@ -896,6 +897,10 @@ function renderTagList(obj){
 				
 				$('.resultsSection').jscroll({		  
 					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+				});
+				
+				$('a').click( function(e) {
+					e.preventDefault();
 				});
 				
 				$(dlg).dialog("close");
