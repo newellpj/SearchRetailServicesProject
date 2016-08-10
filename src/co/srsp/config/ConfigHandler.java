@@ -19,6 +19,8 @@ public class ConfigHandler {
 
 	private final static Logger log = Logger.getLogger(ConfigHandler.class); 
 	
+	public static final String CONFIG_ROOT_DIR = "../webapps/SearchRetailServicesProject/presentationResources/";
+	
 	private static ConfigHandler instance = null;
 	
 	public static ConfigHandler getInstance(){
@@ -43,7 +45,7 @@ public class ConfigHandler {
 			//read entire file
 		StringBuffer sb = new StringBuffer();	
 		
-		try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+		try(BufferedReader br = new BufferedReader(new FileReader(CONFIG_ROOT_DIR+fileName))) {
 			// load a properties file
 			String line = "";
 			

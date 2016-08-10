@@ -27,9 +27,10 @@ public class SearchFilter {
 		this.searchType = searchType;
 		searchTypeToReturnObjectMapping = new HashMap<String, Object>();
 		searchTypeToReturnObjectMapping.put(SEARCH_TYPE_FEEDS, FeedMessage.class);
-		
-		stopWordsList = (List<String>)ConfigHandler.getInstance().readCSVFile("./presentationResources/stopwords.txt", ConfigHandler.LIST_RETURN_TYPE);
+		System.out.println("current directory is : "+System.getProperty("user.dir"));
+		stopWordsList = (List<String>)ConfigHandler.getInstance().readCSVFile("stopwords.txt", ConfigHandler.LIST_RETURN_TYPE);
 	
+		
 		
 	}
 
