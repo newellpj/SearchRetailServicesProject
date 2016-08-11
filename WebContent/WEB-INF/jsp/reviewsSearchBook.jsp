@@ -38,7 +38,15 @@ var html = $(".bookRevList").html();
 	
 	
 		searchPageReadyInit();
+		var acc = document.getElementsByClassName("accordion");
+		var i;
 
+		for (i = 0; i < acc.length; i++) {
+			acc[i].onclick = function(){
+				this.classList.toggle("active");
+				this.nextElementSibling.classList.toggle("hide");
+			}
+		}
 		
 		   
 	});
@@ -60,6 +68,8 @@ var html = $(".bookRevList").html();
 <body background="./presentationResources/images/bgimg.jpg">
 
 <br/>
+<button class="accordion">Search Books</button>
+
 	<div id="search-box" class="search-box">
 
 		<h3>PJs Book Reviews Page</h3>
@@ -116,7 +126,7 @@ var html = $(".bookRevList").html();
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
 								</button>
 								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
-										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
+										Reset
 								</button>
 								</td>
 									
@@ -129,6 +139,7 @@ var html = $(".bookRevList").html();
 			
 		</form:form>
 </div>	
+
 <div id="resultsSection" class="resultsSection">
 		<form:form id="searchResults" class="searchResults">
 		

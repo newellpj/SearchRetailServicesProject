@@ -48,7 +48,15 @@
 	
 	
 		searchDocsPageInit();
+		var acc = document.getElementsByClassName("accordion");
+		var i;
 
+		for (i = 0; i < acc.length; i++) {
+			acc[i].onclick = function(){
+				this.classList.toggle("active");
+				this.nextElementSibling.classList.toggle("hide");
+			}
+		}
 		
 		   
 	});
@@ -70,6 +78,7 @@
 <body background="./presentationResources/images/bgimg.jpg">
 
 <br/>
+<button class="accordion">Search Documents</button>
 	<div id="search-box" class="search-box">
 
 		<h3>PJs Book Reviews Page</h3>
