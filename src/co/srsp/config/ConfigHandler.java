@@ -1,6 +1,7 @@
 package co.srsp.config;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class ConfigHandler {
 	private final static Logger log = Logger.getLogger(ConfigHandler.class); 
 	
 	public static final String CONFIG_ROOT_DIR = "../webapps/SearchRetailServicesProject/presentationResources/";
+	public static final String CONFIG_ROOT_DIR_UNIT_TEST = "./WebContent/presentationResources/";
 	
 	private static ConfigHandler instance = null;
 	
@@ -45,7 +47,15 @@ public class ConfigHandler {
 			//read entire file
 		StringBuffer sb = new StringBuffer();	
 		
-		try(BufferedReader br = new BufferedReader(new FileReader(CONFIG_ROOT_DIR+fileName))) {
+		String configDir = "";
+		
+		if(new File(CONFIG_ROOT_DIR+fileName).exists()){
+			configDir = CONFIG_ROOT_DIR;
+		}else{
+			configDir = CONFIG_ROOT_DIR_UNIT_TEST;
+		}
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(configDir+fileName))) {
 			// load a properties file
 			String line = "";
 			
