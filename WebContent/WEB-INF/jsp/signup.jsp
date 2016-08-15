@@ -27,7 +27,7 @@
 		<form:form  action="signupSubmitted" method="post" commandName="usersModel">
 			<table width="100%">
 				<tr>
-					<td>Choose a username:</td>
+					<td>Choose a Username:</td>
 					<td><form:input path="username" name="username" class="usernameInput" style="width:257px !important;" type='text' /><span class="glyphicon glyphicon-user iconspan"></span></td>
 				</tr>
 				<tr>
