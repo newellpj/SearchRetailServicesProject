@@ -1,8 +1,7 @@
 package co.srsp.hibernate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -212,6 +211,8 @@ public class HibernateTestClass {
 			assertNotNull(authority.getAuthority());
 			assertNotNull(authority.getUsername());
 		}
+		
+		userBO.delete(users, auth);
 	}
 
 }
