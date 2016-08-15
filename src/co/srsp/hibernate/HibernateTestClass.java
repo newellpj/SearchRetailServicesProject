@@ -1,17 +1,21 @@
 package co.srsp.hibernate;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import co.srsp.hibernate.orm.Authorities;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
 import co.srsp.hibernate.orm.Users;
-
 
 public class HibernateTestClass {
 
@@ -20,13 +24,14 @@ public class HibernateTestClass {
 		//testBooksAndReviews();
 		//testUsersAuthorities();
 		//testSelectSubsets();
-		testTagsSearch();
+	//	testTagsSearch();
 	}
 	
-	private static void testTagsSearch(){
+	@Test
+	public void testTagsSearch(){
 		//findBooksByTagsLazyLoad
 		
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		//BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
 		TagsBusinessObject tagsBO = (TagsBusinessObject) ctx.getBean("tagsBusinessObject");
@@ -46,6 +51,9 @@ public class HibernateTestClass {
 		
 		for(Books book : booksFound){
 			System.out.println("title :::: "+book.getTitle());
+			
+			assertNotNull(book.getTitle());
+			//assertEquals("Fear and Loathing in Las Vegas", book.getTitle());
 		}
 		
 		
@@ -53,8 +61,9 @@ public class HibernateTestClass {
 		
 	}
 	
-	private static void testBooksSearchPublisher(){
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
+	@Test
+	public void testBooksSearchPublisher(){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
 		BookReviewsBusinessObject booksReviewsBO = (BookReviewsBusinessObject) ctx.getBean("booksReviewsBusinessObject");
@@ -68,14 +77,16 @@ public class HibernateTestClass {
 		List<Books> booksFound = booksReviewsBO.findBooksByPublishersLazyLoad(books.getPublisher(), 0, 20);
 
 		for(Books book : booksFound){
+			assertNotNull(book.getTitle());
+		
 			System.out.println("title :::: "+book.getTitle());
 		}
 
 	}
 	
-	
-	private static void testBooksAndReviews(){
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
+	@Test
+	public void testBooksAndReviews(){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
 		BookReviewsBusinessObject booksReviewsBO = (BookReviewsBusinessObject) ctx.getBean("booksReviewsBusinessObject");
@@ -89,22 +100,34 @@ public class HibernateTestClass {
 		Books bookFound = booksBO.findBooksByTitleAndAuthor(books.getTitle(), books.getAuthor()).get(0);
 		
 		System.out.println("book found : "+bookFound.getTitle()+" author : "+bookFound.getAuthor());
+		assertEquals("Fear and Loathing in Las Vegas", bookFound.getTitle());
+		assertEquals("Hunter S Thompson", bookFound.getAuthor());
 		
 		int count = 0;
 		
-		while(count < 200){	
-			BookReviews bookReviews = new BookReviews();
-			bookReviews.setIdbooks(15);
-			bookReviews.setReviewersUsername("edureka");
-			bookReviews.setReviewText("Absolutely loved it. RECOMMENDED! : "+count);
-			booksReviewsBO.save(bookReviews);
-			count++;
+		boolean exceptionCaught = false;
+		
+		try{
+		
+			while(count < 200){	
+				BookReviews bookReviews = new BookReviews();
+				bookReviews.setIdbooks(15);
+				bookReviews.setReviewersUsername("edureka");
+				bookReviews.setReviewText("Absolutely loved it. RECOMMENDED! : "+count);
+				booksReviewsBO.save(bookReviews);
+				
+				count++;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			exceptionCaught = true;
 		}
 
+		assertFalse(exceptionCaught);
 	}
 	
-	private static void testSelectSubsets(){
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
+	public void testSelectSubsets(){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
 		BookReviewsBusinessObject booksReviewsBO = (BookReviewsBusinessObject) ctx.getBean("booksReviewsBusinessObject");
@@ -133,19 +156,17 @@ public class HibernateTestClass {
 		
 	}
 	
-	private static void testUsersAuthorities(){
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("C:/Users/newelly/SpringCertificationProject/SpringCertificationProject/resources/applicationContext.xml");
-		
+	@Test
+	public void testPasswordsEncryptDecrypt(){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		UsersBusinessObject userBO = (UsersBusinessObject) ctx.getBean("usersBusinessObject");
 		AuthoritiesBusinessObject authBO = (AuthoritiesBusinessObject) ctx.getBean("authoritiesBusinessObject");
-		
 		Users users = new Users();
-
-		users.setUsername("taylorpt");
-		users.setPassword("password1");
+		String passPlainText = "pAssword1";
+		users.setUsername("taylorpt13");
+		System.out.println("userBO.encryptPassword(pAssword1) : "+userBO.encryptPassword("pAssword1"));
+		users.setPassword(userBO.encryptPassword("pAssword1"));
 		users.setEnabled("Y");
-		
-	//	userBO.save(users);
 		
 		Authorities auth = new Authorities();
 		auth.setAuthority("ROLE_USER");
@@ -154,13 +175,42 @@ public class HibernateTestClass {
 		userBO.save(users, auth);
 		
 		Users usersRet = userBO.findUsersByUsername(users.getUsername());
+		userBO.delete(users, auth);
+		assertEquals("taylorpt13", usersRet.getUsername());
+		assertEquals(true, userBO.checkPassword(usersRet.getPassword(), passPlainText));
+		
+		
+	}
+	
+	public void testUsersAuthorities(){
+
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		UsersBusinessObject userBO = (UsersBusinessObject) ctx.getBean("usersBusinessObject");
+		AuthoritiesBusinessObject authBO = (AuthoritiesBusinessObject) ctx.getBean("authoritiesBusinessObject");
+		
+		Users users = new Users();
+		users.setUsername("taylorpt");
+		users.setPassword("password1");
+		users.setEnabled("Y");
+		
+		Authorities auth = new Authorities();
+		auth.setAuthority("ROLE_USER");
+		auth.setUsername(users.getUsername());
+		
+		//userBO.save(users, auth);
+		
+		Users usersRet = userBO.findUsersByUsername(users.getUsername());
 		List<Authorities> authRetList = authBO.findAuthoritiesByUserName(users.getUsername());
+		
+		assertEquals("password1", usersRet.getPassword());
 		
 		System.out.println("user password returned is : "+usersRet.getPassword());
 		
 		for(Authorities authority : authRetList){
 			System.out.println("auth authoritiy : "+authority.getAuthority());
 			System.out.println("auth username : "+authority.getUsername());
+			assertNotNull(authority.getAuthority());
+			assertNotNull(authority.getUsername());
 		}
 	}
 

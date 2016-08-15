@@ -26,7 +26,7 @@ public class UsersRolesAuthoritiesService {
 	public void addUser(UsersModel userModel){
 		Users user = new Users();
 		user.setUsername(userModel.getUsername());
-		user.setPassword(userModel.getPassword());
+		user.setPassword(userBO.encryptPassword(userModel.getPassword()));
 		user.setEnabled("Y");
 		
 		Authorities authorities = new Authorities();

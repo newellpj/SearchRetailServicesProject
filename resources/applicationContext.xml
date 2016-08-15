@@ -59,11 +59,15 @@
    		<bean id="myAuthenticationSuccessHandler"  class="co.srsp.config.SimpleUrlAuthenticationSuccessHandler" />
  
    
-   		<bean id="reviewsController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
+   		<bean id="solrAndDbSearchController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
 	    </bean>
 	    
 	    <bean id="feedsController" class="co.srsp.controller.FeedsController">  
 	    </bean>
+	    
+	      <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+			<constructor-arg name="strength" value="11" />
+		   </bean>
 	    
 	   
 	   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
@@ -74,6 +78,7 @@
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
 	   
+
 	    <bean id="authoritiesBusinessObject" class="co.srsp.hibernate.AuthoritiesBusinessObjectImpl">
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
