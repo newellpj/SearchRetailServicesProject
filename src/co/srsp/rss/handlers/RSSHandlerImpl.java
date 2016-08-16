@@ -19,10 +19,7 @@ import co.srsp.rss.model.FeedMessage;
 public class RSSHandlerImpl implements RSSHandlerInterface {
 
 	private final static Logger log = Logger.getLogger(RSSHandlerImpl.class); 
-	
-	
-	
-	
+
 	@Override
 	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter){
 		SyndFeedInput input = new SyndFeedInput();
@@ -137,9 +134,9 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 					feedMsg.setCurrentPaginationOffset(rssPaginationOffset+10);
 				}
 				
-				//apply for search filter
+				//apply the search filter
 				
-				if(searchFilter != null && searchFilter.addFeedData(feedMsg)){ //user has enetered text so need to match records
+				if(searchFilter != null && searchFilter.addFeedData(feedMsg)){ //user has entered text so need to match records
 
 					feedMsg.setSearchCriteriaMatched(searchFilter.getSearchTermsMatchedArray());
 					feedArr[matchedCount] = feedMsg;		

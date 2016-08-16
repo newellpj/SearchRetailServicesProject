@@ -1,15 +1,19 @@
 package co.srsp.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import co.srsp.hibernate.UsersBusinessObject;
 import co.srsp.hibernate.orm.Authorities;
 import co.srsp.hibernate.orm.Users;
+import co.srsp.rss.handlers.RSSHandlerImpl;
 import co.srsp.viewmodel.UsersModel;
 
 public class UsersRolesAuthoritiesService {
 
+	private final static Logger log = Logger.getLogger(UsersRolesAuthoritiesService.class); 
+	
 	private ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 	private UsersBusinessObject userBO = (UsersBusinessObject) ctx.getBean("usersBusinessObject");
 	

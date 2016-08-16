@@ -61,9 +61,9 @@
 </head>
 <body background="./presentationResources/images/bgimg.jpg">
 	
-	<div id="myMenu" >
+	<div class="col-12" >
 		
-		<ul>
+		<ul class="topnav responsive">
 		
 		  <li id="activeSel"  onclick="switchActive($(this));"><a href="reviewsSearchBook" target="theI_Frame">Search book</a></li>
 		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame">Search documents</a></li>

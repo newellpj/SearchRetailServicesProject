@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,9 +16,12 @@ import co.srsp.hibernate.orm.Authorities;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
 import co.srsp.hibernate.orm.Users;
+import co.srsp.service.UsersRolesAuthoritiesService;
 
 public class HibernateTestClass {
 
+	private final static Logger log = Logger.getLogger(HibernateTestClass.class); 
+	
 	public static void main(String[] args) {
 		
 		//testBooksAndReviews();

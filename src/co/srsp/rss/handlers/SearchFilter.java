@@ -97,8 +97,9 @@ public class SearchFilter {
 			String singleSearchTerm = splitSearchCriteria[i].trim();
 			
 			log.info("singleSearchTerm : "+singleSearchTerm);
+			log.info("topWordsList.contains(singleSearchTerm) : "+stopWordsList.contains(singleSearchTerm.toLowerCase()));
 			
-			if(singleSearchTerm != null && !"".equals(singleSearchTerm) && !stopWordsList.contains(singleSearchTerm)){
+			if(singleSearchTerm != null && !"".equals(singleSearchTerm) && !stopWordsList.contains(singleSearchTerm.toLowerCase())){
 				if(dataToTest.getTitle().toLowerCase().contains(singleSearchTerm.toLowerCase().trim())){
 					somethingMatched = true;
 					matchedCount++;
