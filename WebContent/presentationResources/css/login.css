@@ -1,0 +1,104 @@
+.login-box {
+	width: 30%;
+	padding: 10px;
+	margin-left: 33%;
+	margin-top: 5%;
+	background: #fff;	
+	background-color: #ededed;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+.loginFields{
+	width: 100%;
+	min-width:100%;
+	margin-left:4em;
+}
+
+.usernameInput {
+  padding: 5px;
+  border-right: none !important;
+  border: solid 1.5px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+  border-radius: 7px 0px 0px 7px;
+}
+
+.userFields{
+	width:100%;
+	margin-left:4em;
+	float:right;
+	margin-bottom:0.5em;
+}
+
+.passFields{
+	width:100%;
+	min-width:100%;
+	float:right;
+	margin-left:4em;
+}
+
+ .iconspanLogin {
+    position: relative;
+	background-color: #A2C5D0;
+    color: #3D3C3A;
+	border: solid 1.5px #dcdcdc;
+	padding: 0.6em;
+	border-left: none;
+	border-radius: 0px 7px 7px 0px;
+}
+
+.loginButton{width:80%; margin-top:1em; margin-left:4em;}
+
+@media screen and (max-width:680px) {
+  ul.topnav li:not(:first-child) {display: none; }
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+
+@media screen and (max-width:1400px){
+	div#loginFields.loginFields.responsive{margin-left:1em;}
+}
+
+@media screen and (max-width:980px){
+ .login-box.responsive {position: relative; padding:0;margin:0; width:auto;}
+ button.loginButton.responsive{margin-left:1em; width:70%;}
+ .login-box.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+  }
+}
+
+@media screen and (max-width:580px){
+	 button.loginButton.responsive{margin-left:2em; width:80%;}
+}
+
+@media screen and (max-width:420px){
+	 button.loginButton.responsive{margin-left:1em; width:93%;}
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative; padding:0;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
