@@ -6,7 +6,6 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.css">
-
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
@@ -65,12 +64,12 @@
 		
 		<ul class="topnav responsive">
 		
-		  <li id="activeSel"  onclick="switchActive($(this));"><a href="reviewsSearchBook" target="theI_Frame">Search book</a></li>
-		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame">Search documents</a></li>
+		  <li id="activeSel"  onclick="switchActive($(this));"><a href="reviewsSearchBook" target="theI_Frame">Search Book</a></li>
+		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame">Search Docs</a></li>
 		  <li id="activeSel1"  onclick="switchActive($(this));"><a href="searchNASA" target="theI_Frame">Search NASA</a></li>
-		  <li id="activeSel2" onclick="switchActive($(this));"><a href="reviewsAddBook" target="theI_Frame">Add book</a></li>
+		  <li id="activeSel2" onclick="switchActive($(this));"><a href="reviewsAddBook" target="theI_Frame">Add a book</a></li>
 		  <li id="activeSel3" onclick="switchActive($(this));"><a href="reviewsReviewBook" target="theI_Frame">Review book</a></li>
-		  <li id="logout"><a href="logout">Logout</a></li>
+		  <li id="logout"><a href="logout"> Logout <span style="color:transparent; text-shadow:none;">.......... </span></a></li>
 		 </ul>			 
 		 	</div>
 		 
@@ -79,7 +78,7 @@
 		
 		
 <br/>
-<div style="margin-left:200px !important;">
+<div class="frameContainer responsive">
   <iframe name="theI_Frame" id="theI_Frame" src="reviewsSearchBook" frameborder="0" scrolling="yes" onload="resizeIframe(this)">
   </iframe>
 </div>
