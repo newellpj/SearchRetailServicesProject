@@ -8,7 +8,8 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
-
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/login.css">
+<script type="text/javascript" src="./presentationResources/js/matchHeight.js"></script>
 <title>Login Page</title>
 <style>
 
@@ -25,6 +26,10 @@
 		 
 	    top.location = self.location.href;
 	 }
+	 
+	 $( document ).ready(function() {
+		$(div).matchHeight(byRow);
+	  });
 
 </script>
 
@@ -33,7 +38,7 @@
 
 	
 
-	<div id="login-box">
+	<div id="login-box" class="login-box responsive">
 
 		<h3>PJs Book Reviews Login Page</h3>
 
@@ -49,20 +54,22 @@
 		<form 
 			action="<c:url value='/j_spring_security_check' />" method='POST'>
 
-			<table style="width:100%;">
-				<tr>
-					<td>Username:</td>
-					<td><input class="usernameInput" style="width:205px !important;" type='text' name='username'><span class="glyphicon glyphicon-user iconspan"></span></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='password' style="width:205px !important;" />  <span class="glyphicon glyphicon-lock iconspan"></span></td>
-				</tr>
-				<tr>
-					<td colspan='1'></td></td><td colspan='1'><button name="submit" type="submit" style="margin-left:150px !important;"
-						value="Login" >	 <span class="glyphicon glyphicon-log-in"></span> &nbsp; Login </button></td>
-				</tr>
-			</table>
+			<div id="loginFields" class="loginFields responsive">
+				<div id="users" class="userFields responsive">
+					Username:
+					<input class="usernameInput responsive" type='text' name='username' style="width:60%;"><span class="glyphicon glyphicon-user iconspanLogin"></span>
+				 </div>
+				<div id="pass"  class="passFields responsive">
+					Password:
+					<input class="usernameInput responsive" type='password' name='password' style="width:60%; margin-left:0.3em;"/><span class="glyphicon glyphicon-lock iconspanLogin"></span>
+				</div>
+				
+					
+			</div>	
+			<div >
+		<button name="submit" type="submit" class="loginButton responsive" 
+						value="Login" >	 <span class="glyphicon glyphicon-log-in"></span> &nbsp; Login </button>
+			</div>			
 		</form>
 	</div>
 

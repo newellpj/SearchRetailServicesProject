@@ -52,6 +52,8 @@
 
 .loginButton{width:80%; margin-top:1em; margin-left:4em;}
 
+.retLoginButton{width:95%; margin-top:1em; margin-left:1em;}
+
 @media screen and (max-width:680px) {
   ul.topnav li:not(:first-child) {display: none; }
   ul.topnav li.icon {
