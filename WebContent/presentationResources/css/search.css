@@ -30,11 +30,10 @@ button.accordion.responsive {position: relative; margin:0; width:90%;}
 
 
 div.search-box.responsive{
-  padding: 0 18px;
-	width: 766px !important;
-	padding: 20px;
-	margin-left:400px;
-	margin-top:30px;
+	width: 50%;
+	padding: 2em;
+	margin-left:33%;
+	margin-top:2em;
 	background: #fff;
 	background-color: #ededed;
 	-webkit-border-radius: 2px;
