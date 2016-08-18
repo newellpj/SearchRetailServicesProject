@@ -22,8 +22,8 @@
 
 button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; width:98%;}
 	 div.tagSearches.responsive{margin:0;min-width:98%;display:inline-block;}
-	 .searchBook.responsive{min-width:40%; margin:0.5em;}
-	.resetSearch.responsive{min-width:40%;margin:0.5em;}
+	 .searchBook.responsive{min-width:40%; margin:1.5em;}
+	.resetSearch.responsive{min-width:40%;margin:1.5em;}
 }
 
 
