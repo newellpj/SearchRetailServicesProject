@@ -110,13 +110,13 @@ var html = $(".bookRevList").html();
 					<select style="visibility:hidden; width:30%;" id="languageSelect"></select>
 		          </div>	
 			
-			  <div class="tagSearches" style="margin-left:30%;"> 
+			  <div class="tagSearches responsive"> 
 					
 							
-								<button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" value="Search.." > 
+								<button id="searchBook" class="searchBook responsive" name="searchBook" type="button"  onclick="performAjaxSearch();" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:0.5em;" ></span>Search...
 								</button>
-								<button id="resetSearch" class="resetSearch" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
+								<button id="resetSearch" class="resetSearch responsive" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
 										<span class="glyphicon glyphicon-erase" style="padding-right:0.5em;" ></span> Reset...
 								</button> 
 

@@ -21,23 +21,55 @@
  div.search-box.responsive {position: relative; padding:0.4em; margin:0.5em; width:95%; display:block;}
 
 button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; width:98%;}
+	 div.tagSearches.responsive{margin:0;min-width:98%;display:inline-block;}
+	 .searchBook.responsive{min-width:40%; margin:0.5em;}
+	.resetSearch.responsive{min-width:40%;margin:0.5em;}
 }
 
 
 
-@media screen and (max-width:580px){
+@media screen and (max-width:600px){
 	 div.titleAndGenre.responsive{ display:block; margin:0.2em}
 	 div.authorCategory.responsive{ display:block;}
 	 div.publisherLang.responsive{ display:block;}
 	 
 	 input#titleText{min-width:85%; margin-bottom:1em;}
-	 select#genreSelect{min-width:80%; margin-bottom:1em;}
+	 select#genreSelect{min-width:70%; margin-bottom:1em;}
+	 
 	 
 }
 
-@media screen and (max-width:420px){
+@media screen and (max-width:540px){
+	input#titleText{min-width:80%; margin-bottom:1em;}
+	input#genre{margin-left:1em; margin-bottom:1em;}
+	 select#genreSelect{min-width:70%; margin-bottom:1em;}
+	 div.tagSearches.responsive{margin:0;min-width:98%;display:block;}
+	 .searchBook.responsive{min-width:90%; margin:0.5em;}
+	.resetSearch.responsive{min-width:90%;margin:0.5em;}
+
 }
 
+@media screen and (max-width:420px){
+	input#titleText{min-width:75%; margin-bottom:1em;}
+	input#genre{margin-left:0.5em;}
+	select#genreSelect{min-width:70%; margin-bottom:1em;}
+	
+
+}
+
+@media screen and (max-width:330px){
+	input#titleText{min-width:70%; margin-bottom:1em;}
+	input#genre{margin-left:0.5em;}
+	select#genreSelect{min-width:60%; margin-bottom:1em;}
+}
+
+#searchBook{
+	width:20%;
+}
+
+#resetSearch{
+	width:20%;
+}
 
 div.titleAndGenre{
 	width:100%;
@@ -80,15 +112,26 @@ div.search-box.responsive.hide {
     display: none;
 }
 
-button.accordion {
-    background-color: #eee;
+div.tagSearches{
+	margin-left:20%;
+	min-width:100%;
+	display:inline;
+}
+
+.test{
 	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
 	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
-	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
+	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 	
+}
+
+button.accordion {
+    background-color: #eee;
+	background-image:url(../images/bgimg.jpg);
+	
     color: #444;
     cursor: pointer;
     padding: 1em;
-    width: 40%;
+    width: 50%;
     text-align: left;
     border: none;
 	margin-left:33%;
