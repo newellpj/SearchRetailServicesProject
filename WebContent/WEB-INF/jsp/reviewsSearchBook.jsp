@@ -69,11 +69,9 @@ var html = $(".bookRevList").html();
 <body background="./presentationResources/images/bgimg.jpg">
 
 
-<button class="accordion responsive">Search Books</button>
+<button class="glyphicon glyphicon-book accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
 
 	<div class="search-box responsive">
-
-		
 
 		<c:if test="${not empty error}">
 			<div class="error alert alert-error">${error}</div>
@@ -88,51 +86,41 @@ var html = $(".bookRevList").html();
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
 	
 	
-				
+				<div class="titleAndGenre responsive">
 					Title:
-					<input id="titleText" style="width:40%;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span>
+					<input id="titleText"  type='text' name='titleText' style="width:40%;" ><span class="glyphicon glyphicon-book iconspan2"></span>
 					
 					
-					<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> 
-					<select style="visibility:hidden; width:40%;" id="genreSelect"></select>
-							
-					
-				
-				
+					<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
+					<select style="visibility:hidden; width:30%; margin-left:1.7em;" id="genreSelect"></select>
+				</div>		
+				<div class="authorCategory responsive">
 					Author:
 					<input id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
-					<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br />
-					<select style="visibility:hidden; width:40%;" id="categorySelect"></select>
-					
+					<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category
+					<select style="visibility:hidden; width:30%; margin-left:0.4em;" id="categorySelect"></select>
+				</div>	
 				
-				
+				<div class="publisherLang responsive">
 					Publisher:
 					<input id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
-					<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br />
-					<select style="visibility:hidden; width:40%;" id="languageSelect"></select>
+					<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
+					<select style="visibility:hidden; width:30%;" id="languageSelect"></select>
+		          </div>	
+			
+			  <div class="tagSearches" style="margin-left:30%;"> 
 					
-				
-				
-						
-			
-			
-			
-			  <div class="tagSearches" style="margin-left:200px !important;"> 
-						<table width="100%">
 							
-								<td colspan='1'> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 
-								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
+								<button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" value="Search.." > 
+								<span class="glyphicon glyphicon-eye-open" style="padding-right:0.5em;" ></span>Search...
 								</button>
-								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
-										Reset
-								</button>
-								
-									
-	
-							
-						</table>
+								<button id="resetSearch" class="resetSearch" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
+										<span class="glyphicon glyphicon-erase" style="padding-right:0.5em;" ></span> Reset...
+								</button> 
+
+					
 					</div>		
 			<br/>
 

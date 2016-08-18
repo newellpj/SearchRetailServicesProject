@@ -1,37 +1,68 @@
 
+@media screen and (max-width:1600px){
+	button.accordion.responsive { width:50%;}
+}
 
 
-@media screen and (max-width:1400px){
-	div.search-box.responsive {position: relative; padding:0; margin:1em; width:70%;}
+@media screen and (max-width:1300px){
+	div.search-box.responsive {position: relative; padding:1em; margin-left:10em; width:70%;}
+	  button.accordion.responsive {position: relative; margin-left:10em; padding:1em; width:68%;}
 	 div.frameContainer.responsive{position: relative; padding:0; margin:0; width:100%;}
 }
 
-@media screen and (max-width:980px){
- div.search-box.responsive {position: relative; padding:0; margin:1em; width:80%;}
+@media screen and (max-width:1080px){
+ div.search-box.responsive {position: relative; padding:1em; margin:1em; width:90%;}
   div.frameContainer.responsive{position: relative; padding:0; margin:0; width:auto;}
+  button.accordion.responsive {position: relative; margin:0.5em; padding:2em; width:90%;}
 }
 
 
 @media screen and (max-width:720px){
- div.search-box.responsive {position: relative; padding:0.4em; margin:0.5em; width:90%;}
+ div.search-box.responsive {position: relative; padding:0.4em; margin:0.5em; width:95%; display:block;}
 
-button.accordion.responsive {position: relative; margin:0; width:90%;}
+button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; width:98%;}
 }
 
 
 
 @media screen and (max-width:580px){
-	 button.loginButton.responsive{margin-left:2em; width:80%;}
+	 div.titleAndGenre.responsive{ display:block; margin:0.2em}
+	 div.authorCategory.responsive{ display:block;}
+	 div.publisherLang.responsive{ display:block;}
+	 
+	 input#titleText{min-width:85%; margin-bottom:1em;}
+	 select#genreSelect{min-width:80%; margin-bottom:1em;}
+	 
 }
 
 @media screen and (max-width:420px){
-	 button.loginButton.responsive{margin-left:1em; width:93%;}
 }
 
 
-div.search-box.responsive{
+div.titleAndGenre{
+	width:100%;
+	margin-bottom:1em;
+	display:inline-block;
+	margin-left: 2.1em;
+}
+
+div.authorCategory{
+	width:100%;
+	margin-bottom:1em;
+	display:inline-block;
+	margin-left: 1em;
+}
+
+div.publisherLang{
+	width:100%;
+	margin-bottom:1em;
+	display:inline-block;
+	margin-left: 0;
+}
+
+div.search-box{
 	width: 50%;
-	padding: 2em;
+	padding: 1em;
 	margin-left:33%;
 	margin-top:2em;
 	background: #fff;
@@ -42,20 +73,21 @@ div.search-box.responsive{
 	box-shadow: 10px 10px 5px #888888;
 	border-radius: 10px 10px 10px 10px;
    display: block;
+   text-shadow: 0.5px 0.5px #a8a8a8;
 }
 
 div.search-box.responsive.hide {
     display: none;
 }
 
-button.accordion.responsive {
+button.accordion {
     background-color: #eee;
 	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
 	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
 	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
     color: #444;
     cursor: pointer;
-    padding: 1.5em;
+    padding: 1em;
     width: 40%;
     text-align: left;
     border: none;
@@ -64,7 +96,7 @@ button.accordion.responsive {
     transition: 0.4s;
 }
 
-button.accordion.responsive:after {
+button.accordion:after {
     content: "\2796"; /* Unicode character for "plus" sign (+) */
     font-size: 13px;
     color: #777;
@@ -72,6 +104,6 @@ button.accordion.responsive:after {
     margin-left: 5px;
 }
 
-button.accordion.responsive.active:after {
+button.accordion.active:after {
     content: '\02795'; /* Unicode character for "minus" sign (-) */
 }
