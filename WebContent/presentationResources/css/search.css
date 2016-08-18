@@ -3,7 +3,7 @@
 
 @media screen and (max-width:1400px){
 	div.search-box.responsive {position: relative; padding:0; margin:1em; width:70%;}
-	 div.frameContainer.responsive{position: relative; padding:0; margin:1em; width:100%;}
+	 div.frameContainer.responsive{position: relative; padding:0; margin:0; width:100%;}
 }
 
 @media screen and (max-width:980px){
@@ -13,9 +13,9 @@
 
 
 @media screen and (max-width:720px){
- div.search-box.responsive {position: relative; padding:0; margin:1em; width:90%;}
- div.frameContainer.responsive{position: relative; padding:0; margin:0; width:auto;}
+ div.search-box.responsive {position: relative; padding:0.4em; margin:0.5em; width:90%;}
 
+button.accordion.responsive {position: relative; margin:0; width:90%;}
 }
 
 
@@ -26,4 +26,53 @@
 
 @media screen and (max-width:420px){
 	 button.loginButton.responsive{margin-left:1em; width:93%;}
+}
+
+
+div.search-box.responsive{
+  padding: 0 18px;
+	width: 766px !important;
+	padding: 20px;
+	margin-left:400px;
+	margin-top:30px;
+	background: #fff;
+	background-color: #ededed;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+	box-shadow: 10px 10px 5px #888888;
+	border-radius: 10px 10px 10px 10px;
+   display: block;
+}
+
+div.search-box.responsive.hide {
+    display: none;
+}
+
+button.accordion.responsive {
+    background-color: #eee;
+	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
+	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
+	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
+    color: #444;
+    cursor: pointer;
+    padding: 1.5em;
+    width: 40%;
+    text-align: left;
+    border: none;
+	margin-left:33%;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion.responsive:after {
+    content: "\2796"; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.responsive.active:after {
+    content: '\02795'; /* Unicode character for "minus" sign (-) */
 }

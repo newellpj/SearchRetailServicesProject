@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/search.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
@@ -67,12 +68,12 @@ var html = $(".bookRevList").html();
 </head>
 <body background="./presentationResources/images/bgimg.jpg">
 
-<br/>
-<button class="accordion">Search Books</button>
 
-	<div id="search-box" class="search-box">
+<button class="accordion responsive">Search Books</button>
 
-		<h3>PJs Book Reviews Page</h3>
+	<div class="search-box responsive">
+
+		
 
 		<c:if test="${not empty error}">
 			<div class="error alert alert-error">${error}</div>
@@ -81,57 +82,56 @@ var html = $(".bookRevList").html();
 			<div class="message">${message}</div>
 		</c:if>
 		
-		<p><span style="align-center;">Please type in the criteria to find a book to review.</span></p>
+		<p><span style="align-center; font-style:italic;">Please type in the criteria to find a book to review</span></p>
 
 
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
 	
-		<table style="width:100%;">
-			<tr><td colspan="3">Search a Book to Review</td></tr>		
-				<tr>
-					<td>Title:</td>
-					<td><input id="titleText" style="width:262px !important;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span></td>
+	
+				
+					Title:
+					<input id="titleText" style="width:40%;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span>
 					
 					
-					<td><input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
-					<td><select style="visibility:hidden; width:240px;" id="genreSelect"></select></td>
+					<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> 
+					<select style="visibility:hidden; width:40%;" id="genreSelect"></select>
 							
 					
-				</tr>
-				<tr>
-					<td>Author:</td>
-					<td><input id="authorText" style="width:262px !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
+				
+				
+					Author:
+					<input id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
-					<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
-					<td><select style="visibility:hidden; width:240px;" id="categorySelect"></select></td>
+					<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br />
+					<select style="visibility:hidden; width:40%;" id="categorySelect"></select>
 					
-				</tr>
-				<tr>
-					<td>Publisher:</td>
-					<td><input id="publisherText" style="width:262px !important;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
+				
+				
+					Publisher:
+					<input id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
-					<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
-					<td><select style="visibility:hidden; width:240px;" id="languageSelect"></select></td>
+					<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br />
+					<select style="visibility:hidden; width:40%;" id="languageSelect"></select>
 					
-				</tr>
+				
 				
 						
 			
-			</table>
+			
 			
 			  <div class="tagSearches" style="margin-left:200px !important;"> 
 						<table width="100%">
-							<tr>
-								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 
+							
+								<td colspan='1'> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
 								</button>
 								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
 										Reset
 								</button>
-								</td>
+								
 									
 	
-							</tr>
+							
 						</table>
 					</div>		
 			<br/>

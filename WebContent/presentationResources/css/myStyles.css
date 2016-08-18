@@ -643,66 +643,11 @@ tr:nth-child(even)		{ background-color:#e9e9e9; }
   overflow: hidden;
 }
 
-div.search-box{
-  padding: 0 18px;
-	width: 766px !important;
-	padding: 20px;
-	margin-left:400px;
-	margin-top:30px;
-	background: #fff;
-	background-color: #ededed;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-	box-shadow: 10px 10px 5px #888888;
-	border-radius: 10px 10px 10px 10px;
-   display: block;
-}
 
-div.search-box.hide {
-    display: none;
-}
 
-button.accordion {
-    background-color: #eee;
-	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
-	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
-	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 50%;
-    text-align: left;
-    border: none;
-	margin-left:350px;
-    outline: none;
-    transition: 0.4s;
-}
 
-button.accordion:after {
-    content: "\2796"; /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
-    color: #777;
-    float: right;
-    margin-left: 5px;
-}
 
-button.accordion.active:after {
-    content: '\02795'; /* Unicode character for "minus" sign (-) */
-}
 
-#search-box{
-	width: 766px !important;
-	padding: 20px;
-	margin-left:400px;
-	background: #fff;
-	background-color: #ededed;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-	box-shadow: 10px 10px 5px #888888;
-	border-radius: 10px 10px 10px 10px;
-}
 
 #all-search-box{
 	width: 90% !important;
@@ -1069,7 +1014,7 @@ select {
   height: 800px;
   width: 100%;
   resize: none;
-  margin-top: 50px;
+  margin-top: 1%;
   overflow-x: scroll;
   overflow-y: hidden !important;
 }
@@ -1387,33 +1332,7 @@ div.search-box.hide {
     display: none;
 }
 
-button.accordion {
-    background-color: #eee;
-	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
-	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
-	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 50%;
-    text-align: left;
-    border: none;
-	margin-left:350px;
-    outline: none;
-    transition: 0.4s;
-}
 
-button.accordion:after {
-    content: "\2796"; /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
-    color: #777;
-    float: right;
-    margin-left: 5px;
-}
-
-button.accordion.active:after {
-    content: '\02795'; /* Unicode character for "minus" sign (-) */
-}
 
 #search-box{
 	width: 766px !important;
