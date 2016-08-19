@@ -24,18 +24,28 @@ button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; wid
 	 div.tagSearches.responsive{margin:0;min-width:98%;display:inline-block;}
 	 .searchBook.responsive{min-width:40%; margin:1.5em;}
 	.resetSearch.responsive{min-width:40%;margin:1.5em;}
+	
+	input#titleText{min-width:83%; margin-bottom:1em;}
+	 select#genreSelect{min-width:70%; margin-bottom:1em;}
+	 input#genre{margin-left:2em; margin-bottom:0.5em; }
+	 input#authorText{min-width:83%; margin-bottom:1em;}
+	 select#categorySelect{min-width:70%; margin-bottom:1em;}
+	 input#category{margin-left:2em; margin-bottom:0.5em; }
+	 div.authorCategory.responsive{margin-left:1em;}
 }
 
 
 
 @media screen and (max-width:600px){
 	 div.titleAndGenre.responsive{ display:block; margin:0.2em}
-	 div.authorCategory.responsive{ display:block;}
-	 div.publisherLang.responsive{ display:block;}
+	 div.authorCategory.responsive{ display:block; margin:0.2em}
+	 div.publisherLang.responsive{ display:block; margin:0.2em}
 	 
 	 input#titleText{min-width:85%; margin-bottom:1em;}
 	 select#genreSelect{min-width:70%; margin-bottom:1em;}
 	 
+	 input#authorText{min-width:80%; margin-bottom:1em;}
+	 select#categorySelect{min-width:70%; margin-bottom:1em;}
 	 
 }
 
@@ -43,6 +53,10 @@ button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; wid
 	input#titleText{min-width:80%; margin-bottom:1em;}
 	input#genre{margin-left:1em; margin-bottom:1em;}
 	 select#genreSelect{min-width:70%; margin-bottom:1em;}
+	 input#category{margin-left:1em; margin-bottom:1em;}
+	 input#authorText{min-width:77%; margin-bottom:1em;}
+	 select#categorySelect{min-width:66%; margin-bottom:1em;}
+	 
 	 div.tagSearches.responsive{margin:0;min-width:98%;display:block;}
 	 .searchBook.responsive{min-width:90%; margin:0.5em;}
 	.resetSearch.responsive{min-width:90%;margin:0.5em;}
@@ -53,7 +67,10 @@ button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; wid
 	input#titleText{min-width:75%; margin-bottom:1em;}
 	input#genre{margin-left:0.5em;}
 	select#genreSelect{min-width:70%; margin-bottom:1em;}
-	
+
+	input#authorText{min-width:70%; margin-bottom:1em;}
+	input#category{margin-left:0.5em;}
+	select#categorySelect{min-width:68%; margin-bottom:1em;}	
 
 }
 
