@@ -151,7 +151,7 @@ div.publisherLang{
 	width:100%;
 	margin-bottom:1em;
 	display:inline-block;
-	margin-left: 0;
+	margin-left: -0.2em;
 }
 
 div.search-box{
