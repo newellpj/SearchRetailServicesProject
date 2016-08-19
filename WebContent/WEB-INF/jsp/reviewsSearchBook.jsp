@@ -69,7 +69,7 @@ var html = $(".bookRevList").html();
 <body background="./presentationResources/images/bgimg.jpg">
 
 
-<button class="glyphicon glyphicon-book accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
+<button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
 
 	<div class="search-box responsive">
 
