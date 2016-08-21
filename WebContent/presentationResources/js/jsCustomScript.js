@@ -260,21 +260,23 @@ function noBookToReview(){
 
 
 	function switchActive(obj){
+		
 		var id = $(obj).attr("id");	
 		document.getElementById(id).style.backgroundColor="#f6f6f6";
 	    document.getElementById(id).style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
         document.getElementById(id).style.backgroundRepeat="no-repeat";
 		document.getElementById(id).style.backgroundPosition="center bottom";		 
 
-		
-		
-        $('#myMenu ul li').each(function(){
+        $('ul.topnav.responsive li').each(function(){
 			var idFound = $(this).attr("id");
-			
+		
 			if(idFound != id){
-				document.getElementById(idFound).style.backgroundColor="#e9e9e9";
+				//document.getElementById(idFound).style.backgroundColor="#e9e9e9";
 				document.getElementById(idFound).style.backgroundImage="";
-				
+				document.getElementById(idFound).style.background="linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+				document.getElementById(idFound).style.background="-moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+				document.getElementById(idFound).style.background="-webkit-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+				document.getElementById(idFound).style.boxShadow="box-shadow: 2px 2px 4px  5px #888888";
 			}  
         });
     }

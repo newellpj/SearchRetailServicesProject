@@ -30,7 +30,7 @@
       document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
 	  document.getElementById("activeSel").style.backgroundPosition="center bottom";	
 	  
-	    $("myMenu li a").click(function(e) {
+	    $("topnav li a").click(function(e) {
 	        e.preventDefault();
 	        $("#theI_Frame").attr("src", $(this).attr("href"));
 	    })
