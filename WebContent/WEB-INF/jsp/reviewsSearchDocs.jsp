@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/docs.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
@@ -78,8 +79,8 @@
 <body background="./presentationResources/images/bgimg.jpg">
 
 <br/>
-<button class="accordion">Search Documents</button>
-	<div id="search-box" class="search-box">
+<button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Documents </span></button>
+	<div id="search-box" class="search-box responsive">
 
 		<h3>PJs Book Reviews Page</h3>
 

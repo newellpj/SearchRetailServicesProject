@@ -275,7 +275,7 @@ select {
   height: 800px;
   width: 100%;
   resize: none;
-  margin-top: 50px;
+  margin-top: 2em;
   overflow-x: scroll;
   overflow-y: hidden !important;
 }

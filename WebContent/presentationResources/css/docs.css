@@ -1,0 +1,177 @@
+
+
+@media screen and (max-width:1600px){
+	button.accordion.responsive { width:50%;}
+	div.search-box.responsive {position: relative; padding:1em; margin-left:25%; width:60%;}
+		 div#resultsSection.resultsSection.responsive{position: relative; padding:1em; margin-left:25%; width:60%;}
+}
+
+
+@media screen and (max-width:1300px){
+	div.search-box.responsive {position: relative; padding:1em; margin-left:10em; width:70%;}
+	  button.accordion.responsive {position: relative; margin-left:10em; padding:1em; width:68%;}
+	 div.frameContainer.responsive{position: relative; padding:0; margin:0; width:100%;}
+	 div#resultsSection.resultsSection.responsive{position: relative; padding:1em; margin-left:10em; width:70%;}
+}
+
+@media screen and (max-width:1080px){
+ div.search-box.responsive {position: relative; padding:1em; margin:1em; max-width:90%;}
+  div.frameContainer.responsive{position: relative; padding:0; margin:0; width:auto;}
+  button.accordion.responsive {position: relative; margin:0.5em; padding:2em; width:90%;}
+   div#resultsSection.resultsSection.responsive{position: relative; padding:1em; margin:1em; max-width:90%;}
+  
+}
+
+
+@media screen and (max-width:720px){
+ div.search-box.responsive {position: relative; padding:0.4em; margin:0.5em; min-width:95%; display:block;}
+ div#resultsSection.resultsSection.responsive {position: relative; padding:0.4em; margin:0.5em; min-width:95%; display:block;}
+
+	button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; width:98%;}
+	 div.tagSearches.responsive{margin:0;min-width:98%;display:inline-block;}
+	 .searchBook.responsive{min-width:40%; margin:1.5em;}
+	.resetSearch.responsive{min-width:40%;margin:1.5em;}
+	
+	input#titleText{min-width:83%; margin-bottom:1em;}
+	 select#genreSelect{min-width:70%; margin-bottom:1em;}
+	 input#genre{margin-left:2em; margin-bottom:0.5em; }
+	 
+	 input#authorText{min-width:83%; margin-bottom:1em;}
+	 select#categorySelect{min-width:70%; margin-bottom:1em;}
+	 input#category{margin-left:2em; margin-bottom:0.5em; }
+	 
+	 input#publisherText{min-width:80%; margin-bottom:1em;}
+	 select#languageSelect{min-width:70%; margin-bottom:1em;}
+	 input#language{margin-left:2em; margin-bottom:0.5em; }
+	 
+	 div.authorCategory.responsive{margin-left:1em;}
+	 div.publisherLang.responsive{margin-left:1em;}
+}
+
+
+
+@media screen and (max-width:600px){
+	 div.titleAndGenre.responsive{ display:block; margin:0.2em}
+	 div.authorCategory.responsive{ display:block; margin:0.2em}
+	 div.publisherLang.responsive{ display:block; margin:0.2em}
+	 
+	 input#titleText{min-width:85%; margin-bottom:1em;}
+	 select#genreSelect{min-width:70%; margin-bottom:1em;}
+	 
+	 input#authorText{min-width:80%; margin-bottom:1em;}
+	 select#categorySelect{min-width:70%; margin-bottom:1em;}
+	  input#category{margin-left:2.5em; margin-bottom:0.5em; }
+	  
+	 input#publisherText{min-width:77%; margin-bottom:1em;}
+	 input#language{margin-left:1em; margin-bottom:1em;}
+	 select#languageSelect{min-width:70%; margin-bottom:1em;}
+	 
+}
+
+@media screen and (max-width:540px){
+	input#titleText{min-width:80%; margin-bottom:1em;}
+	input#genre{margin-left:1em; margin-bottom:1em;}
+	 select#genreSelect{min-width:70%; margin-bottom:1em;}
+	
+	input#category{margin-left:1em; margin-bottom:1.3em;}
+	 input#authorText{min-width:77%; margin-bottom:1em;}
+	 select#categorySelect{min-width:66%; margin-bottom:1em;}
+	 
+	 input#language{margin-left:1em; margin-bottom:1em;}
+	 input#publisherText{min-width:73%; margin-bottom:1em;}
+	 select#languageSelect{min-width:66%; margin-bottom:1em;}
+	 
+	 
+	 div.tagSearches.responsive{margin:0;min-width:98%;display:block;}
+	 .searchBook.responsive{min-width:90%; margin:0.5em;}
+	.resetSearch.responsive{min-width:90%;margin:0.5em;}
+
+}
+
+@media screen and (max-width:470px){
+		input#publisherText{min-width:70%; margin-bottom:1em;}
+}
+
+@media screen and (max-width:420px){
+	input#titleText{min-width:75%; margin-bottom:1em;}
+	input#genre{margin-left:0.5em;}
+	select#genreSelect{min-width:70%; margin-bottom:1em;}
+
+	input#authorText{min-width:71%; margin-bottom:1em;}
+	input#category{margin-left:0.5em;}
+	select#categorySelect{min-width:68%; margin-bottom:1em;}	
+	
+	input#publisherText{min-width:68%; margin-bottom:1em;}
+	input#language{margin-left:0.5em;}
+	select#languageSelect{min-width:68%; margin-bottom:1em;}	
+
+}
+
+@media screen and (max-width:370px){
+	input#authorText{min-width:69%; margin-bottom:1em;}
+	input#publisherText{min-width:64%; margin-bottom:1em;}
+}
+
+@media screen and (max-width:350px){
+	input#titleText{min-width:73%; margin-bottom:1em; border-radius:7px 7px 7px 7px; border-right: solid 1.5px #dcdcdc;}
+	input#genre{margin-left:0.5em;}
+	select#genreSelect{min-width:60%; margin-bottom:1em;}
+	
+	input#authorText{min-width:68%; margin-bottom:1em; border-radius:7px 7px 7px 7px; border-right: solid 1.5px #dcdcdc;}
+	input#category{margin-left:0.5em;}
+	select#categorySelect{min-width:65%; margin-bottom:1em;}	
+	
+	input#publisherText{min-width:65%; margin-bottom:1em; border-radius:7px 7px 7px 7px; border-right: solid 1.5px #dcdcdc;}
+	input#language{margin-left:0;}
+	select#languageSelect{min-width:63%; margin-bottom:1em;}	
+	
+      .glyphicon-pencil{visibility:hidden;}
+	  .glyphicon-book{visibility:hidden;}
+	  .glyphicon-barcode{visibility:hidden;}
+
+}
+
+
+div.search-box{
+	width: 40%;
+	padding: 1em;
+	margin-left:33%;
+	margin-top:2em;
+	overflow:hidden;
+	background: #fff;
+	background-color: #ededed;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+	box-shadow: 10px 10px 5px #888888;
+	border-radius: 10px 10px 10px 10px;
+   display: block;
+   text-shadow: 0.5px 0.5px #a8a8a8;
+}
+
+button.accordion {
+    background-color: #eee;
+	background-image:url(../images/bgimg.jpg);
+	
+    color: #444;
+    cursor: pointer;
+    padding: 1em;
+    width: 40%;
+    text-align: left;
+    border: none;
+	margin-left:33%;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion:after {
+    content: "\2796"; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    content: '\02795'; /* Unicode character for "minus" sign (-) */
+}
