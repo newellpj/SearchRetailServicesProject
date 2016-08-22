@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/addBook.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
@@ -77,9 +78,9 @@ $(document).ready(function() {
 <body background="./presentationResources/images/bgimg.jpg">
 
 <br/>
-	<div id="add-book-box">
+	<div id="add-book-box" class="add-book-box responsive">
 
-		<h3>Add a Book to Review</h3>
+		
 
 		<c:if test="${not empty error}">
 			<div class="error alert alert-error">${error}</div>
@@ -90,51 +91,52 @@ $(document).ready(function() {
 		
 		<p><span style="align-center;">Title and Author are mandatory</span></p>
 
-<br/><br/>
+<br/>
 			<form:form id="reviewsForm" action="searchOrAddBook" method="post" commandName="bookReviewsModel">
 
-		<table style="width:100%;">
+		
 			
-				<tr>
-					<td>Title:</td>
-					<td><input style="width:250px !important;" id="titleTextAdd" type='text' name='titleTextAdd'><span class="glyphicon glyphicon-book iconspan3"></span></td>
-				</tr>
-				<tr>
-					<td>Author:</td>
-					<td><input style="width:250px !important;" id="authorTextAdd" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspan3"></span></td>
-				</tr>
-				<tr>
-					<td>Publisher:</td>
-					<td><input id="publisherTextAdd" style="width:250px !important;" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspan2"></span></td>
-				</tr>
-				<tr>
-					<td colspan="1"></td><td colspan='2'><button id="addBook" name="addBook" type="button"
+				<div class="titleFields responsive">
+					Title:
+					<input id="titleTextAdd" type='text' name='titleTextAdd'><span class="glyphicon glyphicon-book iconspan3"></span>
+				</div>
+				<div class="authorFields responsive">
+					Author:
+					<input  id="authorTextAdd" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspan3"></span>
+				
+				</div>
+				<div class="publisherFields responsive">
+					Publisher:
+					<input id="publisherTextAdd" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
+				</div>
+				
+					<button id="addBook" name="addBook" type="button"
 						value="Add a book.." onclick="performAjaxAddBook();" >
 						<span class="glyphicon glyphicon-plus-sign"  ></span>&nbsp; Add a Book... </button>
-						</td>
-				</tr>
-				<tr><td><span style="visibility:hidden;">placeholder</span></td></tr>
+						
+				
+				<span style="visibility:hidden;">placeholder</span>
 	
 				
-			</table>
+		
 			
 			  <fieldset>
                 <h4>Add attributes to enable better searching</h4>
                    <div class="tagSearches"> 
-						<table width="100%">
-							<tr>
-								<td><input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> </td>
-								<td><select style="visibility:hidden;" id="genreSelect"></select></td>
-							</tr>
-							<tr>
-								<td><input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br /></td>
-								<td><select style="visibility:hidden;" id="categorySelect"></select></td>
-							</tr>
-							<tr>
-								<td><input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br /></td>
-								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
-							</tr>
-						</table>
+						
+							
+								<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> 
+								<select style="visibility:hidden;" id="genreSelect"></select>
+							
+							
+								<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br />
+								<select style="visibility:hidden;" id="categorySelect"></select>
+							
+							
+								<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br />
+								<select style="visibility:hidden;" id="languageSelect"></select>
+							
+					
 					</div>
 					
 						<ul id="bookTagsList" class="bookTagsList">
