@@ -815,7 +815,7 @@ function renderTagList(obj){
 	var html = document.getElementById("bookRevList").html;
 	var innerHTML = document.getElementById("bookRevList").innerHTML;
 	
-	document.getElementById("resultsSection").style.visibility = "visible";	
+	document.getElementById("resultsSectionDocs").style.visibility = "visible";	
 	document.getElementById("bookRevList").innerHTML = ""; //this is the original search results div that gets displayed
 	
 	if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
@@ -897,7 +897,7 @@ function renderTagList(obj){
 				
 				$(".search").append("<div class='next'><a href='retrieveNextSearchDocsSegment'>"+""+"</a> </div>");
 				
-				$('.resultsSection').jscroll({		  
+				$('.resultsSectionDocs').jscroll({		  
 					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
 				});
 				

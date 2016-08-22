@@ -82,7 +82,7 @@
 <button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Documents </span></button>
 	<div id="search-box" class="search-box responsive">
 
-		<h3>PJs Book Reviews Page</h3>
+
 
 		<c:if test="${not empty error}">
 			<div class="error alert alert-error">${error}</div>
@@ -90,63 +90,55 @@
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
 		</c:if>
+
 		
-		<p><span style="align-center;">Please type in the criteria to find a book to review.</span></p>
-
-
+		<p><span style="align-center; font-style:italic;">Please type in the criteria to find documents to view</span></p>
+		
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
 	
-		<table style="width:100%;">
-			<tr><td colspan="3">Search a Document to Review</td></tr>		
-				<tr>
-					<td>Title:</td>
-					<td><input id="titleText" style="width:262px !important;" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span></td>		
-						<td><span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span></td>
-				</tr>
-				<tr>
-					<td>Author:</td>
-					<td><input id="authorText" style="width:262px !important; float:left !important;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span></td>
-					<td><span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span></td>
-				</tr>
-				</table>
-				<table>
-				<tr>
-					<td>Keywords (comma separated):</td>
-					<td><div id="tags"><input id="keywordsText" style="width:262px !important;" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>
+			<div class="titleFields responsive">
+			
+					Title:
+					<input id="titleText" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspan2"></span>		
+						<span style="visibility:hidden;"> hidden text for placeholder hidde text .</span>
+				
+			</div>
+			<div class="authorFields">
+					Author:
+					<input id="authorText" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
+					<span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span>
+			</div>
+			<div class="tagFields">	
+					Keywords (comma separated): </br></br>
+					<div id="tags"><input id="keywordsText" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>
 							<span>Java</span>
 							<span>Javascript</span>
 							<span>JQuery</span>
 							<span>Angular</span>
 						</div>
-					</td>	
-				</tr>
-
-			</table>
-			
-			  <div class="tagSearches" style="margin-left:200px !important;"> 
-						<table width="100%">
-							<tr>
-								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxDocSearch();" style="width: 110px; height: 42px;" value="Search.." > 
+			</div>
+		
+			  <div class="tagSearches responsive"> 
+						
+							
+								<button id="searchBook" class="searchBook" name="searchBook" type="button" onclick="performAjaxDocSearch();" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
 								</button>
-								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetDocSearch();"  value="Reset" >
+								<button id="resetSearch" class="resetSearch"  name="resetSearch" type="button" onclick="resetDocSearch();"  value="Reset" >
 										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
 								</button>
-								</td>
-									
-	
-							</tr>
-						</table>
+								
 					</div>		
 			<br/>
 
 			
 		</form:form>
 </div>	
-<div id="resultsSection" class="resultsSection">
+
+<div id="resultsSectionDocs" class="resultsSectionDocs responsive">
 		<form:form id="searchResults" class="searchResults">
 		
-				<div id="search" class="search" style="display:none; width:1000px !important;">
+				<div id="search" class="search" >
 					<ul id="bookRevList" class="bookRevList" >				
 					</ul>
 			</div>
@@ -159,6 +151,6 @@
 <div class="facebookFooter" >
 	<div id="fb-root" ></div>
 <div class="fb-like" data-href="http://www.w3schools.com/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-</div>
+
 </body>
 </html>
