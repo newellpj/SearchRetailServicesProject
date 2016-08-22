@@ -164,7 +164,50 @@ button#addBook{
 }
 
 div.tagSearches{
-	margin-left:15%;
+	margin-left:5%;
+	min-width:100%;
+	display:inline-block;
+}
+
+
+
+input#genre{
+	width:5%;
+}
+
+select#genreSelect{
+	float:right;
+}
+
+div#genreSelection1.genreSelection1{
+	min-width:70%;
+	margin-left:0;
+	margin-bottom:1em;
+	float:left;
+	margin-right:30%;
+}
+
+div.categorySelection{
+	min-width:70%;
+	margin-left:0;
+	margin-bottom:1em;
+	float:left;
+	margin-right:30%;
+}
+
+select#categorySelect{
+	float:right;
+}
+
+div.languageSelection{
+	min-width:70%;
+	margin-left:0;
+	margin-bottom:1em;
+	float:left;
+}
+
+select#languageSelect{
+	float:right;
 }
 
 div.titleFields{

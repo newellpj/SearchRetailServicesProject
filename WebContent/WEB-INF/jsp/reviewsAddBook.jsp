@@ -103,13 +103,11 @@ $(document).ready(function() {
 				<div class="authorFields responsive">
 					Author:
 					<input  id="authorTextAdd" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspan3"></span>
-				
 				</div>
 				<div class="publisherFields responsive">
 					Publisher:
 					<input id="publisherTextAdd" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 				</div>
-				
 					<button id="addBook" name="addBook" type="button"
 						value="Add a book.." onclick="performAjaxAddBook();" >
 						<span class="glyphicon glyphicon-plus-sign"  ></span>&nbsp; Add a Book... </button>
@@ -124,18 +122,18 @@ $(document).ready(function() {
                 <h4>Add attributes to enable better searching</h4>
                    <div class="tagSearches"> 
 						
-							
-								<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre <br /> 
+							<div id="genreSelection1" class="genreSelection1">
+								<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
 								<select style="visibility:hidden;" id="genreSelect"></select>
-							
-							
-								<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category<br />
+							</div>
+							<div class="categorySelection">
+								<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category
 								<select style="visibility:hidden;" id="categorySelect"></select>
-							
-							
-								<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language<br />
+							</div>
+							<div class="languageSelection">
+								<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
 								<select style="visibility:hidden;" id="languageSelect"></select>
-							
+							</div>
 					
 					</div>
 					
