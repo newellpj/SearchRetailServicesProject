@@ -112,11 +112,7 @@ ul.topnav li.icon {display: none;}
     box-sizing: border-box;
 }
 
-@media screen and (min-width: 480px) {
-    body {
-        background-color: lightgreen;
-    }
-}
+
 
 .row::after {
     content: "";
