@@ -98,15 +98,16 @@ $(document).ready(function() {
 			
 				<div class="titleFields responsive">
 					Title:
-					<input id="titleTextAdd" type='text' name='titleTextAdd'><span class="glyphicon glyphicon-book iconspan3"></span>
+					<input id="titleTextAdd" class="responsive" type='text' name='titleTextAdd'><span class="glyphicon glyphicon-book iconspanAddBook" ></span> 
 				</div>
+				
 				<div class="authorFields responsive">
 					Author:
-					<input  id="authorTextAdd" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspan3"></span>
+					<input  id="authorTextAdd" class="responsive" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspanAddBook"></span>
 				</div>
 				<div class="publisherFields responsive">
 					Publisher:
-					<input id="publisherTextAdd" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
+					<input id="publisherTextAdd" class="responsive" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspanAddBook"></span>
 				</div>
 					<button id="addBook" name="addBook" type="button"
 						value="Add a book.." onclick="performAjaxAddBook();" >
@@ -122,15 +123,15 @@ $(document).ready(function() {
                 <h4>Add attributes to enable better searching</h4>
                    <div class="tagSearches"> 
 						
-							<div id="genreSelection1" class="genreSelection1">
+							<div id="genreSelection1" class="genreSelection1 responsive">
 								<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
 								<select style="visibility:hidden;" id="genreSelect"></select>
 							</div>
-							<div class="categorySelection">
+							<div class="categorySelection responsive">
 								<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category
 								<select style="visibility:hidden;" id="categorySelect"></select>
 							</div>
-							<div class="languageSelection">
+							<div class="languageSelection responsive">
 								<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
 								<select style="visibility:hidden;" id="languageSelect"></select>
 							</div>
