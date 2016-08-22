@@ -109,7 +109,7 @@ $(document).ready(function() {
 					Publisher:
 					<input id="publisherTextAdd" class="responsive" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspanAddBook"></span>
 				</div>
-					<button id="addBook" name="addBook" type="button"
+					<button id="addBook" name="addBook" class="responsive" type="button"
 						value="Add a book.." onclick="performAjaxAddBook();" >
 						<span class="glyphicon glyphicon-plus-sign"  ></span>&nbsp; Add a Book... </button>
 						

@@ -83,6 +83,7 @@
 	input#publisherTextAdd.responsive{min-width:70%;}
 	input#authorTextAdd.responsive{min-width:70.5%;margin-left:0.6em;}
 	input#titleTextAdd.responsive{min-width:70.5%;margin-left:0.6em;}
+	button#addBook.responsive{min-width:90%;}
 }
 
 @media screen and (max-width:480px){
@@ -97,9 +98,9 @@
 
 @media screen and (max-width:420px){
 	
-	input#publisherTextAdd.responsive{min-width:75%; border-right:solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
-	input#authorTextAdd.responsive{min-width:75%;margin-left:0.6em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
-	input#titleTextAdd.responsive{min-width:75%;margin-left:0.6em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
+	input#publisherTextAdd.responsive{min-width:75%; margin-left:0.1em; border-right:solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
+	input#authorTextAdd.responsive{min-width:75%;margin-left:0.1em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
+	input#titleTextAdd.responsive{min-width:75%;margin-left:0.1em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
 	
       .glyphicon-pencil{display:none;}
 	  .glyphicon-book{display:none;}
