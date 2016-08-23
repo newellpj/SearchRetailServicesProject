@@ -6,7 +6,16 @@ public class SolrSearchData {
 	private String keywordText;
 	private String stream_content_type;
 	private String id; //contains the URL to the doc
+	private String largercontent;
 	
+	
+	
+	public String getlargercontent() {
+		return largercontent;
+	}
+	public void setlargercontent(String largercontent) {
+		this.largercontent = largercontent;
+	}
 	public String gettitle() {
 		return title;
 	}

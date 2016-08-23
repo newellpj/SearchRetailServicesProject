@@ -810,6 +810,16 @@ function renderTagList(obj){
 		
  }
  
+ function formatDocSearchContent(searchData){
+	 
+	 
+	 
+//		"<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
+//		" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
+//		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
+	 
+ }
+ 
  function performAjaxDocSearch(){
 	
 	var html = document.getElementById("bookRevList").html;
@@ -828,7 +838,6 @@ function renderTagList(obj){
 
 	}
 
-	 
 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
 			maxWidth: 600,
@@ -884,13 +893,14 @@ function renderTagList(obj){
 		
 				
 				for(var i = 0; i < returnList.length ;i++){
+
 					
 					$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
 					$('.bookRevList').append("</div>");
 					
 					var ID = '#item'+i;
 					
-					$(ID).html(returnList[i]);	
+					$(ID).html(formatDocSearchContent(returnList[i]));	
 					//toggleReadMoreSearchResults(ID);
 				}
 				

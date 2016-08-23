@@ -6,10 +6,12 @@
 	 input#bookAuthorReview.responsive{max-width:450px;}
 	 .iconspanReview.responsive{margin-right: 20px;}
 	 button#addReview.responsive{max-width:450px;}
+	 div#resultsSectionReview.resultsSection.responsive{max-width:700px; margin-left:1%;}	
 }
 
 @media screen and (max-width:750px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:680px; margin-left:1%;}
+     div#resultsSectionReview.resultsSection.responsive{max-width:680px; margin-left:1%;}	
 	 textarea#reviewText.responsive{max-width:420px;}
 	  input#bookTitleReview.responsive{max-width:420px;}
 	 input#bookAuthorReview.responsive{max-width:420px;}
@@ -20,6 +22,7 @@
 
 @media screen and (max-width:720px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:640px; margin-left:1%;}
+	div#resultsSectionReview.resultsSection.responsive{max-width:640px; margin-left:1%;}	
 	 textarea#reviewText.responsive{max-width:400px;}
 	  input#bookTitleReview.responsive{max-width:400px;}
 	 input#bookAuthorReview.responsive{max-width:400px;}
@@ -31,6 +34,7 @@
 
 @media screen and (max-width:670px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:550px; margin-left:1%;}
+	 div#resultsSectionReview.resultsSection.responsive{max-width:550px; margin-left:1%;}	
 	 textarea#reviewText.responsive{max-width:310px;}
 	  input#bookTitleReview.responsive{max-width:310px;}
 	 input#bookAuthorReview.responsive{max-width:310px;}
@@ -41,6 +45,7 @@
 
 @media screen and (max-width:580px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:490px; margin-left:1%;  padding:10px;}
+     div#resultsSectionReview.resultsSection.responsive{max-width:490px; margin-left:1%;}	
 	 textarea#reviewText.responsive{max-width:280px;}
 	  input#bookTitleReview.responsive{max-width:280px;}
 	 input#bookAuthorReview.responsive{max-width:280px;}
@@ -51,6 +56,7 @@
 
 @media screen and (max-width:530px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:450px; margin-left:1%; padding:10px;}
+	 div#resultsSectionReview.resultsSection.responsive{max-width:450px; margin-left:1%;}	
 	 textarea#reviewText.responsive{max-width:240px;}
 	  input#bookTitleReview.responsive{max-width:240px;}
 	 input#bookAuthorReview.responsive{max-width:240px;}
@@ -61,6 +67,7 @@
 
 @media screen and (max-width:480px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:380px; margin-left:1%; padding:10px;}
+	 div#resultsSectionReview.resultsSection.responsive{max-width:380px; margin-left:1%;}	
 	 textarea#reviewText.responsive{max-width:240px; #dcdcdc; border-radius:7px 7px 7px 7px;}
 	  input#bookTitleReview.responsive{max-width:240px; #dcdcdc; border-radius:7px 7px 7px 7px;}
 	 input#bookAuthorReview.responsive{max-width:240px; #dcdcdc; border-radius:7px 7px 7px 7px;}
@@ -73,6 +80,7 @@
 
 @media screen and (max-width:405px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:325px; margin-left:1%; padding:10px;}
+     div#resultsSectionReview.resultsSection.responsive{max-width:325px; margin-left:1%;}	
 	 textarea#reviewText.responsive{max-width:190px; #dcdcdc; border-radius:7px 7px 7px 7px;}
 	  input#bookTitleReview.responsive{max-width:190px; #dcdcdc; border-radius:7px 7px 7px 7px;}
 	 input#bookAuthorReview.responsive{max-width:190px; #dcdcdc; border-radius:7px 7px 7px 7px;}
@@ -130,5 +138,21 @@ button#addReview{
 	height: 213px;
 	border-left: none;
 	border-radius: 0px 7px 7px 0px;
+}
+
+#resultsSectionReview{
+	visibility:hidden;
+	width: 766px;
+	padding: 2.5em;
+	margin-top: 3em;
+	margin-bottom: 3em;
+	margin: 40px auto;
+	background: #fff;
+	background-color: white;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+	box-shadow: 10px 10px 5px #888888;
+	border-radius: 10px 10px 10px 10px;
 }
 

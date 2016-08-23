@@ -309,7 +309,7 @@ public class SolrAndDbSearchingPageController {
 	
 	
 	@RequestMapping(value = { "/searchForDocs"}, method = RequestMethod.GET)
-	public @ResponseBody List<String> searchForDocs(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody SolrSearchData[] searchForDocs(HttpServletRequest request, HttpServletResponse response){
 		log.info("searchForDocs keyword text : : "+request.getParameter("keywordText"));
 		
 		resetSearchSessionAttributes(request);
@@ -415,13 +415,18 @@ public class SolrAndDbSearchingPageController {
 		log.info("finalisedFilteredList size "+finalisedFilteredList.size());
 
 		List<SolrSearchData> returnList = new ArrayList<SolrSearchData>();
-		List<String> formattedList = new ArrayList<String>();
+	//	List<String> formattedList = new ArrayList<String>();
 
+		SolrSearchData[] returnArray = new SolrSearchData[finalisedFilteredList.size()];
+		
+		int count = 0;
+		
 		for(SolrDocument solrD : finalisedFilteredList){
 			
 			ssd = new SolrSearchData();
 			
 			for(String field : solrService.getFieldsArray()){
+				
 				String fieldToSet = (solrD.getFieldValue(field) != null) ? solrD.getFieldValue(field).toString() : "";
 				
 				try{
@@ -436,9 +441,7 @@ public class SolrAndDbSearchingPageController {
 			log.info("author set : "+ssd.getauthor());
 			log.info("title set : "+ssd.gettitle());
 			log.info("id set : "+ssd.getid());
-			
-			returnList.add(ssd);
-			
+
 			String title = "";
 			
 			if(ssd.gettitle() == null || "".equals(ssd.gettitle().trim()) || "Unknown".equalsIgnoreCase(ssd.gettitle()) || "en".equalsIgnoreCase(ssd.gettitle())){
@@ -462,24 +465,33 @@ public class SolrAndDbSearchingPageController {
 			
 			
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
-			log.info("author 2 : "+author);
-			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
-					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
-					"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
 			
+			ssd.setauthor(author);
+			ssd.settitle(title);
+			ssd.setlargercontent(largerContent);
+
+			log.info("author 2 : "+author);
+//			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
+//					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
+//					"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
+			
+			returnArray[count] = ssd;
+			count++;
 		}
 		
-		if(formattedList.size() == 0){
-			formattedList.add("No documents found..");
-		}
+//		"<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
+//		" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
+//		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
+		
+//		if(formattedList.size() == 0){
+//			formattedList.add("No documents found..");
+//		}
 		
 		request.getSession().setAttribute("solrSearchListReturned", returnList);
 		
 		log.info("list to return is : "+returnList.size());
 		
-		
-		
-		return formattedList;
+		return returnArray;
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)

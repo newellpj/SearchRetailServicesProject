@@ -35,7 +35,7 @@ $(document).ready(function() {
 			loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
 		  });
 		  
-		  document.getElementById("resultsSection").style.visibility = "visible";
+		  document.getElementById("resultsSectionReview").style.visibility = "visible";
 	   }
 	 
 	  
@@ -127,7 +127,7 @@ $(document).ready(function() {
 		</form:form>
 	</div>
 			
-	<div id="resultsSection" class="resultsSection">
+	<div id="resultsSectionReview" class="resultsSection responsive">
 		
 				<c:if test="${not empty reviewLists}">
 					<h4>Book Reviews for <%=session.getAttribute("bookTitleFound")%></h4>
