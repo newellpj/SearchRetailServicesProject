@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/searchFeeds.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/jquery.bxslider.css">
 
@@ -64,7 +65,7 @@
 </head>
 <body background="./presentationResources/images/bgimg.jpg" >
 
-	<div id="all-search-box" class="all-search-box">
+	<div id="all-search-box" class="all-search-box responsive">
 
 
 		<c:if test="${not empty error}">
@@ -80,9 +81,9 @@
 		
 				<tr>
 					<td>
-						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 0px 0px 0px 0px !important;" id="searchAllSelect"></select>
-						<input id="searchText" style="width:85% !important; border-radius: 0px !important; margin-left: -4px;"  type='text' name='searchText'>
-						<button id="searchAllBtn" style="margin-left: -4px; background-color: #A2C5D0; padding-top: 6px !important; padding-bottom: 11px !important; 
+						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 0px 0px 0px 0px;" id="searchAllSelect"></select>
+						<input id="searchText" style="width:85%; border-radius: 0px; margin-left: -4px;"  type='text' name='searchText' class="responsive">
+						<button id="searchAllBtn" style="margin-left: -4px; background-color: #A2C5D0; padding-top: 6px; padding-bottom: 11px; 
 						        color: #3D3C3A; border-radius: 0px 7px 7px 0px;" type="button" onclick="getRSSFeed(false, true);" > 
 						<span class="glyphicon glyphicon-search" style="padding-top: 1px !important;"></span></button>
 				

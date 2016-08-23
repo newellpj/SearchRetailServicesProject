@@ -128,7 +128,7 @@ var html = $(".bookRevList").html();
 		</form:form>
 </div>	
 
-<div id="resultsSection" class="resultsSection">
+<div id="resultsSection" class="resultsSection responsive">
 		<form:form id="searchResults" class="searchResults">
 		
 				<div id="search" class="search" style="display:none; width:1000px !important;">
