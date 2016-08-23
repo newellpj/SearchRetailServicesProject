@@ -1,0 +1,63 @@
+
+@media screen and (max-width:830px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:700px; margin-left:1%;}
+	 textarea#reviewText.responsive{max-width:450px;}
+	 .iconspanReview.responsive{margin-right: 29px;}
+}
+
+@media screen and (max-width:720px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:680px; margin-left:1%;}
+	 textarea#reviewText.responsive{max-width:450px;}
+	 .iconspanReview.responsive{margin-right: 29px;}
+}
+
+
+
+#add-reviews-box{
+	width: 766px;
+	padding: 20px;
+	margin: 40px auto;
+	background: #fff;
+	background-color: #ededed;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+button#addReview{
+	width:523px;
+
+}
+
+.iconspanTitleAuth{
+	
+    margin-top: -1px;
+    position: relative;
+	background-color: #A2C5D0;
+    color: #3D3C3A;
+	border: solid 1.5px #dcdcdc;
+	padding: 8px;
+	border-left: none;
+	border-radius: 0px 7px 7px 0px;
+}
+
+
+
+.iconspanReview{
+	 float: right;
+    margin-right: 14px;
+    margin-top: -1px;
+    position: relative;
+	background-color: #A2C5D0;
+    color: #3D3C3A;
+	border: solid 1.5px #dcdcdc;
+	padding-top: 100px;
+	padding-left: 8px;
+	padding-right: 8px;
+	height: 213px;
+	border-left: none;
+	border-radius: 0px 7px 7px 0px;
+}
+

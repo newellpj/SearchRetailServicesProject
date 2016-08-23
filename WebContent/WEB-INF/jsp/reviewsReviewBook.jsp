@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/reviewBook.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
@@ -84,7 +85,7 @@ $(document).ready(function() {
 <body background="./presentationResources/images/bgimg.jpg">
 
 <br/>
-	<div id="add-reviews-box" class="add-reviews-box">
+	<div id="add-reviews-box" class="add-reviews-box responsive">
 
 		<h3>Add a Book Review</h3>
 
@@ -102,23 +103,24 @@ $(document).ready(function() {
 
 				<tr>
 					<td>Title:</td>
-					<td><input type='text'  style="width:255px !important;" id="bookTitleReview" name='bookTitleReview' disabled="true" 
-					value='<%=session.getAttribute("bookTitleFound")%>'><span class="glyphicon glyphicon-book iconspan4"></span></td>
+					<td><input type='text'  style="width:523px;" id="bookTitleReview" class="responsive" name='bookTitleReview' disabled="true" 
+					value='<%=session.getAttribute("bookTitleFound")%>'><span class="glyphicon glyphicon-book iconspanTitleAuth"></span></td>
 					<td><span style="visibility:hidden;">quick  brown</span></td>
 				</tr>
 				<tr>
 					<td>Author:</td>
-					<td><input type='text' style="width:255px !important;" id="bookAuthorReview" name='bookAuthorReview' 
-					disabled="true" value='<%=session.getAttribute("bookAuthorFound")%>' /><span class="glyphicon glyphicon-pencil iconspan4"></span></td>
+					<td><input type='text' style="width:523px;" id="bookAuthorReview" name='bookAuthorReview' class="responsive"
+					disabled="true" value='<%=session.getAttribute("bookAuthorFound")%>' /><span class="glyphicon glyphicon-pencil iconspanTitleAuth"></span></td>
 					<td><span style="visibility:hidden;">quick  brown</span></td>
 				</tr>
 				<tr>
 					<td>Review:</td>
-					<td><textarea style="resize: none; width:523px !important; height:212px !important;" id="reviewText" name="reviewText" rows="10" cols="70" > </textarea> <span class="glyphicon glyphicon-comment iconspan5"></span></td>
+					<td><textarea class="responsive" style="resize: none; width:523px; height:212px;" id="reviewText" name="reviewText" rows="10" cols="70" ></textarea>
+					<span class="glyphicon glyphicon-comment iconspanReview responsive"></span></td>
 				</tr>
 				<tr>
-					<td colspan="1"></td><td colspan='2'><button id="addReview" name="addReview" type="button"
-						value="Add Review.." onclick="performAjaxAddReview();"> <span class="glyphicon glyphicon-star glyphicon-star-empty"></span> Add Review..  </button> </td>
+					<td colspan="1"></td><td colspan='2'><button id="addReview" class="responsive" name="addReview" type="button"
+						value="Add Review.." onclick="performAjaxAddReview();"><span class="glyphicon glyphicon-star glyphicon-star-empty"></span> Add Review..  </button> </td>
 				</tr>
 			</table>
 			
