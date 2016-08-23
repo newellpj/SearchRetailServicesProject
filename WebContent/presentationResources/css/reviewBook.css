@@ -1,14 +1,21 @@
 
-@media screen and (max-width:830px){
+@media screen and (max-width:850px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:700px; margin-left:1%;}
 	 textarea#reviewText.responsive{max-width:450px;}
-	 .iconspanReview.responsive{margin-right: 29px;}
+	 input#bookTitleReview.responsive{max-width:450px;}
+	 input#bookAuthorReview.responsive{max-width:450px;}
+	 .iconspanReview.responsive{margin-right: 20px;}
+	 button#addReview.responsive{max-width:450px;}
 }
 
-@media screen and (max-width:720px){
+@media screen and (max-width:750px){
 	 div#add-reviews-box.add-reviews-box.responsive{max-width:680px; margin-left:1%;}
-	 textarea#reviewText.responsive{max-width:450px;}
-	 .iconspanReview.responsive{margin-right: 29px;}
+	 textarea#reviewText.responsive{max-width:420px;}
+	  input#bookTitleReview.responsive{max-width:420px;}
+	 input#bookAuthorReview.responsive{max-width:420px;}
+	 .iconspanReview.responsive{margin-right: 30px;}
+	 button#addReview.responsive{max-width:420px;}
+ 
 }
 
 
