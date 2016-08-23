@@ -64,12 +64,12 @@
 		
 		<ul class="topnav responsive">
 		
-		  <li id="activeSel"  onclick="switchActive($(this));"><a href="reviewsSearchBook" target="theI_Frame">Search Book</a></li>
-		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame">Search Docs</a></li>
-		  <li id="activeSel1"  onclick="switchActive($(this));"><a href="searchNASA" target="theI_Frame">Search NASA</a></li>
-		  <li id="activeSel2" onclick="switchActive($(this));"><a href="reviewsAddBook" target="theI_Frame">Add a book</a></li>
-		  <li id="activeSel3" onclick="switchActive($(this));"><a href="reviewsReviewBook" target="theI_Frame">Review book</a></li>
-		  <li id="logout"><a href="logout"> Logout <span style="color:transparent; text-shadow:none;">.......... </span></a></li>
+		  <li id="activeSel"  onclick="switchActive($(this));"><a href="reviewsSearchBook" target="theI_Frame">&nbsp; Search Book </a></li>
+		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame"> Search Docs &nbsp;</a></li>
+		  <li id="activeSel1"  onclick="switchActive($(this));"><a href="searchNASA" target="theI_Frame">Search NASA &nbsp;</a></li>
+		  <li id="activeSel2" onclick="switchActive($(this));"><a href="reviewsAddBook" target="theI_Frame"> &nbsp; Add a book &nbsp;&nbsp;</a></li>
+		  <li id="activeSel3" onclick="switchActive($(this));"><a href="reviewsReviewBook" target="theI_Frame">Review book &nbsp;</a></li>
+		  <li id="logout"><a href="logout"> &nbsp;&nbsp;Logout <span style="color:transparent; text-shadow:none;">.......... </span></a></li>
 		 </ul>			 
 		 	</div>
 		 

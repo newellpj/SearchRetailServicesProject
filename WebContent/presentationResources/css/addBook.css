@@ -55,7 +55,7 @@
 }
 
 @media screen and (max-width:650px){
- div.add-book-box.responsive{min-width:95%; margin-left:1%;}
+ div.add-book-box.responsive{min-width:98%; margin-left:1%;}
  	div.titleFields.responsive{min-width:100%;}
 	input#titleTextAdd.responsive{min-width:75%;margin-left:0.6em;}
 	
