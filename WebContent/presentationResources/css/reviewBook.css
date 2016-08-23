@@ -18,6 +18,70 @@
  
 }
 
+@media screen and (max-width:720px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:640px; margin-left:1%;}
+	 textarea#reviewText.responsive{max-width:400px;}
+	  input#bookTitleReview.responsive{max-width:400px;}
+	 input#bookAuthorReview.responsive{max-width:400px;}
+	 .iconspanReview.responsive{margin-right: 10px;}
+	 button#addReview.responsive{max-width:400px;}
+ 
+}
+
+
+@media screen and (max-width:670px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:550px; margin-left:1%;}
+	 textarea#reviewText.responsive{max-width:310px;}
+	  input#bookTitleReview.responsive{max-width:310px;}
+	 input#bookAuthorReview.responsive{max-width:310px;}
+	 .iconspanReview.responsive{margin-right: 86px;}
+	 button#addReview.responsive{max-width:310px;}
+	.dummyTD{display:none;}
+}
+
+@media screen and (max-width:580px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:490px; margin-left:1%;  padding:10px;}
+	 textarea#reviewText.responsive{max-width:280px;}
+	  input#bookTitleReview.responsive{max-width:280px;}
+	 input#bookAuthorReview.responsive{max-width:280px;}
+	 .iconspanReview.responsive{margin-right:77px;}
+	 button#addReview.responsive{max-width:280px;}
+ 
+}
+
+@media screen and (max-width:530px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:450px; margin-left:1%; padding:10px;}
+	 textarea#reviewText.responsive{max-width:240px;}
+	  input#bookTitleReview.responsive{max-width:240px;}
+	 input#bookAuthorReview.responsive{max-width:240px;}
+	 .iconspanReview.responsive{margin-right: 77px;}
+	 button#addReview.responsive{max-width:240px;}
+ 
+}
+
+@media screen and (max-width:480px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:380px; margin-left:1%; padding:10px;}
+	 textarea#reviewText.responsive{max-width:240px; #dcdcdc; border-radius:7px 7px 7px 7px;}
+	  input#bookTitleReview.responsive{max-width:240px; #dcdcdc; border-radius:7px 7px 7px 7px;}
+	 input#bookAuthorReview.responsive{max-width:240px; #dcdcdc; border-radius:7px 7px 7px 7px;}
+	 .iconspanReview.responsive{margin-right: 1px;}
+	 button#addReview.responsive{max-width:240px;}
+       .glyphicon-pencil{display:none;}
+	  .glyphicon-book{display:none;}
+	  .glyphicon-comment{display:none;}
+}
+
+@media screen and (max-width:405px){
+	 div#add-reviews-box.add-reviews-box.responsive{max-width:325px; margin-left:1%; padding:10px;}
+	 textarea#reviewText.responsive{max-width:190px; #dcdcdc; border-radius:7px 7px 7px 7px;}
+	  input#bookTitleReview.responsive{max-width:190px; #dcdcdc; border-radius:7px 7px 7px 7px;}
+	 input#bookAuthorReview.responsive{max-width:190px; #dcdcdc; border-radius:7px 7px 7px 7px;}
+	 .iconspanReview.responsive{margin-right: 1px;}
+	 button#addReview.responsive{max-width:190px;}
+       .glyphicon-pencil{display:none;}
+	  .glyphicon-book{display:none;}
+	  .glyphicon-comment{display:none;}
+}
 
 
 #add-reviews-box{

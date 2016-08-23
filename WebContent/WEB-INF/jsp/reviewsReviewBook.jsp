@@ -105,13 +105,13 @@ $(document).ready(function() {
 					<td>Title:</td>
 					<td><input type='text'  style="width:523px;" id="bookTitleReview" class="responsive" name='bookTitleReview' disabled="true" 
 					value='<%=session.getAttribute("bookTitleFound")%>'><span class="glyphicon glyphicon-book iconspanTitleAuth"></span></td>
-					<td><span style="visibility:hidden;">quick  brown</span></td>
+					<td><span style="visibility:hidden;" class="dummyTD">quick  brown</span></td>
 				</tr>
 				<tr>
 					<td>Author:</td>
 					<td><input type='text' style="width:523px;" id="bookAuthorReview" name='bookAuthorReview' class="responsive"
 					disabled="true" value='<%=session.getAttribute("bookAuthorFound")%>' /><span class="glyphicon glyphicon-pencil iconspanTitleAuth"></span></td>
-					<td><span style="visibility:hidden;">quick  brown</span></td>
+					<td><span style="visibility:hidden;" class="dummyTD">quick  brown</span></td>
 				</tr>
 				<tr>
 					<td>Review:</td>
