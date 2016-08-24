@@ -62,6 +62,9 @@
    		<bean id="solrAndDbSearchController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
 	    </bean>
 	    
+	    <bean id="testController" class="co.srsp.controller.TestController">  
+	    </bean>
+	    
 	    <bean id="feedsController" class="co.srsp.controller.FeedsController">  
 	    </bean>
 	    
