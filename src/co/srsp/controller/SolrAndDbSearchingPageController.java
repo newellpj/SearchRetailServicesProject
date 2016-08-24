@@ -475,14 +475,13 @@ public class SolrAndDbSearchingPageController {
 //					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
 //					"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
 			
+			ssd.setextract(solrService.extractSpecifiedDocumentContent(ssd.getid(), 600));
+			
 			returnArray[count] = ssd;
 			count++;
 		}
 		
-//		"<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
-//		" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
-//		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
-		
+
 //		if(formattedList.size() == 0){
 //			formattedList.add("No documents found..");
 //		}

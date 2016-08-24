@@ -377,10 +377,8 @@ function noBookToReview(){
 						
 						var searchTermsArr = feedMessageArr[0]['searchCriteriaMatched'];
 						
-						alert('searchTermsArr : '+searchTermsArr);
-						
-						//searchTermsArr.replace(",")
-						
+						//alert('searchTermsArr : '+searchTermsArr);
+
 						var myHilitor = new Hilitor("#feedsSliderSegment ul");
 						myHilitor.apply(searchTermsArr);
 
@@ -812,12 +810,11 @@ function renderTagList(obj){
  
  function formatDocSearchContent(searchData){
 	 
+		var formattedMarkup = "<b>Title : </b>"+searchData[title]+"<b> Author : </b> "+searchData[author]+" &nbsp; <b> link to doc </b> <a href='file://///"+searchdata[id]+"'"+
+		" target="+"'"+"_blank"+"'"+">"+searchData[title]+"</a><p style='font-size:x-small;!important'>"+searchData[extract]+
+		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+searchData[largerContent]+"</div>";
 	 
-	 
-//		"<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
-//		" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
-//		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
-	 
+		return formattedMarkup;
  }
  
  function performAjaxDocSearch(){

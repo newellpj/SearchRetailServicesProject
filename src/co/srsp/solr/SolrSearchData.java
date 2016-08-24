@@ -7,9 +7,14 @@ public class SolrSearchData {
 	private String stream_content_type;
 	private String id; //contains the URL to the doc
 	private String largercontent;
+	private String extract;
 	
-	
-	
+	public String getextract() {
+		return extract;
+	}
+	public void setextract(String extract) {
+		this.extract = extract;
+	}
 	public String getlargercontent() {
 		return largercontent;
 	}
