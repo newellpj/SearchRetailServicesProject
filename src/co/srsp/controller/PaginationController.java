@@ -160,7 +160,7 @@ public class PaginationController {
 		+"' src='"+thumbLoc+"'/></div>"+
 		"<span style='font-family:courier;'><b>Title : </b>"+book.getTitle()+"<b> Author : </b> "+book.getAuthor()+" &nbsp; <b>Publisher: </b>"
 		+book.getPublisher()+"</span> <p style='font-size:x-small;!important'>"+book.getExcerpt()+
-		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this </p> </div>";
+		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this </a> </p> </div>";
 		
 		return formattedMarkup;
 	}
@@ -176,7 +176,6 @@ public class PaginationController {
 		HashMap<String, String> imageDimensionsMap = new HashMap<String, String>();
 		
 		try{
-			//file system relative references are different from web application relative references 
 			String fileURLPath = (imageLocation.toLowerCase().contains("http")) ? imageLocation :
 						"../webapps/SearchRetailServicesProject/presentationResources/images/"+book.getThumbnailLocation();
 			
