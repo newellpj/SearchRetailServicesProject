@@ -984,10 +984,12 @@ function renderTagList(obj){
 					//excerpt;
 					//thumbnailLocation;
 
-		var formattedMarkup = "<div><img src='"+searchData['thumbnailLocation']+"' /></div>"
+		var formattedMarkup = "<div><img src='"+searchData['thumbnailLocation']+"' />"+
 		"<b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; Publisher: "+searchData['publisherText']+
-		" <p style='font-size:x-small;!important'>"+searchData['excerpt']+"</p>";
+		" <p style='font-size:x-small;!important'>"+searchData['excerpt']+"</p> </div>";
 	 
+		alert(formattedMarkup);
+
 		return formattedMarkup;
  }
  
