@@ -590,6 +590,8 @@ public class SolrAndDbSearchingPageController {
 			model.setTitleText(book.getTitle()); 
 			model.setExcerpt(book.getExcerpt());
 			
+			log.info("EXCERPT : "+model.getExcerpt());
+			
 			String loc = (book.getThumbnailLocation() != null && book.getThumbnailLocation().contains("http")) ? book.getThumbnailLocation() : "./presentationResources/images/"+book.getThumbnailLocation();
 			
 			model.setThumbnnalLocation(loc); 

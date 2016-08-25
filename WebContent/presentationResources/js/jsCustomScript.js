@@ -1069,7 +1069,7 @@ function renderTagList(obj){
 					$('.bookRevList').append("<div>");
 
 					$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
-					var bookDetails =  bookReviewsModelArray[i][booksList];
+					var bookDetails =  bookReviewsModelArray[i]['booksList'];
 					
 					if("No books found" != bookDetails){
 						
