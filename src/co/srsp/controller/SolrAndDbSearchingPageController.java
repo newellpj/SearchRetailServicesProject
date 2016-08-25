@@ -494,7 +494,7 @@ public class SolrAndDbSearchingPageController {
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
-	public @ResponseBody BookReviewsModel searchBook(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody BookReviewsModel[] searchBook(HttpServletRequest request, HttpServletResponse response){
 		
 		log.info("request.getSession() : "+request.getSession());
 		
@@ -578,14 +578,30 @@ public class SolrAndDbSearchingPageController {
 			//return booksStringViewList;
 		}
 		
-		BookReviewsModel bookReviewsModel = new BookReviewsModel();
-		bookReviewsModel.setTitleText(request.getParameter("titleText"));
-		bookReviewsModel.setAuthorText(request.getParameter("authorText"));
-		bookReviewsModel.setPublisherText(request.getParameter("publisherText"));
+		BookReviewsModel[] bookReviewsModelArray = new BookReviewsModel[booksList.size()];
+		int count = 0;
 		
-		bookReviewsModel.setBooksList(booksStringViewList);
+		BookReviewsModel model = null;
+		
+		for(Books book : booksList){
+			log.info("1 book.getThumbnailLocation() : "+book.getThumbnailLocation());	
+			model = new BookReviewsModel();
+			model.setAuthorText(book.getAuthor());
+			model.setTitleText(book.getTitle()); 
+			model.setExcerpt(book.getExcerpt());
+			
+			String loc = (book.getThumbnailLocation() != null && book.getThumbnailLocation().contains("http")) ? book.getThumbnailLocation() : "./presentationResources/images/"+book.getThumbnailLocation();
+			
+			model.setThumbnnalLocation(loc); 
+			model.setBooksID(book.getIdbooks());
+			model.setPublisherText(book.getPublisher());
+			model.setBooksList(book.getTitle()+" - "+book.getAuthor());			
+			bookReviewsModelArray[count] = model;
+			count++;
+		}
+		
 		modelView.setViewName("reviewsSearchBook");
-		return bookReviewsModel;
+		return bookReviewsModelArray;
 
 	}
 

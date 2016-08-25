@@ -7,6 +7,8 @@ public class Books implements java.io.Serializable {
 	private String title;
 	private String author;
 	private String publisher;
+	private String thumbnailLocation;
+	private String excerpt;
 	
 	public Books() {
 	}
@@ -46,6 +48,22 @@ public class Books implements java.io.Serializable {
 
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+
+	public String getThumbnailLocation() {
+		return thumbnailLocation;
+	}
+
+	public void setThumbnailLocation(String thumbnailLocation) {
+		this.thumbnailLocation = thumbnailLocation;
+	}
+
+	public String getExcerpt() {
+		return excerpt;
+	}
+
+	public void setExcerpt(String excerpt) {
+		this.excerpt = excerpt;
 	}
 	
 	

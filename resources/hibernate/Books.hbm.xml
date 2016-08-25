@@ -17,5 +17,11 @@
         <property name="publisher" type="string">
             <column name="publisher" length="45" />
         </property>
+         <property name="thumbnailLocation" type="string">
+            <column name="thumbnailLocation" length="45" />
+        </property>
+         <property name="excerpt" type="string">
+            <column name="excerpt" length="1000" />
+        </property>
     </class>
 </hibernate-mapping>

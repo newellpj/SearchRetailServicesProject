@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 public class BookReviewsModel {
 	
-	private List<String> booksList;
+	private String booksList;
 	
 	private int booksID;
 	
@@ -42,13 +42,31 @@ public class BookReviewsModel {
 	@Size(min=1,max=40)
 	private String publisherText;
 
+	private String excerpt;
 	
-	
-	public List<String> getBooksList() {
+	private String thumbnailLocation;
+		
+	public String getExcerpt() {
+		return excerpt;
+	}
+
+	public void setExcerpt(String excerpt) {
+		this.excerpt = excerpt;
+	}
+
+	public String getThumbnailLocation() {
+		return thumbnailLocation;
+	}
+
+	public void setThumbnnalLocation(String thumbnailLocation) {
+		this.thumbnailLocation = thumbnailLocation;
+	}
+
+	public String getBooksList(){
 		return booksList;
 	}
 
-	public void setBooksList(List<String> booksList) {
+	public void setBooksList(String booksList) {
 		this.booksList = booksList;
 	}
 

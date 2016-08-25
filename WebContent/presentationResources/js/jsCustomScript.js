@@ -975,6 +975,21 @@ function renderTagList(obj){
 		    $(this).closest(ID).find('.docsSearchSegment, .docsSearchSegmentBig').toggleClass('docsSearchSegment docsSearchSegmentBig');
 		});
  }
+
+ function formatBooksSearchContent(searchData){
+	 
+					//authorText;
+					//titleText;
+					//publisherText;
+					//excerpt;
+					//thumbnailLocation;
+
+		var formattedMarkup = "<div><img src='"+searchData['thumbnailLocation']+"' /></div>"
+		"<b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; Publisher: "+searchData['publisherText']+
+		" <p style='font-size:x-small;!important'>"+searchData['excerpt']+"</p>";
+	 
+		return formattedMarkup;
+ }
  
  function performAjaxSearch(){
 	// $('.searchResults').trigger("reset");
@@ -1039,7 +1054,7 @@ function renderTagList(obj){
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
 			type: 'GET',
-			success:  function(bookReviewsModel) {
+			success:  function(bookReviewsModelArray) {
 			  
 				//alert('bookReviewsModel reviewText : '+bookReviewsModel['reviewText']);
 			//	alert('bookReviewsModel : '+JSON.stringify(bookReviewsModel, undefined, 2));
@@ -1049,11 +1064,12 @@ function renderTagList(obj){
 				document.getElementById("search").style.display = "inline";
 		
 				
-				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
+				for(var i = 0; i < bookReviewsModelArray.length ;i++){
 					
 					$('.bookRevList').append("<div>");
-					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
-					var bookDetails = bookReviewsModel['booksList'][i]
+
+					$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
+					var bookDetails =  bookReviewsModelArray[i][booksList];
 					
 					if("No books found" != bookDetails){
 						
@@ -1116,7 +1132,7 @@ function renderTagList(obj){
 					
 					 $(errorDialog).dialog("open");
 					 
-					window.parent.location.href = 'logout'; 
+					//window.parent.location.href = 'logout'; 
 			 
 		 }
 		});    
