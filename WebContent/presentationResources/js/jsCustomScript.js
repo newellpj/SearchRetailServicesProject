@@ -978,11 +978,25 @@ function renderTagList(obj){
 
  function formatBooksSearchContent(searchData){
 	 
-		var formattedMarkup = "<div style='float:left' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
-		"<b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; Publisher: "+searchData['publisherText']+
-		" <p style='font-size:x-small;!important'>"+searchData['excerpt']+"</p> </div>";
+	 var bookDetails =  searchData['booksList'];
+	 
+		if("No books found" != bookDetails){
+						
+				bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
+				
+				//$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+				//$('.bookRevList').append("</a>");
+		}
+	 
+		var formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
+		+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
+		"<span style='font-family:courier;'><b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; <b>Publisher: </b>"
+		+searchData['publisherText']+"</span>"+
+		" <p style='font-size:x-small;!important'>"+searchData['excerpt']+
+		
+		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this </p> </div>";
 
-		return formattedMarkup;
+		return formattedMarkup; 
  }
  
  function performAjaxSearch(){
@@ -1060,18 +1074,18 @@ function renderTagList(obj){
 				
 				for(var i = 0; i < bookReviewsModelArray.length ;i++){
 					
-					$('.bookRevList').append("<div>");
+					$('.bookRevList').append("<div class='searchSegment'>");
 
 					$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
-					var bookDetails =  bookReviewsModelArray[i]['booksList'];
+					//var bookDetails =  bookReviewsModelArray[i]['booksList'];
 					
-					if("No books found" != bookDetails){
+					//if("No books found" != bookDetails){
 						
-						bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
+					//	bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
 						
-						$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
-						$('.bookRevList').append("</a>");
-					}
+					//	$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+					//	$('.bookRevList').append("</a>");
+					//}
 					
 					$('.bookRevList').append("</div>");
 				}
