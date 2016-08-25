@@ -47,7 +47,7 @@
 						<c:forEach var="listValue2" items="${booksLists2}">
 					
 						
-							<div class="searchSegment"> ${listValue2} &nbsp; <a style='font-style:italic !important;' href="<c:url value="reviewsReviewBook?titleAuthorText=${listValue2}" />"> Review this</a> </div>
+							<div class="searchSegment"> ${listValue2} </div>
 						</c:forEach>
 						
 					
