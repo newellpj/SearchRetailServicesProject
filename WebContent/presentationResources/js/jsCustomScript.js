@@ -978,17 +978,9 @@ function renderTagList(obj){
 
  function formatBooksSearchContent(searchData){
 	 
-					//authorText;
-					//titleText;
-					//publisherText;
-					//excerpt;
-					//thumbnailLocation;
-
-		var formattedMarkup = "<div><img src='"+searchData['thumbnailLocation']+"' />"+
+		var formattedMarkup = "<div style='float:left' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
 		"<b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; Publisher: "+searchData['publisherText']+
 		" <p style='font-size:x-small;!important'>"+searchData['excerpt']+"</p> </div>";
-	 
-		alert(formattedMarkup);
 
 		return formattedMarkup;
  }

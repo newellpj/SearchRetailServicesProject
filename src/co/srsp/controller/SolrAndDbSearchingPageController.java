@@ -1,5 +1,6 @@
 package co.srsp.controller;
 
+import java.awt.Image;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrDocument;
@@ -594,10 +596,50 @@ public class SolrAndDbSearchingPageController {
 			
 			String loc = (book.getThumbnailLocation() != null && book.getThumbnailLocation().contains("http")) ? book.getThumbnailLocation() : "./presentationResources/images/"+book.getThumbnailLocation();
 			
-			model.setThumbnnalLocation(loc); 
+			model.setThumbnnalLocation(loc);
 			model.setBooksID(book.getIdbooks());
 			model.setPublisherText(book.getPublisher());
 			model.setBooksList(book.getTitle()+" - "+book.getAuthor());			
+			
+			try{
+				//file system relative references are different from web application relative references 
+				String fileURLPath = (loc.toLowerCase().contains("http")) ? loc : "../webapps/SearchRetailServicesProject/presentationResources/images/"+book.getThumbnailLocation();
+				log.info( System.getProperty("user.dir"));
+				 
+				File file = new File(fileURLPath);
+				log.info("location for file is :::: "+fileURLPath);
+				log.info("does file exist : "+file.exists());
+				
+				Image image = new ImageIcon(fileURLPath).getImage();
+				
+				int imgWidth = image.getWidth(null);
+				int imgHeight = image.getHeight(null);
+				
+				log.info("imgWidth : "+imgWidth);
+				log.info("imgHeight : "+imgHeight);
+				
+				if(imgWidth > imgHeight){
+					double result = new Double(imgHeight)/ new Double(imgWidth);
+					log.info("result : "+result);
+					imgHeight = (int)(result * new Double(120));
+					imgWidth = 120;
+				}else if(imgWidth < imgHeight){
+					double result = new Double(imgWidth)/ new Double(imgHeight);
+					imgWidth = (int)(result * new Double(120));
+					imgHeight = 120;
+				}else{
+					imgHeight = 120;
+					imgWidth  = 120;
+				}
+				
+				model.setImageHeight(String.valueOf(imgHeight));
+				model.setImageWidth(String.valueOf(imgWidth));
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}
+			
 			bookReviewsModelArray[count] = model;
 			count++;
 		}
@@ -605,6 +647,40 @@ public class SolrAndDbSearchingPageController {
 		modelView.setViewName("reviewsSearchBook");
 		return bookReviewsModelArray;
 
+	}
+	
+	public static void main(String args[]){
+		
+		try{
+			Image image = new ImageIcon("C:/Tomcat_8/webapps/SearchRetailServicesProject/presentationResources/images/plague.jpg").getImage();
+			
+			int imgWidth = image.getWidth(null);
+			int imgHeight = image.getHeight(null);
+			
+			System.out.println("imgWidth BEFORE : "+imgWidth);
+			System.out.println("imgHeight BEFORE : "+imgHeight);
+			
+			if(imgWidth > imgHeight){
+				double result = new Double(imgHeight)/ new Double(imgWidth);
+				log.info("result : "+result);
+				imgHeight = (int)(result * new Double(120));
+				imgWidth = 120;
+			}else if(imgWidth < imgHeight){
+				double result = new Double(imgWidth)/ new Double(imgHeight);
+				imgWidth = (int)(result * new Double(120));
+				imgHeight = 120;
+			}else{
+				imgHeight = 120;
+				imgWidth  = 120;
+			}
+			
+			System.out.println("imgWidth AFTER : "+imgWidth);
+			System.out.println("imgHeight AFTER : "+imgHeight);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 
 

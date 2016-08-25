@@ -46,6 +46,27 @@ public class BookReviewsModel {
 	
 	private String thumbnailLocation;
 		
+	private String imageHeight;
+	
+	private String imageWidth;
+	
+
+	public String getImageHeight() {
+		return imageHeight;
+	}
+
+	public void setImageHeight(String imageHeight) {
+		this.imageHeight = imageHeight;
+	}
+
+	public String getImageWidth() {
+		return imageWidth;
+	}
+
+	public void setImageWidth(String imageWidth) {
+		this.imageWidth = imageWidth;
+	}
+
 	public String getExcerpt() {
 		return excerpt;
 	}
