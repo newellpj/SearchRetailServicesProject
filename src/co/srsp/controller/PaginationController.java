@@ -1,13 +1,16 @@
 package co.srsp.controller;
 
+import java.awt.Image;
 import java.io.File;
 import java.lang.reflect.Method;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrDocument;
@@ -131,18 +134,13 @@ public class PaginationController {
 		log.info("size of booksList list returned : "+booksList.size());
 		//log.info("size of booksList2 list returned : "+booksLists2.size());
 		List<String> booksLists2 = new ArrayList<String>();
-//		HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(request.getSession().getAttribute("bookTitleFound").toString(), 
-//				request.getSession().getAttribute("bookAuthorFound").toString(), latestOffset, 20);
 
-	//	request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
 		ArrayList<String> list = new ArrayList<String>();
 		
 		for(Books book : booksList){	
-			booksLists2.add(book.getTitle()+" - "+book.getAuthor());
+			booksLists2.add(formattedSearchListItem(book, book.getTitle()+" - "+book.getAuthor()));
 		}
 		
-		log.info("22 size of booksList list returned : "+booksList.size());
-		log.info("22 size of booksList2 list returned : "+booksLists2.size());
 		ModelAndView model = new ModelAndView();	
 		//model.addObject("bookReviewsModel", bookReviewsModel);
 		model.addObject("booksLists2", booksLists2);
@@ -150,6 +148,76 @@ public class PaginationController {
 		return model;
 	}
 	
+	private String formattedSearchListItem(Books book, String bookDetails){
+		if(!"No books found".equalsIgnoreCase(bookDetails)){			
+			bookDetails =  URLEncoder.encode(bookDetails);
+		}
+		
+		String thumbLoc = getTrueThumbnailLocation(book);
+		HashMap imageDimensionsMap = getImageDimensions(thumbLoc, book);
+		
+		String formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageDimensionsMap.get("imageWidth")+"' height='"+imageDimensionsMap.get("imageHeight")
+		+"' src='"+thumbLoc+"'/></div>"+
+		"<span style='font-family:courier;'><b>Title : </b>"+book.getTitle()+"<b> Author : </b> "+book.getAuthor()+" &nbsp; <b>Publisher: </b>"
+		+book.getPublisher()+"</span> <p style='font-size:x-small;!important'>"+book.getExcerpt()+
+		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this </p> </div>";
+		
+		return formattedMarkup;
+	}
+	
+	private String getTrueThumbnailLocation(Books book){
+		return (book.getThumbnailLocation() != null && book.getThumbnailLocation().contains("http")) ? 
+				book.getThumbnailLocation() : "./presentationResources/images/"+book.getThumbnailLocation();
+
+	}
+	
+	private HashMap getImageDimensions(String imageLocation, Books book){
+		
+		HashMap<String, String> imageDimensionsMap = new HashMap<String, String>();
+		
+		try{
+			//file system relative references are different from web application relative references 
+			String fileURLPath = (imageLocation.toLowerCase().contains("http")) ? imageLocation :
+						"../webapps/SearchRetailServicesProject/presentationResources/images/"+book.getThumbnailLocation();
+			
+			log.info( System.getProperty("user.dir"));
+			 
+			File file = new File(fileURLPath);
+			log.info("location for file is :::: "+fileURLPath);
+			log.info("does file exist : "+file.exists());
+			
+			Image image = new ImageIcon(fileURLPath).getImage();
+			
+			int imgWidth = image.getWidth(null);
+			int imgHeight = image.getHeight(null);
+			
+			log.info("imgWidth : "+imgWidth);
+			log.info("imgHeight : "+imgHeight);
+			
+			if(imgWidth > imgHeight){
+				double result = new Double(imgHeight)/ new Double(imgWidth);
+				log.info("result : "+result);
+				imgHeight = (int)(result * new Double(120));
+				imgWidth = 120;
+			}else if(imgWidth < imgHeight){
+				double result = new Double(imgWidth)/ new Double(imgHeight);
+				imgWidth = (int)(result * new Double(120));
+				imgHeight = 120;
+			}else{
+				imgHeight = 120;
+				imgWidth  = 120;
+			}
+			
+			imageDimensionsMap.put("imageWidth", String.valueOf(imgWidth));
+			imageDimensionsMap.put("imageHeight", String.valueOf(imgHeight));
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		
+		return imageDimensionsMap;
+	}
 	
 	@RequestMapping(value = { "/retrieveNextSearchDocsSegment"}, method = RequestMethod.GET)
 	public ModelAndView retrieveNextSearchDocsSegment(HttpServletRequest request, HttpServletResponse response) {
