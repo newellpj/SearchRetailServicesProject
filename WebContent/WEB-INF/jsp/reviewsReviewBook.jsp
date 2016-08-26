@@ -65,6 +65,17 @@ $(document).ready(function() {
 			 $('#addReview').prop('disabled', true); 
 		  }
      });
+	 
+	 var acc = document.getElementsByClassName("accordionReviews");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+			acc[i].onclick = function(){
+				this.classList.toggle("active");
+				this.nextElementSibling.classList.toggle("hide");
+			}
+		}
+	 
      
 });
 
@@ -84,7 +95,9 @@ $(document).ready(function() {
 
 <body background="./presentationResources/images/bgimg.jpg">
 
-<br/>
+
+<button class="glyphicon glyphicon-search accordionReviews responsive"> <span style="font-family:Arial;">Show or Hide Review Books </span></button>
+
 	<div id="add-reviews-box" class="add-reviews-box responsive">
 
 		<h3>Add a Book Review</h3>

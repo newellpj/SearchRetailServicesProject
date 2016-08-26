@@ -225,6 +225,31 @@ select {
    border-radius: 8px;
 }
 
+button.accordionReviews {
+    background-color: #eee;
+	background-image:url(../images/bgimg.jpg);
+    color: #444;
+    cursor: pointer;
+    padding: 1em;
+    width: 40%;
+    text-align: left;
+    border: none;
+	margin-left: 30%;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordionReviews:after {
+    content: "\2796"; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordionReviews.active:after {
+    content: '\02795'; /* Unicode character for "minus" sign (-) */
+}
 
 <!-- button:focus {outline:0; border-radius: 7px;} -->
 
