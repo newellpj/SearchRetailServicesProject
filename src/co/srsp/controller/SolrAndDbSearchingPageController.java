@@ -76,6 +76,15 @@ public class SolrAndDbSearchingPageController {
 		return model;
 	}
 	
+	@RequestMapping(value = { "/reviewsReviewBookNoneAdded"}, method = RequestMethod.GET)
+	public ModelAndView reviewsReviewBookNoneAdded() {
+		log.info("we getting in here addDocsSearchPage?");
+		ModelAndView model = new ModelAndView();		
+		model.setViewName("reviewsReviewBook");
+		return model;
+	}
+	
+	
 	@RequestMapping(value = { "/getBookReviewsList"}, method = RequestMethod.GET)
 	public ModelAndView getBookReviewsList(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -93,6 +102,8 @@ public class SolrAndDbSearchingPageController {
 		modelView.addObject("reviewsList", bookMap.values());
 		return modelView;
 	}
+	
+
 	
 	@RequestMapping(value = { "/reviewsReviewBook"}, method = RequestMethod.GET)
 	public ModelAndView addReviewsPage(HttpServletRequest request, HttpServletResponse response) {
