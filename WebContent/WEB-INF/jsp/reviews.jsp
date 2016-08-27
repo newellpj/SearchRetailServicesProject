@@ -68,7 +68,7 @@
 		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame"> Search Docs &nbsp;</a></li>
 		  <li id="activeSel1"  onclick="switchActive($(this));"><a href="searchNASA" target="theI_Frame">Search NASA &nbsp;</a></li>
 		  <li id="activeSel2" onclick="switchActive($(this));"><a href="reviewsAddBook" target="theI_Frame"> &nbsp; Add a book &nbsp;&nbsp;</a></li>
-		  <li id="activeSel3" ><a href="/reviewsReviewBookNoneAdded" target="theI_Frame">Review book &nbsp;</a></li>
+		  <li id="activeSel3" ><a href="reviewsReviewBookNoneAdded" target="theI_Frame">Review book &nbsp;</a></li>
 		  <li id="logout"><a href="logout"> &nbsp;&nbsp;Logout <span style="color:transparent; text-shadow:none;">.......... </span></a></li>
 		 </ul>			 
 		 	</div>
