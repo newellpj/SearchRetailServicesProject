@@ -1,5 +1,6 @@
 package co.srsp.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.solr.common.SolrDocumentList;
@@ -51,5 +52,9 @@ public class SolrSearchService {
 	
 	public String performFacetedQuery(String query){
 		return solrSearchManager.performFacetedQuery(query);
+	}
+	
+	public HashMap<String, String> getMimeTypeToThumbLocationMap(){
+		return solrSearchManager.getMimeTypeToThumbMap();
 	}
 }

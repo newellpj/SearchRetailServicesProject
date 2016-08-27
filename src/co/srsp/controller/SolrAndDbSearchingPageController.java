@@ -519,6 +519,7 @@ public class SolrAndDbSearchingPageController {
 			ssd.settitle(title);
 			ssd.setlargercontent(largerContent);
 			
+			
 			//TODO detect content
 			TikaConfig config = TikaConfig.getDefaultConfig();
 			Detector detector = new DefaultDetector(config.getMimeRepository());
@@ -535,6 +536,9 @@ public class SolrAndDbSearchingPageController {
 			    log.info("media base type : "+mediaType.getBaseType());
 			    log.info("media sub type : "+mediaType.getSubtype());
 			    log.info(detector.detect(stream, metadata).toString());
+			    
+			    ssd.setThumbnailLocation(solrService.getMimeTypeToThumbLocationMap().get(mediaType.getSubtype()));
+			    
 			}catch(Exception e){
 				e.printStackTrace();
 				log.error(e.getMessage());

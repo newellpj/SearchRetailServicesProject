@@ -49,14 +49,7 @@ public class SolrSearchManager {
 
 	public void setMimeTypeToThumbMap(HashMap<String, String> mimeTypeToThumbMap) {
 		this.mimeTypeToThumbMap = mimeTypeToThumbMap;
-		String[] indexValuePairList = mimetypeToThumbnailLocList.split(",");
 		
-		log.info("indexValuePairList : "+indexValuePairList);
-		
-		for(int i=0; indexValuePairList.length > i; i++){
-			String[] indexValuePair = indexValuePairList[i].split(":");
-			mimeTypeToThumbMap.put(indexValuePair[0], indexValuePair[1]);	
-		}
 		
 	}
 
@@ -67,6 +60,15 @@ public class SolrSearchManager {
 	public void setMimetypeToThumbnailLocList(String mimetypeToThumbnailLocList) {
 		this.mimetypeToThumbnailLocList = mimetypeToThumbnailLocList;
 		
+		String[] indexValuePairList = mimetypeToThumbnailLocList.split(",");
+		
+		log.info("indexValuePairList : "+indexValuePairList);
+		
+		for(int i=0; indexValuePairList.length > i; i++){
+			String[] indexValuePair = indexValuePairList[i].split(":");
+			log.info("key : "+indexValuePair[0]+" value : "+indexValuePair[1]);
+			mimeTypeToThumbMap.put(indexValuePair[0], indexValuePair[1]);	
+		}
 	}
 
 	public String[] getFieldArray(){
