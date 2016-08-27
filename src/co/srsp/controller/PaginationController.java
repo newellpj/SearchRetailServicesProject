@@ -15,6 +15,12 @@ import javax.swing.ImageIcon;
 import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.tika.config.TikaConfig;
+import org.apache.tika.detect.DefaultDetector;
+import org.apache.tika.detect.Detector;
+import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.mime.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -370,9 +376,34 @@ public class PaginationController {
 				largerContent = largerContent + "<i> ...open document to see more</i>";
 			}
 			
+			TikaConfig config = TikaConfig.getDefaultConfig();
+			Detector detector = new DefaultDetector(config.getMimeRepository());
+			
+	
+			try{
+				TikaInputStream stream = TikaInputStream.get(new File(ssd.getid()));
+	
+				Metadata metadata = new Metadata();
+				metadata.add(Metadata.RESOURCE_NAME_KEY, ssd.getid());
+			    MediaType mediaType = detector.detect(stream, metadata);
+			    
+			    log.info("media type : "+mediaType.getType());
+			    log.info("media base type : "+mediaType.getBaseType());
+			    log.info("media sub type : "+mediaType.getSubtype());
+			    log.info(detector.detect(stream, metadata).toString());
+			    
+			    ssd.setThumbnailLocation(solrService.getMimeTypeToThumbLocationMap().get(mediaType.getSubtype().toLowerCase().trim()));
+			    
+			}catch(Exception e){
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}
+			
+			
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
-			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
+			formattedList.add("<div style='float:left; margin-right:1.5em;' ><img src='"+ssd.getThumbnailLocation()+"' /></div>"
+					+ "<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
 					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
 					"<i> <a href='#' onclick='displayFullContent();'> ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+
 					largerContent+"</div>");

@@ -537,7 +537,7 @@ public class SolrAndDbSearchingPageController {
 			    log.info("media sub type : "+mediaType.getSubtype());
 			    log.info(detector.detect(stream, metadata).toString());
 			    
-			    ssd.setThumbnailLocation(solrService.getMimeTypeToThumbLocationMap().get(mediaType.getSubtype()));
+			    ssd.setThumbnailLocation(solrService.getMimeTypeToThumbLocationMap().get(mediaType.getSubtype().toLowerCase().trim()));
 			    
 			}catch(Exception e){
 				e.printStackTrace();
