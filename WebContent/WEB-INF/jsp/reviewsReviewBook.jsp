@@ -25,7 +25,10 @@
 <script>
 $(document).ready(function() {
 	
-	
+	//alert(parent.document.getElementById("activeSel3").style);
+		
+	switchActiveOnParentForReviews();
+		
 		
 	  var html = $(".bookRevList").html();
 		  
@@ -142,9 +145,18 @@ $(document).ready(function() {
 			
 	<div id="resultsSectionReview" class="resultsSection responsive">
 		
+		<c:if test="${not empty formattedHTML}">
+						<div class='reviewedBookDetails'>${formattedHTML}</div>
+					</c:if>
+		
 				<c:if test="${not empty reviewLists}">
-					<h4>Book Reviews for <%=session.getAttribute("bookTitleFound")%></h4>
+					<span style='font-family:courier; font-style:italic; font-size:medium;' >Book Reviews for <%=session.getAttribute("bookTitleFound")%></span>
+				
+					
 					<ul id="bookRevList" class="bookRevList">
+						
+					
+					
 						<c:forEach var="listValue" items="${reviewLists}">
 							<li>${listValue}</li>
 						</c:forEach>

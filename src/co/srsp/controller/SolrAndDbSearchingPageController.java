@@ -115,12 +115,23 @@ public class SolrAndDbSearchingPageController {
 		ModelAndView model = new ModelAndView();	
 		
 		String searchSelectedBook = request.getParameter("titleAuthorText");
+		String publisher = "";
+		String excerpt = "";
+		String imageWidth = request.getParameter("imageWidth");
+		String imageHeight = request.getParameter("imageHeight");
+		String thumnbnailLocation = request.getParameter("thumbnailLocation");
+
+		request.getParameter("titleAuthorText");
+		
 		log.info("searchSelectedBook : "+searchSelectedBook);
+		
+		String title ="";
+		String author  = "";
 		
 		if(searchSelectedBook != null && !"".equals(searchSelectedBook)){
 			//the existence of the request parameter searchSelectedBook - means we are coming to the reviews page from the search book page AND NOT the add book page.
-			String title = searchSelectedBook.substring(0, searchSelectedBook.lastIndexOf("-")).trim();
-			String author = searchSelectedBook.substring(searchSelectedBook.lastIndexOf("-")+1).trim();
+			title = searchSelectedBook.substring(0, searchSelectedBook.lastIndexOf("-")).trim();
+			author = searchSelectedBook.substring(searchSelectedBook.lastIndexOf("-")+1).trim();
 			
 			title = title.replaceAll("-", " ");
 			
@@ -147,6 +158,9 @@ public class SolrAndDbSearchingPageController {
 			for(Books book : bookMap.keySet()){	
 				bookMap.get(book);
 				
+				publisher = book.getPublisher();
+				excerpt = book.getExcerpt();
+
 				for(BookReviews bookRev : bookMap.get(book)){
 					list.add(bookRev.getReviewText()+" - <b>reviewed by "+bookRev.getReviewersUsername()+"</b>");
 				}
@@ -157,6 +171,18 @@ public class SolrAndDbSearchingPageController {
 			}
 			
 			model.addObject("reviewLists", list);
+			
+			log.info("thumnbnailLocation :::: "+thumnbnailLocation);
+			
+			String formattedHTML = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageWidth+"' height='"+imageHeight
+					+"' src='"+thumnbnailLocation+"' /></div>"+
+					"<span style='font-family:courier;'><b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b>Publisher: </b>"
+					+publisher+"</span>"+
+					" <p style='font-size:x-small;!important'>"+excerpt+"</p><br/>";
+			
+			log.info("formattedHTML :::: "+formattedHTML);
+			
+			model.addObject("formattedHTML", formattedHTML);
 		}else{
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
@@ -177,7 +203,7 @@ public class SolrAndDbSearchingPageController {
 			return null;
 		}
 		
-		
+
 		log.info(" addBookReview request "+request.toString());
 		log.info("request contain titleText ? : "+request.getParameter("titleText"));
 		log.info("request contain authorText ? : "+request.getParameter("authorText"));

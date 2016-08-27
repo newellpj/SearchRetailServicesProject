@@ -258,10 +258,45 @@ function noBookToReview(){
 
 }
 
+    function switchActiveOnParentForReviews(obj){
+		
+		parent.document.getElementById("activeSel3").style.backgroundColor="#f6f6f6";
+	    parent.document.getElementById("activeSel3").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
+        parent.document.getElementById("activeSel3").style.backgroundRepeat="no-repeat";
+		parent.document.getElementById("activeSel3").style.backgroundPosition="center bottom";		 
+
+
+				//document.getElementById(idFound).style.backgroundColor="#e9e9e9";
+		parent.document.getElementById("activeSel").style.backgroundImage="";
+		parent.document.getElementById("activeSel").style.background="linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel").style.background="-moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel").style.background="-webkit-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel").style.boxShadow="box-shadow: 2px 2px 4px  5px #888888";
+	
+        parent.document.getElementById("activeSel0").style.backgroundImage="";
+		parent.document.getElementById("activeSel0").style.background="linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel0").style.background="-moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel0").style.background="-webkit-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel0").style.boxShadow="box-shadow: 2px 2px 4px  5px #888888";
+		
+		parent.document.getElementById("activeSel1").style.backgroundImage="";
+		parent.document.getElementById("activeSel1").style.background="linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel1").style.background="-moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel1").style.background="-webkit-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel1").style.boxShadow="box-shadow: 2px 2px 4px  5px #888888";
+		
+		parent.document.getElementById("activeSel2").style.backgroundImage="";
+		parent.document.getElementById("activeSel2").style.background="linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel2").style.background="-moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel2").style.background="-webkit-linear-gradient(top, #efefef 0%, #bbbbbb 100%)";  
+		parent.document.getElementById("activeSel2").style.boxShadow="box-shadow: 2px 2px 4px  5px #888888";
+    }
+
 
 	function switchActive(obj){
 		
 		var id = $(obj).attr("id");	
+		
 		document.getElementById(id).style.backgroundColor="#f6f6f6";
 	    document.getElementById(id).style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
         document.getElementById(id).style.backgroundRepeat="no-repeat";
@@ -994,7 +1029,8 @@ function renderTagList(obj){
 		+searchData['publisherText']+"</span>"+
 		" <p style='font-size:x-small;!important'>"+searchData['excerpt']+
 		
-		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this </p> </div>";
+		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
+		+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p>";
 
 		return formattedMarkup; 
  }
