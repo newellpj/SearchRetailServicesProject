@@ -1,8 +1,7 @@
 package co.srsp.solr;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -29,7 +28,12 @@ public class SolrSearchManager {
 	private String solrFieldsList;
 	
 	@Autowired
+	private String mimetypeToThumbnailLocList; 
+	
+	@Autowired
 	private String connectionString;
+	
+	private HashMap<String, String> mimeTypeToThumbMap = new HashMap<String, String>();
 	
 	public SolrSearchManager(){
 	}
@@ -37,8 +41,34 @@ public class SolrSearchManager {
 	public String getSolrFieldsList() {
 		return solrFieldsList;
 	}
-
 	
+	
+	public HashMap<String, String> getMimeTypeToThumbMap() {
+		return mimeTypeToThumbMap;
+	}
+
+	public void setMimeTypeToThumbMap(HashMap<String, String> mimeTypeToThumbMap) {
+		this.mimeTypeToThumbMap = mimeTypeToThumbMap;
+		String[] indexValuePairList = mimetypeToThumbnailLocList.split(",");
+		
+		log.info("indexValuePairList : "+indexValuePairList);
+		
+		for(int i=0; indexValuePairList.length > i; i++){
+			String[] indexValuePair = indexValuePairList[i].split(":");
+			mimeTypeToThumbMap.put(indexValuePair[0], indexValuePair[1]);	
+		}
+		
+	}
+
+	public String getMimetypeToThumbnailLocList() {
+		return mimetypeToThumbnailLocList;
+	}
+
+	public void setMimetypeToThumbnailLocList(String mimetypeToThumbnailLocList) {
+		this.mimetypeToThumbnailLocList = mimetypeToThumbnailLocList;
+		
+	}
+
 	public String[] getFieldArray(){
 		return solrFieldsList.split(":");
 	}

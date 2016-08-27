@@ -14,6 +14,12 @@ import javax.swing.ImageIcon;
 import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.tika.config.TikaConfig;
+import org.apache.tika.detect.DefaultDetector;
+import org.apache.tika.detect.Detector;
+import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.mime.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -77,9 +83,13 @@ public class SolrAndDbSearchingPageController {
 	}
 	
 	@RequestMapping(value = { "/reviewsReviewBookNoneAdded"}, method = RequestMethod.GET)
-	public ModelAndView reviewsReviewBookNoneAdded() {
+	public ModelAndView reviewsReviewBookNoneAdded(HttpServletRequest request, HttpServletResponse response) {
 		log.info("we getting in here addDocsSearchPage?");
-		ModelAndView model = new ModelAndView();		
+		ModelAndView model = new ModelAndView();
+		
+		request.getSession().setAttribute("bookAuthorFound", "");
+		request.getSession().setAttribute("bookTitleFound", "");
+
 		model.setViewName("reviewsReviewBook");
 		return model;
 	}
@@ -461,7 +471,7 @@ public class SolrAndDbSearchingPageController {
 		int count = 0;
 		
 		for(SolrDocument solrD : finalisedFilteredList){
-			
+
 			ssd = new SolrSearchData();
 			
 			for(String field : solrService.getFieldsArray()){
@@ -508,27 +518,38 @@ public class SolrAndDbSearchingPageController {
 			ssd.setauthor(author);
 			ssd.settitle(title);
 			ssd.setlargercontent(largerContent);
-
+			
+			//TODO detect content
+			TikaConfig config = TikaConfig.getDefaultConfig();
+			Detector detector = new DefaultDetector(config.getMimeRepository());
+			
+	
+			try{
+				TikaInputStream stream = TikaInputStream.get(new File(ssd.getid()));
+	
+				Metadata metadata = new Metadata();
+				metadata.add(Metadata.RESOURCE_NAME_KEY, ssd.getid());
+			    MediaType mediaType = detector.detect(stream, metadata);
+			    
+			    log.info("media type : "+mediaType.getType());
+			    log.info("media base type : "+mediaType.getBaseType());
+			    log.info("media sub type : "+mediaType.getSubtype());
+			    log.info(detector.detect(stream, metadata).toString());
+			}catch(Exception e){
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}
+			
 			log.info("author 2 : "+author);
-//			formattedList.add("<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
-//					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+
-//					"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+largerContent+"</div>");
 			
 			ssd.setextract(solrService.extractSpecifiedDocumentContent(ssd.getid(), 600));
 			
 			returnArray[count] = ssd;
 			count++;
 		}
-		
 
-//		if(formattedList.size() == 0){
-//			formattedList.add("No documents found..");
-//		}
-		
-		request.getSession().setAttribute("solrSearchListReturned", returnList);
-		
+		request.getSession().setAttribute("solrSearchListReturned", returnList);		
 		log.info("list to return is : "+returnList.size());
-		
 		return returnArray;
 	}
 	

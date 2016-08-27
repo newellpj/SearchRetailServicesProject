@@ -845,7 +845,10 @@ function renderTagList(obj){
  
  function formatDocSearchContent(searchData){
 	 
-		var formattedMarkup = "<b>Title : </b>"+searchData['title']+"<b> Author : </b> "+searchData['author']+" &nbsp; <b> link to doc </b> <a href='file://///"+searchData['id']+"'"+
+	 
+	 
+		var formattedMarkup =  "<div style='float:left; margin-right:1.5em;' ><img src='"+searchData['thumbnailLocation']+"' /></div>"+
+		"<b>Title : </b>"+searchData['title']+"<b> Author : </b> "+searchData['author']+" &nbsp; <b> link to doc </b> <a href='file://///"+searchData['id']+"'"+
 		" target="+"'"+"_blank"+"'"+">"+searchData['title']+"</a><p style='font-size:x-small;!important'>"+searchData['extract']+
 		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+searchData['largerContent']+"</div>";
 	 
@@ -1003,7 +1006,6 @@ function renderTagList(obj){
  
  function toggleReadMoreSearchResults(ID){
 		$('.docsSearchSegment').find('a[href="#"]').on('click', function (e) {
-		    alert('in find');
 			e.preventDefault();
 		    this.expand = !this.expand;
 		    $(this).text(this.expand?"Click to collapse":"Click to read more");

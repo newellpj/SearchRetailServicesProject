@@ -8,7 +8,15 @@ public class SolrSearchData {
 	private String id; //contains the URL to the doc
 	private String largercontent;
 	private String extract;
+	private String thumbnailLocation;
 	
+	
+	public String getThumbnailLocation() {
+		return thumbnailLocation;
+	}
+	public void setThumbnailLocation(String thumbnailLocation) {
+		this.thumbnailLocation = thumbnailLocation;
+	}
 	public String getextract() {
 		return extract;
 	}

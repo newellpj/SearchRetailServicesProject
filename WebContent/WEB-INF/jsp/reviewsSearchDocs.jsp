@@ -119,28 +119,22 @@
 			</div>
 		
 			  <div class="tagSearches responsive"> 
-						
-							
-								<button id="searchBook" class="searchBook" name="searchBook" type="button" onclick="performAjaxDocSearch();" value="Search.." > 
-								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
-								</button>
-								<button id="resetSearch" class="resetSearch"  name="resetSearch" type="button" onclick="resetDocSearch();"  value="Reset" >
-										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
-								</button>
-								
-					</div>		
-			<br/>
-
-			
+					<button id="searchBook" class="searchBook" name="searchBook" type="button" onclick="performAjaxDocSearch();" value="Search.." > 
+					<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
+					</button>
+					<button id="resetSearch" class="resetSearch"  name="resetSearch" type="button" onclick="resetDocSearch();"  value="Reset" >
+							<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
+					</button>	
+			   </div>		
+			<br/>		
 		</form:form>
 </div>	
 
 <div id="resultsSectionDocs" class="resultsSectionDocs responsive">
-		<form:form id="searchResults" class="searchResults">
-		
-				<div id="search" class="search" >
-					<ul id="bookRevList" class="bookRevList" >				
-					</ul>
+		<form:form id="searchResults" class="searchResults">	
+			<div id="search" class="search" >
+				<ul id="bookRevList" class="bookRevList" >				
+				</ul>
 			</div>
 		
 		</form:form>
