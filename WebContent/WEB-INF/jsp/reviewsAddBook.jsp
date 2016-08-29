@@ -114,7 +114,7 @@ Array.prototype.forEach.call( inputs, function( input )
 			<div class="message">${message}</div>
 		</c:if>
 		
-		<p><span style="align-center;">Title and Author are mandatory</span></p>
+		<p><span style="align-center;text-shadow: 0.5px 0.5px #a8a8a8;">Title and Author are mandatory</span></p>
 
 <br/>
 			<form:form id="reviewsForm" action="searchOrAddBook" method="post" commandName="bookReviewsModel">
@@ -143,9 +143,9 @@ Array.prototype.forEach.call( inputs, function( input )
 	
 				
 		
-			
-			  <fieldset>
-                <h4>Add attributes to enable better searching</h4>
+			<br/><br/>
+			  <fieldset><p>
+                <span style="align-center;text-shadow: 0.5px 0.5px #a8a8a8;">Add attributes to enable better searching</span></p>
                    <div class="tagSearches"> 
 						
 							<div id="genreSelection1" class="genreSelection1 responsive">
@@ -163,17 +163,18 @@ Array.prototype.forEach.call( inputs, function( input )
 							
 
 					</div>
-					
+					<br/>
 					<div class="fileUploaderSection">	
+							<p><span style="align-center;text-shadow: 0.5px 0.5px #a8a8a8;">Upload thumbnail image for the book</span></p>
 								<input type="file" name="file" id="file" class="inputfile" />
 								<label for="file"><img src="./presentationResources/images/button_select.gif" /></label>
 								<label  class="uploadLabel">No file chosen</label>
 							</div>
-					
+							</fieldset>
 						<ul id="bookTagsList" class="bookTagsList">
 						</ul>
            
-			</fieldset>
+			
 			
 
 
