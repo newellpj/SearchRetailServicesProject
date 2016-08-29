@@ -66,9 +66,14 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 			Map hashMap = new HashMap();
 			hashMap.put("title", title);
 			hashMap.put("author", author);
+			//session.load(theClass, id) //evict and clear load performs new select only if object is evicted or cleared from session
+			
 			
 			list = session.createQuery(" from "+Books.class.getName()+" where UPPER(title) = UPPER(:title) and UPPER(author) = UPPER(:author) ").setProperties(hashMap).list();
 		}
+		
+		
+		//session.clear();
 		
 		return list;
 
