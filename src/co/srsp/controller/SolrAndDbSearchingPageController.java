@@ -140,7 +140,7 @@ public class SolrAndDbSearchingPageController {
 		String excerpt = "";
 		String imageWidth = request.getParameter("imageWidth");
 		String imageHeight = request.getParameter("imageHeight");
-		String thumnbnailLocation = request.getParameter("thumbnailLocation");
+		String thumbnailLocation = request.getParameter("thumbnailLocation");
 
 		request.getParameter("titleAuthorText");
 		
@@ -160,16 +160,24 @@ public class SolrAndDbSearchingPageController {
 			
 			request.getSession().setAttribute("bookTitleFound", title);
 			request.getSession().setAttribute("bookAuthorFound", author);
+			request.getSession().setAttribute("imageWidth", imageWidth);
+			request.getSession().setAttribute("imageHeight", imageHeight);
+			request.getSession().setAttribute("thumbnailLocation", thumbnailLocation);
+		}else{
+			//get values from session
+			
+			title = (request.getSession().getAttribute("bookTitleFound") != null) ? request.getSession().getAttribute("bookTitleFound").toString() : ""; 
+			author = (request.getSession().getAttribute("bookAuthorFound") != null) ? request.getSession().getAttribute("bookAuthorFound").toString() : ""; 
+			imageWidth = (request.getSession().getAttribute("imageWidth") != null) ? request.getSession().getAttribute("imageWidth").toString() : ""; 
+			imageHeight = (request.getSession().getAttribute("imageHeight") != null) ? request.getSession().getAttribute("imageHeight").toString() : ""; 
+			thumbnailLocation = (request.getSession().getAttribute("thumbnailLocation") != null) ? request.getSession().getAttribute("thumbnailLocation").toString() : ""; 
 		}
-		
-		String bookTitleFound = (request.getSession().getAttribute("bookTitleFound") != null) ? request.getSession().getAttribute("bookTitleFound").toString() : ""; 
-		String bookAuthorFound = (request.getSession().getAttribute("bookAuthorFound") != null) ? request.getSession().getAttribute("bookAuthorFound").toString() : ""; 
-		
-		bookReviewsModel.setBookTitleReview(bookTitleFound);
-		bookReviewsModel.setBookAuthorReview(bookAuthorFound);
+
+		bookReviewsModel.setBookTitleReview(title);
+		bookReviewsModel.setBookAuthorReview(author);
 		
 		
-		if(!"".equals(bookTitleFound)){
+		if(!"".equals(title)){
 		
 			HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(request.getSession().getAttribute("bookTitleFound").toString(), 
 					request.getSession().getAttribute("bookAuthorFound").toString(),0,20);
@@ -181,6 +189,7 @@ public class SolrAndDbSearchingPageController {
 				
 				publisher = book.getPublisher();
 				excerpt = book.getExcerpt();
+			
 
 				for(BookReviews bookRev : bookMap.get(book)){
 					list.add(bookRev.getReviewText()+" - <b>reviewed by "+bookRev.getReviewersUsername()+"</b>");
@@ -191,12 +200,15 @@ public class SolrAndDbSearchingPageController {
 				list.add("No Reviews found for title.");
 			}
 			
+			
+			
+			
 			model.addObject("reviewLists", list);
 			
-			log.info("thumnbnailLocation :::: "+thumnbnailLocation);
+			log.info("thumnbnailLocation :::: "+thumbnailLocation);
 			
 			String formattedHTML = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageWidth+"' height='"+imageHeight
-					+"' src='"+thumnbnailLocation+"' /></div>"+
+					+"' src='"+thumbnailLocation+"' /></div>"+
 					"<span style='font-family:courier;'><b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b>Publisher: </b>"
 					+publisher+"</span>"+
 					" <p style='font-size:x-small;!important'>"+excerpt+"</p><br/>";

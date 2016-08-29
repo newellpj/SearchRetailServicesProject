@@ -22,6 +22,31 @@
 <script>
 
 $(document).ready(function() {
+	
+	var inputs = document.querySelectorAll( '.inputfile' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	var label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
+
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+
+		if( fileName )
+			$('.uploadLabel').html(fileName);
+
+		else
+			$('.uploadLabel').html("no file chosen");
+	
+	});
+});
+	
+	
 	if($("#titleTextAdd").val() == '' || $("#authorTextAdd").val() == ''){
 			$( '#addBook').prop('disabled', true);
 		}
@@ -135,8 +160,15 @@ $(document).ready(function() {
 								<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
 								<select style="visibility:hidden;" id="languageSelect"></select>
 							</div>
-					
+							
+
 					</div>
+					
+					<div class="fileUploaderSection">	
+								<input type="file" name="file" id="file" class="inputfile" />
+								<label for="file"><img src="./presentationResources/images/button_select.gif" /></label>
+								<label  class="uploadLabel">No file chosen</label>
+							</div>
 					
 						<ul id="bookTagsList" class="bookTagsList">
 						</ul>

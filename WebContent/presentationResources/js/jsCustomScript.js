@@ -514,8 +514,6 @@ function noBookToReview(){
 							width: ( 300 )
 						});
 
-						alert('we in error?');
-						
 						var msg = e.errorMessage;
 						
 						if('undefined' == msg || msg == null){
@@ -530,6 +528,106 @@ function noBookToReview(){
 			 }
 			});  
 	}
+	
+
+	function performAjaxUpload(e, methodPath) {
+			
+			if(e.status == 'begin'){
+			 
+				var location = window.location.href;
+				
+				location = location.substring(0,location.indexOf("pages")+5)
+			
+				inProgress(e);
+				var percent = $("#uploadingPercent");
+				var file = document.getElementById('filefield').files[0];
+				var text = $(".fileNameText").val();
+				var formdata = new FormData();
+
+				//var form = document.getElementById('form');
+				//var formData = new FormData(form); this for use where want to persist all form data to the server
+				
+				formdata.append('sampleFile', file);
+				formdata.append("sampleText", text);
+				
+				
+				 $.ajax({
+					// code for displaying percentage tested in Mozilla and Chrome
+				     xhr: function() {
+						var xhr = new window.XMLHttpRequest();
+
+						xhr.upload.addEventListener("progress", function(evt) {
+							if (evt.lengthComputable) {
+								var percentComplete = evt.loaded / evt.total;
+								percentComplete = parseInt(percentComplete * 100);
+								percent.html(percentComplete+"%");
+
+								if (percentComplete === 100) {} //Do something with this
+
+							}
+						}, false);
+
+						return xhr;
+					},
+					url: location+'/uploaders/upload/'+methodPath,
+					data: formdata,
+					dataType: 'text',
+					processData: false,
+					contentType: false,
+					type: 'POST',
+					success:  function(e) {
+								
+							  $(".ui-dialog-content").dialog("close");
+							  $('.refreshUploadList').click();	
+							
+					 },
+
+
+				 error: function(e){
+
+			
+						$(".ui-dialog-content").dialog("close");
+
+						var dlg= $("<div></div>").dialog({
+								hide: 'fade',
+								maxWidth: 300,
+								modal: true,
+								show: 'fade',
+								open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+									buttons: [
+								{
+									'class': 'btn btn-primary',
+									click: function(e) {
+										$(this).dialog("close");
+										window.opener.location.href = window.opener.location.href;
+									
+									},
+									text: 'OK'
+								}
+							
+							],	
+								title: 'Error uploading file',
+								width: ( 300 )
+							});
+
+							
+							
+							var msg = e.errorMessage;
+							
+							if('undefined' == msg || msg == null){
+									msg = "File Could not be uploaded at this time. Please ensure file is less than 2gb in size."
+							}
+							
+							$(dlg).html('<p>'+msg+'</p>');
+							
+							 $(dlg).dialog("open");
+					 
+				 }
+				});                
+			
+			}
+		            
+		}   
 	
 	function getSearchAllSelectOptionsToPixelsMapping(selectedText){
 		return searchAllMap[selectedText];
