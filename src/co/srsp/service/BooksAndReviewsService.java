@@ -67,7 +67,10 @@ public class BooksAndReviewsService {
 				 bookTags.setTagType(key);
 				 bookTags.setTagValue(tagsAndValueMap.get(key));
 				 bookTags.setIdbooks(books.getIdbooks());
-				 tagsBO.save(bookTags);
+				 
+				 if(!"".equals(bookTags.getTagValue())){
+					 tagsBO.save(bookTags);
+				 }
 			}
 			
 			

@@ -817,21 +817,29 @@ function renderTagList(obj){
 		var catTextVal = $('#categorySelect').val();
 		var langTextVal = $('#languageSelect').val();
 		
+		var formdata = new FormData();
+		formdata.append('bookAuthorFound',authorTextVal);
+		formdata.append('bookTitleFound',titleTextVal);
+		formdata.append('bookPublisherFound',publisherTextVal);
+		formdata.append('genreTextVal',genreTextVal);
+		formdata.append('catTextVal',catTextVal);
+		formdata.append('langTextVal',langTextVal);
+		
+		var file = document.getElementById('file').files[0];
+		
+		var fileName = $(".uploadLabel").val();
+		
+		formdata.append('theFile', file);
+		formdata.append('filename', fileName);
+		
 		$.ajax({
 			url: 'addNewBook',
-			dataType: 'JSON',
-			data: { 
-				titleText: titleTextVal,
-				authorText: authorTextVal, 
-				publisherText: publisherTextVal,
-				genreText: genreTextVal,
-				catText: catTextVal,
-				langText: langTextVal
-			},
-			processData: true,
-			contentType: 'application/json; charset=utf-8',
-			type: 'GET',
-			success:  function(bookReviewsModel) {
+			data: formdata,
+			dataType: 'text',
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			success:  function() {
 			    $(dlg).dialog("close");
 			    $('#activeSel3', parent.document).click();
 				window.location.href = 'reviewsReviewBook';
@@ -875,7 +883,7 @@ function renderTagList(obj){
 			        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
 			        $('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 					 $(errorDialog).dialog("open");
-			         window.parent.location.href = 'logout'; 
+			        // window.parent.location.href = 'logout'; 
 		 }
 		});    
 		
