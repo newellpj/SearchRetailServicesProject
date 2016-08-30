@@ -14,6 +14,9 @@
 	
 	div.publisherFields.responsive{min-width:85%; }
 	input#publisherTextAdd.responsive{min-width:74%;}
+	
+
+	
 }
 
 @media screen and (max-width:1520px){
@@ -48,10 +51,24 @@
 
 @media screen and (max-width:880px){
 	 div.add-book-box.responsive{min-width:85%; margin-left:10%;}
+	 
+	 div.textAreaExcept.responsive{max-width:100%;};
+	 
 }
 
-@media screen and (max-width:720px){
+@media screen and (max-width:730px){
 	 div.add-book-box.responsive{min-width:92%; margin-left:5%;}
+
+
+	 input#publisherTextAdd.responsive{min-width:75%; margin-left:0.1em; border-right:solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
+	input#authorTextAdd.responsive{min-width:75%;margin-left:0.1em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
+	input#titleTextAdd.responsive{min-width:75%;margin-left:0.1em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
+	textArea#excerptText{max-width:75%;margin-left:0.1em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
+      .glyphicon-pencil{display:none;}
+	  .glyphicon-book{display:none;}
+	  .glyphicon-barcode{display:none;}
+	  .glyphicon-comment{display:none;}
+	 
 }
 
 @media screen and (max-width:650px){
@@ -63,7 +80,13 @@
 	input#authorTextAdd.responsive{min-width:75%;margin-left:0.6em;}
 	
 	div.publisherFields.responsive{min-width:100%; }
-	input#publisherTextAdd.responsive{min-width:74%;}
+	input#publisherTextAdd.responsive{min-width:73%;}
+		
+	
+	
+	 textArea#excerptText{max-width:80%;}
+
+	
 
 	div.languageSelection.responsive{
 		min-width:95%;
@@ -79,11 +102,15 @@
 }
 
 @media screen and (max-width:540px){
+	
     div.add-book-box.responsive{min-width:97%; margin-left:0.5%;}
 	input#publisherTextAdd.responsive{min-width:70%;}
 	input#authorTextAdd.responsive{min-width:70.5%;margin-left:0.6em;}
 	input#titleTextAdd.responsive{min-width:70.5%;margin-left:0.6em;}
 	button#addBook.responsive{min-width:90%;}
+		
+	 textArea#excerptText{max-width:70%;}
+
 }
 
 @media screen and (max-width:480px){
@@ -91,9 +118,13 @@
 	input#publisherTextAdd.responsive{min-width:63%;}
 	input#authorTextAdd.responsive{min-width:63.5%;margin-left:0.6em;}
 	input#titleTextAdd.responsive{min-width:63.5%;margin-left:0.6em;}
+	textArea#excerptText{max-width:50%;}
 	
 	
-	
+}
+
+@media screen and (max-width:420px){
+	textArea#excerptText{max-width:50%;}
 }
 
 @media screen and (max-width:420px){
@@ -101,11 +132,11 @@
 	input#publisherTextAdd.responsive{min-width:75%; margin-left:0.1em; border-right:solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
 	input#authorTextAdd.responsive{min-width:75%;margin-left:0.1em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
 	input#titleTextAdd.responsive{min-width:75%;margin-left:0.1em; border-right: solid 1.5px #dcdcdc; border-radius:7px 7px 7px 7px;}
-	
+	 textArea#excerptText{max-width:45%;}
       .glyphicon-pencil{display:none;}
 	  .glyphicon-book{display:none;}
 	  .glyphicon-barcode{display:none;}
-
+	  
 
 	
 }
@@ -113,6 +144,7 @@
 @media screen and (max-width:370px){
 	input#authorText{min-width:69%; margin-bottom:1em;}
 	input#publisherText{min-width:64%; margin-bottom:1em;}
+		 textArea#excerptText{max-width:40%;}
 }
 
 @media screen and (max-width:350px){
@@ -122,6 +154,7 @@
 	input#publisherTextAdd.responsive{min-width:65%;}
 	input#authorTextAdd.responsive{min-width:65.5%;margin-left:0.6em;}
 	input#titleTextAdd.responsive{min-width:65.5%;margin-left:0.6em;}
+		 textArea#excerptText{max-width:30%;}
 }
 
  .iconspanAddBook {
@@ -177,6 +210,8 @@ div.excerptFields{
 	margin-left:  0.6em;
 	
 }
+
+
 
 input#titleTextAdd{
 	min-width:75%;
