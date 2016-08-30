@@ -816,6 +816,8 @@ function renderTagList(obj){
 		var genreTextVal = $('#genreSelect').val();  
 		var catTextVal = $('#categorySelect').val();
 		var langTextVal = $('#languageSelect').val();
+		var excerpt = $('#excerptText').val();
+
 		
 		var formdata = new FormData();
 		formdata.append('bookAuthorFound',authorTextVal);
@@ -824,7 +826,7 @@ function renderTagList(obj){
 		formdata.append('genreTextVal',genreTextVal);
 		formdata.append('catTextVal',catTextVal);
 		formdata.append('langTextVal',langTextVal);
-		
+		formdata.append('excerpt',excerpt);
 		var file = document.getElementById('file').files[0];
 		
 		var fileName = $(".uploadLabel").val();

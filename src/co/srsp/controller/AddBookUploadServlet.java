@@ -170,7 +170,19 @@ public class AddBookUploadServlet extends HttpServlet {
 					BookReviewsModel bookReviewsModel = new BookReviewsModel();
 					bookReviewsModel.setTitleText(request.getSession().getAttribute("bookTitleFound").toString());
 					bookReviewsModel.setAuthorText(request.getSession().getAttribute("bookAuthorFound").toString());
-					bookReviewsModel.setPublisherText(request.getSession().getAttribute("bookPublisherFound").toString());
+					
+					if(request.getSession().getAttribute("bookPublisherFound") != null){
+						bookReviewsModel.setPublisherText(request.getSession().getAttribute("bookPublisherFound").toString());
+					}
+					
+					if(request.getSession().getAttribute("excerpt") != null){
+						bookReviewsModel.setExcerpt(request.getSession().getAttribute("excerpt").toString());
+					}
+					
+					if(request.getSession().getAttribute("thumbnailLocation") != null){
+						bookReviewsModel.setThumbnnalLocation(request.getSession().getAttribute("thumbnailLocation").toString());
+					}
+					
 					
 					log.info("creating book reviews model 2222 ");
 					

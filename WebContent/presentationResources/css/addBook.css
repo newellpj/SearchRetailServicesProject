@@ -143,12 +143,12 @@ div.titleFields{
 	margin-left: 1.6em;
 }
 
+
 div.publisherFields{
 	min-width:85%;
 	margin-bottom:0.5em;
 	display:inline-block;
 	margin-left: 0;
-	
 }
 
 .authorFields{
@@ -158,6 +158,26 @@ div.publisherFields{
 	margin-left: 0.5em;
 
 }
+
+.excerptLabel{
+	margin-top:8em;
+	margin-left:-0.5em;
+}
+
+.textAreaExcept{
+	margin-left:0; 
+	margin-top:-9em;
+}
+
+
+div.excerptFields{
+	min-width:78%;
+	margin-bottom:0.5em;
+	display:inline-block;
+	margin-left:  0.6em;
+	
+}
+
 input#titleTextAdd{
 	min-width:75%;
 	margin-left:0.6em;
@@ -178,6 +198,22 @@ input#publisherTextAdd{
   padding:5px;
   font-family:Arial;
   width: 75%;
+}
+
+.iconspanReview{
+	 float: right;
+    margin-right: 14px;
+    margin-top: -1px;
+    position: relative;
+	background-color: #A2C5D0;
+    color: #3D3C3A;
+	border: solid 1.5px #dcdcdc;
+	padding-top: 100px;
+	padding-left: 8px;
+	padding-right: 8px;
+	height: 213px;
+	border-left: none;
+	border-radius: 0px 7px 7px 0px;
 }
 
 button#addBook{

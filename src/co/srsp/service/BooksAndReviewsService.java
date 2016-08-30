@@ -55,6 +55,8 @@ public class BooksAndReviewsService {
 		books.setTitle(bookReviewsModel.getTitleText());
 		books.setAuthor(bookReviewsModel.getAuthorText());
 		books.setPublisher(bookReviewsModel.getPublisherText());
+		books.setThumbnailLocation(bookReviewsModel.getThumbnailLocation());
+		books.setExcerpt(bookReviewsModel.getExcerpt());
 		
 		BookTags bookTags = null;
 

@@ -134,6 +134,11 @@ Array.prototype.forEach.call( inputs, function( input )
 					Publisher:
 					<input id="publisherTextAdd" class="responsive" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspanAddBook"></span>
 				</div>
+				<div class="excerptFields responsive">
+				   <div class="excerptLabel responsive" >Excerpt:</div>
+					<div class="textAreaExcept responsive"><textarea style="resize: none; height:212px; margin-left:4em;" id="excerptText" name="excerptText" rows="10" cols="63" ></textarea>
+					<span class="glyphicon glyphicon-comment iconspanReview responsive"></span></div>
+				</div>
 					<button id="addBook" name="addBook" class="responsive" type="button"
 						value="Add a book.." onclick="performAjaxAddBook();" >
 						<span class="glyphicon glyphicon-plus-sign"  ></span>&nbsp; Add a Book... </button>
@@ -160,8 +165,6 @@ Array.prototype.forEach.call( inputs, function( input )
 								<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
 								<select style="visibility:hidden;" id="languageSelect"></select>
 							</div>
-							
-
 					</div>
 					<br/>
 					<div class="fileUploaderSection">	
@@ -173,10 +176,6 @@ Array.prototype.forEach.call( inputs, function( input )
 							</fieldset>
 						<ul id="bookTagsList" class="bookTagsList">
 						</ul>
-           
-			
-			
-
 
 		</form:form>
 	</div>
