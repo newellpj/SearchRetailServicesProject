@@ -31,6 +31,30 @@ public class HibernateTestClass {
 	}
 	
 	@Test
+	public void testBookLoad(){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
+		Books book = booksBO.findBooksByTitleOnly("The Plague");
+		
+		System.out.println("book title : "+book.getTitle());
+		System.out.println("book author : "+book.getAuthor());
+		
+		//book.setTitle("The plague goes on");
+		
+		Books book2 = new Books();
+		book2.setIdbooks(9);
+		book2.setTitle("The plague goes on");
+		
+		booksBO.update(book2);
+		book = booksBO.findBooksByTitleOnly("The Plague");
+		
+		System.out.println("2 book title : "+book.getTitle());
+		System.out.println("2 book author : "+book.getAuthor());
+		
+		
+	}
+	
+	@Test
 	public void testTagsSearch(){
 		//findBooksByTagsLazyLoad
 		

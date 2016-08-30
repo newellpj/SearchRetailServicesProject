@@ -50,6 +50,7 @@ public class BooksAndReviewsService {
 		return booksReviewsBO.findBooksReviewByTitleAndAuthorLazyLoad(title, author, offset, numberOfRecords);
 	}
 	
+	
 	public void addBook(BookReviewsModel bookReviewsModel, HashMap<String, String> tagsAndValueMap){
 		Books books = new Books();
 		books.setTitle(bookReviewsModel.getTitleText());

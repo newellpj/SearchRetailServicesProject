@@ -10,6 +10,8 @@ public interface BooksBusinessObject {
 	public void update(Books books);
 	public void delete(Books books, List<BookReviews> bookReviews);
 	
+	public Books findBooksByTitleOnly(String title);
+	
 	/**
 	 * gets book by title and/or author. If author is null it will just search on title.
 	 * @param title

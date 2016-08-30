@@ -1,5 +1,6 @@
 package co.srsp.hibernate;
 
+import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,18 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 		session.close();
 	}
 
+	@Override
+	public Books findBooksByTitleOnly(String title) {
+		Books book = new Books();
+		book.setTitle(title);
+		Session session = this.getSessionFactory().openSession();
+		book = (Books)session.load(Books.class, 10);
+		
+		
+		
+		return book;
+	}
+	
 	@Override
 	public List<Books> findBooksByTitleAndAuthor(String title, String author) {
 		// TODO Auto-generated method stub
