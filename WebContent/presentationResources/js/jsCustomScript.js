@@ -677,9 +677,9 @@ function renderTagList(obj){
 		var myOptions = ""
 	
 		if(ID == 'genre'){
-			myOptions = [{ text: 'Please select..', value: ''}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
-							 {text : 'Biography', value: 'Biography'}, {text : 'Philosophy', value: 'Philosophy'},
-							 {text : 'Romance', value: 'Romance'}];		
+			myOptions = [{ text: 'Please select..', value: ''}, { text: 'Drama', value: 'Drama'}, { text: 'Thriller', value: 'Thriller'}, {text : 'Crime', value: 'Crime'},
+							 {text : 'Biography', value: 'Biography'}, {text : 'Philosophy', value: 'Philosophy'}, {text : 'Mystery', value : 'Mystery'},
+							 {text : 'Romance', value: 'Romance'},{text : 'Human Interest', value : 'Human Interest'}, {text : 'Sci-fi', value : 'Sci-fi'}];		
 		}else if(ID == 'category'){
 			myOptions= [{ text: 'Please select..', value: ''}, { text: 'Fiction', value: 'Fiction'}, {text : 'Non-fiction', value: 'Non-fiction'}];	 
 		}else{

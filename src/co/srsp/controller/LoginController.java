@@ -61,8 +61,9 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 		
 		//request.getSession(true);
 		
+		String referrer = request.getHeader("referer");
 		
-		log.info("logger we again login!!!!!!");
+		log.info("logger we again login and referrer is :::: "+referrer);
 	
 		ModelAndView model = new ModelAndView();
 		if (error != null) {

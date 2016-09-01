@@ -180,7 +180,14 @@ public class AddBookUploadServlet extends HttpServlet {
 					}
 					
 					if(request.getSession().getAttribute("thumbnailLocation") != null){
-						bookReviewsModel.setThumbnnalLocation(request.getSession().getAttribute("thumbnailLocation").toString());
+						
+						String tempStr = request.getSession().getAttribute("thumbnailLocation").toString();
+						
+						String imageFileNameMinusDirPath = tempStr.substring(tempStr.lastIndexOf("/")+1);
+						
+						bookReviewsModel.setThumbnnalLocation(imageFileNameMinusDirPath);
+					}else{
+						bookReviewsModel.setThumbnnalLocation("noimage.jpg");
 					}
 					
 					

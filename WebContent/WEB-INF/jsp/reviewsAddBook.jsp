@@ -136,7 +136,7 @@ Array.prototype.forEach.call( inputs, function( input )
 				</div>
 				<div class="excerptFields responsive">
 				   <div class="excerptLabel responsive" >Excerpt:</div>
-					<div class="textAreaExcept responsive"><textarea style="resize: none; height:212px; margin-left:4em;" id="excerptText" name="excerptText" rows="10" cols="63" ></textarea>
+					<div class="textAreaExcept responsive"><textarea style="resize: none; height:212px; margin-left:4em;" maxlength="2000" id="excerptText" name="excerptText" rows="10" cols="63" ></textarea>
 					<span class="glyphicon glyphicon-comment iconspanReview responsive"></span></div>
 				</div>
 					<button id="addBook" name="addBook" class="responsive" type="button"

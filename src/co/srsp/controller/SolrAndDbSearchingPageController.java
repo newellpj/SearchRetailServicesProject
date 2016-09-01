@@ -94,7 +94,7 @@ public class SolrAndDbSearchingPageController {
 	
 	@RequestMapping(value = { "/reviewsReviewBookNoneAdded"}, method = RequestMethod.GET)
 	public ModelAndView reviewsReviewBookNoneAdded(HttpServletRequest request, HttpServletResponse response) {
-		log.info("we getting in here addDocsSearchPage?");
+		log.info("we getting in here reviewsReviewBookNoneAdded?");
 		ModelAndView model = new ModelAndView();
 		
 		request.getSession().setAttribute("bookAuthorFound", "");

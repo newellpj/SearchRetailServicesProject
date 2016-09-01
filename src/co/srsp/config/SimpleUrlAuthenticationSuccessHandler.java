@@ -31,8 +31,7 @@ public class SimpleUrlAuthenticationSuccessHandler implements AuthenticationSucc
         clearAuthenticationAttributes(request);
     }
  
-    protected void handle(HttpServletRequest request, 
-      HttpServletResponse response, Authentication authentication) throws IOException {
+    protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         String targetUrl = determineTargetUrl(authentication);
         log.info("handle");
         if (response.isCommitted()) {
