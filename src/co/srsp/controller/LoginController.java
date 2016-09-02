@@ -24,7 +24,8 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 	private final static Logger log = Logger.getLogger(LoginController.class); 
 	
 	private String defaultTargetUrl;
-	
+
+
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
 		log.info("login code");
@@ -63,6 +64,7 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 		
 		String referrer = request.getHeader("referer");
 		
+		
 		log.info("logger we again login and referrer is :::: "+referrer);
 	
 		ModelAndView model = new ModelAndView();
@@ -75,6 +77,7 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 			log.info("ELSE!!!!!!");
 			//response.sendRedirect("login");
 		}
+		
 		
 		return model;
 

@@ -7,14 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import co.srsp.controller.LoginController;
 
 public class SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     protected Logger log = Logger.getLogger(SimpleUrlAuthenticationSuccessHandler.class); 
@@ -38,7 +41,7 @@ public class SimpleUrlAuthenticationSuccessHandler implements AuthenticationSucc
         	log.info("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
         }
- 
+                
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
  

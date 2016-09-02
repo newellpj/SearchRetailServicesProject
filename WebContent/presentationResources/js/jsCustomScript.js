@@ -258,7 +258,15 @@ function noBookToReview(){
 
 }
 
+	function switchActiveWithID(ID){
+		switchActive(document.getElementById(ID));
+	}
+
     function switchActiveOnParentForReviews(obj){
+		
+		window.localStorage.setItem('itemClick', 'reviewsReviewBookNoneAdded');
+		
+		window.localStorage.setItem('clickID', "activeSel3");
 		
 		parent.document.getElementById("activeSel3").style.backgroundColor="#f6f6f6";
 	    parent.document.getElementById("activeSel3").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
@@ -296,6 +304,16 @@ function noBookToReview(){
 	function switchActive(obj){
 		
 		var id = $(obj).attr("id");	
+		
+		//window.localStorage = 
+		
+		var html = $(obj).html();
+		var href = html.substring(html.indexOf('href')+6);
+		href = href.substring(0, href.indexOf('"'));
+	
+		//window.localStorage = href;
+		window.localStorage.setItem('itemClick', href);
+		window.localStorage.setItem('clickID', id);
 		
 		document.getElementById(id).style.backgroundColor="#f6f6f6";
 	    document.getElementById(id).style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";

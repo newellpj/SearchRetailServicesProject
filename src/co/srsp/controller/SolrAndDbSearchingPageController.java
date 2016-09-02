@@ -70,7 +70,7 @@ public class SolrAndDbSearchingPageController {
 	
 	@RequestMapping(value = { "/searchNASA"}, method = RequestMethod.GET)
 	public ModelAndView addSearchAllPage() {
-		log.info("we getting in here add search all page?");
+		log.info("we getting in here searchNASA page?");
 		ModelAndView model = new ModelAndView();		
 		model.setViewName("searchNASA");
 		return model;

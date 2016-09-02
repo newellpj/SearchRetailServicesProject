@@ -30,13 +30,19 @@
       document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
 	  document.getElementById("activeSel").style.backgroundPosition="center bottom";	
 	  
+	 
+	  $("#theI_Frame").attr("src", window.localStorage.getItem('itemClick'));
+	  switchActiveWithID(window.localStorage.getItem('clickID'))
+	  
 	    $("topnav li a").click(function(e) {
 	        e.preventDefault();
-	        $("#theI_Frame").attr("src", $(this).attr("href"));
+	        $("#theI_Frame").attr("src", window.localStorage.getItem('itemClick'));//$(this).attr("href"));
 	    })
 
 	});
 
+	
+	
 	$("#theI_Frame").jscroll();
 	
 	

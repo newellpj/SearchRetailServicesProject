@@ -13,8 +13,8 @@ public class SessionListener implements HttpSessionListener  {
 	
 	@Override
     public void sessionCreated(HttpSessionEvent event) {
-		log.info("==== Session is created ====");
-		
+		log.info("==== Session is created ==== "+event.getSession().getServletContext().getServerInfo());
+
         event.getSession().setMaxInactiveInterval(2*60);
         log.info("event source obj : "+event.getSource().getClass());
 
@@ -22,6 +22,6 @@ public class SessionListener implements HttpSessionListener  {
  
     @Override
     public void sessionDestroyed(HttpSessionEvent event) {
-        log.info("==== Session is destroyed ====");
+        log.info("==== Session is destroyed ==== : "+event.getSession().getServletContext().getServerInfo());
     }
 }

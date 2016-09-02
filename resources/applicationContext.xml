@@ -53,7 +53,7 @@
 		  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
 	    </bean>
    
-		<bean id="authenticationSuccessHandler" class="co.srsp.controller.LoginController">  
+		<bean id="loginController" class="co.srsp.controller.LoginController">  
 		    <property name="defaultTargetUrl" value="/reviews" />
 	    </bean>
    
