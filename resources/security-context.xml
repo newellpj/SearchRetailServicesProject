@@ -16,6 +16,7 @@
 	 <security:intercept-url pattern="/reviews" access="hasRole('ROLE_USER')" />
 	 <security:intercept-url pattern="/reviewsSearchBook" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/reviewsAddBook" access="hasRole('ROLE_USER')" />
+     <security:intercept-url pattern="/reviewsSearchDocs" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/reviewsReviewBook" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/retrieveNextSegment" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/getBookReviewsList" access="hasRole('ROLE_USER')" />
