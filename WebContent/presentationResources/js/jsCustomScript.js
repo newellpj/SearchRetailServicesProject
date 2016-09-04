@@ -256,7 +256,13 @@ function noBookToReview(){
 		
 		 $(errorDialog).dialog("open");
 
-}
+	}
+
+	
+	function setLandingPageToDefault(){
+		window.localStorage.setItem('itemClick', 'reviewsSearchBook');
+		window.localStorage.setItem('clickID', "activeSel");
+	}
 
 	function switchActiveWithID(ID){
 		switchActive(document.getElementById(ID));
