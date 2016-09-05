@@ -191,7 +191,6 @@ public class AddBookUploadServlet extends HttpServlet {
 					}
 					
 					
-					log.info("creating book reviews model 2222 ");
 					
 					HashMap<String, String> tagsAndValueMap = new HashMap<String, String>();
 					
