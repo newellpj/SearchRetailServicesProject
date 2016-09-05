@@ -41,6 +41,8 @@
 	<div id="login-box" class="login-box responsive">
 
 		<img src="./presentationResources/images/searchserv.png" />
+		<img src="./presentationResources/images/magnifyingGlass.png" />
+		
 	
 
 		<c:if test="${not empty error}">
