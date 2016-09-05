@@ -40,7 +40,8 @@
 
 	<div id="login-box" class="login-box responsive">
 
-		<h3>PJs Book Reviews Login Page</h3>
+		<img src="./presentationResources/images/searchserv.png" />
+	
 
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
@@ -48,7 +49,7 @@
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
 		</c:if>
-		
+			<br/><br/>
 		<p>Sign in already a user otherwise <a href="signup">Sign up</a></p>
 <br/><br/>
 		<form 
