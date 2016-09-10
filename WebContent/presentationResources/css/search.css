@@ -3,6 +3,10 @@
 	button.accordion.responsive { width:50%;}
 	div.search-box.responsive {position: relative; padding:1em; margin-left:25%; width:60%;}
 		 div#resultsSection.resultsSection.responsive{position: relative; padding:1em; margin-left:25%; width:60%;}
+		 select#genreSelect.responsive{opacity:1;}
+		 select#categorySelect.responsive{opacity:1;}
+		 select#languageSelect.responsive{opacity:1;}
+		 .logoImg{display:none;}
 }
 
 
@@ -207,6 +211,10 @@ div.tagSearches{
 	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
 	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 	
 }
+
+ select#genreSelect{opacity:0.6;}
+ select#categorySelect{opacity:0.6;}
+ select#languageSelect{opacity:0.6;}
 
 button.accordion {
     background-color: #eee;

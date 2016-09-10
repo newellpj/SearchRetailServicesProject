@@ -46,6 +46,7 @@ var html = $(".bookRevList").html();
 			acc[i].onclick = function(){
 				this.classList.toggle("active");
 				this.nextElementSibling.classList.toggle("hide");
+				this.nextElementSibling.nextElementSibling.classList.toggle("hide");
 			}
 		}
 		
@@ -75,8 +76,8 @@ var html = $(".bookRevList").html();
 <button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
 
 
-	<div style="float">
-<img width='300' height='300' src='./presentationResources/images/Medium_SecondPress.png' style='float:right; margin-right:420px; margin-top:60px;' /></div>
+	<div class="logoImg">
+<img width='300' height='300' src='./presentationResources/images/Medium_SecondPress.png' style='float:right; margin-right:22%; margin-top:4%;' /></div>
 
 	<div class="search-box responsive">
 
@@ -99,14 +100,14 @@ var html = $(".bookRevList").html();
 					
 					
 					<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
-					<select style="visibility:hidden; width:30%; margin-left:1.7em; opaque:0.75;" id="genreSelect"></select>
+					<select class="responsive" style="visibility:hidden; width:30%; margin-left:1.7em; " id="genreSelect"></select>
 				</div>		
 				<div class="authorCategory responsive">
 					Author:
 					<input id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
 					<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category
-					<select style="visibility:hidden; width:30%; margin-left:0.4em; opaque:0.75;" id="categorySelect"></select>
+					<select class="responsive" style="visibility:hidden; width:30%; margin-left:0.4em;" id="categorySelect"></select>
 				</div>	
 				
 				<div class="publisherLang responsive">
@@ -114,7 +115,7 @@ var html = $(".bookRevList").html();
 					<input id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
 					<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
-					<select style="visibility:hidden; width:30%; opaque:0.75;" id="languageSelect"></select>
+					<select class="responsive" style="visibility:hidden; width:30%;" id="languageSelect"></select>
 		          </div>	
 			
 			  <div class="tagSearches responsive"> 
