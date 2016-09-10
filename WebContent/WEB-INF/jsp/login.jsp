@@ -41,7 +41,7 @@
 	<div id="login-box" class="login-box responsive">
 
 		<img src="./presentationResources/images/searchserv.png" />
-		<img src="./presentationResources/images/magnifyingGlass.png" />
+		<img height="100" width="200" src="./presentationResources/images/eyeball.png" />
 		
 	
 

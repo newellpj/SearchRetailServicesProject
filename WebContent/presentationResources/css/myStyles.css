@@ -726,23 +726,7 @@ display: inline-block;
 	font-style: italic ;
 }
 
-option { 
-    /* Whatever color  you want */
-    background-color: white;
-	color: gray !important;
-}
 
-
-
-select {
-   height: 34px;
-   background: white;
-   width: 240px;
-   height: 29px;
-   overflow: hidden;
-   width: 240px;
-   border-radius: 8px;
-}
 
 
 <!-- button:focus {outline:0; border-radius: 7px;} -->
