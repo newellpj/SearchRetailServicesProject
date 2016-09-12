@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>SearchRetailServicesProject</groupId>
-  <artifactId>SearchRetailServicesProject</artifactId>
+  <groupId>iFindit4U</groupId>
+  <artifactId>iFindit4U</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
@@ -32,7 +32,7 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>C:/Tomcat_8/webapps/SearchRetailServicesProject</directory>
+							<directory>C:/Tomcat_8/webapps/iFindit4U</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
@@ -56,10 +56,10 @@
 						</goals>
 
 						<configuration>
-							<outputDirectory>C:/Tomcat_8/webapps/SearchRetailServicesProject</outputDirectory>
+							<outputDirectory>C:/Tomcat_8/webapps/iFindit4U</outputDirectory>
 							<resources>
 								<resource>
-									<directory>target/SearchRetailServicesProject</directory>
+									<directory>target/iFindit4U</directory>
 
 								</resource>
 							</resources>
@@ -75,7 +75,7 @@
 
 
 							<configuration>
-								<outputDirectory>C:/Tomcat_8/webapps/SearchRetailServicesProject/WEB-INF/classes</outputDirectory>
+								<outputDirectory>C:/Tomcat_8/webapps/iFindit4U/WEB-INF/classes</outputDirectory>
 								<resources>
 									<resource>
 										<directory>resources</directory>
@@ -93,7 +93,7 @@
 			
 			
 		</plugins>
-			<finalName>SearchRetailServicesProject</finalName>
+			<finalName>iFindit4U</finalName>
   </build>
   
   <dependencies>

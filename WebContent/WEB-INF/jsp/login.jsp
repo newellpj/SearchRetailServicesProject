@@ -40,8 +40,8 @@
 
 	<div id="login-box" class="login-box responsive">
 
-		<img src="./presentationResources/images/searchserv.png" />
-		<img height="100" width="200" src="./presentationResources/images/eyeball.png" />
+	
+		<div class="logoImg"><img  width='504' height='420' src='./presentationResources/images/paperandglassFoldedCoffeeStain.png'/></div>
 		
 	
 
