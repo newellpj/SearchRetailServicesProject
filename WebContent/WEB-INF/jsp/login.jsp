@@ -41,7 +41,7 @@
 	<div id="login-box" class="login-box responsive">
 
 	
-		<div class="logoImg"><img  width='504' height='420' src='./presentationResources/images/paperandglassFoldedCoffeeStain.png'/></div>
+		<div class="logoimg responsive"><img  width='552' height='460' src='./presentationResources/images/paperandglassFoldedCoffeeStain.png'/></div>
 		
 	
 
@@ -52,12 +52,15 @@
 			<div class="message">${message}</div>
 		</c:if>
 			<br/><br/>
-		<p>Sign in already a user otherwise <a href="signup">Sign up</a></p>
-<br/><br/>
+
+
 		<form 
 			action="<c:url value='/j_spring_security_check' />" method='POST'>
 
 			<div id="loginFields" class="loginFields responsive">
+			
+					<p>Sign in already a user otherwise <a href="signup">Sign up</a></p>
+			
 				<div id="users" class="userFields responsive">
 					Username:
 					<input class="usernameInput responsive" type='text' name='username' style="width:60%;"><span class="glyphicon glyphicon-user iconspanLogin"></span>

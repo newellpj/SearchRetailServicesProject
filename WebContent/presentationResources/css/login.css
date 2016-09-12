@@ -16,6 +16,7 @@
 	width: 100%;
 	min-width:100%;
 	margin-left:4em;
+	margin-top: -4em;
 }
 
 .usernameInput {
@@ -54,15 +55,6 @@
 
 .retLoginButton{width:95%; margin-top:1em; margin-left:1em;}
 
-@media screen and (max-width:680px) {
-  ul.topnav li:not(:first-child) {display: none; }
-  ul.topnav li.icon {
-    float: right;
-    display: inline-block;
-  }
-  
-   .logoImg{display:none;}
-}
 
 
 @media screen and (max-width:1400px){
@@ -80,17 +72,14 @@
   }
 }
 
-@media screen and (max-width:580px){
-	 button.loginButton.responsive{margin-left:2em; width:80%;}
-}
-
-@media screen and (max-width:420px){
-	 button.loginButton.responsive{margin-left:1em; width:93%;}
-}
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
 @media screen and (max-width:680px) {
-  ul.topnav.responsive {position: relative; padding:0;}
+
+  	div#loginFields.loginFields.responsive{margin-top: 0em;}
+   div.logoimg.responsive{display:none;} 
+
+ ul.topnav.responsive {position: relative; padding:0;}
   ul.topnav.responsive li.icon {
     position: absolute;
     right: 0;
@@ -106,3 +95,18 @@
     text-align: left;
   }
 }
+
+
+@media screen and (max-width:580px){
+	 button.loginButton.responsive{margin-left:2em; width:80%;}
+}
+
+@media screen and (max-width:420px){
+	 button.loginButton.responsive{margin-left:1em; width:93%;}
+}
+
+
+
+
+   
+
