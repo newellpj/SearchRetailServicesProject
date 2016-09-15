@@ -41,7 +41,7 @@
 	<div id="login-box" class="login-box responsive">
 
 	
-		<div class="logoimg responsive"><img  width='552' height='460' src='./presentationResources/images/paperandglassFoldedCoffeeStain.png'/></div>
+		<div class="logoimg responsive"><img  width='552' height='460' src='./presentationResources/images/paperandglassFoldedCoffeeStain2.png'/></div>
 		
 	
 
