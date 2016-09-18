@@ -2,7 +2,7 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <%@page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html ng-app="searchBookPageApp">
 <head>
 
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
@@ -15,6 +15,7 @@
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jsCustomScript.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
+<script type="text/javascript" src="./presentationResources/js/angular.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Book Reviews</title>
@@ -96,7 +97,7 @@ var html = $(".bookRevList").html();
 	
 				<div class="titleAndGenre responsive">
 					Title:
-					<input id="titleText"  type='text' name='titleText' style="width:40%;" ><span class="glyphicon glyphicon-book iconspan2"></span>
+					<input ng-model="titleText" id="titleText"  type='text' name='titleText' style="width:40%;" ><span class="glyphicon glyphicon-book iconspan2"></span>
 					
 					
 					<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 

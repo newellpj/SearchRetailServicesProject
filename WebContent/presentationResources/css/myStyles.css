@@ -86,7 +86,7 @@ ul.topnav li {float: left; color: black; width:15%;}
 ul.topnav li a {
     display: inline-block;
     color: black;
-	text-shadow: 1px 1px #a8a8a8;
+	text-shadow: 0.5px 0.5px #a8a8a8;
     text-align: center;
     padding: 14px 16px;
 	width:100%;
@@ -204,9 +204,7 @@ ul.topnav li.icon {display: none;}
     position: absolute;
 }
 
-.tagSearches{
-	font-style: italic ;
-}
+
 
 option { 
     /* Whatever color  you want */
@@ -838,7 +836,7 @@ input[type="button"]{
 	border: 0px solid #3232ff;
 	cursor: pointer;
 	box-shadow: -5px -5px- 5px -5px #3838cc inset;
-	text-shadow: 1px 1px #a8a8a8;
+	text-shadow: 0.7px 0.7px #a8a8a8;
 }
 
 button{
@@ -854,7 +852,7 @@ button{
 	border: 0px solid #3232ff;
 	cursor: pointer;
 	box-shadow: -5px -5px- 5px -5px #3838cc inset;
-	text-shadow: 1px 1px #a8a8a8;
+	text-shadow: 0.7px 0.7px #a8a8a8;
 }
 
 .dialogButton{
