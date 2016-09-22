@@ -16,6 +16,7 @@
 <script type="text/javascript" src="./presentationResources/js/jsCustomScript.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
 <script type="text/javascript" src="./presentationResources/js/angular.js"></script>
+<script type="text/javascript" src="./presentationResources/js/search.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Book Reviews</title>
@@ -76,11 +77,12 @@ var html = $(".bookRevList").html();
 
 <button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
 
-
+<div ng-controller="searchPageController" ng-init="titleText=''; authorText=''; publisherText='fuckass'" >
 	<div class="logoImg">
-<img width='300' height='300' src='./presentationResources/images/Medium_SecondPress.png' style='float:right; margin-right:22%; margin-top:4%;' /></div>
+		<img width='230' height='115' src='./presentationResources/images/eyeball.png' style='float:right; margin-right:28%; margin-top:3%;' />
+	</div>
 
-	<div class="search-box responsive">
+	<div class="search-box responsive" >
 
 		<c:if test="${not empty error}">
 			<div class="error alert alert-error">${error}</div>
@@ -95,9 +97,9 @@ var html = $(".bookRevList").html();
 			<form:form id="reviewsForm"  commandName="bookReviewsModel">
 	
 	
-				<div class="titleAndGenre responsive">
+				<div class="titleAndGenre responsive" >
 					Title:
-					<input ng-model="titleText" id="titleText"  type='text' name='titleText' style="width:40%;" ><span class="glyphicon glyphicon-book iconspan2"></span>
+					<input ng-model="titleText" id="titleText" type='text' name='titleText' style="width:40%;"><span class="glyphicon glyphicon-book iconspan2"></span>
 					
 					
 					<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
@@ -105,7 +107,7 @@ var html = $(".bookRevList").html();
 				</div>		
 				<div class="authorCategory responsive">
 					Author:
-					<input id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
+					<input ng-model="authorText" id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
 					<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category
 					<select class="responsive" style="visibility:hidden; width:30%; margin-left:0.4em;" id="categorySelect"></select>
@@ -113,16 +115,16 @@ var html = $(".bookRevList").html();
 				
 				<div class="publisherLang responsive">
 					Publisher:
-					<input id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
+					<input ng-model="publisherText" id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
 					<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
 					<select class="responsive" style="visibility:hidden; width:30%;" id="languageSelect"></select>
 		          </div>	
 			
-			  <div class="tagSearches responsive"> 
+			  <div class="tagSearches responsive" ng-controller="searchSubmitter"> 
 					
 							
-								<button id="searchBook" class="searchBook responsive" name="searchBook" type="button"  onclick="performAjaxSearch();" value="Search.." > 
+								<button id="searchBook" class="searchBook responsive" name="searchBook" type="button"  ng-click="performBookSearch();" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:0.5em;" ></span>Search...
 								</button>
 								<button id="resetSearch" class="resetSearch responsive" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >
@@ -137,11 +139,11 @@ var html = $(".bookRevList").html();
 		</form:form>
 </div>	
 
-<div id="resultsSection" class="resultsSection responsive">
+<div id="resultsSection" class="resultsSection responsive" >
 		<form:form id="searchResults" class="searchResults">
 		
 				<div id="search" class="search" style="display:none; width:1000px !important;">
-					<ul id="bookRevList" class="bookRevList" >				
+					<ul id="bookRevList" class="bookRevList" ng-bind-html="formattedSearchData">				
 					</ul>
 			</div>
 		
@@ -153,6 +155,8 @@ var html = $(".bookRevList").html();
 <div class="facebookFooter" >
 	<div id="fb-root" ></div>
 <div class="fb-like" data-href="http://www.w3schools.com/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+</div>
+
 </div>
 </body>
 </html>

@@ -55,7 +55,7 @@ public class SolrAndDbSearchingPageController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		log.info("we getting in here user logged in here - "+auth.getName());
-		ModelAndView model = new ModelAndView();		
+		ModelAndView model = new ModelAndView();		 
 		model.setViewName("reviews");
 		return model;
 	}
@@ -685,8 +685,7 @@ public class SolrAndDbSearchingPageController {
 			log.info("lang text to search on : "+request.getParameter("langText"));
 			tagsAndValueMap.put("langText", request.getParameter("langText"));
 		}
-		
-		
+
 		log.info("just before service instantiation !");
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();

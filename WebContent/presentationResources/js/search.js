@@ -1,4 +1,168 @@
-angular.module('searchBookPageApp', [])
-	.controller('searchBookController', function($scope) {
-	 // we'll fill this out later
- });
+(function(angular) {
+
+	var searchBookApp  = angular.module('searchBookPageApp', []);
+
+
+		searchBookApp.controller('searchPageController', function($scope, $log) {
+		 $log.info("11 title text from search page controller : "+$scope.titleText);
+			 $scope.$watch('titleText', function(newVal, oldVal, scope) {
+				 
+				// $log.info("newVal : "+newVal);
+				//  $log.info("we are here1 "+$scope.titleText);
+				 if(newVal != undefined){
+				 
+					//$scope.authorText = "My Author : "+newVal;
+				 }
+			});
+
+		});
+	 
+	 
+
+	 
+	//searchBookApp.factory('titleVal', function(){
+	  //return { titleText: '' };
+	//});
+	  
+	 
+		searchBookApp.controller('searchSubmitter', function($scope, $http, $log) {
+		 
+			 $scope.performBookSearch = function () {
+			 
+				$log.info("we are titleVal : "+$scope.titleText);	
+				
+					 var dlg = $("<div></div>").dialog({
+						hide: 'fade',
+						maxWidth: 600,
+						modal: true,
+						height: 200,
+						show: 'fade',
+						title: 'Searching Books....',
+						width: ( ('__proto__' in {}) ? '600' : 600 )
+					});
+
+					$(dlg).parent().find('button').remove();
+					
+					$(dlg).html("<div class='ajax-loader-2 help-inline pull-right'></div><div><p>Searching books...</p></div>");
+						
+					$(dlg).dialog("open");
+				
+				
+				$http({
+						url : 'searchForBook',
+						method : 'GET',
+						headers: {'Content-Type' : 'application/json'},
+						dataType: "JSON",
+						params: { 
+							titleText: $scope.titleText,
+							authorText: $scope.authorTextVal, 
+							publisherText: $scope.publisherTextVal,
+							genreText: $scope.genreTextVal,
+							catText: $scope.catTextVal,
+							langText: $scope.langTextVal
+						}
+					}).success(function(bookReviewsModelArray){
+						
+						$log.info("we are here");	
+						
+						
+						document.getElementById("search").style.display = "inline";
+			
+					
+						for(var i = 0; i < bookReviewsModelArray.length ;i++){
+						  $scope.formattedSearchData = $scope.formattedSearchData + "<div class='searchSegment'>"+
+						        formatBooksSearchContent(bookReviewsModelArray[i])+	"</div>";
+						}
+						
+					
+						$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+						
+						$('.resultsSection').jscroll({		  
+							loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+						});
+						
+						$(dlg).dialog("close");
+					
+					}).error(function(data, status){
+						$log.error("we errored here");
+						
+						$(dlg).dialog("close");
+
+						var errorDialog = $("<div></div>").dialog({
+								hide: 'fade',
+								maxWidth: 300,
+								modal: true,
+								show: 'fade',
+								open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
+									buttons: [
+								{
+									'class': 'btn btn-primary',
+									click: function(e) {
+										$(this).dialog("close");
+									},
+									text: 'OK'
+								}
+							
+							],	
+								title: 'Could NOT find book!',
+								width: ( 300 )
+							});
+
+
+							var msg = e.errorMessage;
+							
+							if('undefined' == msg || msg == null){
+									msg = "There was an error retrieving book";
+							}
+							
+							$(errorDialog).html('<p>'+msg+'</p>');
+							$('.ui-dialog-buttonset').css("backgroundImage", "url('')");
+							$('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
+							
+							 $(errorDialog).dialog("open");
+								
+							})
+
+			 }
+
+		});
+		
+		
+		//searchBookApp.controller('searchResultsController', function($scope, $controller, $log) {
+		//	angular.extend(this, $controller('searchPageController', {$scope: $scope}));
+		//	$log.info("22 title text from search results controller : "+$scope.titleText);
+		//	 $scope.$watch('titleText', function(newVal, oldVal, scope) {
+		//		 $log.info(newVal);
+		//	 });
+		//});
+		
+		
+	
+})(angular);
+
+	
+	function formatBooksSearchContent(searchData){
+		 
+		 var bookDetails =  searchData['booksList'];
+		 
+			if("No books found" != bookDetails){
+							
+					bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
+					
+					//$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
+					//$('.bookRevList').append("</a>");
+			}
+		 
+			var formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
+			+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
+			"<span style='font-family:courier;'><b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; <b>Publisher: </b>"
+			+searchData['publisherText']+"</span>"+
+			" <p style='font-size:x-small;!important'>"+searchData['excerpt']+
+			
+			"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
+			+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p>";
+
+			return formattedMarkup; 
+	 }
+	
+ 
