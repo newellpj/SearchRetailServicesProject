@@ -77,7 +77,7 @@ var html = $(".bookRevList").html();
 
 <button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
 
-<div ng-controller="searchPageController" ng-init="titleText=''; authorText=''; publisherText='fuckass'" >
+<div ng-controller="searchPageController" ng-init="titleText=''; authorText=''; publisherText='Harper'" >
 	<div class="logoImg">
 		<img width='230' height='115' src='./presentationResources/images/eyeball.png' style='float:right; margin-right:28%; margin-top:3%;' />
 	</div>

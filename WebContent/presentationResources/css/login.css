@@ -55,9 +55,14 @@
 
 .retLoginButton{width:95%; margin-top:1em; margin-left:1em;}
 
+@media screen and (max-width:1600px){
+	 .login-box.responsive {position: relative; padding:0.5em;margin-left:20%; width:50%;}
+	div#loginFields.loginFields.responsive{margin-left:1em;}
+}
 
 
 @media screen and (max-width:1400px){
+	 .login-box.responsive {position: relative; padding:0.5em;margin-left:20%; width:50%;}
 	div#loginFields.loginFields.responsive{margin-left:1em;}
 }
 

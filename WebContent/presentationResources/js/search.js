@@ -15,6 +15,7 @@
 				 }
 			});
 
+
 		});
 	 
 	 
@@ -29,7 +30,16 @@
 		 
 			 $scope.performBookSearch = function () {
 			 
-				$log.info("we are titleVal : "+$scope.titleText);	
+				$log.info("we are titleVal 323 : "+$scope.titleText);	
+				
+					var titleText = $scope.titleText;
+					var publisherText = $scope.publisherText;
+					var authorText = $scope.authorText;
+					var genreText = $scope.genreText;
+					var catText = $scope.catText;
+					var langText = $scope.langText;
+				
+					$log.info("publisher text ::: "+publisherText);
 				
 					 var dlg = $("<div></div>").dialog({
 						hide: 'fade',
@@ -54,12 +64,12 @@
 						headers: {'Content-Type' : 'application/json'},
 						dataType: "JSON",
 						params: { 
-							titleText: $scope.titleText,
-							authorText: $scope.authorTextVal, 
-							publisherText: $scope.publisherTextVal,
-							genreText: $scope.genreTextVal,
-							catText: $scope.catTextVal,
-							langText: $scope.langTextVal
+							titleText: titleText,
+							publisherText: publisherText,
+							authorText: authorText,
+							genreText: genreText,
+							catText: catText,
+							langText: langText
 						}
 					}).success(function(bookReviewsModelArray){
 						
@@ -95,29 +105,29 @@
 								show: 'fade',
 								open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); },
 									buttons: [
-								{
-									'class': 'btn btn-primary',
-									click: function(e) {
-										$(this).dialog("close");
-									},
-									text: 'OK'
-								}
-							
-							],	
+										{
+											'class': 'btn btn-primary',
+											click: function(e) {
+												$(this).dialog("close");
+											},
+											text: 'OK'
+										}
+									
+									],	
+									
+								create: function (event, ui) {
+									//$(event.target).parent().css('position', 'fixed'); - this stops the error message jumping around after initial popup
+								},									
 								title: 'Could NOT find book!',
 								width: ( 300 )
 							});
 
-
-							var msg = e.errorMessage;
-							
-							if('undefined' == msg || msg == null){
-									msg = "There was an error retrieving book";
-							}
-							
+							msg = "There was an error retrieving book";
+						
 							$(errorDialog).html('<p>'+msg+'</p>');
 							$('.ui-dialog-buttonset').css("backgroundImage", "url('')");
 							$('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
+							
 							
 							 $(errorDialog).dialog("open");
 								
