@@ -61,6 +61,7 @@
  
    
    		<bean id="solrAndDbSearchController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
+   			<property name="thumbnailPath" value="../webapps/iFindit4U/presentationResources/images/" />
 	    </bean>
 	    
 	    <bean id="testController" class="co.srsp.controller.TestController">  

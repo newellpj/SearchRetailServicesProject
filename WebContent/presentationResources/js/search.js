@@ -30,6 +30,24 @@
 		 
 			 $scope.performBookSearch = function () {
 			 
+				var html = document.getElementById("bookRevList").html;
+				var innerHTML = document.getElementById("bookRevList").innerHTML;
+				
+				document.getElementById("resultsSection").style.visibility = "visible";	
+				document.getElementById("bookRevList").innerHTML = ""; //this is the original search results div that gets displayed
+				
+				if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
+					
+					document.getElementById("bookRevList2").innerHTML = "";
+					
+					 $( ".bookRevList2" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
+							this.innerHTML = "";
+					  });
+					
+					
+				}
+				
+			 
 				$log.info("we are titleVal 323 : "+$scope.titleText);	
 				
 					var titleText = $scope.titleText;
@@ -73,15 +91,17 @@
 						}
 					}).success(function(bookReviewsModelArray){
 						
-						$log.info("we are here");	
+						$log.info("we are here : "+bookReviewsModelArray.length);	
 						
 						
 						document.getElementById("search").style.display = "inline";
 			
 					
 						for(var i = 0; i < bookReviewsModelArray.length ;i++){
-						  $scope.formattedSearchData = $scope.formattedSearchData + "<div class='searchSegment'>"+
-						        formatBooksSearchContent(bookReviewsModelArray[i])+	"</div>";
+							$log.info();
+						  	$('.bookRevList').append("<div class='searchSegment'>");
+							$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
+							$('.bookRevList').append("</div>");
 						}
 						
 					

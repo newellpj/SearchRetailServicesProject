@@ -21,6 +21,8 @@ import org.apache.tika.detect.Detector;
 import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -182,8 +184,12 @@ public class PaginationController {
 		HashMap<String, String> imageDimensionsMap = new HashMap<String, String>();
 		
 		try{
+			
+			ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+			SolrAndDbSearchingPageController controller = (SolrAndDbSearchingPageController)ctx.getBean("SolrAndDbSearchingPageController");
+			
 			String fileURLPath = (imageLocation.toLowerCase().contains("http")) ? imageLocation :
-						"../webapps/SearchRetailServicesProject/presentationResources/images/"+book.getThumbnailLocation();
+				controller.getThumbnailPath()+book.getThumbnailLocation();
 			
 			log.info( System.getProperty("user.dir"));
 			 
