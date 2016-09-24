@@ -50,8 +50,6 @@ public class SolrAndDbSearchingPageController {
 
 	private final static Logger log = Logger.getLogger(SolrAndDbSearchingPageController.class); 
 	
-	private String thumbnailPath;
-	
 	@RequestMapping(value = { "/reviews"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
 		
@@ -61,16 +59,7 @@ public class SolrAndDbSearchingPageController {
 		model.setViewName("reviews");
 		return model;
 	}
-		
-	public String getThumbnailPath() {
-		return thumbnailPath;
-	}
-
-	public void setThumbnailPath(String thumbnailPath) {
-		this.thumbnailPath = thumbnailPath;
-		log.info("###thumbnailPath : "+thumbnailPath);
-	}
-
+	
 	@RequestMapping(value = { "/reviewsAddBook"}, method = RequestMethod.GET)
 	public ModelAndView addBookPage() {
 		log.info("we getting in here reviewsAddBook?");
@@ -758,17 +747,17 @@ public class SolrAndDbSearchingPageController {
 			
 			log.info("EXCERPT : "+model.getExcerpt());
 			
-//			String loc = (book.getThumbnailLocation() != null && book.getThumbnailLocation().contains("http")) ? 
-//					book.getThumbnailLocation() : "./presentationResources/images/"+book.getThumbnailLocation();
+			String loc = (book.getThumbnailLocation() != null && book.getThumbnailLocation().contains("http")) ? 
+					book.getThumbnailLocation() : "./presentationResources/images/"+book.getThumbnailLocation();
 			
-			model.setThumbnnalLocation(book.getThumbnailLocation());
+			model.setThumbnnalLocation(loc);
 			model.setBooksID(book.getIdbooks());
 			model.setPublisherText(book.getPublisher());
 			model.setBooksList(book.getTitle()+" - "+book.getAuthor());			
 			
 			try{
 				//file system relative references are different from web application relative references 
-				String fileURLPath = (book.getThumbnailLocation().toLowerCase().contains("http")) ? book.getThumbnailLocation() : thumbnailPath+book.getThumbnailLocation();
+				String fileURLPath = (loc.toLowerCase().contains("http")) ? loc : "../webapps/iFindit4U/presentationResources/images/"+book.getThumbnailLocation();
 				log.info( System.getProperty("user.dir"));
 				 
 				File file = new File(fileURLPath);

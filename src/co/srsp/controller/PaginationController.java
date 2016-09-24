@@ -185,11 +185,8 @@ public class PaginationController {
 		
 		try{
 			
-			ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-			SolrAndDbSearchingPageController controller = (SolrAndDbSearchingPageController)ctx.getBean("SolrAndDbSearchingPageController");
-			
 			String fileURLPath = (imageLocation.toLowerCase().contains("http")) ? imageLocation :
-				controller.getThumbnailPath()+book.getThumbnailLocation();
+						"../webapps/iFindit4U/presentationResources/images/"+book.getThumbnailLocation();
 			
 			log.info( System.getProperty("user.dir"));
 			 
