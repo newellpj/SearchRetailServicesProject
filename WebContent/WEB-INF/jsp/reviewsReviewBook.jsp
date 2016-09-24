@@ -131,7 +131,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td>Review:</td>
-					<td><textarea class="responsive" style="resize: none; width:523px; height:212px;" id="reviewText" name="reviewText" rows="10" cols="70" ></textarea>
+					<td><textarea class="responsive" style="resize: none; width:523px; height:212px;" id="reviewText" name="reviewText" rows="10" cols="70" maxlength="1000" ></textarea>
 					<span class="glyphicon glyphicon-comment iconspanReview responsive"></span></td>
 				</tr>
 				<tr>
