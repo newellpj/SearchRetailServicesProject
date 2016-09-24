@@ -153,7 +153,7 @@ public class SolrAndDbSearchingPageController {
 		String thumbnailLocation = request.getParameter("thumbnailLocation");
 
 		request.getParameter("titleAuthorText");
-		
+		log.info("thumbnailLocation from request : "+thumbnailLocation);
 		log.info("searchSelectedBook : "+searchSelectedBook);
 		
 		String title ="";

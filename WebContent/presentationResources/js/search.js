@@ -97,14 +97,16 @@
 						document.getElementById("search").style.display = "inline";
 			
 					
+					    $scope.formattedSearchData = '';
+					
 						for(var i = 0; i < bookReviewsModelArray.length ;i++){
-							$log.info();
+						
 						  	$('.bookRevList').append("<div class='searchSegment'>");
 							$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
 							$('.bookRevList').append("</div>");
+	
 						}
 						
-					
 						$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
 						
 						$('.resultsSection').jscroll({		  

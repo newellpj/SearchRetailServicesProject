@@ -168,8 +168,10 @@ public class PaginationController {
 		+"' src='"+thumbLoc+"'/></div>"+
 		"<span style='font-family:courier;'><b>Title : </b>"+book.getTitle()+"<b> Author : </b> "+book.getAuthor()+" &nbsp; <b>Publisher: </b>"
 		+book.getPublisher()+"</span> <p style='font-size:x-small;!important'>"+book.getExcerpt()+
-		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this </a> </p> </div>";
-		
+		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
+				+"&imageHeight="+imageDimensionsMap.get("imageHeight")+"&imageWidth="+imageDimensionsMap.get("imageWidth")+"&thumbnailLocation="+
+		     "./presentationResources/images/"+book.getThumbnailLocation()+"'> Review this </a> </p> </div>";
+				
 		return formattedMarkup;
 	}
 	
