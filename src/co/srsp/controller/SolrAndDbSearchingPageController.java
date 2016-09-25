@@ -105,23 +105,24 @@ public class SolrAndDbSearchingPageController {
 	}
 	
 	
-	@RequestMapping(value = { "/getBookReviewsList"}, method = RequestMethod.GET)
-	public ModelAndView getBookReviewsList(HttpServletRequest request, HttpServletResponse response) {
-		
-		if(request.getSession() == null){
-			return null;
-		}
-		
-		//TODO add book review then bring back all back reviews with this one added - paginated!
-		
-		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(request.getSession().getAttribute("bookTitleFound").toString(), 
-				request.getSession().getAttribute("bookAuthorFound").toString());
-		
-		ModelAndView modelView = new ModelAndView("reviewsReviewBook");
-		modelView.addObject("reviewsList", bookMap.values());
-		return modelView;
-	}
+//	@RequestMapping(value = { "/getBookReviewsList"}, method = RequestMethod.GET)
+//	public ModelAndView getBookReviewsList(HttpServletRequest request, HttpServletResponse response) {
+//		
+//		if(request.getSession() == null){
+//			return null;
+//		}
+//		
+//		//TODO add book review then bring back all back reviews with this one added - paginated!
+//		
+//		BooksAndReviewsService booksService = new BooksAndReviewsService();
+//		HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(
+//				request.getSession().getAttribute("bookTitleFound").toString(), 
+//				request.getSession().getAttribute("bookAuthorFound").toString());
+//		
+//		ModelAndView modelView = new ModelAndView("reviewsReviewBook");
+//		modelView.addObject("reviewsList", bookMap.values());
+//		return modelView;
+//	}
 	
 
 	
@@ -204,7 +205,27 @@ public class SolrAndDbSearchingPageController {
 				}
 				
 				for(BookReviews bookRev : bookMap.get(book)){
-					list.add(bookRev.getReviewText()+" - <b>reviewed by "+bookRev.getReviewersUsername()+"</b>");
+						
+					// color: #f70;
+					//	content: "\2605";
+					
+					StringBuffer starRatingsHTMLBuffer = new StringBuffer();
+					
+					//starRatingsHTMLBuffer.append("<div>");
+					
+					log.info("bookRev.getStarRating() : "+bookRev.getStarRating());
+					
+					if(bookRev.getStarRating() != null){
+						for(int i = 0; bookRev.getStarRating() < i ;i++){
+							starRatingsHTMLBuffer.append("<span style='color:'#f70;text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5)'");
+							starRatingsHTMLBuffer.append("'\2605'");
+							starRatingsHTMLBuffer.append("</span></br>");
+						}
+					}
+				
+					//starRatingsHTMLBuffer.append("</div>");
+				
+					list.add(starRatingsHTMLBuffer.toString()+bookRev.getReviewText()+" - <b>reviewed by "+bookRev.getReviewersUsername()+"</b>");
 				}
 			}
 			
@@ -215,6 +236,8 @@ public class SolrAndDbSearchingPageController {
 			model.addObject("reviewLists", list);
 			
 			log.info("thumnbnailLocation :::: "+thumbnailLocation);
+			
+	
 			
 			String formattedHTML = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageWidth+"' height='"+imageHeight
 					+"' src='"+thumbnailLocation+"' /></div>"+
@@ -245,7 +268,6 @@ public class SolrAndDbSearchingPageController {
 			return null;
 		}
 		
-
 		log.info(" addBookReview request "+request.toString());
 		log.info("request contain titleText ? : "+request.getParameter("titleText"));
 		log.info("request contain authorText ? : "+request.getParameter("authorText"));
@@ -267,7 +289,9 @@ public class SolrAndDbSearchingPageController {
 			bookID = book.getIdbooks();
 		}
 		
-		booksService.addReview(bookID, SecurityContextHolder.getContext().getAuthentication().getName(), request.getParameter("reviewText").toString());
+		Integer starRating = Integer.parseInt(request.getParameter("starRating"));
+		
+		booksService.addReview(bookID, SecurityContextHolder.getContext().getAuthentication().getName(), request.getParameter("reviewText").toString(), starRating);
 		//addReview(request.getParameter("titleText"), request.getParameter("authorText"));
 	
 		ModelAndView modelAndView = new ModelAndView();
@@ -275,8 +299,8 @@ public class SolrAndDbSearchingPageController {
 		BookReviewsModel bookReviewsModel = new BookReviewsModel();
 		bookReviewsModel.setTitleText(request.getParameter("titleText"));
 		bookReviewsModel.setAuthorText(request.getParameter("authorText"));
-		bookReviewsModel.setReviewText(request.getParameter("reviewText"));
-		
+		bookReviewsModel.setReviewText(request.getParameter("reviewText"));	
+		bookReviewsModel.setStarRating(starRating);
 		//store returned values in session
 		
 		request.getSession().setAttribute("bookTitleFound", request.getParameter("titleText"));
@@ -290,119 +314,6 @@ public class SolrAndDbSearchingPageController {
 	}
 	
 
-	
-//	@RequestMapping(value = { "/addNewBook"}, method = RequestMethod.POST)
-//	public ModelAndView addNewBook(Model model, @Valid UsersModel usersModel, BindingResult result){//HttpServletRequest request, HttpServletResponse response){
-		
-		
-	//   log.info("addNewBook !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	   
-	//   log.info(result.getFieldValue("authorTextVal"));
-//		System.out.println("addNewBook");
-//		 boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-//		
-//		 log.info("is multi-part content : "+isMultipart);
-//		 System.out.println("content type from servlet req context : "+ new ServletRequestContext(request).getContentType()); 
-//		 InputStream fileStream = null;
-//		 try{
-//		 
-//			 if(isMultipart){
-//				 String userEnteredFileName = "";
-//				 
-//			        String fieldName = "";
-//	              String fileName = "";
-//	              long fileSize = -1;
-//				 
-//				 List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-//			        for (FileItem item : items) {
-//			            if (item.isFormField()) {
-//			                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
-//			                String inputFieldName = item.getFieldName();
-//			                userEnteredFileName = item.getString();
-//			                
-//			                System.out.println("field name : "+inputFieldName);
-//			                System.out.println("userEnteredFileName : "+userEnteredFileName);
-//			                
-//			                // ... (do your job here)
-//			            } else {
-//			                // Process form file field (input type="file").
-//			                fieldName = item.getFieldName();
-//			                fileName = FilenameUtils.getName(item.getName());
-//			                 fileSize = item.getSize();
-//			                System.out.println("22 file field name : "+fieldName);
-//			                System.out.println("22 file name : "+fileName);
-//			                
-//			                fileStream = item.getInputStream();
-//			                
-//			               // copyFile(fileStream, fileName);
-//			                
-//			         
-//			                
-//			                //request.getSession().setAttribute("uploadedFile", fileStream);
-//			                
-//			              //  depBean.upload();
-//			                // ... (do your job here)
-//			            }
-//			        }
-//			        
-//			  
-//	              
-//	           
-//			 }
-//			 
-//		 }catch(Throwable t){
-//			 t.printStackTrace();
-//			 System.out.println("");
-//		 }finally{
-//			 
-//			 if(fileStream != null){
-//		//		 fileStream.close();
-//			 }
-//			 
-//		     System.out.println("cleaning up file input stream : "+fileStream);
-//		 }
-//		
-		
-	//	log.info("request "+request.toString());
-		
-//		if(request.getSession() == null){
-//			return null;
-//		}
-		
-//		log.info("request contain titleText ? : "+request.getParameter("titleText"));
-//		log.info("request contain authorText ? : "+request.getParameter("authorText"));
-//	
-//		
-//		log.info("request contain titleText ? : "+request.getParameter("titleText"));
-//		log.info("request contain authorText ? : "+request.getParameter("authorText"));
-		//log.info("author from map : "+bookReviewsModel.getAuthorText());
-		
-	//	BooksAndReviewsService booksService = new BooksAndReviewsService();
-		
-//		BookReviewsModel bookReviewsModel = new BookReviewsModel();
-//		bookReviewsModel.setTitleText(request.getParameter("titleText"));
-//		bookReviewsModel.setAuthorText(request.getParameter("authorText"));
-//		bookReviewsModel.setPublisherText(request.getParameter("publisherText"));
-//		
-//		HashMap<String, String> tagsAndValueMap = new HashMap<String, String>();
-//		tagsAndValueMap.put("genreText", request.getParameter("genreText"));
-//		tagsAndValueMap.put("catText", request.getParameter("catText"));
-//		tagsAndValueMap.put("langText", request.getParameter("langText"));
-		
-	//	booksService.addBook(bookReviewsModel, tagsAndValueMap);
-	
-//		ModelAndView modelAndView = new ModelAndView();
-		
-		
-		//store returned values in session
-		
-//		request.getSession().setAttribute("bookTitleFound", request.getParameter("titleText"));
-//		request.getSession().setAttribute("bookAuthorFound", request.getParameter("authorText"));
-//		request.getSession().setAttribute("bookPublisherFound", request.getParameter("publisherText"));
-		
-	//	modelAndView.setViewName("reviews");
-	//	return modelAndView;//bookReviewsModel;
-	//}
 	
 	@RequestMapping(value = { "/searchForBook2"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel searchBook2(HttpServletRequest request, HttpServletResponse response){

@@ -50,6 +50,16 @@ public class BookReviewsModel {
 	
 	private String imageWidth;
 	
+	private int starRating;
+	
+
+	public int getStarRating() {
+		return starRating;
+	}
+
+	public void setStarRating(int starRating) {
+		this.starRating = starRating;
+	}
 
 	public String getImageHeight() {
 		return imageHeight;

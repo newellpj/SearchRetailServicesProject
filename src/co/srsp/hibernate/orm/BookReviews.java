@@ -8,6 +8,7 @@ public class BookReviews implements java.io.Serializable {
 	private Integer idbooks;
 	private String reviewText;
 	private String reviewersUsername;
+	private Integer starRating;
 
 	public BookReviews() {
 	}
@@ -16,6 +17,15 @@ public class BookReviews implements java.io.Serializable {
 		this.idbooks = idbooks;
 		this.reviewText = reviewText;
 		this.reviewersUsername = reviewersUsername;
+	}
+
+	
+	public Integer getStarRating() {
+		return starRating;
+	}
+
+	public void setStarRating(Integer starRating) {
+		this.starRating = starRating;
 	}
 
 	public Integer getIdbookReviews() {

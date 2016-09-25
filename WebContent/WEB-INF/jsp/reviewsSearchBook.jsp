@@ -138,9 +138,9 @@ var html = $(".bookRevList").html();
 <div id="resultsSection" class="resultsSection responsive" >
 		<form:form id="searchResults" class="searchResults">
 		
-				<div id="search" class="search" style="display:none; width:1000px !important;">
-					<ul id="bookRevList" class="bookRevList" ng-bind-html="formattedSearchData">				
-					</ul>
+			<div id="search" class="search" style="display:none; width:1000px !important;">
+				<ul id="bookRevList" class="bookRevList" ng-bind-html="formattedSearchData">				
+				</ul>
 			</div>
 		
 		</form:form>

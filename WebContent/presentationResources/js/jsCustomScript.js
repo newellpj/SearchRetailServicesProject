@@ -726,11 +726,8 @@ function renderTagList(obj){
 		document.getElementById(ID+'Select').style.display = 'none';
 		document.getElementById(ID+'Select').style.visibility = 'hidden';
 	}
-	
-	
-	
-}
 
+}
 
 
   function performAjaxAddReview(){
@@ -753,6 +750,9 @@ function renderTagList(obj){
 		var authorTextVal = $('#bookAuthorReview').val();
 		var titleTextVal = $('#bookTitleReview').val(); 
 		var reviewTextVal = $('#reviewText').val();
+		var starRating = $("input[name='rating']:checked").val();
+		
+		alert("star rating : "+starRating);
 		
 		$.ajax({
 			url: 'addBookReview',
@@ -760,7 +760,8 @@ function renderTagList(obj){
 			data: { 
 				titleText: titleTextVal,
 				authorText: authorTextVal, 
-				reviewText: reviewTextVal
+				reviewText: reviewTextVal,
+				starRating: starRating
 			},
 			processData: true,
 			contentType: 'application/json; charset=utf-8',

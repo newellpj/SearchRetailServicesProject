@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/search.css">
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>

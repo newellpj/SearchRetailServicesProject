@@ -82,12 +82,13 @@ public class BooksAndReviewsService {
 		}
 	}
 	
-	public void addReview(int bookID, String username, String reviewText){
+	public void addReview(int bookID, String username, String reviewText, Integer starRating){
 		log.info("add review : "+bookID+" : "+username+" : "+reviewText);
 		BookReviews bookReview = new BookReviews();
 		bookReview.setIdbooks(bookID);
 		bookReview.setReviewersUsername(username);
 		bookReview.setReviewText(reviewText);
+		bookReview.setStarRating(starRating);
 		booksReviewsBO.save(bookReview);
 	}
 }

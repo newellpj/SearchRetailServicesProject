@@ -35,7 +35,7 @@ $(document).ready(function() {
 	  if(html != 'undefined' && html != null){
 	
 		  $('.resultsSection').jscroll({		  
-			loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+				loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
 		  });
 		  
 		  document.getElementById("resultsSectionReview").style.visibility = "visible";
@@ -62,12 +62,28 @@ $(document).ready(function() {
      });
 	 
 	 $('#reviewText').blur(function() {
-        if($("#reviewText").val().trim() != '') {
+        if(starRating != null && starRating != '' && $("#reviewText").val().trim() != '') {
            $('#addReview').prop('disabled', false);
         }else{
 			 $('#addReview').prop('disabled', true); 
 		  }
      });
+	 
+	// $("input[name='rating']:checked").val();
+	 $('input:radio[name=rating]').click(function() {
+	
+		starRating = $("input[name='rating']:checked").val();
+		
+		alert("starRating : "+starRating);
+		
+        if(starRating != null && starRating != '' && $("#reviewText").val().trim() != '') {
+           $('#addReview').prop('disabled', false);
+        }else{
+			 $('#addReview').prop('disabled', true); 
+		  }
+     });
+	 
+	 
 	 
 	 var acc = document.getElementsByClassName("accordionReviews");
 		var i;
@@ -104,6 +120,15 @@ $(document).ready(function() {
 	<div id="add-reviews-box" class="add-reviews-box responsive">
 
 		<h3>Add a Book Review</h3>
+	    <span style="font-weight: normal;font-style:italic; text-shadow: 0.5px 0.5px #a8a8a8; margin-top:8px; float:left;">Please rate this book :</span>	
+			<fieldset class="rating">
+			
+			    <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="The Best">5 stars</label>
+			    <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Very good">4 stars</label>
+			    <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Average">3 stars</label>
+			    <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Didn't like it">2 stars</label>
+			    <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Terrible">1 star</label>
+			</fieldset>
 
 		<c:if test="${not empty error}">
 			<div class="error alert alert-error">${error}</div>
@@ -140,37 +165,33 @@ $(document).ready(function() {
 				</tr>
 			</table>
 			
+		
+			
+			
 		</form:form>
 	</div>
 			
 	<div id="resultsSectionReview" class="resultsSection responsive">
 		
+				
 		<c:if test="${not empty formattedHTML}">
 						<div class='reviewedBookDetails'>${formattedHTML}</div>
 					</c:if>
 		
 				<c:if test="${not empty reviewLists}">
 					<span style='font-family:courier; font-style:italic; font-size:medium;' >Book Reviews for <%=session.getAttribute("bookTitleFound")%></span>
-				
-					
+									
 					<ul id="bookRevList" class="bookRevList">
-						
-					
-					
 						<c:forEach var="listValue" items="${reviewLists}">
-							<li>${listValue}</li>
+							<li><div class="reviewSegment">${listValue}</div></li>
 						</c:forEach>
 					</ul>
 					
 				 <div class="next"><a href="retrieveNextReviewsSegment">next</a> </div>
-					
-			
+
 				</c:if>
 		
 		</div>
-
-
-	
 
 	<div class="facebookFooter" >
 	<div id="fb-root" ></div>
