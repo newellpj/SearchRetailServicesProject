@@ -50,6 +50,10 @@ public class BookReviewsBusinessObjectImpl extends HibernateDaoSupport implement
 		session.close();
 	}
 	
+
+	
+	
+	
 	public HashMap<Books, List<BookReviews>> findBooksReviewByTitleAndAuthorLazyLoad(String title, String author, int offset, int numberOfRecords ){
 		
 		log.info("BookReviews title to search : "+title);

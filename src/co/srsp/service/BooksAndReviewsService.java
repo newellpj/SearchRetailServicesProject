@@ -34,6 +34,10 @@ public class BooksAndReviewsService {
 		return booksBO.findBooksByTitleAndAuthor(title, author);
 	}
 	
+	public List<Books> findBooksByAnyCriteriaLazyLoad(HashMap<String, HashMap<String, String>> searchCriteria, int offset, int numberOfRecords){
+		return tagsBO.findBooksByAnyCriteriaLazyLoad(searchCriteria, offset, numberOfRecords);
+	}
+	
 	public HashMap<Books, List<BookReviews>> searchBookReviewsByTitleAndAuthor(String title, String author){
 		return booksReviewsBO.findBooksReviewByTitleAndAuthor(title, author);
 	}

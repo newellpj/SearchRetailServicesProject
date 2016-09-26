@@ -11,4 +11,5 @@ public interface TagsBusinessObject {
 	public void update(BookTags books);
 	public void delete(BookTags books);
 	public List<Books> findBooksByTagsLazyLoad(HashMap<String, String> tagsKeyValues, int offset, int numberOfRecords);
+	public List<Books> findBooksByAnyCriteriaLazyLoad(HashMap<String, HashMap<String, String>> searchCriteria, int offset, int numberOfRecords);
 }
