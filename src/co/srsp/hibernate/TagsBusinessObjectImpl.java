@@ -58,7 +58,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		int count = 0;
 		
 		if(searchCriteria.containsKey("tags") && searchCriteria.containsKey("books")){
-			
+			log.info("tags and books...................................");
 			HashMap<String, String> tagsKeyValues = searchCriteria.get("tags");
 			
 			for(String key : tagsKeyValues.keySet()){
@@ -111,7 +111,15 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			sqlAppender.append(booksWhereClause);
 			
 			//TODO the pagination part of this query set
+			
+			log.info("sql appender ::: "+sqlAppender.toString());
+			log.info("sql offset ::: "+offset);
+			log.info("sql numberOfRecords ::: "+numberOfRecords);
+			
 			List list = session.createSQLQuery(sqlAppender.toString()).setFirstResult(offset).setMaxResults(numberOfRecords).list();
+			
+			log.info("list size returned : "+list);
+			log.info("list size returned : "+list.size());
 			
 			List<Books> books = new ArrayList<Books>();
 			
@@ -147,24 +155,43 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			
 			count = 0;
 			Map booksValuesMap = new HashMap();
-			
+			log.info("before key message size : "+booksSearchCriteria.size());
 			for(String booksKey : booksSearchCriteria.keySet()){
 			
+				log.info("count in books search criteria : "+count);
+				log.info("key in books search criteria : "+booksKey);
+				
 				if(count > 0){
 					booksWhereClause += " and ";
 				}
+				log.info("books key : "+booksKey.toLowerCase());
+				log.info("books criteria values : "+booksSearchCriteria.get(booksKey));
 				
-				booksWhereClause += "UPPER("+booksKey.toLowerCase()+") = UPPER(:"+booksKey+")";
-				booksValuesMap.put(booksKey.toLowerCase(), searchCriteria.get(booksKey));
+				booksWhereClause += " UPPER("+booksKey.toLowerCase()+") = UPPER(:"+booksKey+") ";
+				booksValuesMap.put(booksKey.toLowerCase(), booksSearchCriteria.get(booksKey));
 				count++;
+				
 			}
 			
 			log.info("booksWhereClause :::: "+booksWhereClause);
+			log.info("sql appender ::: "+sqlAppender.toString());
+			log.info("sql offset ::: "+offset);
+			log.info("sql numberOfRecords ::: "+numberOfRecords);
+			
 			
 			//TODO the pagination part of this query set
-			List list = session.createQuery(" from "+Books.class.getName()+booksWhereClause).setProperties(booksValuesMap).setFirstResult(offset).setMaxResults(numberOfRecords).list();
+			try{
+				List list = session.createQuery(" from "+Books.class.getName()+booksWhereClause).setProperties(booksValuesMap).setFirstResult(offset).setMaxResults(numberOfRecords).list();
+				log.info("list size returned : "+list);
+				log.info("list size returned : "+list.size());
+				
+				return list;
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}
 			
-			return list;
 		}
 		
 		return null;

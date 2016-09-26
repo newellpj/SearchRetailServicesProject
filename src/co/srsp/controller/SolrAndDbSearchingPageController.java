@@ -579,6 +579,11 @@ public class SolrAndDbSearchingPageController {
 		String authorText = request.getParameter("authorText");
 		String publisherText = request.getParameter("publisherText");
 		
+		//contains any search criteria the users has input from the search books page 
+		//they currently being - title, author, publisher, category, genre, language
+		
+		HashMap<String, HashMap<String, String>> searchCriteria = new HashMap<String, HashMap<String, String>>();
+		
 		HashMap<String, String> tagsAndValueMap = new HashMap<String, String>();
 		
 		if(request.getParameter("genreText") != null && !"".equals(request.getParameter("genreText"))){
@@ -596,6 +601,12 @@ public class SolrAndDbSearchingPageController {
 			log.info("lang text to search on : "+request.getParameter("langText"));
 			tagsAndValueMap.put("langText", request.getParameter("langText"));
 		}
+		
+		log.info("tags and value map size : "+tagsAndValueMap.size());
+		
+		if(tagsAndValueMap.size() > 0){
+			searchCriteria.put("tags", tagsAndValueMap);
+		}
 
 		log.info("just before service instantiation !");
 		
@@ -603,22 +614,58 @@ public class SolrAndDbSearchingPageController {
 		
 		List<Books> booksList = new ArrayList<Books>();
 		log.info("just before test !");
+
+		request.getSession().setAttribute("publisherText", publisherText);
+		request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
+		request.getSession().setAttribute("tagsAndValueMap", tagsAndValueMap);
 		
-		if(titleText != null && !"".equals(titleText) || (!"".equals(authorText) && authorText != null)){
-			log.info("in here111");
-			booksList.addAll(booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText")));
+		HashMap<String, String> booksSearchCriteria = null;
+		
+		if(titleText != null && !"".equals(titleText)){
 			
-		}else if(publisherText != null && !"".equals(publisherText)){
-			log.info("in here222");
-			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));
-			request.getSession().setAttribute("publisherText", publisherText);
-			request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
-		}else{
-			log.info("in here333");
-			booksList.addAll(booksService.findBooksByTagsLazyLoad(tagsAndValueMap, 0, 20));
-			request.getSession().setAttribute("searchType", "findBooksByTagsLazyLoad");
-			request.getSession().setAttribute("tagsAndValueMap", tagsAndValueMap);
+			if(booksSearchCriteria == null){
+				booksSearchCriteria = new HashMap<String, String>(); 
+			}
+			
+			booksSearchCriteria.put("title", titleText);
+			log.info("in here111");
+			//booksList.addAll(booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText")));
 		}
+		
+		if(!"".equals(authorText) && authorText != null){
+			
+			if(booksSearchCriteria == null){
+				booksSearchCriteria = new HashMap<String, String>(); 
+			}
+			
+			booksSearchCriteria.put("author", authorText);
+		}
+		
+		if(publisherText != null && !"".equals(publisherText)){
+			
+			if(booksSearchCriteria == null){
+				booksSearchCriteria = new HashMap<String, String>(); 
+			}
+			
+			booksSearchCriteria.put("publisher", publisherText);
+			log.info("in here222");
+//			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));
+//			request.getSession().setAttribute("publisherText", publisherText);
+//			request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
+		}
+		
+		if(booksSearchCriteria != null){
+			searchCriteria.put("books", booksSearchCriteria); 
+		}
+		
+		booksList.addAll(booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, 0, 20));
+		
+//		else{
+//			log.info("in here333");
+//			booksList.addAll(booksService.findBooksByTagsLazyLoad(tagsAndValueMap, 0, 20));
+//			request.getSession().setAttribute("searchType", "findBooksByTagsLazyLoad");
+//			request.getSession().setAttribute("tagsAndValueMap", tagsAndValueMap);
+//		}
 
 		ModelAndView modelView = new ModelAndView();
 		List<String> booksStringViewList = new ArrayList<String>();
@@ -638,6 +685,8 @@ public class SolrAndDbSearchingPageController {
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
 			request.getSession().setAttribute("currentPaginationOffset", 0);
+			
+			log.info("no books found ");
 			
 			booksStringViewList.add("No books found");
 			

@@ -184,25 +184,25 @@
 	
 	function formatBooksSearchContent(searchData){
 		 
-		 var bookDetails =  searchData['booksList'];
-		 
+			var bookDetails =  searchData['booksList'];
+			var formattedMarkup = "";
+			 
 			if("No books found" != bookDetails){
 							
-					bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
-					
-					//$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
-					//$('.bookRevList').append("</a>");
+				bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
+				
+				formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
+				+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
+				"<span style='font-family:courier;'><b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; <b>Publisher: </b>"
+				+searchData['publisherText']+"</span>"+
+				" <p style='font-size:x-small;!important'>"+searchData['excerpt']+
+				
+				"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
+				+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p>";
+			}else{
+				formattedMarkup = "No books found!!"
 			}
-		 
-			var formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
-			+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
-			"<span style='font-family:courier;'><b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; <b>Publisher: </b>"
-			+searchData['publisherText']+"</span>"+
-			" <p style='font-size:x-small;!important'>"+searchData['excerpt']+
-			
-			"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
-			+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p>";
-
+			 
 			return formattedMarkup; 
 	 }
 	
