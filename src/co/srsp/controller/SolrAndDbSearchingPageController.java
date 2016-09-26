@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.srsp.constants.SessionConstants;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
 import co.srsp.service.BooksAndReviewsService;
@@ -335,7 +336,8 @@ public class SolrAndDbSearchingPageController {
 		request.getSession().removeAttribute("bookTitleFound");
 		request.getSession().removeAttribute("currentPaginationOffset");
 		request.getSession().removeAttribute("searchType");
-		request.getSession().removeAttribute("tagsAndValueMap");
+		request.getSession().removeAttribute(SessionConstants.TAGS_SEARCH_CRITERIA);
+		request.getSession().removeAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
 		request.getSession().removeAttribute("publisherText");
 		
 		return new BookReviewsModel();
@@ -349,7 +351,10 @@ public class SolrAndDbSearchingPageController {
 		request.getSession().setAttribute("catText", "");
 		request.getSession().setAttribute("langText", "");
 		request.getSession().setAttribute("searchType", "");
-		request.getSession().setAttribute("tagsAndValueMap", null);
+		request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA, null);
+		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, null);
+		
+		
 		request.getSession().setAttribute("currentPaginationOffset", 0);
 		request.getSession().setAttribute("solrSearchListReturned", null);
 		request.getSession().setAttribute("solrPaginationOffset", 0);
@@ -605,7 +610,7 @@ public class SolrAndDbSearchingPageController {
 		log.info("tags and value map size : "+tagsAndValueMap.size());
 		
 		if(tagsAndValueMap.size() > 0){
-			searchCriteria.put("tags", tagsAndValueMap);
+			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
 		}
 
 		log.info("just before service instantiation !");
@@ -617,7 +622,7 @@ public class SolrAndDbSearchingPageController {
 
 		request.getSession().setAttribute("publisherText", publisherText);
 		request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
-		request.getSession().setAttribute("tagsAndValueMap", tagsAndValueMap);
+		request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
 		
 		HashMap<String, String> booksSearchCriteria = null;
 		
@@ -646,26 +651,22 @@ public class SolrAndDbSearchingPageController {
 			if(booksSearchCriteria == null){
 				booksSearchCriteria = new HashMap<String, String>(); 
 			}
-			
 			booksSearchCriteria.put("publisher", publisherText);
 			log.info("in here222");
-//			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));
-//			request.getSession().setAttribute("publisherText", publisherText);
-//			request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
 		}
 		
+		if(booksSearchCriteria != null && booksSearchCriteria.size() > 0){
+			request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, booksSearchCriteria);
+		}else{
+			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
+		}
+		
+		
 		if(booksSearchCriteria != null){
-			searchCriteria.put("books", booksSearchCriteria); 
+			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksSearchCriteria); 
 		}
 		
 		booksList.addAll(booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, 0, 20));
-		
-//		else{
-//			log.info("in here333");
-//			booksList.addAll(booksService.findBooksByTagsLazyLoad(tagsAndValueMap, 0, 20));
-//			request.getSession().setAttribute("searchType", "findBooksByTagsLazyLoad");
-//			request.getSession().setAttribute("tagsAndValueMap", tagsAndValueMap);
-//		}
 
 		ModelAndView modelView = new ModelAndView();
 		List<String> booksStringViewList = new ArrayList<String>();
@@ -685,12 +686,8 @@ public class SolrAndDbSearchingPageController {
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
 			request.getSession().setAttribute("currentPaginationOffset", 0);
-			
 			log.info("no books found ");
-			
 			booksStringViewList.add("No books found");
-			
-			//return booksStringViewList;
 		}
 		
 		BookReviewsModel[] bookReviewsModelArray = new BookReviewsModel[booksList.size()];

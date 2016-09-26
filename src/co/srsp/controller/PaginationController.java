@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import co.srsp.constants.SessionConstants;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
 import co.srsp.service.BooksAndReviewsService;
@@ -121,22 +122,26 @@ public class PaginationController {
 		log.info("paginationOffset: "+paginationOffset);
 		List<Books> booksList = new ArrayList<Books>();
 		
-		if("findBooksByPublisherLazyLoad".equalsIgnoreCase(searchType)){
-			
-			log.info("doing findBooksByPublisherLazyLoad");
-			
-			String publisherVal = request.getSession().getAttribute("publisherText").toString();			
-			booksList = booksService.findBooksByPublisherLazyLoad(publisherVal, latestOffset, 20);
-			request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
-			
-		}else if("findBooksByTagsLazyLoad".equalsIgnoreCase(searchType)){
-			log.info("doing findBooksByTagsLazyLoad");
-			HashMap<String, String> tagsAndValueMap = (HashMap<String, String>)request.getSession().getAttribute("tagsAndValueMap");
-			booksList = booksService.findBooksByTagsLazyLoad(tagsAndValueMap, paginationOffset+20, 20);
-			request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
-		}else{
-			log.info("just here");
+		
+		
+		
+		HashMap<String, String> booksMap = (HashMap)request.getSession().getAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
+		
+		HashMap<String, String> tagsAndValueMap = (HashMap)request.getSession().getAttribute(SessionConstants.TAGS_SEARCH_CRITERIA);
+		
+		HashMap<String, HashMap<String, String>> searchCriteria = new HashMap<String, HashMap<String, String>>();
+		
+		if(booksMap.size() > 0){
+			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
 		}
+		
+		if(tagsAndValueMap.size() > 0){
+			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
+		}
+		
+		request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
+		booksList = booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, paginationOffset+20, 20);
+		
 		log.info("size of booksList list returned : "+booksList.size());
 		//log.info("size of booksList2 list returned : "+booksLists2.size());
 		List<String> booksLists2 = new ArrayList<String>();

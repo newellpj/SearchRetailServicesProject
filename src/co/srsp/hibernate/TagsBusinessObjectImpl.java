@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.srsp.constants.SessionConstants;
 import co.srsp.controller.PaginationController;
 import co.srsp.hibernate.orm.BookTags;
 import co.srsp.hibernate.orm.Books;
@@ -57,9 +58,9 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		StringBuffer sqlAppender = new StringBuffer();
 		int count = 0;
 		
-		if(searchCriteria.containsKey("tags") && searchCriteria.containsKey("books")){
+		if(searchCriteria.containsKey(SessionConstants.TAGS_SEARCH_CRITERIA) && searchCriteria.containsKey(SessionConstants.BOOKS_SEARCH_CRITERIA)){
 			log.info("tags and books...................................");
-			HashMap<String, String> tagsKeyValues = searchCriteria.get("tags");
+			HashMap<String, String> tagsKeyValues = searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA);
 			
 			for(String key : tagsKeyValues.keySet()){
 				
@@ -82,7 +83,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			//List list = session.createSQLQuery(sqlAppender.toString()).list(); //allows you to create native sql query
 			
 			
-			HashMap<String, String> booksSearchCriteria = searchCriteria.get("books");
+			HashMap<String, String> booksSearchCriteria = searchCriteria.get(SessionConstants.BOOKS_SEARCH_CRITERIA);
 			
 			String booksWhereClause = "";
 			
@@ -137,13 +138,13 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			
 			return books;
 			
-		}else if(searchCriteria.containsKey("tags") && !searchCriteria.containsKey("books")){
+		}else if(searchCriteria.containsKey(SessionConstants.TAGS_SEARCH_CRITERIA) && !searchCriteria.containsKey(SessionConstants.BOOKS_SEARCH_CRITERIA)){
 			//TODO the pagination part of this query set
-			return findBooksByTagsLazyLoad(searchCriteria.get("tags"), offset, numberOfRecords);
+			return findBooksByTagsLazyLoad(searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA), offset, numberOfRecords);
 			
-		}else if(searchCriteria.containsKey("books")){
+		}else if(searchCriteria.containsKey(SessionConstants.BOOKS_SEARCH_CRITERIA)){
 			
-			HashMap<String, String> booksSearchCriteria = searchCriteria.get("books");
+			HashMap<String, String> booksSearchCriteria = searchCriteria.get(SessionConstants.BOOKS_SEARCH_CRITERIA);
 			
 			String booksWhereClause = "";
 			
