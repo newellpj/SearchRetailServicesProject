@@ -43,9 +43,18 @@
 					 $( ".bookRevList2" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
 							this.innerHTML = "";
 					  });
+						
+					$( ".searchSegment" ).remove();
 					
-					
+				 					 
+						
 				}
+				
+				//as search segment can get placed outside the book list by the jscroll function we should 
+				//remove all searchSegments - they will be re-added by javascript or the controllers dynamically 
+				//anyway so no damage is done
+				
+				
 				
 			 
 				$log.info("we are titleVal 323 : "+$scope.titleText);	

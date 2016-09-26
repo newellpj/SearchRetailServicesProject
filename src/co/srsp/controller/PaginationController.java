@@ -21,8 +21,6 @@ import org.apache.tika.detect.Detector;
 import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -148,6 +146,8 @@ public class PaginationController {
 		for(Books book : booksList){	
 			booksLists2.add(formattedSearchListItem(book, book.getTitle()+" - "+book.getAuthor()));
 		}
+		
+		log.info("books List 2 size ::: "+booksLists2.size());
 		
 		ModelAndView model = new ModelAndView();	
 		//model.addObject("bookReviewsModel", bookReviewsModel);

@@ -43,16 +43,12 @@
 	<ul id="bookRevList2" class="bookRevList2" >				
 				
 				<c:if test="${not empty booksLists2}">
-
-					
 						<c:forEach var="listValue2" items="${booksLists2}">
-					
-						
 							<div class="searchSegment"> ${listValue2} </div>
 						</c:forEach>
 						
 					
-						</ul>
+		</ul>
 				 <div class="next"><a href="retrieveNextSearchSegment">next</a> </div>
 					
 			

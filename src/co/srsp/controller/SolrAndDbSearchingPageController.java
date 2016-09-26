@@ -216,7 +216,7 @@ public class SolrAndDbSearchingPageController {
 					log.info("bookRev.getStarRating() : "+bookRev.getStarRating());
 					
 					if(bookRev.getStarRating() != null){
-						for(int i = 0; bookRev.getStarRating() < i ;i++){
+						for(int i = 0; bookRev.getStarRating() > i ;i++){
 							starRatingsHTMLBuffer.append("<span style='color:'#f70;text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5)'");
 							starRatingsHTMLBuffer.append("'\2605'");
 							starRatingsHTMLBuffer.append("</span></br>");
@@ -224,7 +224,7 @@ public class SolrAndDbSearchingPageController {
 					}
 				
 					//starRatingsHTMLBuffer.append("</div>");
-				
+				log.info("starRatingsHTMLBuffer : "+starRatingsHTMLBuffer.toString());
 					list.add(starRatingsHTMLBuffer.toString()+bookRev.getReviewText()+" - <b>reviewed by "+bookRev.getReviewersUsername()+"</b>");
 				}
 			}
