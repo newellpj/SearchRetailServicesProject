@@ -13,6 +13,76 @@
 				 
 					//$scope.authorText = "My Author : "+newVal;
 				 }
+				 
+				   
+				 
+			});
+			
+			$scope.genreText = {
+				model: null,
+				availableOptions: [
+					 {value: '', name: 'Please select..'},
+					 {value: 'Drama', name: 'Drama'},
+					 {value: 'Thriller', name: 'Thriller'},
+					 {value: 'Crime', name: 'Crime'},
+					 {value: 'Biography', name: 'Biography'},
+					 {value: 'Philosophy', name: 'Philosophy'},
+					 {value: 'Mystery', name: 'Mystery'},
+					 {value: 'Non-fiction', name: 'Non-fiction'},
+					 {value: 'Romance', name: 'Romance'},
+					 {value: 'Sci-fi', name: 'Sci-fi'},
+					 {value: 'Human Interest', name: 'Human Interest'}
+				 ],
+				 selectedOption: {value: '', name: 'Please select..'} 
+			};
+			
+			$scope.catText = {
+				model: null,
+				availableOptions: [
+					 {value: '', name: 'Please select..'},
+					 {value: 'Fiction', name: 'Fiction'},
+					 {value: 'Non-fiction', name: 'Non-fiction'}
+				 ],
+				 selectedOption: {value: '', name: 'Please select..'} 
+			};
+			
+			$scope.langText = {
+				availableOptions: [
+					 {value: '', name: 'Please select..'},
+					 {value: 'English', name: 'English'},
+					 {value: 'French', name: 'French'},
+					 {value: 'Mandarin', name: 'Mandarin'},
+				     {value: 'Hindi', name: 'Hindi'}, 
+					 {value: 'Latin', name: 'Latin'},
+					 {value: 'Spanish', name: 'Spanish'}
+				 ],
+				 selectedOption: {value: '', name: 'Please select..'} 
+			};
+			
+			
+   
+			
+			$scope.$watch('catCheck', function(newVal, oldVal, scope) {
+				$log.info("newVal : "+newVal);
+				if(newVal){
+					$scope.catText.selectedOption = $scope.catText.availableOptions[0];
+				}
+				
+				
+			});
+			
+			$scope.$watch('langCheck', function(newVal, oldVal, scope) {
+				$log.info(newVal);
+				if(newVal){
+					$scope.langText.selectedOption = $scope.langText.availableOptions[0];
+				}
+			});
+			
+			$scope.$watch('genreCheck', function(newVal, oldVal, scope) {		
+				$log.info(newVal);
+				if(newVal){
+					$scope.genreText.selectedOption = $scope.genreText.availableOptions[0];
+				}
 			});
 
 
@@ -67,7 +137,8 @@
 					var langText = $scope.langText;
 				
 					$log.info("publisher text ::: "+publisherText);
-				
+					$log.info("langText text ::: "+langText);
+					
 					 var dlg = $("<div></div>").dialog({
 						hide: 'fade',
 						maxWidth: 600,
@@ -179,17 +250,10 @@
 		});
 		
 		
-		//searchBookApp.controller('searchResultsController', function($scope, $controller, $log) {
-		//	angular.extend(this, $controller('searchPageController', {$scope: $scope}));
-		//	$log.info("22 title text from search results controller : "+$scope.titleText);
-		//	 $scope.$watch('titleText', function(newVal, oldVal, scope) {
-		//		 $log.info(newVal);
-		//	 });
-		//});
-		
-		
 	
 })(angular);
+
+
 
 	
 	function formatBooksSearchContent(searchData){
@@ -209,8 +273,6 @@
 				
 				"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
 				+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p>";
-			}else{
-				formattedMarkup = "No books found!!"
 			}
 			 
 			return formattedMarkup; 

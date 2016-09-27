@@ -98,23 +98,32 @@ var html = $(".bookRevList").html();
 					<input ng-model="titleText" id="titleText" type='text' name='titleText' style="width:40%;"><span class="glyphicon glyphicon-book iconspan2"></span>
 					
 					
-					<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
-					<select ng-model="genreSelect" class="responsive" style="visibility:hidden; width:30%; margin-left:1.7em; " id="genreSelect"></select>
+					<input id="genre" type="checkbox"  ng-model="genreCheck" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
+					<select ng-model="genreText.selectedOption" class="responsive" style="visibility:hidden; width:30%; margin-left:1.7em; " id="genreSelect" 
+							ng-options="option.name for option in genreText.availableOptions track by option.value">
+					
+					</select>
 				</div>		
 				<div class="authorCategory responsive">
 					Author:
 					<input ng-model="authorText" id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
-					<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category
-					<select ng-model="categorySelect"  class="responsive" style="visibility:hidden; width:30%; margin-left:0.4em;" id="categorySelect"></select>
+					<input id="category" type="checkbox" ng-model="catCheck"  name="category" value="category" onclick="renderTagList($(this));" />Category
+					<select  ng-model="catText.selectedOption" name="catText" class="responsive" style="visibility:hidden; width:30%; margin-left:0.4em;" id="categorySelect" 
+					    ng-options="option.name for option in catText.availableOptions track by option.value" >
+					</select>
+	
 				</div>	
 				
 				<div class="publisherLang responsive">
-					Publisher:
+					Publisher:  
 					<input ng-model="publisherText" id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
-					<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
-					<select ng-model="languageSelect" class="responsive" style="visibility:hidden; width:30%;" id="languageSelect"></select>
+					<input id="language" ng-model="langCheck" type="checkbox" name="language" value="language" />Language
+					<select ng-model="langText.selectedOption" name="langText" class="responsive" style="width:30%;" id="languageSelect" 
+							ng-options="option.name for option in langText.availableOptions track by option.value" >	
+					</select>
+
 		          </div>	
 			
 			  <div class="tagSearches responsive" ng-controller="searchSubmitter"> 

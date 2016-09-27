@@ -58,9 +58,14 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		StringBuffer sqlAppender = new StringBuffer();
 		int count = 0;
 		
-		if(searchCriteria.containsKey(SessionConstants.TAGS_SEARCH_CRITERIA) && searchCriteria.containsKey(SessionConstants.BOOKS_SEARCH_CRITERIA)){
+		HashMap<String, String> tagsMap  = searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA);
+		HashMap<String, String> booksMap  = searchCriteria.get(SessionConstants.BOOKS_SEARCH_CRITERIA);
+		
+		if(tagsMap.size() > 0 && booksMap.size() > 0){
 			log.info("tags and books...................................");
 			HashMap<String, String> tagsKeyValues = searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA);
+			
+			
 			
 			for(String key : tagsKeyValues.keySet()){
 				
@@ -77,6 +82,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 				if(count > 1){
 					sqlAppender.append(")");
 				}
+			
 			}
 
 			log.info("sql appender value ::: "+sqlAppender.toString());
@@ -94,6 +100,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			booksWhereClause += " where ";
 			
 			count = 0;
+			
 			Map booksValuesMap = new HashMap();
 			
 			for(String booksKey : booksSearchCriteria.keySet()){
@@ -102,10 +109,12 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 					booksWhereClause += " and ";
 				}
 				
-				booksWhereClause += "UPPER("+booksKey.toLowerCase()+") = UPPER(:"+booksKey+")";
+				booksWhereClause += "UPPER("+booksKey.toLowerCase()+") = UPPER('"+booksSearchCriteria.get(booksKey)+"')";
 				booksValuesMap.put(booksKey.toLowerCase(), searchCriteria.get(booksKey));
 				count++;
 			}
+			
+			booksWhereClause += ")";
 			
 			log.info("booksWhereClause :::: "+booksWhereClause);
 			
@@ -116,6 +125,8 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			log.info("sql appender ::: "+sqlAppender.toString());
 			log.info("sql offset ::: "+offset);
 			log.info("sql numberOfRecords ::: "+numberOfRecords);
+			
+			//setProperties(booksValuesMap).setFirstResult(offset).setMaxResults(numberOfRecords).list();
 			
 			List list = session.createSQLQuery(sqlAppender.toString()).setFirstResult(offset).setMaxResults(numberOfRecords).list();
 			
@@ -138,12 +149,13 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			
 			return books;
 			
-		}else if(searchCriteria.containsKey(SessionConstants.TAGS_SEARCH_CRITERIA) && !searchCriteria.containsKey(SessionConstants.BOOKS_SEARCH_CRITERIA)){
+		}else if(tagsMap.size() > 0 && booksMap.size() <= 0){
 			//TODO the pagination part of this query set
+			log.info("tags only search criteria");
 			return findBooksByTagsLazyLoad(searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA), offset, numberOfRecords);
 			
-		}else if(searchCriteria.containsKey(SessionConstants.BOOKS_SEARCH_CRITERIA)){
-			
+		}else if(booksMap.size() > 0){
+			log.info("books only search criteria");
 			HashMap<String, String> booksSearchCriteria = searchCriteria.get(SessionConstants.BOOKS_SEARCH_CRITERIA);
 			
 			String booksWhereClause = "";

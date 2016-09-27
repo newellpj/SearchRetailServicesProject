@@ -578,6 +578,9 @@ public class SolrAndDbSearchingPageController {
 		log.info("request contain titleText ? : "+request.getParameter("titleText"));
 		log.info("request contain authorText ? : "+request.getParameter("authorText"));
 		log.info("request contain publisherText ? : "+request.getParameter("publisherText"));
+		
+		log.info("request contain lang text ? : "+request.getParameter("langText"));
+		
 		//log.info("author from map : "+bookReviewsModel.getAuthorText());
 		
 		String titleText = request.getParameter("titleText");
