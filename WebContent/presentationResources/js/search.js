@@ -5,6 +5,11 @@
 
 		searchBookApp.controller('searchPageController', function($scope, $log) {
 		 $log.info("11 title text from search page controller : "+$scope.titleText);
+			 
+			 $scope.genreHide = true;
+			 $scope.categoryHide = true;
+			 $scope.languageHide = true;
+			 
 			 $scope.$watch('titleText', function(newVal, oldVal, scope) {
 				 
 				// $log.info("newVal : "+newVal);
@@ -67,8 +72,7 @@
 				if(newVal){
 					$scope.catText.selectedOption = $scope.catText.availableOptions[0];
 				}
-				
-				
+					
 			});
 			
 			$scope.$watch('langCheck', function(newVal, oldVal, scope) {
@@ -253,7 +257,21 @@
 	
 })(angular);
 
+	function showHideSearchBookSelect(obj){
+		
+		var ID = $(obj).attr('id');
 
+		if(document.getElementById(ID).checked){
+			document.getElementById(ID+'Select').style.visibility = 'visible';
+			document.getElementById(ID+'Select').style.display = 'inline';
+								 
+		}else{
+			document.getElementById(ID+'Select').selectedIndex = 0;
+			document.getElementById(ID+'Select').style.display = 'none';
+			document.getElementById(ID+'Select').style.visibility = 'hidden';
+		}
+
+	} 
 
 	
 	function formatBooksSearchContent(searchData){
