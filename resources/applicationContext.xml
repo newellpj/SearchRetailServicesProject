@@ -98,8 +98,6 @@
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
 	   
- <bean id="myAspect" class="co.srsp.aop.MethodBeforeAdvisor">
-</bean>
 	   
 	   
 </beans>

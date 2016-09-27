@@ -672,17 +672,10 @@ public class SolrAndDbSearchingPageController {
 		List<String> booksStringViewList = new ArrayList<String>();
 		
 		log.info("book list : "+booksList.size());
+		request.getSession().setAttribute("currentPaginationOffset", 0);
 		
-		if(booksList != null && booksList.size() > 0){
 			
-			for(Books books : booksList){
-				booksStringViewList.add(books.getTitle()+" - "+books.getAuthor());
-			}
-			
-			modelView.addObject("booksList", booksStringViewList);
-			request.getSession().setAttribute("currentPaginationOffset", 0);
-			
-		}else{
+		if(booksList == null || booksList.size() == 0){
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
 			request.getSession().setAttribute("currentPaginationOffset", 0);
@@ -754,6 +747,21 @@ public class SolrAndDbSearchingPageController {
 			bookReviewsModelArray[count] = model;
 			count++;
 		}
+		
+		log.info("before testing array length");
+		
+		if(bookReviewsModelArray.length == 0){
+			log.info("after testing array length");
+			bookReviewsModelArray = new BookReviewsModel[1];
+			log.info("after testing array length 222");
+			BookReviewsModel model_ = new BookReviewsModel();
+			log.info("after testing array length 333");
+			model_.setBooksList("No Books Found!!");
+			log.info("after testing array length 444");
+			bookReviewsModelArray[0] = model_;
+		}
+		
+		log.info("after testing array length 555");
 		
 		modelView.setViewName("reviewsSearchBook");
 		return bookReviewsModelArray;

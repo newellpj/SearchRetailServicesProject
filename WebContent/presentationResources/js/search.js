@@ -108,19 +108,29 @@
 					
 					    $scope.formattedSearchData = '';
 					
-						for(var i = 0; i < bookReviewsModelArray.length ;i++){
-						
-						  	$('.bookRevList').append("<div class='searchSegment'>");
-							$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
-							$('.bookRevList').append("</div>");
-	
+						var testFirstElement = bookReviewsModelArray[0]['booksList'];
+					
+						$log.info('testFirstElement : '+testFirstElement);
+					
+						if("No Books Found!!" != testFirstElement){
+					
+							for(var i = 0; i < bookReviewsModelArray.length ;i++){
+							
+								$('.bookRevList').append("<div class='searchSegment'>");
+								$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
+								$('.bookRevList').append("</div>");
+		
+							}
+							
+							$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+							
+							$('.resultsSection').jscroll({		  
+								loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+							});
+							
+						}else{
+							$('.bookRevList').append("<span style='text-shadow: 0.5px 0.5px #a8a8a8; '>No Books Found!! </span>");
 						}
-						
-						$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
-						
-						$('.resultsSection').jscroll({		  
-							loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
-						});
 						
 						$(dlg).dialog("close");
 					
