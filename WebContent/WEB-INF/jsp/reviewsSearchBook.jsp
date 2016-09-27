@@ -48,7 +48,7 @@ var html = $(".bookRevList").html();
 			acc[i].onclick = function(){
 				this.classList.toggle("active");
 				this.nextElementSibling.classList.toggle("hide");
-				this.nextElementSibling.nextElementSibling.classList.toggle("hide");
+				//this.nextElementSibling.nextElementSibling.classList.toggle("hide");
 			}
 		}
 		
