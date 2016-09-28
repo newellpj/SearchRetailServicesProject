@@ -67,6 +67,56 @@ public class HibernateTestClass {
 	}
 	
 
+	@Test
+	public void testTagsSearchWithNullCriteria(){
+	ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		//BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
+		TagsBusinessObject tagsBO = (TagsBusinessObject) ctx.getBean("tagsBusinessObject");
+		
+		HashMap<String, HashMap<String, String>> searchCriteriaMap = new HashMap<String, HashMap<String, String>>();
+		
+		HashMap<String, String> tagsMap = null;
+		
+	
+		
+		HashMap<String, String> booksMap = new HashMap<String, String>();
+		
+		booksMap.put(SessionConstants.TITLE_TEXT, "The Trial");
+		booksMap.put(SessionConstants.AUTHOR_TEXT, "Franz Kafka");
+		booksMap.put(SessionConstants.PUBLISHER_TEXT, "Vintage");
+		
+		searchCriteriaMap.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsMap);
+		searchCriteriaMap.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
+		
+		List<Books> booksFound = tagsBO.findBooksByAnyCriteriaLazyLoad(searchCriteriaMap, 0, 20);
+		
+		assertNotNull(booksFound);
+		
+		if(booksFound != null){
+			assertTrue(booksFound.size() > 0);
+		}
+		
+		tagsMap = new <String, String>HashMap();
+		
+		tagsMap.put(SessionConstants.GENRE_TEXT, "Drama");
+		tagsMap.put(SessionConstants.LANGUAGE_TEXT, "English");
+		tagsMap.put(SessionConstants.CATEGORY_TEXT, "Fiction");
+		
+		booksMap = null;
+		searchCriteriaMap = new HashMap<String, HashMap<String, String>>();
+		searchCriteriaMap.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsMap);
+		searchCriteriaMap.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
+		
+		booksFound = tagsBO.findBooksByAnyCriteriaLazyLoad(searchCriteriaMap, 0, 20);
+		
+		assertNotNull(booksFound);
+		
+		if(booksFound != null){
+			assertTrue(booksFound.size() > 0);
+		}
+		
+	}
 	
 	@Test
 	public void testTagsSearch(){
@@ -229,7 +279,7 @@ public class HibernateTestClass {
 		AuthoritiesBusinessObject authBO = (AuthoritiesBusinessObject) ctx.getBean("authoritiesBusinessObject");
 		Users users = new Users();
 		String passPlainText = "pAssword1";
-		users.setUsername("taylorpt13");
+		users.setUsername("taylorpt1332");
 		System.out.println("userBO.encryptPassword(pAssword1) : "+userBO.encryptPassword("pAssword1"));
 		users.setPassword(userBO.encryptPassword("pAssword1"));
 		users.setEnabled("Y");
@@ -242,7 +292,7 @@ public class HibernateTestClass {
 		
 		Users usersRet = userBO.findUsersByUsername(users.getUsername());
 		userBO.delete(users, auth);
-		assertEquals("taylorpt13", usersRet.getUsername());
+		assertEquals("taylorpt1332", usersRet.getUsername());
 		assertEquals(true, userBO.checkPassword(usersRet.getPassword(), passPlainText));
 		
 		

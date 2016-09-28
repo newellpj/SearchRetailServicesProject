@@ -53,7 +53,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 	}
 	
 	public List<Books> findBooksByAnyCriteriaLazyLoad(HashMap<String, HashMap<String, String>> searchCriteria, int offset, int numberOfRecords){
-		
+		log.info("findBooksByAnyCriteriaLazyLoad");
 		Session session = this.getSessionFactory().openSession();
 		StringBuffer sqlAppender = new StringBuffer();
 		int count = 0;
@@ -61,7 +61,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		HashMap<String, String> tagsMap  = searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA);
 		HashMap<String, String> booksMap  = searchCriteria.get(SessionConstants.BOOKS_SEARCH_CRITERIA);
 		
-		if(tagsMap.size() > 0 && booksMap.size() > 0){
+		if(tagsMap != null && tagsMap.size() > 0 && booksMap != null && booksMap.size() > 0){
 			log.info("tags and books...................................");
 			HashMap<String, String> tagsKeyValues = searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA);
 			
@@ -149,12 +149,12 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			
 			return books;
 			
-		}else if(tagsMap.size() > 0 && booksMap.size() <= 0){
+		}else if((tagsMap != null && tagsMap.size() > 0) && (booksMap == null || booksMap.size() <= 0)){
 			//TODO the pagination part of this query set
 			log.info("tags only search criteria");
 			return findBooksByTagsLazyLoad(searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA), offset, numberOfRecords);
 			
-		}else if(booksMap.size() > 0){
+		}else if(booksMap != null && booksMap.size() > 0){
 			log.info("books only search criteria");
 			HashMap<String, String> booksSearchCriteria = searchCriteria.get(SessionConstants.BOOKS_SEARCH_CRITERIA);
 			
@@ -212,6 +212,8 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 	
 	
 	public List<Books> findBooksByTagsLazyLoad(HashMap<String, String> tagsKeyValues, int offset, int numberOfRecords){
+		
+		log.info("findBooksByTagsLazyLoad");
 		Session session = this.getSessionFactory().openSession();
 		
 		StringBuffer sqlAppender = new StringBuffer();
