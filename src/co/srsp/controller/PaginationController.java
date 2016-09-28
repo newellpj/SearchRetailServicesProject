@@ -121,21 +121,19 @@ public class PaginationController {
 		List<Books> booksList = new ArrayList<Books>();
 		
 		
-		
-		
 		HashMap<String, String> booksMap = (HashMap)request.getSession().getAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
 		
 		HashMap<String, String> tagsAndValueMap = (HashMap)request.getSession().getAttribute(SessionConstants.TAGS_SEARCH_CRITERIA);
 		
 		HashMap<String, HashMap<String, String>> searchCriteria = new HashMap<String, HashMap<String, String>>();
 		
-		if(booksMap.size() > 0){
+		if(booksMap != null && booksMap.size() > 0){
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
 		}else{
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
 		}
 		
-		if(tagsAndValueMap.size() > 0){
+		if(tagsAndValueMap != null && tagsAndValueMap.size() > 0){
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
 		}else{
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, new HashMap<String, String>());

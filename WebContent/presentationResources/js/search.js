@@ -69,24 +69,24 @@
 			
 			$scope.$watch('catCheck', function(newVal, oldVal, scope) {
 				$log.info("newVal : "+newVal);
-				if(newVal){
+				
 					$scope.catText.selectedOption = $scope.catText.availableOptions[0];
-				}
+				
 					
 			});
 			
 			$scope.$watch('langCheck', function(newVal, oldVal, scope) {
 				$log.info(newVal);
-				if(newVal){
+				
 					$scope.langText.selectedOption = $scope.langText.availableOptions[0];
-				}
+				
 			});
 			
 			$scope.$watch('genreCheck', function(newVal, oldVal, scope) {		
 				$log.info(newVal);
-				if(newVal){
+				
 					$scope.genreText.selectedOption = $scope.genreText.availableOptions[0];
-				}
+				
 			});
 
 
@@ -109,6 +109,8 @@
 				
 				document.getElementById("resultsSection").style.visibility = "visible";	
 				document.getElementById("bookRevList").innerHTML = ""; //this is the original search results div that gets displayed
+				
+				$log.info("inner html of  book rev list : "+document.getElementById("bookRevList").innerHTML);
 				
 				if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
 					
@@ -186,14 +188,20 @@
 						var testFirstElement = bookReviewsModelArray[0]['booksList'];
 					
 						$log.info('testFirstElement : '+testFirstElement);
+						$log.info('bookReviewsModelArray : '+bookReviewsModelArray.length);
 					
 						if("No Books Found!!" != testFirstElement){
-					
-							for(var i = 0; i < bookReviewsModelArray.length ;i++){
+							$log.info("we here again");
+							for(var i = 0; i < bookReviewsModelArray.length; i++){
 							
-								//$('.bookRevList').append("");
-								$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
-								//$('.bookRevList').append("</div>");
+								//$log.info("first book in array : "+$('.bookRevList').html());
+								
+								//$('.bookRevList').append("<div class='searchSegment'>");
+								
+								var formattedContent = "<div class='searchSegment'>"+formatBooksSearchContent(bookReviewsModelArray[i], $log)+"</div>"
+								
+								$('.bookRevList').append(formattedContent);
+							//	$('.bookRevList').append("</div>");
 		
 							}
 							
@@ -274,23 +282,25 @@
 	} 
 
 	
-	function formatBooksSearchContent(searchData){
-		 
+	function formatBooksSearchContent(searchData, $log){
+			$log.info("formatting");
 			var bookDetails =  searchData['booksList'];
 			var formattedMarkup = "";
+			 
+			$log.info("formatBooksSearchContent "+bookDetails); 
 			 
 			if("No books found" != bookDetails){
 							
 				bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
 				
-				formattedMarkup = "<div class='searchSegment'><div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
+				formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
 				+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
 				"<span style='font-family:courier;'><b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; <b>Publisher: </b>"
 				+searchData['publisherText']+"</span>"+
 				" <p style='font-size:x-small;!important'>"+searchData['excerpt']+
 				
 				"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
-				+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p></div>";
+				+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p>";
 			}
 			 
 			return formattedMarkup; 
