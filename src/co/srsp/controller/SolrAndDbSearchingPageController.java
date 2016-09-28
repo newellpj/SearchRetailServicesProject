@@ -192,7 +192,7 @@ public class SolrAndDbSearchingPageController {
 		
 			HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(request.getSession().getAttribute("bookTitleFound").toString(), 
 					request.getSession().getAttribute("bookAuthorFound").toString(),0,20);
-			request.getSession().setAttribute("currentPaginationOffset", 0);
+			request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
 			ArrayList<String> list = new ArrayList<String>();
 			
 			for(Books book : bookMap.keySet()){	
@@ -252,7 +252,7 @@ public class SolrAndDbSearchingPageController {
 		}else{
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
-			request.getSession().setAttribute("currentPaginationOffset", 0);
+			request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
 		}
 		
 		model.addObject("bookReviewsModel", bookReviewsModel);	
@@ -334,28 +334,28 @@ public class SolrAndDbSearchingPageController {
 		
 		request.getSession().removeAttribute("bookAuthorFound");
 		request.getSession().removeAttribute("bookTitleFound");
-		request.getSession().removeAttribute("currentPaginationOffset");
-		request.getSession().removeAttribute("searchType");
+		request.getSession().removeAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET);
+		request.getSession().removeAttribute(SessionConstants.SEARCH_TYPE_TAG);
 		request.getSession().removeAttribute(SessionConstants.TAGS_SEARCH_CRITERIA);
 		request.getSession().removeAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
-		request.getSession().removeAttribute("publisherText");
+		request.getSession().removeAttribute(SessionConstants.PUBLISHER_TEXT);
 		
 		return new BookReviewsModel();
 	}
 	
 	private void resetSearchSessionAttributes(HttpServletRequest request){
-		request.getSession().setAttribute("publisherText", "");
-		request.getSession().setAttribute("titleText", "");
-		request.getSession().setAttribute("authorText", "");
-		request.getSession().setAttribute("genreText", "");
-		request.getSession().setAttribute("catText", "");
-		request.getSession().setAttribute("langText", "");
-		request.getSession().setAttribute("searchType", "");
+		request.getSession().setAttribute(SessionConstants.PUBLISHER_TEXT, "");
+		request.getSession().setAttribute(SessionConstants.TITLE_TEXT, "");
+		request.getSession().setAttribute(SessionConstants.AUTHOR_TEXT, "");
+		request.getSession().setAttribute(SessionConstants.GENRE_TEXT, "");
+		request.getSession().setAttribute(SessionConstants.CATEGORY_TEXT, "");
+		request.getSession().setAttribute(SessionConstants.LANGUAGE_TEXT, "");
+		request.getSession().setAttribute(SessionConstants.SEARCH_TYPE_TAG, "");
 		request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA, null);
 		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, null);
 		
 		
-		request.getSession().setAttribute("currentPaginationOffset", 0);
+		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
 		request.getSession().setAttribute("solrSearchListReturned", null);
 		request.getSession().setAttribute("solrPaginationOffset", 0);
 		request.getSession().setAttribute("solrTitleQuery", "");
@@ -575,17 +575,17 @@ public class SolrAndDbSearchingPageController {
 		}
 		
 		resetSearchSessionAttributes(request);
-		log.info("request contain titleText ? : "+request.getParameter("titleText"));
-		log.info("request contain authorText ? : "+request.getParameter("authorText"));
-		log.info("request contain publisherText ? : "+request.getParameter("publisherText"));
+		log.info("request contain titleText ? : "+request.getParameter(SessionConstants.TITLE_TEXT));
+		log.info("request contain authorText ? : "+request.getParameter(SessionConstants.AUTHOR_TEXT));
+		log.info("request contain publisherText ? : "+request.getParameter(SessionConstants.PUBLISHER_TEXT));
 		
 		log.info("request contain lang text ? : "+request.getParameter("langText"));
 		
 		//log.info("author from map : "+bookReviewsModel.getAuthorText());
 		
-		String titleText = request.getParameter("titleText");
-		String authorText = request.getParameter("authorText");
-		String publisherText = request.getParameter("publisherText");
+		String titleText = request.getParameter(SessionConstants.TITLE_TEXT);
+		String authorText = request.getParameter(SessionConstants.AUTHOR_TEXT);
+		String publisherText = request.getParameter(SessionConstants.PUBLISHER_TEXT);
 		
 		//contains any search criteria the users has input from the search books page 
 		//they currently being - title, author, publisher, category, genre, language
@@ -594,28 +594,30 @@ public class SolrAndDbSearchingPageController {
 		
 		HashMap<String, String> tagsAndValueMap = new HashMap<String, String>();
 		
-		if(request.getParameter("genreText") != null && !"".equals(request.getParameter("genreText"))){
-			tagsAndValueMap.put("genreText", request.getParameter("genreText"));
-			log.info("genreText to search on : "+request.getParameter("genreText"));
+		if(request.getParameter(SessionConstants.GENRE_TEXT) != null && !"".equals(request.getParameter(SessionConstants.GENRE_TEXT))){
+			tagsAndValueMap.put(SessionConstants.GENRE_TEXT, request.getParameter(SessionConstants.GENRE_TEXT));
+			log.info("genreText to search on : "+request.getParameter(SessionConstants.GENRE_TEXT));
 		}
 		
-		if(request.getParameter("catText") != null && !"".equals(request.getParameter("catText"))){
-			log.info("catText to search on : "+request.getParameter("catText"));
+		if(request.getParameter(SessionConstants.CATEGORY_TEXT) != null && !"".equals(request.getParameter(SessionConstants.CATEGORY_TEXT))){
+			log.info("catText to search on : "+request.getParameter(SessionConstants.CATEGORY_TEXT));
 			
-			tagsAndValueMap.put("catText", request.getParameter("catText"));
+			tagsAndValueMap.put(SessionConstants.CATEGORY_TEXT, request.getParameter(SessionConstants.CATEGORY_TEXT));
 		}
 		
-		if(request.getParameter("langText") != null && !"".equals(request.getParameter("langText"))){
+		if(request.getParameter(SessionConstants.LANGUAGE_TEXT) != null && !"".equals(request.getParameter(SessionConstants.LANGUAGE_TEXT))){
 			log.info("lang text to search on : "+request.getParameter("langText"));
-			tagsAndValueMap.put("langText", request.getParameter("langText"));
+			tagsAndValueMap.put(SessionConstants.LANGUAGE_TEXT, request.getParameter(SessionConstants.LANGUAGE_TEXT));
 		}
 		
 		log.info("tags and value map size : "+tagsAndValueMap.size());
 		
 		if(tagsAndValueMap.size() > 0){
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
+			request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
 		}else{
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, new <String, String>HashMap());
+			request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA,  new <String, String>HashMap());
 		}
 
 		log.info("just before service instantiation !");
@@ -625,9 +627,9 @@ public class SolrAndDbSearchingPageController {
 		List<Books> booksList = new ArrayList<Books>();
 		log.info("just before test !");
 
-		request.getSession().setAttribute("publisherText", publisherText);
-		request.getSession().setAttribute("searchType", "findBooksByPublisherLazyLoad");
-		request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
+		request.getSession().setAttribute(SessionConstants.PUBLISHER_TEXT, publisherText);
+		request.getSession().setAttribute(SessionConstants.SEARCH_TYPE_TAG, SessionConstants.FIND_BY_BOOKS_BY_PUBLISHER_LAZY_LOAD);
+		
 		
 		HashMap<String, String> booksSearchCriteria = null;
 		
@@ -637,7 +639,7 @@ public class SolrAndDbSearchingPageController {
 				booksSearchCriteria = new HashMap<String, String>(); 
 			}
 			
-			booksSearchCriteria.put("title", titleText);
+			booksSearchCriteria.put(SessionConstants.TITLE_TEXT, titleText);
 			log.info("in here111");
 			//booksList.addAll(booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText")));
 		}
@@ -648,7 +650,7 @@ public class SolrAndDbSearchingPageController {
 				booksSearchCriteria = new HashMap<String, String>(); 
 			}
 			
-			booksSearchCriteria.put("author", authorText);
+			booksSearchCriteria.put(SessionConstants.AUTHOR_TEXT, authorText);
 		}
 		
 		if(publisherText != null && !"".equals(publisherText)){
@@ -656,20 +658,18 @@ public class SolrAndDbSearchingPageController {
 			if(booksSearchCriteria == null){
 				booksSearchCriteria = new HashMap<String, String>(); 
 			}
-			booksSearchCriteria.put("publisher", publisherText);
+			booksSearchCriteria.put(SessionConstants.PUBLISHER_TEXT, publisherText);
 			log.info("in here222");
 		}
 		
 		if(booksSearchCriteria != null && booksSearchCriteria.size() > 0){
+			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksSearchCriteria); 
 			request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, booksSearchCriteria);
 		}else{
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
+			request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
 		}
 		
-		
-		if(booksSearchCriteria != null){
-			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksSearchCriteria); 
-		}
 		
 		booksList.addAll(booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, 0, 20));
 
@@ -683,7 +683,7 @@ public class SolrAndDbSearchingPageController {
 		if(booksList == null || booksList.size() == 0){
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");
-			request.getSession().setAttribute("currentPaginationOffset", 0);
+			request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
 			log.info("no books found ");
 			booksStringViewList.add("No books found");
 		}

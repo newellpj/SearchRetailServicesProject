@@ -100,9 +100,7 @@ public class PaginationController {
 		}
 		
 		log.info("we getting in here retrieveNextSegment?");
-		
-		log.info("bookTitleFound retrieveNextSegment : "+request.getSession().getAttribute("bookTitleFound")); 
-		log.info("bookAuthorFound  retrieveNextSegment : "+request.getSession().getAttribute("bookAuthorFound")); 
+
 		
 		BookReviewsModel bookReviewsModel = new BookReviewsModel();
 		//bookReviewsModel.setBookTitleReview(request.getSession().getAttribute("bookTitleFound").toString());
@@ -110,7 +108,7 @@ public class PaginationController {
 		
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
 		
-		String currentOffsetInSession = request.getSession().getAttribute("currentPaginationOffset").toString();
+		String currentOffsetInSession = request.getSession().getAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET).toString();
 		
 		log.info("currentOffset : "+currentOffsetInSession);
 		
@@ -118,7 +116,7 @@ public class PaginationController {
 		
 		String searchType = request.getSession().getAttribute("searchType").toString();
 		log.info("search type : "+searchType);
-		int paginationOffset = Integer.parseInt(request.getSession().getAttribute("currentPaginationOffset").toString());
+		int paginationOffset = Integer.parseInt(request.getSession().getAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET).toString());
 		log.info("paginationOffset: "+paginationOffset);
 		List<Books> booksList = new ArrayList<Books>();
 		
@@ -133,13 +131,17 @@ public class PaginationController {
 		
 		if(booksMap.size() > 0){
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
+		}else{
+			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
 		}
 		
 		if(tagsAndValueMap.size() > 0){
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
+		}else{
+			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, new HashMap<String, String>());
 		}
 		
-		request.getSession().setAttribute("currentPaginationOffset", (paginationOffset +20));
+		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, (paginationOffset +20));
 		booksList = booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, paginationOffset+20, 20);
 		
 		log.info("size of booksList list returned : "+booksList.size());

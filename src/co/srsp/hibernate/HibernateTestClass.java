@@ -12,11 +12,13 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import co.srsp.constants.SessionConstants;
 import co.srsp.hibernate.orm.Authorities;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
 import co.srsp.hibernate.orm.Users;
 import co.srsp.service.UsersRolesAuthoritiesService;
+import junit.framework.Assert;
 
 public class HibernateTestClass {
 
@@ -43,16 +45,28 @@ public class HibernateTestClass {
 		
 		Books book2 = new Books();
 		book2.setIdbooks(9);
-		book2.setTitle("The plague goes on");
+		book2.setTitle("The Trial");
+		book2.setAuthor("Franz Kafka");
+		book2.setPublisher("Vintage");
+		book2.setThumbnailLocation("theTrial.png");
+		book2.setExcerpt("Someone must have been telling lies about Josef K., he knew he had done nothing wrong but, one morning, he was arrested."
+				+ " From its gripping first sentence onward, this novel exemplifies the term Kafkaesque."+
+				" Its darkly humorous narrative recounts a bank clerk's entrapment based on an undisclosed charge in a maze of nonsensical rules and"
+				+ " bureaucratic roadblocks. Written in 1914 and published posthumously in 1925, Kafka's engrossing parable about the human condition plunges"
+				+ " an isolated individual into an impersonal, illogical system. Josef K.'s ordeals raise provocative, ever-relevant issues related to the role "
+				+ " of government and the nature of justice. This inexpensive edition of one of the 20th century's most important novels features an acclaimed translation "
+				+ "by David Wyllie.");
 		
 		booksBO.update(book2);
-		book = booksBO.findBooksByTitleOnly("The Plague");
-		
+		book = booksBO.findBooksByTitleOnly("The Trial");
+		//booksBO.delete(book2, null);
 		System.out.println("2 book title : "+book.getTitle());
 		System.out.println("2 book author : "+book.getAuthor());
 		
 		
 	}
+	
+
 	
 	@Test
 	public void testTagsSearch(){
@@ -62,6 +76,31 @@ public class HibernateTestClass {
 		
 		//BooksBusinessObject booksBO = (BooksBusinessObject) ctx.getBean("booksBusinessObject");
 		TagsBusinessObject tagsBO = (TagsBusinessObject) ctx.getBean("tagsBusinessObject");
+		
+		HashMap<String, HashMap<String, String>> searchCriteriaMap = new HashMap<String, HashMap<String, String>>();
+		
+		HashMap<String, String> tagsMap = new HashMap<String, String>();
+		
+		tagsMap.put(SessionConstants.GENRE_TEXT, "Drama");
+		tagsMap.put(SessionConstants.LANGUAGE_TEXT, "English");
+		tagsMap.put(SessionConstants.CATEGORY_TEXT, "Fiction");
+		
+		HashMap<String, String> booksMap = new HashMap<String, String>();
+		
+		booksMap.put(SessionConstants.TITLE_TEXT, "The Trial");
+		booksMap.put(SessionConstants.AUTHOR_TEXT, "Franz Kafka");
+		booksMap.put(SessionConstants.PUBLISHER_TEXT, "Vintage");
+		
+		searchCriteriaMap.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsMap);
+		searchCriteriaMap.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
+		
+		List<Books> booksFound = tagsBO.findBooksByAnyCriteriaLazyLoad(searchCriteriaMap, 0, 20);
+		
+		assertNotNull(booksFound);
+		
+		if(booksFound != null){
+			assertTrue(booksFound.size() > 0);
+		}
 		
 		Books books = new Books();
 		books.setTitle("Fear and Loathing in Las Vegas");
@@ -74,9 +113,9 @@ public class HibernateTestClass {
 		map.put("catText", "Non-fiction");	
 		map.put("genreText", "Philosophy");	
 		
-		List<Books> booksFound = tagsBO.findBooksByTagsLazyLoad(map, 0, 20);
+		List<Books> booksFound2 = tagsBO.findBooksByTagsLazyLoad(map, 0, 20);
 		
-		for(Books book : booksFound){
+		for(Books book : booksFound2){
 			System.out.println("title :::: "+book.getTitle());
 			
 			assertNotNull(book.getTitle());

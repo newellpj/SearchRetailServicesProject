@@ -166,9 +166,9 @@
 						headers: {'Content-Type' : 'application/json'},
 						dataType: "JSON",
 						params: { 
-							titleText: titleText,
-							publisherText: publisherText,
-							authorText: authorText,
+							title: titleText,
+							publisher: publisherText,
+							author: authorText,
 							genreText: genreText,
 							catText: catText,
 							langText: langText
