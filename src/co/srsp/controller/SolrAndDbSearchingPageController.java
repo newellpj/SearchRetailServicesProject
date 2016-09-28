@@ -614,6 +614,8 @@ public class SolrAndDbSearchingPageController {
 		
 		if(tagsAndValueMap.size() > 0){
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, tagsAndValueMap);
+		}else{
+			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, new <String, String>HashMap());
 		}
 
 		log.info("just before service instantiation !");

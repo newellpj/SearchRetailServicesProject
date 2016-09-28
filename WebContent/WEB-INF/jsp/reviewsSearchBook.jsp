@@ -73,7 +73,7 @@ var html = $(".bookRevList").html();
 
 <button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
 
-<div ng-controller="searchPageController" ng-init="titleText='The Trial'; authorText=''; publisherText='Harper'" >
+<div ng-controller="searchPageController" ng-init="titleText='The Trial'; authorText='Franz Kafka'; publisherText='Vintage'" >
 	<div class="logoImg">
 		<img width='300' height='150' src='./presentationResources/images/eyeball.png' style='float:right; margin-right:28%; margin-top:3%;' />
 	</div>
@@ -148,7 +148,7 @@ var html = $(".bookRevList").html();
 		<form:form id="searchResults" class="searchResults">
 		
 			<div id="search" class="search" style="display:none; width:1000px !important;">
-				<ul id="bookRevList" class="bookRevList" ng-bind-html="formattedSearchData">				
+				<ul id="bookRevList" class="bookRevList">				
 				</ul>
 			</div>
 		

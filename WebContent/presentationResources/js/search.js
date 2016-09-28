@@ -136,9 +136,9 @@
 					var titleText = $scope.titleText;
 					var publisherText = $scope.publisherText;
 					var authorText = $scope.authorText;
-					var genreText = $scope.genreText;
-					var catText = $scope.catText;
-					var langText = $scope.langText;
+					var genreText = $scope.genreText.selectedOption.value;
+					var catText = $scope.catText.selectedOption.value;
+					var langText = $scope.langText.selectedOption.value;
 				
 					$log.info("publisher text ::: "+publisherText);
 					$log.info("langText text ::: "+langText);
@@ -191,9 +191,9 @@
 					
 							for(var i = 0; i < bookReviewsModelArray.length ;i++){
 							
-								$('.bookRevList').append("<div class='searchSegment'>");
+								//$('.bookRevList').append("");
 								$('.bookRevList').append(formatBooksSearchContent(bookReviewsModelArray[i]));
-								$('.bookRevList').append("</div>");
+								//$('.bookRevList').append("</div>");
 		
 							}
 							
@@ -283,14 +283,14 @@
 							
 				bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
 				
-				formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
+				formattedMarkup = "<div class='searchSegment'><div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
 				+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
 				"<span style='font-family:courier;'><b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; <b>Publisher: </b>"
 				+searchData['publisherText']+"</span>"+
 				" <p style='font-size:x-small;!important'>"+searchData['excerpt']+
 				
 				"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
-				+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p>";
+				+"&imageHeight="+searchData['imageHeight']+"&imageWidth="+searchData['imageWidth']+"&thumbnailLocation="+searchData['thumbnailLocation']+"'> Review this </p></div>";
 			}
 			 
 			return formattedMarkup; 
