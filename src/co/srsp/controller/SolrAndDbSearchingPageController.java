@@ -2,7 +2,6 @@ package co.srsp.controller;
 
 import java.awt.Image;
 import java.io.File;
-import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,13 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.ImageIcon;
-import javax.validation.Valid;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -30,21 +23,21 @@ import org.apache.tika.mime.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.srsp.config.ConfigHandler;
 import co.srsp.constants.SessionConstants;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
+import co.srsp.rss.handlers.HTMLHelper;
 import co.srsp.service.BooksAndReviewsService;
 import co.srsp.service.SolrSearchService;
 import co.srsp.solr.SolrSearchData;
 import co.srsp.viewmodel.BookReviewsModel;
-import co.srsp.viewmodel.UsersModel;
+import co.srsp.viewmodel.HTMLModel;
 
 @Controller
 public class SolrAndDbSearchingPageController {
@@ -210,7 +203,7 @@ public class SolrAndDbSearchingPageController {
 					// color: #f70;
 					//	content: "\2605";
 					
-					StringBuffer starRatingsHTMLBuffer = new StringBuffer();
+					String starRatingsHTMLBuffer = new String();
 					
 					//starRatingsHTMLBuffer.append("<div>");
 					
@@ -218,9 +211,7 @@ public class SolrAndDbSearchingPageController {
 					
 					if(bookRev.getStarRating() != null){
 						//for(int i = 0; bookRev.getStarRating() > i ;i++){
-							starRatingsHTMLBuffer.append("<div class=");
-							starRatingsHTMLBuffer.append("stars"+bookRev.getStarRating());
-							starRatingsHTMLBuffer.append("</div>");
+							starRatingsHTMLBuffer = "<div class='stars"+bookRev.getStarRating()+"'></div>";
 						//}
 					}
 				
@@ -241,17 +232,32 @@ public class SolrAndDbSearchingPageController {
 			
 			log.info("thumnbnailLocation :::: "+thumbnailLocation);
 			
+
+			
+			HTMLModel htmlModel = new HTMLModel();
+			htmlModel.setauthor(author);
+			htmlModel.settitle(title);
+			htmlModel.setimageHeight(imageHeight);
+			htmlModel.setimageWidth(imageWidth);
+			htmlModel.setpublisher(publisher);
+			htmlModel.setthumbnailLocation(thumbnailLocation);
+			htmlModel.setexcerpt(excerpt);
+			
+			HTMLHelper htmlHelper = new HTMLHelper();
+			String reviewsListFormattedHTML = htmlHelper.formatReviewBookOnlyHTML(htmlModel);
 	
 			
-			String formattedHTML = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageWidth+"' height='"+imageHeight
-					+"' src='"+thumbnailLocation+"' /></div>"+
-					"<span style='font-family:courier;'><b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b>Publisher: </b>"
-					+publisher+"</span>"+
-					" <p style='font-size:x-small;!important'>"+excerpt+"</p><br/>";
+			log.info("reviewsListHTML : "+reviewsListFormattedHTML);
 			
-			log.info("formattedHTML :::: "+formattedHTML);
+//			String formattedHTML = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageWidth+"' height='"+imageHeight
+//					+"' src='"+thumbnailLocation+"' /></div>"+
+//					"<span style='font-family:courier;'><b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b>Publisher: </b>"
+//					+publisher+"</span>"+
+//					" <p style='font-size:x-small;!important'>"+excerpt+"</p><br/>";
 			
-			model.addObject("formattedHTML", formattedHTML);
+			log.info("formattedHTML :::: "+reviewsListHTML);
+			
+			model.addObject("formattedHTML", reviewsListFormattedHTML);
 		}else{
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");

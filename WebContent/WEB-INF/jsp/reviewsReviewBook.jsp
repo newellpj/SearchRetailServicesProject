@@ -74,8 +74,6 @@ $(document).ready(function() {
 	
 		starRating = $("input[name='rating']:checked").val();
 		
-		alert("starRating : "+starRating);
-		
         if(starRating != null && starRating != '' && $("#reviewText").val().trim() != '') {
            $('#addReview').prop('disabled', false);
         }else{

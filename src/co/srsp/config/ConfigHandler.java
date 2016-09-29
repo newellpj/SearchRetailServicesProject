@@ -20,7 +20,7 @@ public class ConfigHandler {
 
 	private final static Logger log = Logger.getLogger(ConfigHandler.class); 
 	
-	public static final String CONFIG_ROOT_DIR = "../webapps/SearchRetailServicesProject/presentationResources/";
+	public static final String CONFIG_ROOT_DIR = "../webapps/iFindit4U/presentationResources/";
 	public static final String CONFIG_ROOT_DIR_UNIT_TEST = "./WebContent/presentationResources/";
 	
 	private static ConfigHandler instance = null;
@@ -92,6 +92,28 @@ public class ConfigHandler {
 
 	}
 	
+	public String readApplicationProperty(String propLabel ) {
+		Properties prop = new Properties();
+
+		log.info("USER DIR **************** "+ System.getProperty("user.dir"));
+		log.info("application properties path  ::: "+CONFIG_ROOT_DIR+"application.properties");
+		
+		
+		try(InputStream input = new FileInputStream(CONFIG_ROOT_DIR_UNIT_TEST+"application.properties")) {
+			// load a properties file
+			prop.load(input);
+			return prop.getProperty(propLabel);
+			
+
+		} catch(IOException ioe){
+			 ioe.printStackTrace();
+			 log.error(ioe.getMessage());
+		}
+		
+		return null;
+
+	}
+	
 	public String readConfigProperty(String propLabel ) {
 		Properties prop = new Properties();
 		
@@ -99,7 +121,7 @@ public class ConfigHandler {
 		try(InputStream input = new FileInputStream("config.properties")) {
 			// load a properties file
 			prop.load(input);
-			return prop.getProperty("propLabel");
+			return prop.getProperty(propLabel);
 			
 
 		} catch(IOException ioe){
@@ -116,6 +138,6 @@ public class ConfigHandler {
 	}
 	
 	public static void main(String args[]){
-		ConfigHandler.getInstance().readCSVFile("C:/Users/newelly/git/SearchRetailServicesProject/WebContent/presentationResources/stopwords.txt", ConfigHandler.LIST_RETURN_TYPE);
+		System.out.println(ConfigHandler.getInstance().readApplicationProperty("searchListHTML"));
 	}
 }

@@ -752,7 +752,6 @@ function renderTagList(obj){
 		var reviewTextVal = $('#reviewText').val();
 		var starRating = $("input[name='rating']:checked").val();
 		
-		alert("star rating : "+starRating);
 		
 		$.ajax({
 			url: 'addBookReview',
