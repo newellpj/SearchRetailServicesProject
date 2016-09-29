@@ -242,3 +242,4 @@ button.accordion:after {
 button.accordion.active:after {
     content: '\02795'; /* Unicode character for "minus" sign (-) */
 }
+

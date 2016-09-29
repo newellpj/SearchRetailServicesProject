@@ -417,5 +417,42 @@ span.ratingsText{
 }
 
 
+.stars0{
+	 width: 100px;
+    height: 18.5px;
+    background: url(../images/5stars.png) 0 0;
+}
+
+.stars1{
+	 width: 100px;
+    height: 18.5px;
+    background: url(../images/5stars.png) 0 91px;
+}
+
+.stars2{
+	 width: 100px;
+    height: 18.5px;
+    background: url(../images/5stars.png) 0 72.5px;
+}
+
+.stars3{
+	 width: 100px;
+    height: 18.5px;
+    background: url(../images/5stars.png) 0 54.5px;
+}
+
+.stars4{
+	 width: 100px;
+    height: 18.5px;
+    background: url(../images/5stars.png) 0 36px;
+}
+
+.stars5{
+	 width: 100px;
+    height: 18.5px;
+    background: url(../images/5stars.png) 0 18px;
+}
+
+
 
 
