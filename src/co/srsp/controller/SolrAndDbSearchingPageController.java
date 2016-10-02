@@ -32,7 +32,7 @@ import co.srsp.config.ConfigHandler;
 import co.srsp.constants.SessionConstants;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
-import co.srsp.rss.handlers.HTMLHelper;
+import co.srsp.markup.handlers.HTMLHelper;
 import co.srsp.service.BooksAndReviewsService;
 import co.srsp.service.SolrSearchService;
 import co.srsp.solr.SolrSearchData;
@@ -203,24 +203,27 @@ public class SolrAndDbSearchingPageController {
 					// color: #f70;
 					//	content: "\2605";
 					
-					String starRatingsHTMLBuffer = new String();
+				
 					
 					//starRatingsHTMLBuffer.append("<div>");
 					
 					log.info("bookRev.getStarRating() : "+bookRev.getStarRating());
 					
+					String starRating = "0";
+					
 					if(bookRev.getStarRating() != null){
-						//for(int i = 0; bookRev.getStarRating() > i ;i++){
-							starRatingsHTMLBuffer = "<div class='stars"+bookRev.getStarRating()+"'></div>";
-						//}
+						starRating = String.valueOf(bookRev.getStarRating());
 					}
 				
-					//starRatingsHTMLBuffer.append("</div>");
-				log.info("starRatingsHTMLBuffer : "+starRatingsHTMLBuffer.toString());
-				
-					String reviewsFormattedString = starRatingsHTMLBuffer.toString()+bookRev.getReviewText()+" - <b>reviewed by "+bookRev.getReviewersUsername()+"</b>";
-					log.info("reviewsFormattedString : "+reviewsFormattedString);
-					list.add(reviewsFormattedString);
+					HTMLModel htmlModel = new HTMLModel();
+					htmlModel.setstarRating(starRating);
+					htmlModel.setreviewersUserName(bookRev.getReviewersUsername());
+					htmlModel.setreviewerText(bookRev.getReviewText());
+					
+					HTMLHelper htmlHelper = new HTMLHelper();
+					String reviewsFormattedHTML = htmlHelper.formatReviewersHTML(htmlModel);
+			
+					list.add(reviewsFormattedHTML);
 				}
 			}
 			
@@ -244,20 +247,14 @@ public class SolrAndDbSearchingPageController {
 			htmlModel.setexcerpt(excerpt);
 			
 			HTMLHelper htmlHelper = new HTMLHelper();
-			String reviewsListFormattedHTML = htmlHelper.formatReviewBookOnlyHTML(htmlModel);
+			String reviewsBooksOnlyFormattedHTML = htmlHelper.formatReviewBookOnlyHTML(htmlModel);
 	
 			
-			log.info("reviewsListHTML : "+reviewsListFormattedHTML);
+			log.info("reviewsListHTML : "+reviewsBooksOnlyFormattedHTML);
+					
+			log.info("formattedHTML :::: "+reviewsBooksOnlyFormattedHTML);
 			
-//			String formattedHTML = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageWidth+"' height='"+imageHeight
-//					+"' src='"+thumbnailLocation+"' /></div>"+
-//					"<span style='font-family:courier;'><b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b>Publisher: </b>"
-//					+publisher+"</span>"+
-//					" <p style='font-size:x-small;!important'>"+excerpt+"</p><br/>";
-			
-			log.info("formattedHTML :::: "+reviewsListHTML);
-			
-			model.addObject("formattedHTML", reviewsListFormattedHTML);
+			model.addObject("formattedHTML", reviewsBooksOnlyFormattedHTML);
 		}else{
 			request.getSession().setAttribute("bookAuthorFound", "");
 			request.getSession().setAttribute("bookTitleFound", "");

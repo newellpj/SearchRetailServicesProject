@@ -1,4 +1,3 @@
-
 @media screen and (max-width:1600px){
 	button.accordion.responsive { width:50%;}
 	div.search-box.responsive {position: relative; padding:1em; margin-left:25%; width:60%;}
@@ -212,9 +211,9 @@ div.tagSearches{
 	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 	
 }
 
- select#genreSelect{background-color:rgba(255, 255, 255, 0.3);}
- select#categorySelect{background-color:rgba(255, 255, 255, 0.3);}
- select#languageSelect{background-color:rgba(255, 255, 255, 0.3);}
+ select#genreSelect{opacity:0.6;}
+ select#categorySelect{opacity:0.6;}
+ select#languageSelect{opacity:0.6;}
 
 button.accordion {
     background-color: #eee;
@@ -242,4 +241,3 @@ button.accordion:after {
 button.accordion.active:after {
     content: '\02795'; /* Unicode character for "minus" sign (-) */
 }
-

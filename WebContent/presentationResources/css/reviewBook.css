@@ -453,6 +453,16 @@ span.ratingsText{
     background: url(../images/5stars.png) 0 18px;
 }
 
+.starsNotRated{
+	width: 100px;
+    height: 18.5px;
+	color:black;
+	font-style: italic;
+	font-size: medium;
+	font-family:Arial;
+   
+}
+
 
 
 

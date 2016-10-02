@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import co.srsp.rss.handlers.RSSHandlerImpl;
-import co.srsp.rss.handlers.RSSHandlerInterface;
-import co.srsp.rss.handlers.SearchFilter;
+import co.srsp.markup.handlers.RSSHandlerImpl;
+import co.srsp.markup.handlers.RSSHandlerInterface;
+import co.srsp.markup.handlers.SearchFilter;
 import co.srsp.rss.model.FeedMessage;
 
 @Controller

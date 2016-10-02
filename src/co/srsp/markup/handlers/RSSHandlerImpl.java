@@ -1,4 +1,4 @@
-package co.srsp.rss.handlers;
+package co.srsp.markup.handlers;
 
 import java.awt.Image;
 import java.net.URL;

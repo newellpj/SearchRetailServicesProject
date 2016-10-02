@@ -1,4 +1,4 @@
-package co.srsp.rss.handlers;
+package co.srsp.markup.handlers;
 
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpSession;

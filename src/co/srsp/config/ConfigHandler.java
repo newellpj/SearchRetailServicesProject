@@ -25,6 +25,8 @@ public class ConfigHandler {
 	
 	private static ConfigHandler instance = null;
 	
+	public boolean underTest = false;
+	
 	public static ConfigHandler getInstance(){
 		if(instance == null){
 			instance = new ConfigHandler();
@@ -35,6 +37,16 @@ public class ConfigHandler {
 	private ConfigHandler(){	
 	}
 	
+	
+	
+	public boolean isUnderTest() {
+		return underTest;
+	}
+
+	public void setUnderTest(boolean underTest) {
+		this.underTest = underTest;
+	}
+
 	/**
 	 * type returned will be decided by the returnType param value passed
 	 * currently with string array or array list
@@ -98,8 +110,15 @@ public class ConfigHandler {
 		log.info("USER DIR **************** "+ System.getProperty("user.dir"));
 		log.info("application properties path  ::: "+CONFIG_ROOT_DIR+"application.properties");
 		
+		String propertiesDir = "";
 		
-		try(InputStream input = new FileInputStream(CONFIG_ROOT_DIR_UNIT_TEST+"application.properties")) {
+		if(this.isUnderTest()){
+			propertiesDir = CONFIG_ROOT_DIR_UNIT_TEST+"application.properties";
+		}else{
+			propertiesDir = CONFIG_ROOT_DIR+"application.properties";
+		}
+		
+		try(InputStream input = new FileInputStream(propertiesDir)) {
 			// load a properties file
 			prop.load(input);
 			return prop.getProperty(propLabel);
@@ -138,6 +157,15 @@ public class ConfigHandler {
 	}
 	
 	public static void main(String args[]){
+		
+		ConfigHandler configHandler = ConfigHandler.getInstance();
+		
+		if(args != null){
+			String param = args[0];
+			configHandler.setUnderTest(param.contains("t"));
+			
+		}
+		
 		System.out.println(ConfigHandler.getInstance().readApplicationProperty("searchListHTML"));
 	}
 }

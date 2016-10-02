@@ -30,10 +30,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import co.srsp.constants.SessionConstants;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
+import co.srsp.markup.handlers.HTMLHelper;
 import co.srsp.service.BooksAndReviewsService;
 import co.srsp.service.SolrSearchService;
 import co.srsp.solr.SolrSearchData;
 import co.srsp.viewmodel.BookReviewsModel;
+import co.srsp.viewmodel.HTMLModel;
 
 
 @Controller
@@ -79,7 +81,27 @@ public class PaginationController {
 			bookMap.get(book);
 			
 			for(BookReviews bookRev : bookMap.get(book)){
-				list.add(bookRev.getReviewText()+"<b> - reviewed by -  "+bookRev.getReviewersUsername()+"</b>");
+				
+				log.info("bookRev.getStarRating() : "+bookRev.getStarRating());
+				
+				String starRating = "0";
+				
+				if(bookRev.getStarRating() != null){
+					starRating = String.valueOf(bookRev.getStarRating());
+				}
+			
+				HTMLModel htmlModel = new HTMLModel();
+				htmlModel.setstarRating(starRating);
+				htmlModel.setreviewersUserName(bookRev.getReviewersUsername());
+				htmlModel.setreviewerText(bookRev.getReviewText());
+				
+				HTMLHelper htmlHelper = new HTMLHelper();
+				String reviewsFormattedHTML = htmlHelper.formatReviewersHTML(htmlModel);
+		
+				list.add(reviewsFormattedHTML);
+				
+				
+				//list.add(bookRev.getReviewText()+"<b> - reviewed by -  "+bookRev.getReviewersUsername()+"</b>");
 			}
 		}
 		
@@ -169,13 +191,26 @@ public class PaginationController {
 		String thumbLoc = getTrueThumbnailLocation(book);
 		HashMap imageDimensionsMap = getImageDimensions(thumbLoc, book);
 		
-		String formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageDimensionsMap.get("imageWidth")+"' height='"+imageDimensionsMap.get("imageHeight")
-		+"' src='"+thumbLoc+"'/></div>"+
-		"<span style='font-family:courier;'><b>Title : </b>"+book.getTitle()+"<b> Author : </b> "+book.getAuthor()+" &nbsp; <b>Publisher: </b>"
-		+book.getPublisher()+"</span> <p style='font-size:x-small;!important'>"+book.getExcerpt()+
-		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
-				+"&imageHeight="+imageDimensionsMap.get("imageHeight")+"&imageWidth="+imageDimensionsMap.get("imageWidth")+"&thumbnailLocation="+
-		     "./presentationResources/images/"+book.getThumbnailLocation()+"'> Review this </a> </p> </div>";
+		HTMLModel htmlModel = new HTMLModel();
+		htmlModel.setauthor(book.getAuthor());
+		htmlModel.settitle(book.getTitle());
+		htmlModel.setthumbnailLocation(book.getThumbnailLocation());
+		htmlModel.setimageHeight(String.valueOf(imageDimensionsMap.get("imageHeight")));
+		htmlModel.setimageWidth(String.valueOf(imageDimensionsMap.get("imageWidth")));
+		htmlModel.setexcerpt(book.getExcerpt());
+		htmlModel.setpublisher(book.getPublisher());
+		htmlModel.setbookDetails(bookDetails);
+		
+		HTMLHelper helper = new HTMLHelper();
+		String formattedMarkup = helper.formatSearchHTML(htmlModel);
+		
+//		String formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageDimensionsMap.get("imageWidth")+"' height='"+imageDimensionsMap.get("imageHeight")
+//		+"' src='"+thumbLoc+"'/></div>"+
+//		"<span style='font-family:courier;'><b>Title : </b>"+book.getTitle()+"<b> Author : </b> "+book.getAuthor()+" &nbsp; <b>Publisher: </b>"
+//		+book.getPublisher()+"</span> <p style='font-size:x-small;!important'>"+book.getExcerpt()+
+//		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
+//				+"&imageHeight="+imageDimensionsMap.get("imageHeight")+"&imageWidth="+imageDimensionsMap.get("imageWidth")+"&thumbnailLocation="+
+//		     "./presentationResources/images/"+book.getThumbnailLocation()+"'> Review this </a> </p> </div>";
 				
 		return formattedMarkup;
 	}

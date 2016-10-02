@@ -9,7 +9,37 @@ public class HTMLModel {
 	private String author;
 	private String publisher;
 	private String excerpt;
+	private String starRating;
+	private String reviewerText;
+	private String reviewersUserName;	
+	private String bookDetails;
 	
+	
+	
+	public String getbookDetails() {
+		return bookDetails;
+	}
+	public void setbookDetails(String bookDetails) {
+		this.bookDetails = bookDetails;
+	}
+	public String getstarRating() {
+		return starRating;
+	}
+	public void setstarRating(String starRating) {
+		this.starRating = starRating;
+	}
+	public String getreviewerText() {
+		return reviewerText;
+	}
+	public void setreviewerText(String reviewerText) {
+		this.reviewerText = reviewerText;
+	}
+	public String getreviewersUserName() {
+		return reviewersUserName;
+	}
+	public void setreviewersUserName(String reviewersUserName) {
+		this.reviewersUserName = reviewersUserName;
+	}
 	public String getimageWidth() {
 		return imageWidth;
 	}

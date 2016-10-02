@@ -1,4 +1,4 @@
-package co.srsp.rss.handlers;
+package co.srsp.markup.handlers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
