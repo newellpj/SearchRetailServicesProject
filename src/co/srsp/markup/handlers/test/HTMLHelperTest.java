@@ -61,6 +61,7 @@ public class HTMLHelperTest {
 		htmlModel.setauthor("Paul Newell");
 		htmlModel.settitle("My Homies");
 		htmlModel.setimageHeight("120");
+		htmlModel.setthumbnailLocFullPath("./presentationResources/images/that.png");
 		htmlModel.setimageWidth("110");
 		htmlModel.setpublisher("Harper Collins");
 		htmlModel.setthumbnailLocation("that.png");

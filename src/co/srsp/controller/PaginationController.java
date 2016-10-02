@@ -194,6 +194,7 @@ public class PaginationController {
 		HTMLModel htmlModel = new HTMLModel();
 		htmlModel.setauthor(book.getAuthor());
 		htmlModel.settitle(book.getTitle());
+		htmlModel.setthumbnailLocFullPath(thumbLoc);
 		htmlModel.setthumbnailLocation(book.getThumbnailLocation());
 		htmlModel.setimageHeight(String.valueOf(imageDimensionsMap.get("imageHeight")));
 		htmlModel.setimageWidth(String.valueOf(imageDimensionsMap.get("imageWidth")));

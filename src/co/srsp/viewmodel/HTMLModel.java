@@ -5,6 +5,7 @@ public class HTMLModel {
 	private String imageWidth;
 	private String imageHeight;
 	private String thumbnailLocation;
+	private String thumbnailLocFullPath;
 	private String title;
 	private String author;
 	private String publisher;
@@ -14,8 +15,13 @@ public class HTMLModel {
 	private String reviewersUserName;	
 	private String bookDetails;
 	
-	
-	
+
+	public String getthumbnailLocFullPath() {
+		return thumbnailLocFullPath;
+	}
+	public void setthumbnailLocFullPath(String thumbnailLocFullPath) {
+		this.thumbnailLocFullPath = thumbnailLocFullPath;
+	}
 	public String getbookDetails() {
 		return bookDetails;
 	}
