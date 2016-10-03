@@ -242,7 +242,12 @@ public class SolrAndDbSearchingPageController {
 			request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
 		}
 		
+		
+		log.info("request.getSession().getAttribute(bookTitleFound) !!!!"+request.getSession().getAttribute("bookTitleFound"));
+		
 		model.addObject("bookReviewsModel", bookReviewsModel);	
+		model.addObject("title", title);
+		model.addObject("author", author);
 		model.setViewName("reviewsReviewBook");
 		return model;
 	}

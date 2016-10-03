@@ -141,17 +141,18 @@ $(document).ready(function() {
 			<form:form id="reviewsForm"  method="post" commandName="bookReviewsModel">
 	
 	<div ng-controller="bookReviewSubmitter" >
+	
 		<table style="width:100%;">
 
 				<tr>
 					<td>Title:</td>
-					<td><input type='text' ng-model="titleText"  style="width:523px;" id="bookTitleReview" class="responsive" name='bookTitleReview' disabled="true" 
-					value='<%=session.getAttribute("bookTitleFound")%>'><span class="glyphicon glyphicon-book iconspanTitleAuth"></span></td>
+					<td><input type='text' style="width:523px;" id="bookTitleReview" class="responsive" name='bookTitleReview' disabled="true" 
+					value='<%=session.getAttribute("bookTitleFound")%>' /><span class="glyphicon glyphicon-book iconspanTitleAuth"></span></td>
 					<td><span style="visibility:hidden;" class="dummyTD">quick  brown</span></td>
 				</tr>
 				<tr>
 					<td>Author:</td>
-					<td><input type='text' ng-model="authorText" style="width:523px;" id="bookAuthorReview" name='bookAuthorReview' class="responsive"
+					<td><input type='text' style="width:523px;" id="bookAuthorReview" name='bookAuthorReview' class="responsive"
 					disabled="true" value='<%=session.getAttribute("bookAuthorFound")%>' /><span class="glyphicon glyphicon-pencil iconspanTitleAuth"></span></td>
 					<td><span style="visibility:hidden;" class="dummyTD">quick  brown</span></td>
 				</tr>
