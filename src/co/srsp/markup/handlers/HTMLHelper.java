@@ -81,10 +81,48 @@ public class HTMLHelper {
 		return searchListHTML;
 	}
 	
+	public String formatSearchDocsHTML(HTMLModel htmlModel){
+
+		String reviewsListHTML = ConfigHandler.getInstance().readApplicationProperty("searchDocsHTML")  +
+				 ConfigHandler.getInstance().readApplicationProperty("searchDocsHTML2") + 
+				 ConfigHandler.getInstance().readApplicationProperty("searchDocsHTML3") +
+				 ConfigHandler.getInstance().readApplicationProperty("searchDocsHTML4");
+		
+		String substitutionPlaceholders = ConfigHandler.getInstance().readApplicationProperty("searchDocsSubstitutionVars");
+		String[] subArray = substitutionPlaceholders.split(",");
+
+		System.out.println("subArray : "+subArray.length);
+		
+		for(int i = 0; i < subArray.length; i++){
+	
+			
+			System.out.println("sub array ::: "+subArray[i]);
+			
+			String subVar = subArray[i].trim();
+			
+			try{
+				java.lang.reflect.Method method = htmlModel.getClass().
+					getDeclaredMethod("get"+subVar, new Class[] {});
+			
+				Object obj = method.invoke(htmlModel);
+				String value = (obj != null) ? obj.toString() : "";
+				System.out.println("value : "+value);
+				reviewsListHTML = reviewsListHTML.replace(":"+subVar, value );
+				
+			}catch(Throwable t){
+				t.printStackTrace();
+				System.out.println("we in here ");
+			}
+		}
+		
+		return reviewsListHTML;
+		
+	}
+	
 	public String formatReviewersHTML(HTMLModel htmlModel){
 
 		String reviewsListHTML = ConfigHandler.getInstance().readApplicationProperty("reviewsStarRatingHTML")  +
-				 ConfigHandler.getInstance().readApplicationProperty("reivewsReviewTextHTML");
+				 ConfigHandler.getInstance().readApplicationProperty("reviewsReviewTextHTML");
 		
 		String substitutionPlaceholders = ConfigHandler.getInstance().readApplicationProperty("reviewsHTMLSubstititionVars");
 		String[] subArray = substitutionPlaceholders.split(",");
@@ -131,11 +169,15 @@ public class HTMLHelper {
 		htmlModel.setthumbnailLocation("that.png");
 		htmlModel.setexcerpt("That cat sat on that mat");
 		htmlModel.setbookDetails("My Homies - Paul Newell");
-
+		htmlModel.setdocID("My awesome document title");
+		htmlModel.setspecifiedDocumentContentExtract(" The quick brown fox jumped over the lazy dog. The quick brown fox jumped over. ");
+		htmlModel.setlargerContent(" The quick brown fox jumped over the lazy dog. The quick brown fox jumped over. "
+				+ " The quick brown fox jumped over the lazy dog. The quick brown fox jumped over. "+
+				  " The quick brown fox jumped over the lazy dog. The quick brown fox jumped over.");
 		
 		HTMLHelper helper = new HTMLHelper();
 		
-		System.out.println("formatted html returned : "+helper.formatSearchHTML(htmlModel));
+		System.out.println("formatted html returned : "+helper.formatSearchDocsHTML(htmlModel));
 		
 //		HTMLModel htmlModel = new HTMLModel();
 //		htmlModel.setstarRating("3");

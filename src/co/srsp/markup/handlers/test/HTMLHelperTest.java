@@ -75,4 +75,30 @@ public class HTMLHelperTest {
 		Assert.assertFalse(formattedHTML.contains("\""));
 	}
 	
+	@Test
+	public void testSearchDocsText(){
+		HTMLModel htmlModel = new HTMLModel();
+		htmlModel = new HTMLModel();
+		htmlModel.setauthor("Paul Newell");
+		htmlModel.settitle("My Homies");
+		htmlModel.setimageHeight("120");
+		htmlModel.setimageWidth("110");
+		htmlModel.setpublisher("Harper Collins");
+		htmlModel.setthumbnailLocation("that.png");
+		htmlModel.setexcerpt("That cat sat on that mat");
+		htmlModel.setbookDetails("My Homies - Paul Newell");
+		htmlModel.setdocID("My awesome document title");
+		htmlModel.setspecifiedDocumentContentExtract(" The quick brown fox jumped over the lazy dog. The quick brown fox jumped over. ");
+		htmlModel.setlargerContent(" The quick brown fox jumped over the lazy dog. The quick brown fox jumped over. "
+				+ " The quick brown fox jumped over the lazy dog. The quick brown fox jumped over. "+
+				  " The quick brown fox jumped over the lazy dog. The quick brown fox jumped over.");
+		
+		HTMLHelper helper = new HTMLHelper();
+		
+		System.out.println("formatted html returned : "+helper.formatSearchDocsHTML(htmlModel));
+		String formattedHTML = helper.formatSearchDocsHTML(htmlModel);
+		Assert.assertNotNull(formattedHTML); 
+		Assert.assertFalse(formattedHTML.contains("\""));
+		
+	}
 }

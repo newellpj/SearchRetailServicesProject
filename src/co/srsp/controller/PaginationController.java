@@ -206,13 +206,6 @@ public class PaginationController {
 		HTMLHelper helper = new HTMLHelper();
 		String formattedMarkup = helper.formatSearchHTML(htmlModel);
 		
-//		String formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+imageDimensionsMap.get("imageWidth")+"' height='"+imageDimensionsMap.get("imageHeight")
-//		+"' src='"+thumbLoc+"'/></div>"+
-//		"<span style='font-family:courier;'><b>Title : </b>"+book.getTitle()+"<b> Author : </b> "+book.getAuthor()+" &nbsp; <b>Publisher: </b>"
-//		+book.getPublisher()+"</span> <p style='font-size:x-small;!important'>"+book.getExcerpt()+
-//		"&nbsp; <a style='font-size:x-small;!important; font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails
-//				+"&imageHeight="+imageDimensionsMap.get("imageHeight")+"&imageWidth="+imageDimensionsMap.get("imageWidth")+"&thumbnailLocation="+
-//		     "./presentationResources/images/"+book.getThumbnailLocation()+"'> Review this </a> </p> </div>";
 				
 		return formattedMarkup;
 	}
@@ -449,6 +442,20 @@ public class PaginationController {
 			
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			log.info("author 2 : "+author);
+			
+			String specifiedDocumentContentExtract = solrService.extractSpecifiedDocumentContent(ssd.getid(), 600);
+
+			
+			HTMLModel htmlModel = new HTMLModel();
+			htmlModel.setauthor(author);
+			htmlModel.settitle(title);
+			htmlModel.setthumbnailLocation(ssd.getThumbnailLocation());
+			htmlModel.setdocID(ssd.getid());
+			htmlModel.setspecifiedDocumentContentExtract(specifiedDocumentContentExtract);
+			htmlModel.setlargerContent(largerContent);
+			HTMLHelper helper = new HTMLHelper();
+			helper.formatSearchDocsHTML(htmlModel);
+			
 			formattedList.add("<div style='float:left; margin-right:1.5em;' ><img src='"+ssd.getThumbnailLocation()+"' /></div>"
 					+ "<b>Title : </b>"+title+"<b> Author : </b> "+author+" &nbsp; <b> link to doc </b> <a href='file://///"+ssd.getid()+"'"+
 					" target="+"'"+"_blank"+"'"+">"+title+"</a><p style='font-size:x-small;!important'>"+solrService.extractSpecifiedDocumentContent(ssd.getid(), 600)+

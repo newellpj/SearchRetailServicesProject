@@ -14,8 +14,29 @@ public class HTMLModel {
 	private String reviewerText;
 	private String reviewersUserName;	
 	private String bookDetails;
-	
+	private String docID;
+	private String specifiedDocumentContentExtract;
+	private String largerContent;
+		
 
+	public String getdocID() {
+		return docID;
+	}
+	public void setdocID(String docID) {
+		this.docID = docID;
+	}
+	public String getspecifiedDocumentContentExtract() {
+		return specifiedDocumentContentExtract;
+	}
+	public void setspecifiedDocumentContentExtract(String specifiedDocumentContentExtract) {
+		this.specifiedDocumentContentExtract = specifiedDocumentContentExtract;
+	}
+	public String getlargerContent() {
+		return largerContent;
+	}
+	public void setlargerContent(String largerContent) {
+		this.largerContent = largerContent;
+	}
 	public String getthumbnailLocFullPath() {
 		return thumbnailLocFullPath;
 	}

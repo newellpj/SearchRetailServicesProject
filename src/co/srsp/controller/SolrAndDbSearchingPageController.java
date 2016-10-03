@@ -100,26 +100,6 @@ public class SolrAndDbSearchingPageController {
 	}
 	
 	
-//	@RequestMapping(value = { "/getBookReviewsList"}, method = RequestMethod.GET)
-//	public ModelAndView getBookReviewsList(HttpServletRequest request, HttpServletResponse response) {
-//		
-//		if(request.getSession() == null){
-//			return null;
-//		}
-//		
-//		//TODO add book review then bring back all back reviews with this one added - paginated!
-//		
-//		BooksAndReviewsService booksService = new BooksAndReviewsService();
-//		HashMap<Books, List<BookReviews>> bookMap = booksService.searchBookReviewsByTitleAndAuthor(
-//				request.getSession().getAttribute("bookTitleFound").toString(), 
-//				request.getSession().getAttribute("bookAuthorFound").toString());
-//		
-//		ModelAndView modelView = new ModelAndView("reviewsReviewBook");
-//		modelView.addObject("reviewsList", bookMap.values());
-//		return modelView;
-//	}
-	
-
 	
 	@RequestMapping(value = { "/reviewsReviewBook"}, method = RequestMethod.GET)
 	public ModelAndView addReviewsPage(HttpServletRequest request, HttpServletResponse response) {

@@ -307,12 +307,8 @@ function noBookToReview(){
     }
 
 
-	function switchActive(obj){
-		
-		var id = $(obj).attr("id");	
-		
-		//window.localStorage = 
-		
+	function switchActive(obj){		
+		var id = $(obj).attr("id");		
 		var html = $(obj).html();
 		var href = html.substring(html.indexOf('href')+6);
 		href = href.substring(0, href.indexOf('"'));
