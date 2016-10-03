@@ -85,13 +85,6 @@
 			<constructor-arg name="strength" value="11" />
 		   </bean>
 	  
-	  <bean id="reviewBookSessionBean" class="co.srsp.session.models.ReviewBookSessionBean"  scope="session">
-		 <aop:scoped-proxy/>
-   	</bean>  
-	   
-	<bean id="searchBookSessionBean" class="co.srsp.session.models.SearchBookSessionBean"  scope="session">
-		 <aop:scoped-proxy/>
-   	</bean>
    	
    	
 	   
