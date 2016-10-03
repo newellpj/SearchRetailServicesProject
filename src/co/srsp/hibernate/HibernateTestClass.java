@@ -100,8 +100,8 @@ public class HibernateTestClass {
 		tagsMap = new <String, String>HashMap();
 		
 		tagsMap.put(SessionConstants.GENRE_SELECT, "Drama");
-		tagsMap.put(SessionConstants.LANGUAGE_TEXT, "English");
-		tagsMap.put(SessionConstants.CATEGORY_TEXT, "Fiction");
+		tagsMap.put(SessionConstants.LANGUAGE_SELECT, "English");
+		tagsMap.put(SessionConstants.CATEGORY_SELECT, "Fiction");
 		
 		booksMap = null;
 		searchCriteriaMap = new HashMap<String, HashMap<String, String>>();

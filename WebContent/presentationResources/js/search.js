@@ -51,7 +51,7 @@
 				 selectedOption: {value: '', name: 'Please select..'} 
 			};
 			
-			$scope.langText = {
+			$scope.langSelect = {
 				availableOptions: [
 					 {value: '', name: 'Please select..'},
 					 {value: 'English', name: 'English'},
