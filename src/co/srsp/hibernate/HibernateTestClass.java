@@ -99,7 +99,7 @@ public class HibernateTestClass {
 		
 		tagsMap = new <String, String>HashMap();
 		
-		tagsMap.put(SessionConstants.GENRE_TEXT, "Drama");
+		tagsMap.put(SessionConstants.GENRE_SELECT, "Drama");
 		tagsMap.put(SessionConstants.LANGUAGE_TEXT, "English");
 		tagsMap.put(SessionConstants.CATEGORY_TEXT, "Fiction");
 		
@@ -131,9 +131,9 @@ public class HibernateTestClass {
 		
 		HashMap<String, String> tagsMap = new HashMap<String, String>();
 		
-		tagsMap.put(SessionConstants.GENRE_TEXT, "Drama");
-		tagsMap.put(SessionConstants.LANGUAGE_TEXT, "English");
-		tagsMap.put(SessionConstants.CATEGORY_TEXT, "Fiction");
+		tagsMap.put(SessionConstants.GENRE_SELECT, "Drama");
+		tagsMap.put(SessionConstants.LANGUAGE_SELECT, "English");
+		tagsMap.put(SessionConstants.CATEGORY_SELECT, "Fiction");
 		
 		HashMap<String, String> booksMap = new HashMap<String, String>();
 		

@@ -64,9 +64,7 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 		if(tagsMap != null && tagsMap.size() > 0 && booksMap != null && booksMap.size() > 0){
 			log.info("tags and books...................................");
 			HashMap<String, String> tagsKeyValues = searchCriteria.get(SessionConstants.TAGS_SEARCH_CRITERIA);
-			
-			
-			
+
 			for(String key : tagsKeyValues.keySet()){
 				
 				count++;

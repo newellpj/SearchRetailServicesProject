@@ -99,8 +99,8 @@ var html = $(".bookRevList").html();
 					
 					
 					<input id="genre" type="checkbox"  ng-model="genreCheck" name="genre" value="genre" ng-click="genreHide = !genreHide" />Genre 
-					<select ng-model="genreText.selectedOption" class="responsive" ng-hide="genreHide" style="width:30%; margin-left:1.7em; " id="genreSelect" 
-							ng-options="option.name for option in genreText.availableOptions track by option.value">
+					<select ng-model="genreSelect.selectedOption" class="responsive" ng-hide="genreHide" style="width:30%; margin-left:1.7em; " id="genreSelect" 
+							ng-options="option.name for option in genreSelect.availableOptions track by option.value">
 					
 					</select>
 				</div>		
@@ -109,8 +109,8 @@ var html = $(".bookRevList").html();
 					<input ng-model="authorText" id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
 					<input id="category" type="checkbox" ng-model="catCheck"  name="category" value="category" ng-click="categoryHide = !categoryHide" />Category
-					<select  ng-model="catText.selectedOption" name="catText" ng-hide="categoryHide" class="responsive" style="width:30%; margin-left:0.4em;" id="categorySelect" 
-					    ng-options="option.name for option in catText.availableOptions track by option.value" >
+					<select  ng-model="catSelect.selectedOption" name="catText" ng-hide="categoryHide" class="responsive" style="width:30%; margin-left:0.4em;" id="categorySelect" 
+					    ng-options="option.name for option in catSelect.availableOptions track by option.value" >
 					</select>
 	
 				</div>	
@@ -120,8 +120,8 @@ var html = $(".bookRevList").html();
 					<input ng-model="publisherText" id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
 					<input id="language" ng-model="langCheck" type="checkbox" name="language" value="language" ng-click="languageHide = !languageHide" />Language
-					<select ng-model="langText.selectedOption" ng-hide="languageHide" name="langText" class="responsive" style="width:30%;" id="languageSelect" 
-							ng-options="option.name for option in langText.availableOptions track by option.value" >	
+					<select ng-model="langSelect.selectedOption" ng-hide="languageHide" name="langText" class="responsive" style="width:30%;" id="languageSelect" 
+							ng-options="option.name for option in langSelect.availableOptions track by option.value" >	
 					</select>
 
 		          </div>	

@@ -23,7 +23,7 @@
 				 
 			});
 			
-			$scope.genreText = {
+			$scope.genreSelect = {
 				model: null,
 				availableOptions: [
 					 {value: '', name: 'Please select..'},
@@ -41,7 +41,7 @@
 				 selectedOption: {value: '', name: 'Please select..'} 
 			};
 			
-			$scope.catText = {
+			$scope.catSelect = {
 				model: null,
 				availableOptions: [
 					 {value: '', name: 'Please select..'},
@@ -70,7 +70,7 @@
 			$scope.$watch('catCheck', function(newVal, oldVal, scope) {
 				$log.info("newVal : "+newVal);
 				
-					$scope.catText.selectedOption = $scope.catText.availableOptions[0];
+					$scope.catSelect.selectedOption = $scope.catSelect.availableOptions[0];
 				
 					
 			});
@@ -78,14 +78,14 @@
 			$scope.$watch('langCheck', function(newVal, oldVal, scope) {
 				$log.info(newVal);
 				
-					$scope.langText.selectedOption = $scope.langText.availableOptions[0];
+					$scope.langSelect.selectedOption = $scope.langSelect.availableOptions[0];
 				
 			});
 			
 			$scope.$watch('genreCheck', function(newVal, oldVal, scope) {		
 				$log.info(newVal);
 				
-					$scope.genreText.selectedOption = $scope.genreText.availableOptions[0];
+					$scope.genreSelect.selectedOption = $scope.genreSelect.availableOptions[0];
 				
 			});
 
@@ -138,12 +138,12 @@
 					var titleText = $scope.titleText;
 					var publisherText = $scope.publisherText;
 					var authorText = $scope.authorText;
-					var genreText = $scope.genreText.selectedOption.value;
-					var catText = $scope.catText.selectedOption.value;
-					var langText = $scope.langText.selectedOption.value;
+					var genreSelect = $scope.genreSelect.selectedOption.value;
+					var catSelect = $scope.catSelect.selectedOption.value;
+					var langSelect = $scope.langSelect.selectedOption.value;
 				
 					$log.info("publisher text ::: "+publisherText);
-					$log.info("langText text ::: "+langText);
+					$log.info("langSelect text ::: "+langSelect);
 					
 					 var dlg = $("<div></div>").dialog({
 						hide: 'fade',
@@ -171,9 +171,9 @@
 							title: titleText,
 							publisher: publisherText,
 							author: authorText,
-							genreText: genreText,
-							catText: catText,
-							langText: langText
+							genreSelect: genreSelect,
+							catSelect: catSelect,
+							langSelect: langSelect
 						}
 					}).success(function(bookReviewsModelArray){
 						
@@ -254,7 +254,7 @@
 							
 							
 							 $(errorDialog).dialog("open");
-							 window.parent.location.href = 'logout'; 
+								
 							})
 
 			 }

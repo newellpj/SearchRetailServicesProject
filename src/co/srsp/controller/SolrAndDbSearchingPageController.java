@@ -334,9 +334,9 @@ public class SolrAndDbSearchingPageController {
 		request.getSession().setAttribute(SessionConstants.PUBLISHER_TEXT, "");
 		request.getSession().setAttribute(SessionConstants.TITLE_TEXT, "");
 		request.getSession().setAttribute(SessionConstants.AUTHOR_TEXT, "");
-		request.getSession().setAttribute(SessionConstants.GENRE_TEXT, "");
-		request.getSession().setAttribute(SessionConstants.CATEGORY_TEXT, "");
-		request.getSession().setAttribute(SessionConstants.LANGUAGE_TEXT, "");
+		request.getSession().setAttribute(SessionConstants.GENRE_SELECT, "");
+		request.getSession().setAttribute(SessionConstants.CATEGORY_SELECT, "");
+		request.getSession().setAttribute(SessionConstants.LANGUAGE_SELECT, "");
 		request.getSession().setAttribute(SessionConstants.SEARCH_TYPE_TAG, "");
 		request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA, null);
 		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, null);
@@ -581,20 +581,20 @@ public class SolrAndDbSearchingPageController {
 		
 		HashMap<String, String> tagsAndValueMap = new HashMap<String, String>();
 		
-		if(request.getParameter(SessionConstants.GENRE_TEXT) != null && !"".equals(request.getParameter(SessionConstants.GENRE_TEXT))){
-			tagsAndValueMap.put(SessionConstants.GENRE_TEXT, request.getParameter(SessionConstants.GENRE_TEXT));
-			log.info("genreText to search on : "+request.getParameter(SessionConstants.GENRE_TEXT));
+		if(request.getParameter(SessionConstants.GENRE_SELECT) != null && !"".equals(request.getParameter(SessionConstants.GENRE_SELECT))){
+			tagsAndValueMap.put(SessionConstants.GENRE_SELECT, request.getParameter(SessionConstants.GENRE_SELECT));
+			log.info("genreText to search on : "+request.getParameter(SessionConstants.GENRE_SELECT));
 		}
 		
-		if(request.getParameter(SessionConstants.CATEGORY_TEXT) != null && !"".equals(request.getParameter(SessionConstants.CATEGORY_TEXT))){
-			log.info("catText to search on : "+request.getParameter(SessionConstants.CATEGORY_TEXT));
+		if(request.getParameter(SessionConstants.CATEGORY_SELECT) != null && !"".equals(request.getParameter(SessionConstants.CATEGORY_SELECT))){
+			log.info("catText to search on : "+request.getParameter(SessionConstants.CATEGORY_SELECT));
 			
-			tagsAndValueMap.put(SessionConstants.CATEGORY_TEXT, request.getParameter(SessionConstants.CATEGORY_TEXT));
+			tagsAndValueMap.put(SessionConstants.CATEGORY_SELECT, request.getParameter(SessionConstants.CATEGORY_SELECT));
 		}
 		
-		if(request.getParameter(SessionConstants.LANGUAGE_TEXT) != null && !"".equals(request.getParameter(SessionConstants.LANGUAGE_TEXT))){
+		if(request.getParameter(SessionConstants.LANGUAGE_SELECT) != null && !"".equals(request.getParameter(SessionConstants.LANGUAGE_SELECT))){
 			log.info("lang text to search on : "+request.getParameter("langText"));
-			tagsAndValueMap.put(SessionConstants.LANGUAGE_TEXT, request.getParameter(SessionConstants.LANGUAGE_TEXT));
+			tagsAndValueMap.put(SessionConstants.LANGUAGE_SELECT, request.getParameter(SessionConstants.LANGUAGE_SELECT));
 		}
 		
 		log.info("tags and value map size : "+tagsAndValueMap.size());
