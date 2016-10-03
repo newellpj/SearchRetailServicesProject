@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
-	http://www.springframework.org/schema/aop 
-	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	 xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+	
 	 <bean id="authenticationSuccessHandlerWithoutReferer" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-  
-    <property name="useReferer" value="true" />
-</bean>
+    	<property name="useReferer" value="true" />
+     </bean>
 	
 	   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -18,7 +19,7 @@
 	   </bean>
 	   
 
-
+  
 	   
 	   <bean id="bookReviewsHibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 	   		<property name="dataSource" ref="dataSource" />
@@ -53,6 +54,7 @@
 		  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
 	    </bean>
    
+  
 		<bean id="loginController" class="co.srsp.controller.LoginController">  
 		    <property name="defaultTargetUrl" value="/reviews" />
 	    </bean>
@@ -63,6 +65,16 @@
    		<bean id="solrAndDbSearchController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
 	    </bean>
 	    
+	    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		    <property name="scopes">
+		        <map>
+		            <entry key="session">
+		                <bean class="org.springframework.context.support.SimpleThreadScope"/>
+		            </entry>
+		        </map>
+		    </property>
+		</bean>
+	    
 	    <bean id="testController" class="co.srsp.controller.TestController">  
 	    </bean>
 	    
@@ -72,7 +84,16 @@
 	      <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 			<constructor-arg name="strength" value="11" />
 		   </bean>
-	    
+	  
+	  <bean id="reviewBookSessionBean" class="co.srsp.session.models.ReviewBookSessionBean"  scope="session">
+		 <aop:scoped-proxy/>
+   	</bean>  
+	   
+	<bean id="searchBookSessionBean" class="co.srsp.session.models.SearchBookSessionBean"  scope="session">
+		 <aop:scoped-proxy/>
+   	</bean>
+   	
+   	
 	   
 	   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
 	   		<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
