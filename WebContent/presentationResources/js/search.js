@@ -254,7 +254,7 @@
 							
 							
 							 $(errorDialog).dialog("open");
-								
+							 window.parent.location.href = 'logout'; 
 							})
 
 			 }
