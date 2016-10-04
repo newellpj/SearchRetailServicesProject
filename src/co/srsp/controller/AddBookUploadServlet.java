@@ -98,7 +98,7 @@ public class AddBookUploadServlet extends HttpServlet {
 			                 fileSize = item.getSize();
 			                 log.info("22 file field name : "+fieldName);
 			                 log.info("22 file name : "+fileName);
-			                
+			                 log.info("22 item.getInputStream(): "+item.getInputStream());
 			                fileStream = item.getInputStream();
 			                
 			                loc = copyFile(fileStream, fileName);
@@ -234,18 +234,18 @@ public class AddBookUploadServlet extends HttpServlet {
 	
 	 protected String copyFile(InputStream fileInputStream, String fileName) throws IOException{ 
 
-	    	System.out.println("copyFile to fileName before truncate : "+fileName);
+	    	log.info("copyFile to fileName before truncate : "+fileName);
 	    	
-	    	String uploadPath = "C:/Tomcat_8/webapps/SearchRetailServicesProject/presentationResources/images";
+	    	String uploadPath = "../webapps/iFindit4U/presentationResources/images/";
 	    	String copiedFileNameAndPath = "";
 	    	if(!"".equals(fileName)){
 
 		        try { 
 		        	
-		        	System.out.println("copyFile to tempUploadDir : "+uploadPath);
-		        	System.out.println("copyFile to fileName : "+fileName);
+		        	log.info("copyFile to tempUploadDir : "+uploadPath);
+		        	log.info("copyFile to fileName : "+fileName);
 		        	
-		        	System.out.println("full file path : "+uploadPath +File.separator+ fileName);
+		        	log.info("full file path : "+uploadPath +File.separator+ fileName);
 
 		         	String uniqueFileNameIdentifier = UUID.randomUUID().toString();	
 		         	
@@ -255,8 +255,8 @@ public class AddBookUploadServlet extends HttpServlet {
 	        		
 	        		//fileEntity.setFilePath(copiedFileNameAndPath);
 	        		
-		         	System.out.println("path only : "+uploadPath);
-		         	System.out.println("copiedFileNameAndPath : "+copiedFileNameAndPath);
+	        		log.info("path only : "+uploadPath);
+	        		log.info("copiedFileNameAndPath : "+copiedFileNameAndPath);
 		         	
 		            OutputStream out = new FileOutputStream(new File(copiedFileNameAndPath));
 
@@ -273,16 +273,16 @@ public class AddBookUploadServlet extends HttpServlet {
 		            out.flush(); 
 		            out.close(); 
 		
-		            System.out.println("New file created!"); 
+		            log.info("New file created!"); 
 		
 		        } catch (IOException e) {
 		        	String errMsg = "error Copying file to tempupload directory "+copiedFileNameAndPath+" message="+e.getMessage(); 
-		        	System.out.println(errMsg);
+		        	log.error(errMsg);
 		        	throw new IOException(errMsg,e);
 		        }
 	    	}else{
 	    		String errMsg = "file name "+fileName+" is null or blank : ";
-	    		System.out.println(errMsg);
+	    		log.error(errMsg);
 	    		throw new IOException(errMsg);
 	    	}
 	    	

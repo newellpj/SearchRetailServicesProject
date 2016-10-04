@@ -2,7 +2,7 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <%@page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html ng-app="addBookApp">
 <head>
 
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
@@ -13,6 +13,8 @@
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jsCustomScript.js"></script>
+<script type="text/javascript" src="./presentationResources/js/angular.js"></script>
+<script type="text/javascript" src="./presentationResources/js/addItem.js"></script>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -32,56 +34,22 @@ Array.prototype.forEach.call( inputs, function( input )
 	input.addEventListener( 'change', function( e )
 	{
 		var fileName = '';
-		if( this.files && this.files.length > 1 )
+		if( this.files && this.files.length > 1 ){
 			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-		else
+		}else{
 			fileName = e.target.value.split( '\\' ).pop();
+		}
 
-		if( fileName )
+		if( fileName ){
 			$('.uploadLabel').html(fileName);
-
-		else
+		}else{
 			$('.uploadLabel').html("no file chosen");
+		}
 	
 	});
 });
 	
-	
-	if($("#titleTextAdd").val() == '' || $("#authorTextAdd").val() == ''){
-			$( '#addBook').prop('disabled', true);
-		}
-	 
-	  $('#authorTextAdd').keyup(function() {
-	     if($("#titleTextAdd").val() != '' && $("#authorTextAdd").val() != '') {
-	        $('#addBook').prop('disabled', false);
-	     }else{
-			$( '#addBook').prop('disabled', true);
-		 }
-	  });
-	  
-	  $('#titleTextAdd').keyup(function() {
-	     if($("#titleTextAdd").val() != '' && $("#authorTextAdd").val() != '') {
-	        $('#addBook').prop('disabled', false);
-	     }else{
-			$('#addBook').prop('disabled', true);
-		 }
-	  });
-	  
-	  $('#authorTextAdd').blur(function() {
-	     if($("#titleTextAdd").val() != '' && $("#authorTextAdd").val() != '') {
-	        $('#addBook').prop('disabled', false);
-	     }else{
-			$( '#addBook').prop('disabled', true);
-		 }
-	  });
-	  
-	  $('#titleTextAdd').blur(function() {
-	     if($("#titleTextAdd").val() != '' && $("#authorTextAdd").val() != '') {
-	        $('#addBook').prop('disabled', false);
-	     }else{
-			$('#addBook').prop('disabled', true);
-		 }
-	  });
+
 
 });
 
@@ -103,7 +71,7 @@ Array.prototype.forEach.call( inputs, function( input )
 <body background="./presentationResources/images/bgimg.jpg">
 
 <br/>
-	<div id="add-book-box" class="add-book-box responsive">
+	<div id="add-book-box" class="add-book-box responsive" ng-controller="addItemController">
 
 		
 
@@ -117,30 +85,31 @@ Array.prototype.forEach.call( inputs, function( input )
 		<p><span style="align-center;text-shadow: 0.5px 0.5px #a8a8a8;">Title and Author are mandatory</span></p>
 
 <br/>
-			<form:form id="reviewsForm" action="searchOrAddBook" method="post" commandName="bookReviewsModel">
+			<form:form id="reviewsForm" action="searchOrAddBook" method="post" commandName="bookReviewsModel" name="addItemForm" >
 
 		
 			
 				<div class="titleFields responsive">
 					Title:
-					<input id="titleTextAdd" class="responsive" type='text' name='titleTextAdd'><span class="glyphicon glyphicon-book iconspanAddBook" ></span> 
+					<input ng-model="titleText" id="titleTextAdd" class="responsive" type='text' name='titleTextAdd' required  /><span class="glyphicon glyphicon-book iconspanAddBook" ></span> 
 				</div>
 				
 				<div class="authorFields responsive">
 					Author:
-					<input  id="authorTextAdd" class="responsive" type='text' name='authorTextAdd' /><span class="glyphicon glyphicon-pencil iconspanAddBook"></span>
+					<input ng-model="authorText" id="authorTextAdd" class="responsive" type='text' name='authorTextAdd' required  /><span class="glyphicon glyphicon-pencil iconspanAddBook"></span>
 				</div>
 				<div class="publisherFields responsive">
 					Publisher:
-					<input id="publisherTextAdd" class="responsive" type='text' name='publisherTextAdd' /><span class="glyphicon glyphicon-barcode iconspanAddBook"></span>
+					<input ng-model="publisherText" id="publisherTextAdd" class="responsive" type='text' name='publisherTextAdd' required  /><span class="glyphicon glyphicon-barcode iconspanAddBook"></span>
 				</div>
 				<div class="excerptFields responsive">
 				   <div class="excerptLabel responsive" >Excerpt:</div>
-					<div class="textAreaExcept responsive"><textarea style="resize: none; height:212px; margin-left:4em;" maxlength="2000" id="excerptText" name="excerptText" rows="10" cols="63" ></textarea>
+					<div class="textAreaExcept responsive"><textarea ng-model="excerptText" style="resize: none; height:212px; margin-left:4em;" 
+					maxlength="2000" id="excerptText" name="excerptText" rows="10" cols="63" required ></textarea>
 					<span class="glyphicon glyphicon-comment iconspanReview responsive"></span></div>
 				</div>
-					<button id="addBook" name="addBook" class="responsive" type="button"
-						value="Add a book.." onclick="performAjaxAddBook();" >
+					<button id="addBook" name="addBook" class="responsive" type="button" ng-disabled="addItemForm.$invalid"
+						value="Add a book.." ng-click="addItem();" >
 						<span class="glyphicon glyphicon-plus-sign"  ></span>&nbsp; Add a Book... </button>
 						
 				
@@ -149,21 +118,32 @@ Array.prototype.forEach.call( inputs, function( input )
 				
 		
 			<br/><br/>
-			  <fieldset><p>
+			  <fieldset ng-controller="attributesAndUploadCtrl"><p>
                 <span style="align-center;text-shadow: 0.5px 0.5px #a8a8a8;">Add attributes to enable better searching</span></p>
                    <div class="tagSearches"> 
 						
-							<div id="genreSelection1" class="genreSelection1 responsive">
-								<input id="genre" type="checkbox" name="genre" value="genre" onclick="renderTagList($(this));"/>Genre 
-								<select style="visibility:hidden;" id="genreSelect"></select>
-							</div>
+		
+						
+						<div id="genreSelection1" class="genreSelection1 responsive">	
+							<input id="genre" type="checkbox"  ng-model="genreCheck" name="genre" value="genre" ng-click="genreHide = !genreHide" />Genre 
+							<select ng-model="genreSelect.selectedOption" class="responsive" ng-hide="genreHide" id="genreSelect" 
+									ng-options="option.name for option in genreSelect.availableOptions track by option.value">
+							</select>
+						</div>	
+							
 							<div class="categorySelection responsive">
-								<input id="category" type="checkbox" name="category" value="category" onclick="renderTagList($(this));" />Category
-								<select style="visibility:hidden;" id="categorySelect"></select>
+								<input id="category" type="checkbox" ng-model="catCheck"  name="category" value="category" ng-click="categoryHide = !categoryHide" />Category
+								<select  ng-model="catSelect.selectedOption" name="catText" ng-hide="categoryHide" class="responsive" id="categorySelect" 
+									ng-options="option.name for option in catSelect.availableOptions track by option.value" >
+								</select>
+								
 							</div>
 							<div class="languageSelection responsive">
-								<input id="language" type="checkbox" name="language" value="language" onclick="renderTagList($(this));" />Language
-								<select style="visibility:hidden;" id="languageSelect"></select>
+								<input id="language" ng-model="langCheck" type="checkbox" name="language" value="language" ng-click="languageHide = !languageHide" />Language
+								<select ng-model="langSelect.selectedOption" ng-hide="languageHide" name="langText" class="responsive"  id="languageSelect" 
+										ng-options="option.name for option in langSelect.availableOptions track by option.value" >	
+								</select>
+								
 							</div>
 					</div>
 					<br/>
