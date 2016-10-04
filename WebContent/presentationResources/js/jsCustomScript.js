@@ -743,8 +743,7 @@ function renderTagList(obj){
 		$(dlg).dialog("open");
 		
 		
-		var authorTextVal = $('#bookAuthorReview').val();
-		var titleTextVal = $('#bookTitleReview').val(); 
+
 		var reviewTextVal = $('#reviewText').val();
 		var starRating = $("input[name='rating']:checked").val();
 		

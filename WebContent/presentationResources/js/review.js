@@ -63,25 +63,22 @@
 					dataType: 'JSON',
 					method : 'GET',
 					headers: {'Content-Type' : 'application/json'},
-					dataType: "JSON",
 					params: { 
-						titleText: $('#bookTitleReview').val(),
-						authorText: $('#bookAuthorReview').val(), 
-						reviewText: $scope.reviewText,
-						starRating: $scope.starRating
-					},
-					processData: true,
-					contentType: 'application/json; charset=utf-8',
-					type: 'GET',
-					success:  function(bookReviewsModel) {
+							titleText: $('#bookTitleReview').val(),
+							authorText: $('#bookAuthorReview').val(), 
+							reviewText: $scope.reviewText,
+							starRating: $scope.starRating
+						}
+					}).success(function(bookReviewsModelArray){
+					
+						$log.info("success");
 						$(dlg).dialog("close");
 						window.location.href = 'reviewsReviewBook';
 						
-					 },
-
-				 error: function(e){
-
-			
+					 }).error(function(e){
+						
+						
+						$log.info("error");
 						$(dlg).dialog("close");
 
 						var errorDialog = $("<div></div>").dialog({
@@ -119,8 +116,7 @@
 							$('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 							 $(errorDialog).dialog("open");
 							 window.parent.location.href = 'logout'; 
-				 }
-				});  
+				 })
 
 			 }
 
