@@ -126,7 +126,9 @@ public class TagsBusinessObjectImpl extends HibernateDaoSupport implements TagsB
 			
 			//setProperties(booksValuesMap).setFirstResult(offset).setMaxResults(numberOfRecords).list();
 			
-			List list = session.createSQLQuery(sqlAppender.toString()).setFirstResult(offset).setMaxResults(numberOfRecords).list();
+			//List list = session.createSQLQuery(sqlAppender.toString()).setFirstResult(offset).setMaxResults(numberOfRecords).list();
+			
+			List list = session.createSQLQuery(sqlAppender.toString()).list();
 			
 			log.info("list size returned : "+list);
 			log.info("list size returned : "+list.size());

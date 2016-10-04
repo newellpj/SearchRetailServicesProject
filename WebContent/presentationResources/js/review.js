@@ -38,7 +38,7 @@
 	 
 		reviewsBookPageApp.controller('bookReviewSubmitter', function($scope, $http, $log) {
 		 
-			 $scope.add = function () {
+			 $scope.addBookReview = function () {
 			 
 				var dlg = $("<div></div>").dialog({
 					hide: 'fade',
@@ -54,22 +54,21 @@
 				$(dlg).dialog("open");
 				
 				
-				
 				var starRating =    //$("input[name='rating']:checked").val();
 				
-				$log.info("star rating found "+$.scope.starRating);
+				$log.info("star rating found "+$scope.starRating);
 				
-				$.http({
+				$http({
 					url: 'addBookReview',
 					dataType: 'JSON',
 					method : 'GET',
 					headers: {'Content-Type' : 'application/json'},
 					dataType: "JSON",
 					params: { 
-						titleText: $scope.titleText,
-						authorText: $scope.authorText, 
+						titleText: $('#bookTitleReview').val(),
+						authorText: $('#bookAuthorReview').val(), 
 						reviewText: $scope.reviewText,
-						starRating: $.scope.starRating
+						starRating: $scope.starRating
 					},
 					processData: true,
 					contentType: 'application/json; charset=utf-8',

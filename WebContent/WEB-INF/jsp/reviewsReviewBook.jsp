@@ -163,7 +163,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td colspan="1"></td><td colspan='2'><button id="addReview" class="responsive" name="addReview" type="button"
-						value="Add Review.." onclick="performAjaxAddReview();"><span class="glyphicon glyphicon-star glyphicon-star-empty"></span> Add Review..  </button> </td>
+						value="Add Review.." ng-click="addBookReview();"><span class="glyphicon glyphicon-star glyphicon-star-empty"></span> Add Review..  </button> </td>
 				</tr>
 			</table>
 	</div>			
