@@ -40,7 +40,6 @@ var html = $(".bookRevList").html();
 
 	
 	
-		//searchPageReadyInit();
 		var acc = document.getElementsByClassName("accordion");
 		var i;
 
