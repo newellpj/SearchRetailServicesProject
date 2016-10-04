@@ -26,6 +26,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.srsp.config.ConfigHandler;
 import co.srsp.service.BooksAndReviewsService;
 import co.srsp.viewmodel.BookReviewsModel;
 
@@ -236,7 +237,7 @@ public class AddBookUploadServlet extends HttpServlet {
 
 	    	log.info("copyFile to fileName before truncate : "+fileName);
 	    	
-	    	String uploadPath = "../webapps/iFindit4U/presentationResources/images/";
+	    	String uploadPath = ConfigHandler.getInstance().readApplicationProperty("applicationImagesLocation");
 	    	String copiedFileNameAndPath = "";
 	    	if(!"".equals(fileName)){
 

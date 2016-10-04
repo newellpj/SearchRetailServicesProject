@@ -40,7 +40,7 @@ var html = $(".bookRevList").html();
 
 	
 	
-		searchPageReadyInit();
+		//searchPageReadyInit();
 		var acc = document.getElementsByClassName("accordion");
 		var i;
 
@@ -90,7 +90,7 @@ var html = $(".bookRevList").html();
 		<p><span style="align-center; font-style:italic;">Please type in the criteria to find a book to review</span></p>
 
 
-			<form:form id="reviewsForm"  commandName="bookReviewsModel">
+			<form:form id="searchForm" name="searchForm"  commandName="bookReviewsModel">
 	
 	
 				<div class="titleAndGenre responsive" >
@@ -129,7 +129,9 @@ var html = $(".bookRevList").html();
 			  <div class="tagSearches responsive" ng-controller="searchSubmitter"> 
 					
 							
-								<button id="searchBook" class="searchBook responsive" name="searchBook" type="button"  ng-click="performBookSearch();" value="Search.." > 
+								<button id="searchBook" class="searchBook responsive" name="searchBook" type="button" 
+								 ng-disabled="titleText == '' && authorText == '' && publisherText == '' && langSelect.selectedOption.value == '' 
+											&& catSelect.selectedOption.value == '' && genreSelect.selectedOption.value == '' "  ng-click="performBookSearch();" value="Search.." > 
 								<span class="glyphicon glyphicon-eye-open" style="padding-right:0.5em;" ></span>Search...
 								</button>
 								<button id="resetSearch" class="resetSearch responsive" name="resetSearch" type="button" onclick="resetTheSearch();"  value="Reset" >

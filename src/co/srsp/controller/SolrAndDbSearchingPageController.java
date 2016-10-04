@@ -704,7 +704,7 @@ public class SolrAndDbSearchingPageController {
 			
 			try{
 				//file system relative references are different from web application relative references 
-				String fileURLPath = (loc.toLowerCase().contains("http")) ? loc : "../webapps/iFindit4U/presentationResources/images/"+book.getThumbnailLocation();
+				String fileURLPath = (loc.toLowerCase().contains("http")) ? loc : ConfigHandler.getInstance().readApplicationProperty("applicationImagesLocation")+book.getThumbnailLocation();
 				log.info( System.getProperty("user.dir"));
 				 
 				File file = new File(fileURLPath);
