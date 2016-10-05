@@ -44,23 +44,6 @@ $(document).ready(function() {
 	   }
 	 
 	  
-	
-    
-
-	 
-	// $("input[name='rating']:checked").val();
-	 $('input:radio[name=rating]').click(function() {
-		
-		starRating = $("input[name='rating']:checked").val();
-		alert('raio value : '+starRating);
-        if(starRating != null && starRating != '' && $("#reviewText").val().trim() != '') {
-           $('#addReview').prop('disabled', false);
-        }else{
-			 $('#addReview').prop('disabled', true); 
-		  }
-     });
-	 
-	 
 	 
 	 var acc = document.getElementsByClassName("accordionReviews");
 		var i;
