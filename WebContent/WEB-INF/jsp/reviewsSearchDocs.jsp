@@ -1,243 +1,153 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@page session="true"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="searchDocsApp" >
+<head>
+
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/docs.css">
+<link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
+
+<script type="text/javascript" src="./presentationResources/js/angular.js"></script>
+<script type="text/javascript" src="./presentationResources/js/searchDocs.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jsCustomScript.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery.jscroll.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery.jscroll.min.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery.ellipsis.js"></script>
 
 
-@media screen and (max-width:1600px){
-	button.accordion.responsive { width:50%;}
-	div.search-box.responsive {position: relative; padding:1em; margin-left:25%; width:60%;}
-		 div#resultsSection.resultsSection.responsive{position: relative; padding:1em; margin-left:25%; width:60%;}
-}
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Book Reviews</title>
+<head>
 
+<script>
+	$(document).ready(function() {
 
-@media screen and (max-width:1300px){
-	div.search-box.responsive {position: relative; padding:1em; margin-left:10em; width:70%;}
-	  button.accordion.responsive {position: relative; margin-left:10em; padding:1em; width:68%;}
-	 div.frameContainer.responsive{position: relative; padding:0; margin:0; width:100%;}
-	 div#resultsSection.resultsSection.responsive{position: relative; padding:1em; margin-left:10em; width:70%;}
-}
+		if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+			user_pref("capability.policy.policynames", "localfilelinks");
+			user_pref("capability.policy.localfilelinks.sites", "file:///C:/");
+			user_pref("capability.policy.localfilelinks.checkloaduri.enabled",  "allAccess");
+		}
 
-@media screen and (max-width:1080px){
- div#search-box.search-box.responsive {position: relative; padding:1em; margin:1em; min-width:90%;}
-  div.frameContainer.responsive{position: relative; padding:0; margin:0; width:90%;}
-  button.accordion.responsive {position: relative; margin:0.5em; padding:2em; width:90%;}
-   div#resultsSectionDocs.resultsSectionDocs.responsive{position: relative; padding:1em; margin:1em; min-width:90%;}
-   	 button#searchBook{min-width:45%; margin:0.5em;}
-	button#resetSearch{min-width:45%;margin:0.5em;}
-	div.tagSearches{margin:0;}
-}
-
-
-@media screen and (max-width:720px){
- div.search-box.responsive {position: relative; padding:0.4em; margin:0.5em; min-width:95%; display:block;}
- div#resultsSection.resultsSection.responsive {position: relative; padding:0.4em; margin:0.5em; min-width:95%; display:block;}
-
-	button.accordion.responsive {position: relative; margin:0.5em;  padding:2em; width:98%;}
-	 div.tagSearches.responsive{margin:0;min-width:98%;display:inline-block;}
-	 .searchBook.responsive{min-width:40%; margin:1.5em;}
-	.resetSearch.responsive{min-width:40%;margin:1.5em;}
+		
 	
-	input#titleText{min-width:83%; margin-bottom:1em;}
-
-	 
-	 input#authorText{min-width:83%; margin-bottom:1em;}
-	
-	 
-	 div.authorCategory.responsive{margin-left:1em;}
-	 div.publisherLang.responsive{margin-left:1em;}
-	 div.tagSearches.responsive{margin:0;}
-}
-
-
-
-@media screen and (max-width:600px){
-	 div.titleAndGenre.responsive{ display:block; margin:0.2em}
-	 div.authorCategory.responsive{ display:block; margin:0.2em}
-	 div.publisherLang.responsive{ display:block; margin:0.2em}
-	 
-	 input#titleText{min-width:85%; margin-bottom:1em;}
-	 select#genreSelect{min-width:70%; margin-bottom:1em;}
-	 
-	 input#authorText{min-width:80%; margin-bottom:1em;}
-	 button#searchBook.searchBook{min-width:95%; margin:0.5em; display:block;}
-	button#resetSearch.resetSearch{min-width:95%;margin:0.5em;display:block;}
-	div.tagSearches.responsive{display:block; min-width:99%; margin:0;}
-
-}
-
-@media screen and (max-width:540px){
-	input#titleText{min-width:80%; margin-bottom:1em;}
+		var html = $(".bookRevList").html();
+		 
+	//  if(html != 'undefined' && html != null){
+	//		
+		//  $('.search-box').jscroll({		  
+		//	loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+		//  });
+	//	  
+		 // $('.search').jscroll();
+	//	  
+	//   }
 
 	
-
-	 input#authorText{min-width:77%; margin-bottom:1em;}
-
-	 div.tagSearches.responsive{margin:0;min-width:98%;display:block;}
-	 .searchBook.responsive{min-width:90%; margin:0.5em;}
-	.resetSearch.responsive{min-width:90%;margin:0.5em;}
-
-}
-
-@media screen and (max-width:470px){
-		input#publisherText{min-width:70%; margin-bottom:1em;}
-}
-
-@media screen and (max-width:420px){
-	input#titleText{min-width:75%; margin-bottom:1em;}
-
-
-	input#authorText{min-width:71%; margin-bottom:1em;}
-
-
-
 	
-}
+		searchDocsPageInit();
+		var acc = document.getElementsByClassName("accordion");
+		var i;
 
-@media screen and (max-width:370px){
-	input#authorText{min-width:69%; margin-bottom:1em;}
-	input#publisherText{min-width:64%; margin-bottom:1em;}
-}
-
-@media screen and (max-width:350px){
-	input#titleText{min-width:73%; margin-bottom:1em; border-radius:7px 7px 7px 7px; border-right: solid 1.5px #dcdcdc;}
-	input#authorText{min-width:68%; margin-bottom:1em; border-radius:7px 7px 7px 7px; border-right: solid 1.5px #dcdcdc;}
-
-      .glyphicon-pencil{visibility:hidden;}
-	  .glyphicon-book{visibility:hidden;}
-
-}
-
-.docsSearchSegment{
-	border-top: 1px dotted #e9e9e9;
-	border-bottom: 1px dotted #e9e9e9;
-	border-right: 0px dotted;
-	border-left: 0px dotted;
-	min-height:3%;
-	max-height:3%;
-	margin:1em;
-	padding:5px ;
-	overflow:hidden ;
-	display: block;
-	min-width: 90%;
-	text-overflow: ellipsis !important;
-	white-space: normal;
-}
-
-#resultsSectionDocs{
-	visibility:hidden;
-	width: 40%;
-	padding: 2.5em;
-	margin-top: 3em;
-	margin-bottom: 3em;
-	margin-left: 33%;
-	background: #fff;
-	background-color: white;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-	box-shadow: 10px 10px 5px #888888;
-	border-radius: 10px 10px 10px 10px;
-}
-
-input#titleText{
-	min-width:50%;
-}
-
-input#authorText{
-	min-width:50%;
-}
-
-#tags{
-  float:left;
-  border:1px solid #ccc;
-  padding:5px;
-  font-family:Arial;
-  width: 75%;
-}
-
-div.tagSearches{
-	margin-left:15%;
-}
-
-div.titleFields{
-	width:100%;
-	margin-bottom:0.5em;
-	display:inline-block;
-	margin-left: 1.6em;
-}
-
-div.authorFields{
-	width:100%;
-	margin-bottom:0.5em;
-	display:inline-block;
-	margin-left: 0.5em;
-}
-
-div.tagFields{
-	width:100%;
-	margin-bottom:0.5em;
-	display:inline-block;
-	margin-left: 0.5em;
-}
-
-button#searchBook{
-	min-width:40%;
-}
-
-button#resetSearch{
-	min-width:40%;
-	}
-
-div.search-box{
-	width: 40%;
-	padding: 1em;
-	margin-left:33%;
-	margin-top:2em;
-	overflow:hidden;
-	background: #fff;
-	background-color: #ededed;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-	box-shadow: 10px 10px 5px #888888;
-	border-radius: 10px 10px 10px 10px;
-   display: block;
-   text-shadow: 0.5px 0.5px #a8a8a8;
-}
-
-button.accordion {
-    background-color: #eee;
-	background-image:url(../images/bgimg.jpg);
+		for (i = 0; i < acc.length; i++) {
+			acc[i].onclick = function(){
+				this.classList.toggle("active");
+				this.nextElementSibling.classList.toggle("hide");
+			}
+		}
+		
+		   
+	});
 	
-    color: #444;
-    cursor: pointer;
-    padding: 1em;
-    width: 40%;
-    text-align: left;
-    border: none;
-	margin-left:33%;
-    outline: none;
-    transition: 0.4s;
-}
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+     
+</script>
 
-button.accordion:after {
-    content: "\2796"; /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
-    color: #777;
-    float: right;
-    margin-left: 5px;
-}
+<style>
 
-.iconspanSearchDocs{
-	 float: center;
-    margin-right: 7px;
-    margin-top: 5px;
-    position: relative;
-	background-color: #A2C5D0;
-    color: #3D3C3A;
-	border: solid 1.5px #dcdcdc;
-	padding: 8px;
-	border-left: none;
-	border-radius: 0px 7px 7px 0px;
-}
+</style>
+</head>
+<body background="./presentationResources/images/bgimg.jpg">
 
-button.accordion.active:after {
-    content: '\02795'; /* Unicode character for "minus" sign (-) */
-}
+<br/>
+<button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Documents </span></button>
+	<div id="search-box" class="search-box responsive" ng-controller="searchDocsController" ng-init="titleText = ''; authorText = ''; keywordText= '';" >
+
+
+
+		<c:if test="${not empty error}">
+			<div class="error alert alert-error">${error}</div>
+		</c:if>
+		<c:if test="${not empty message}">
+			<div class="message">${message}</div>
+		</c:if>
+
+		
+		<p><span style="align-center; font-style:italic;">Please type in the criteria to find documents to view</span></p>
+		
+			<form:form id="reviewsForm"  commandName="bookReviewsModel">
+	
+			<div class="titleFields responsive">
+			
+					Title:
+					<input ng-model="titleText" id="titleText" type='text' name='titleText'><span class="glyphicon glyphicon-book iconspanSearchDocs"></span>		
+						<span style="visibility:hidden;"> hidden text for placeholder hidde text .</span>
+				
+			</div>
+			<div class="authorFields">
+					Author:
+					<input ng-model="authorText" id="authorText" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspanSearchDocs"></span>
+					<span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span>
+			</div>
+			<div class="tagFields">	
+					Keywords (comma separated): </br></br>
+					<div id="tags" ><input id="keywordsText" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>
+							<span>Java</span>
+							<span>Javascript</span>
+							<span>JQuery</span>
+							<span>Angular</span>
+						</div>
+			</div>
+		
+			  <div class="tagSearches responsive"> 
+					<button id="searchBook" class="searchBook" name="searchBook" type="button" ng-click="performDocSearch();" 
+							ng-disabled="titleText == '' && authorText == ''" value="Search.." > 
+					<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;"  ></span>Search...
+					</button>
+					<button id="resetSearch" class="resetSearch"  name="resetSearch" type="button" onclick="resetDocSearch();"  value="Reset" >
+							<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
+					</button>	
+			   </div>		
+			<br/>		
+		</form:form>
+</div>	
+
+<div id="resultsSectionDocs" class="resultsSectionDocs responsive">
+		<form:form id="searchResults" class="searchResults">	
+			<div id="search" class="search" >
+				<ul id="bookRevList" class="bookRevList" >				
+				</ul>
+			</div>
+		
+		</form:form>
+</div>		
+		
+	
+
+<div class="facebookFooter" >
+	<div id="fb-root" ></div>
+<div class="fb-like" data-href="http://www.w3schools.com/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
+</body>
+</html>

@@ -1,3 +1,6 @@
+//remember to always use ng-init to initialise html input elements to empty string '' so you can test
+//for empty string only to enable or disable a  button or other component 
+
 (function(angular) {
 
 	var reviewsBookPageApp  = angular.module('reviewsBookPageApp', []);
@@ -5,10 +8,10 @@
 
 		reviewsBookPageApp.controller('reviewPageController', function($scope, $log) {
 		 $log.info("11 title text from search page controller : "+$scope.titleText);
-			 $scope.$watch('reviewText', function(newVal, oldVal, scope) {
+			 $scope.$watch('starRating', function(newVal, oldVal, scope) {
 				 
-				// $log.info("newVal : "+newVal);
-				//  $log.info("we are here1 "+$scope.titleText);
+				 $log.info("newVal : "+newVal);
+				  $log.info("we are here1 "+$scope.titleText);
 				 if(newVal != undefined){
 				 
 					//$scope.authorText = "My Author : "+newVal;

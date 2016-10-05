@@ -44,38 +44,15 @@ $(document).ready(function() {
 	   }
 	 
 	  
-	  if($("#reviewText").val().trim() == ''){
-		$( '#addReview').prop('disabled', true);
-	  }
-	  
-	 
-	  
-	  if($("#bookTitleReview").val() == null || $("#bookTitleReview").val().trim() == ''){
-		  $("#reviewText").prop('disabled', true); 
-		  noBookToReview();
-	  }
+	
     
-     $('#reviewText').keyup(function() {
-        if(starRating != null && starRating != '' && $("#reviewText").val().trim() != '') {
-           $('#addReview').prop('disabled', false);
-        }else{
-			 $('#addReview').prop('disabled', true); 
-		  }
-     });
-	 
-	 $('#reviewText').blur(function() {
-        if(starRating != null && starRating != '' && $("#reviewText").val().trim() != '') {
-           $('#addReview').prop('disabled', false);
-        }else{
-			 $('#addReview').prop('disabled', true); 
-		  }
-     });
+
 	 
 	// $("input[name='rating']:checked").val();
 	 $('input:radio[name=rating]').click(function() {
-	
-		starRating = $("input[name='rating']:checked").val();
 		
+		starRating = $("input[name='rating']:checked").val();
+		alert('raio value : '+starRating);
         if(starRating != null && starRating != '' && $("#reviewText").val().trim() != '') {
            $('#addReview').prop('disabled', false);
         }else{
@@ -117,7 +94,7 @@ $(document).ready(function() {
 
 <button class="glyphicon glyphicon-search accordionReviews responsive"> <span style="font-family:Arial;">Show or Hide Review Books </span></button>
 
-	<div id="add-reviews-box" class="add-reviews-box responsive" ng-controller="reviewPageController" >
+	<div id="add-reviews-box" class="add-reviews-box responsive" ng-controller="reviewPageController"  ng-init="titleText = ''; authorText= ''; reviewText = ''; starRating = '0';">
 
 		<h3>Add a Book Review</h3>
 	    <span style="font-weight: normal;font-style:italic; text-shadow: 0.5px 0.5px #a8a8a8; margin-top:8px; float:left;">Please rate this book :</span>	
@@ -162,8 +139,11 @@ $(document).ready(function() {
 					<span class="glyphicon glyphicon-comment iconspanReview responsive"></span></td>
 				</tr>
 				<tr>
-					<td colspan="1"></td><td colspan='2'><button id="addReview" class="responsive" name="addReview" type="button"
-						value="Add Review.." ng-click="addBookReview();"><span class="glyphicon glyphicon-star glyphicon-star-empty"></span> Add Review..  </button> </td>
+					<td colspan="1"></td><td colspan='2'>
+					
+					<button id="addReview" class="responsive" name="addReview" type="button"
+						value="Add Review.." ng-click="addBookReview();" 
+						ng-disabled=" reviewText == '' || starRating == '0' "><span class="glyphicon glyphicon-star glyphicon-star-empty"></span> Add Review..  </button> </td>
 				</tr>
 			</table>
 	</div>			

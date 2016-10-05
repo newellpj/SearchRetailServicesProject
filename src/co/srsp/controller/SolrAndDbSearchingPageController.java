@@ -560,6 +560,7 @@ public class SolrAndDbSearchingPageController {
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel[] searchBook(HttpServletRequest request, HttpServletResponse response){
 		
+		
 		log.info("request.getSession() : "+request.getSession());
 		
 		if(request.getSession() == null){

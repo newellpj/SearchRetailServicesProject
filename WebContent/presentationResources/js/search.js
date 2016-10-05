@@ -1,3 +1,6 @@
+//remember to always use ng-init to initialise html input elements to empty string '' so you can test
+//for empty string only to enable or disable a  button or other component 
+
 (function(angular) {
 
 	var searchBookApp  = angular.module('searchBookPageApp', []);
@@ -10,18 +13,6 @@
 			 $scope.categoryHide = true;
 			 $scope.languageHide = true;
 			 
-			 $scope.$watch('titleText', function(newVal, oldVal, scope) {
-				 
-				// $log.info("newVal : "+newVal);
-				//  $log.info("we are here1 "+$scope.titleText);
-				 if(newVal != undefined){
-				 
-					//$scope.authorText = "My Author : "+newVal;
-				 }
-				 
-				   
-				 
-			});
 			
 			$scope.genreSelect = {
 				model: null,
