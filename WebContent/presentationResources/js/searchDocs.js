@@ -122,7 +122,7 @@
 					}).error(function(data, status){
 									$(dlg).dialog("close");
 
-				var errorDialog = $("<div></div>").dialog({
+						var errorDialog = $("<div></div>").dialog({
 						hide: 'fade',
 						maxWidth: 300,
 						modal: true,
@@ -133,6 +133,7 @@
 							'class': 'btn btn-primary',
 							click: function(e) {
 								$(this).dialog("close");
+								window.parent.location.href = 'logout'; 
 							},
 							text: 'OK'
 						}
@@ -141,15 +142,11 @@
 						title: 'Could NOT find book!',
 						width: ( 300 )
 					});
+					
+					
+					
+					var msg = "There was an error retrieving book : "+status
 
-					
-					
-					var msg = e.errorMessage;
-					
-					if('undefined' == msg || msg == null){
-							msg = "There was an error retrieving book";
-					}
-					
 					$(errorDialog).html('<p>'+msg+'</p>');
 					
 			        $('.ui-dialog-buttonset').css("backgroundImage", "url('')");
@@ -159,7 +156,7 @@
 					 
 					 
 					 
-					window.parent.location.href = 'logout'; 
+					
 				})
 
 			 }
