@@ -225,6 +225,19 @@ button.accordion:after {
     margin-left: 5px;
 }
 
+.iconspanSearchDocs{
+	 float: center;
+    margin-right: 7px;
+    margin-top: 4px;
+    position: relative;
+	background-color: #A2C5D0;
+    color: #3D3C3A;
+	border: solid 1.5px #dcdcdc;
+	padding: 8px;
+	border-left: none;
+	border-radius: 0px 7px 7px 0px;
+}
+
 button.accordion.active:after {
     content: '\02795'; /* Unicode character for "minus" sign (-) */
 }
