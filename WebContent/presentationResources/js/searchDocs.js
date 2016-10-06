@@ -94,28 +94,36 @@
 						
 						document.getElementById("search").style.display = "inline";
 
-						for(var i = 0; i < returnList.length ;i++){
+						if(returnList.length == 0){
+							$('.bookRevList').append("<div style='font-style: italic; font-size:15px;'> No documents found </div>");	
+								
+						}else{
+						
+							for(var i = 0; i < returnList.length ;i++){
 
+								
+								$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
+								$('.bookRevList').append("</div>");
+								
+								var ID = '#item'+i;
+								
+								//$log.info("return  list !!@!@ "+returnList[i]['largercontent']);
+								
+								$(ID).html(formatDocSearchContent(returnList[i], $log));	
+								//toggleReadMoreSearchResults(ID);
+							}
 							
-							$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
-							$('.bookRevList').append("</div>");
+							$(".search").append("<div class='next'><a href='retrieveNextSearchDocsSegment'>"+""+"</a> </div>");
+						
+							$('.resultsSectionDocs').jscroll({		  
+								loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+							});
 							
-							var ID = '#item'+i;
+							$('a').click( function(e) {
+								e.preventDefault();
+							});
 							
-							$(ID).html(formatDocSearchContent(returnList[i]));	
-							//toggleReadMoreSearchResults(ID);
 						}
-						
-						
-						$(".search").append("<div class='next'><a href='retrieveNextSearchDocsSegment'>"+""+"</a> </div>");
-						
-						$('.resultsSectionDocs').jscroll({		  
-							loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
-						});
-						
-						$('a').click( function(e) {
-							e.preventDefault();
-						});
 						
 						$(dlg).dialog("close");
 					
@@ -154,9 +162,6 @@
 					
 					 $(errorDialog).dialog("open");
 					 
-					 
-					 
-					
 				})
 
 			 }
@@ -197,21 +202,20 @@
 
 			$(dlg).resizable();
 			
-			$(fullTextDiv).css('display', 'inline-block');
+		//	$(fullTextDiv).css('display', 'inline-block');
 			
 			$(dlg).html("<div class='dialogStyles'  style='padding:10px; text-shadow:none!important;'>"+$(fullTextDiv).html()+"<div>");			
 			$(dlg).dialog("open");
 			
 	 }
 	
-	 function formatDocSearchContent(searchData){
-	 
-	 
-	 
+	 function formatDocSearchContent(searchData, $log){
+
 		var formattedMarkup =  "<div style='float:left; margin-right:1.5em;' ><img src='"+searchData['thumbnailLocation']+"' /></div>"+
 		"<b>Title : </b>"+searchData['title']+"<b> Author : </b> "+searchData['author']+" &nbsp; <b> link to doc </b> <a href='file://///"+searchData['id']+"'"+
 		" target="+"'"+"_blank"+"'"+">"+searchData['title']+"</a><p style='font-size:x-small;!important'>"+searchData['extract']+
-		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+searchData['largerContent']+"</div>";
+		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+searchData['largercontent']+"</div>";
+	 
 	 
 		return formattedMarkup;
 	}

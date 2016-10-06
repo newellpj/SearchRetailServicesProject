@@ -515,6 +515,9 @@ public class SolrAndDbSearchingPageController {
 			
 			String author = ssd.getauthor().replaceAll("\\[", "").replaceAll("\\]","");
 			
+			
+			log.info("larger content :::: "+largerContent);
+			
 			ssd.setauthor(author);
 			ssd.settitle(title);
 			ssd.setlargercontent(largerContent);
@@ -552,6 +555,7 @@ public class SolrAndDbSearchingPageController {
 			count++;
 		}
 
+	
 		request.getSession().setAttribute("solrSearchListReturned", returnList);		
 		log.info("list to return is : "+returnList.size());
 		return returnArray;
