@@ -177,7 +177,7 @@
 		
 		 var fullTextDiv = $(".fullContent");	
 		 
-		 var dlg = $("<div class='dialogStyles'></div>").dialog({
+		 var dlg = $("<div class='dialogStyles responsive'></div>").dialog({
 			   buttons : [{
 					'class' : 'dialogButton',
 					click : function(e) {

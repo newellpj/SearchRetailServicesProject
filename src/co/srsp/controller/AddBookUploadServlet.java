@@ -24,6 +24,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
+import org.apache.tika.config.TikaConfig;
+import org.apache.tika.detect.DefaultDetector;
+import org.apache.tika.detect.Detector;
+import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.mime.MediaType;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.srsp.config.ConfigHandler;
@@ -32,7 +38,6 @@ import co.srsp.viewmodel.BookReviewsModel;
 
 @WebServlet(name = "AddBookUploadServlet", urlPatterns = {"/addNewBook"})
 @MultipartConfig
-
 public class AddBookUploadServlet extends HttpServlet {
 	
 	
@@ -102,7 +107,32 @@ public class AddBookUploadServlet extends HttpServlet {
 			                 log.info("22 item.getInputStream(): "+item.getInputStream());
 			                fileStream = item.getInputStream();
 			                
-			                loc = copyFile(fileStream, fileName);
+			                TikaConfig config = TikaConfig.getDefaultConfig();
+			    			Detector detector = new DefaultDetector(config.getMimeRepository());
+			    			
+			    	
+			    			try{
+			    				TikaInputStream stream = TikaInputStream.get(fileStream);
+			    	
+			    				Metadata metadata = new Metadata();
+			    				//metadata.add(Metadata.RESOURCE_NAME_KEY, ssd.getid());
+			    			    MediaType mediaType = detector.detect(stream, metadata);
+			    			    
+			    			    log.info("media type : "+mediaType.getType());
+			    			    log.info("media base type : "+mediaType.getBaseType());
+			    			    log.info("media sub type : "+mediaType.getSubtype());
+			    			    log.info(detector.detect(stream, metadata).toString());
+			    			    
+			    			    //ssd.setThumbnailLocation(solrService.getMimeTypeToThumbLocationMap().get(mediaType.getSubtype().toLowerCase().trim()));
+			    			    
+			    			}catch(Exception e){
+			    				e.printStackTrace();
+			    				log.error(e.getMessage());
+			    			}
+			                
+			                
+			                
+			               //loc = copyFile(fileStream, fileName);
 			                
 			            }
 			        }

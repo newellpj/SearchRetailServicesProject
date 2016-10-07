@@ -82,7 +82,7 @@
 
 <br/>
 <button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Documents </span></button>
-	<div id="search-box" class="search-box responsive" ng-controller="searchDocsController" ng-init="titleText = ''; authorText = ''; keywordText= '';" >
+	<div id="search-box" class="search-box responsive" ng-controller="searchDocsController" ng-init="titleText = ''; authorText = ''; keywordsText= 'PHP';" >
 
 
 
@@ -112,7 +112,7 @@
 			</div>
 			<div class="tagFields">	
 					Keywords (comma separated): </br></br>
-					<div id="tags" ><input id="keywordsText" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>
+					<div id="tags" ><input id="keywordsText" ng-model="keywordsText" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>
 							<span>Java</span>
 							<span>Javascript</span>
 							<span>JQuery</span>
@@ -122,7 +122,7 @@
 		
 			  <div class="tagSearches responsive"> 
 					<button id="searchBook" class="searchBook" name="searchBook" type="button" ng-click="performDocSearch();" 
-							ng-disabled="titleText == '' && authorText == ''" value="Search.." > 
+							ng-disabled="titleText == '' && authorText == '' && keywordsText == '' " value="Search.." > 
 					<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;"  ></span>Search...
 					</button>
 					<button id="resetSearch" class="resetSearch"  name="resetSearch" type="button" onclick="resetDocSearch();"  value="Reset" >

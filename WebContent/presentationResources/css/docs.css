@@ -9,6 +9,7 @@
 
 @media screen and (max-width:1300px){
 	div.search-box.responsive {position: relative; padding:1em; margin-left:10em; width:70%;}
+	 div#resultsSectionDocs.resultsSectionDocs.responsive{position: relative; padding:1em; margin-left:10em; min-width:70%;}
 	  button.accordion.responsive {position: relative; margin-left:10em; padding:1em; width:68%;}
 	 div.frameContainer.responsive{position: relative; padding:0; margin:0; width:100%;}
 	 div#resultsSection.resultsSection.responsive{position: relative; padding:1em; margin-left:10em; width:70%;}
@@ -20,6 +21,7 @@
   button.accordion.responsive {position: relative; margin:0.5em; padding:2em; width:90%;}
    div#resultsSectionDocs.resultsSectionDocs.responsive{position: relative; padding:1em; margin:1em; min-width:90%;}
    	 button#searchBook{min-width:45%; margin:0.5em;}
+	 div.dialogStyles.responsive{width:450px;}
 	button#resetSearch{min-width:45%;margin:0.5em;}
 	div.tagSearches{margin:0;}
 }
@@ -51,7 +53,7 @@
 	 div.titleAndGenre.responsive{ display:block; margin:0.2em}
 	 div.authorCategory.responsive{ display:block; margin:0.2em}
 	 div.publisherLang.responsive{ display:block; margin:0.2em}
-	 
+	 div.dialogStyles.responsive{width:350px;}
 	 input#titleText{min-width:85%; margin-bottom:1em;}
 	 select#genreSelect{min-width:70%; margin-bottom:1em;}
 	 
@@ -82,7 +84,7 @@
 @media screen and (max-width:420px){
 	input#titleText{min-width:75%; margin-bottom:1em;}
 
-
+div.dialogStyles.responsive{width:250px;}
 	input#authorText{min-width:71%; margin-bottom:1em;}
 
 
