@@ -1,0 +1,14 @@
+{
+  "short_name": "iFindit4U",
+  "name": "iFindit4U test app",
+  "icons": [
+    {
+      "src": "tornCard-icon.png",
+      "sizes": "160x140",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/login.jsp",
+  "display": "standalone",
+  "orientation": "landscape"
+}

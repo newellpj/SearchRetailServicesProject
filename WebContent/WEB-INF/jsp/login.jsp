@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/login.css">
+<link rel="manifest" href="./presentationResources/manifest.json">
 <script type="text/javascript" src="./presentationResources/js/matchHeight.js"></script>
 <title>Login Page</title>
 <style>
@@ -30,6 +31,16 @@
 	 $( document ).ready(function() {
 		$(div).matchHeight(byRow);
 	  });
+
+	 if ('serviceWorker' in navigator) {
+		  navigator.serviceWorker.register('/sw.js').then(function(registration) {
+		    // Registration was successful
+		    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		  }).catch(function(err) {
+		    // registration failed :(
+		    console.log('ServiceWorker registration failed: ', err);
+		  });
+		}
 
 </script>
 

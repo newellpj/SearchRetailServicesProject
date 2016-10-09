@@ -1,0 +1,15 @@
+You have a web app manifest file, which defines how your app appears on the user's system and how it should be launched
+
+The manifest must have a `short_name`, a name for display in the banner,
+
+A start URL (e.g. / or index.html) which must be loadable,
+
+At least an `144x144` PNG icon
+
+Your icon declarations should include a mime type of image/png
+
+You have a service worker registered on your site. We recommend a simple custom offline page service worker
+
+Your site is served over HTTPS (service worker requires HTTPS for security)
+
+The user has visited your site at least twice, with at least five minutes between visits.
