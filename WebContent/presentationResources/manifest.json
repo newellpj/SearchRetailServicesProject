@@ -1,6 +1,7 @@
 {
   "short_name": "iFindit4U",
   "name": "iFindit4U test app",
+   "gcm_sender_id": "1079362058546",
   "icons": [
     {
       "src": "tornCard-icon.png",

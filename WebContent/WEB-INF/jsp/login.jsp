@@ -9,8 +9,10 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/login.css">
+
 <link rel="manifest" href="./presentationResources/manifest.json">
-<script type="text/javascript" src="./presentationResources/js/matchHeight.js"></script>
+
+<script type="text/javascript" src="./presentationResources/js/sw.js"></script>
 <title>Login Page</title>
 <style>
 
@@ -32,13 +34,21 @@
 		$(div).matchHeight(byRow);
 	  });
 
+	// window.addEventListener('beforeinstallprompt', function(e) {
+	//	  console.log('beforeinstallprompt Event fired');
+	//	  e.preventDefault();
+	//	  return false;
+	//	});
+	 
 	 if ('serviceWorker' in navigator) {
-		  navigator.serviceWorker.register('/sw.js').then(function(registration) {
+		  navigator.serviceWorker.register('./presentationResources/js/sw.js').then(function(registration) {
 		    // Registration was successful
+		    alert('rego successful');
 		    console.log('ServiceWorker registration successful with scope: ', registration.scope);
 		  }).catch(function(err) {
 		    // registration failed :(
-		    console.log('ServiceWorker registration failed: ', err);
+		   	 alert('rego failed');
+		   	 console.log('ServiceWorker registration failed: ', err);
 		  });
 		}
 

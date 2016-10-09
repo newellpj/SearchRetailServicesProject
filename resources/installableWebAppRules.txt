@@ -13,3 +13,37 @@ You have a service worker registered on your site. We recommend a simple custom 
 Your site is served over HTTPS (service worker requires HTTPS for security)
 
 The user has visited your site at least twice, with at least five minutes between visits.
+
+
+If installation fails, we're not so good at telling you about it
+
+If a worker registers, but then doesn't appear in chrome://inspect/#service-workers or chrome://serviceworker-internals, it's likely failed to install due to an error being thrown, or a rejected promise being passed to event.waitUntil().
+
+To work around this, go to chrome://serviceworker-internals and check "Open DevTools window and pause JavaScript execution on service worker startup for debugging", and put a debugger statement at the start of your install event. This, along with Pause on uncaught exceptions, should reveal the issue.
+
+
+for server key and sender id
+
+https://console.firebase.google.com/project/ifindit4u-a949e/settings/cloudmessaging
+
+
+Send a request from the command line for FCM to push a message
+
+server key: AIzaSyDfNnFAH8REJ51ENImY3Lg6Guv9CePAcYM
+
+FCM will match your servey key with the Sender ID you got from the Firebase Developer Console, which matches the gcm_sender_id value in the manifest. 
+
+curl --header "Authorization: key=<PUBLIC_API_KEY>" --header "Content-Type: application/json" https://android.googleapis.com/gcm/send -d "{\"registration_ids\":[\"<SUBSCRIPTION_ID>\"]}"
+
+authorization key is your server key
+
+curl --header "Authorization: key=AIzaSyDfNnFAH8REJ51ENImY3Lg6Guv9CePAcYM" 
+--header "Content-Type: application/json" https://android.googleapis.com/gcm/send 
+-d "{\"registration_ids\":[\"APA91bE9DAy6_p9bZ9I58rixOv-ya6PsNMi9Nh5VfV4lpXGw1wS6kxrkQbowwBu17ryjGO0ExDlp-S-mCiwKc5HmVNbyVfylhgwITXBYsmSszpK0LpCxr9Cc3RgxqZD7614SqDokwsc3vIEXkaT8OPIM-mnGMRYG1-hsarEU4coJWNjdFP16gWs\"]}"
+
+
+
+
+
+
+
