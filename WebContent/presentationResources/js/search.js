@@ -284,7 +284,7 @@
 							
 				bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");	
 				
-				formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
+				formattedMarkup = "<div style='float:left; margin-right:1.5em;' ><img alt='book thumb' width='"+searchData['imageWidth']+"' height='"+searchData['imageHeight']
 				+"' src='"+searchData['thumbnailLocation']+"' /></div>"+
 				"<span style='font-family:courier;'><b>Title : </b>"+searchData['titleText']+"<b> Author : </b> "+searchData['authorText']+" &nbsp; <b>Publisher: </b>"
 				+searchData['publisherText']+"</span>"+

@@ -63,11 +63,11 @@
 			
 				<div id="users" class="userFields responsive">
 					Username:
-					<input class="usernameInput responsive" type='text' name='username' style="width:60%;"><span class="glyphicon glyphicon-user iconspanLogin"></span>
+					<input class="usernameInput responsive" type='text' name='username' placeholder="Username" style="width:60%;"><span class="glyphicon glyphicon-user iconspanLogin"></span>
 				 </div>
 				<div id="pass"  class="passFields responsive">
 					Password:
-					<input class="usernameInput responsive" type='password' name='password' style="width:60%; margin-left:0.3em;"/><span class="glyphicon glyphicon-lock iconspanLogin"></span>
+					<input class="usernameInput responsive" placeholder="Password" type='password' name='password' style="width:60%; margin-left:0.3em;"/><span class="glyphicon glyphicon-lock iconspanLogin"></span>
 				</div>
 				
 					

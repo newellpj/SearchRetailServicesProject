@@ -155,10 +155,16 @@ function noBookToReview(){
 		
 		window.localStorage.setItem('clickID', "activeSel3");
 		
-		parent.document.getElementById("activeSel3").style.backgroundColor="#f6f6f6";
-	    parent.document.getElementById("activeSel3").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
-        parent.document.getElementById("activeSel3").style.backgroundRepeat="no-repeat";
-		parent.document.getElementById("activeSel3").style.backgroundPosition="center bottom";		 
+	//	parent.document.getElementById("activeSel3").style.backgroundColor="#f6f6f6";
+	//    parent.document.getElementById("activeSel3").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
+    //    parent.document.getElementById("activeSel3").style.backgroundRepeat="no-repeat";
+	//	parent.document.getElementById("activeSel3").style.backgroundPosition="center bottom";	
+
+		  document.getElementById("activeSel3").style.background="linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+		  document.getElementById("activeSel3").style.background="-moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+		  document.getElementById("activeSel3").style.background="-webkit-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+		  document.getElementById("activeSel3").style.borderRadius="10px";	
+		
 
 
 				//document.getElementById(idFound).style.backgroundColor="#e9e9e9";
@@ -198,10 +204,16 @@ function noBookToReview(){
 		window.localStorage.setItem('itemClick', href);
 		window.localStorage.setItem('clickID', id);
 		
-		document.getElementById(id).style.backgroundColor="#f6f6f6";
-	    document.getElementById(id).style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
-        document.getElementById(id).style.backgroundRepeat="no-repeat";
-		document.getElementById(id).style.backgroundPosition="center bottom";		 
+	
+
+		  document.getElementById(id).style.background="linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+		  document.getElementById(id).style.background="-moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+		  document.getElementById(id).style.background="-webkit-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+		  
+		  //document.getElementById("activeSel").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
+		  //document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
+		  document.getElementById(id).style.borderRadius="10px";	
+		
 
         $('ul.topnav.responsive li').each(function(){
 			var idFound = $(this).attr("id");

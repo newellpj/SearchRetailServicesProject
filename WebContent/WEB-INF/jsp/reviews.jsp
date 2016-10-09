@@ -20,17 +20,23 @@
 <head>
 <script language="javascript" type="text/javascript">
   function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
   }
 
   $(document).ready(function(){
 	  
-	  document.getElementById("activeSel").style.backgroundColor="#f6f6f6";
-	  document.getElementById("activeSel").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
-      document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
-	  document.getElementById("activeSel").style.backgroundPosition="center bottom";	
+	  document.getElementById("activeSel").style.background="linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+	  document.getElementById("activeSel").style.background="-moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
+	  document.getElementById("activeSel").style.background="-webkit-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
 	  
-	 
+	  //document.getElementById("activeSel").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
+      //document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
+	  document.getElementById("activeSel").style.borderRadius="10px";	
+	
+	
+	  
+	  
+
 	  $("#theI_Frame").attr("src", window.localStorage.getItem('itemClick'));
 	  switchActiveWithID(window.localStorage.getItem('clickID'))
 	  

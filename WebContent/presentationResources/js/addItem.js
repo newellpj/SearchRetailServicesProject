@@ -166,10 +166,11 @@
 						window.location.href = 'reviewsReviewBook';
 						
 						
-					 }).error(function(e){
+					 }).error(function(error, status){
 						
 						
-						$log.info("error for adding book");
+						$log.info("error for adding book "+error);
+						$log.info("error status for adding book "+status);
 						$(dlg).dialog("close");
 
 						var errorDialog = $("<div></div>").dialog({
@@ -181,9 +182,10 @@
 									buttons: [
 								{
 									'class': 'btn btn-primary',
-									click: function(e) {
+									click: function(error) {
+										$log.info("error coming back ");
 										$(this).dialog("close");
-										
+										 //window.parent.location.href = 'logout'; 
 									
 									},
 									text: 'OK'
@@ -196,7 +198,7 @@
 
 							
 							
-							var msg = e.errorMessage;
+							var msg = status;
 							
 							if('undefined' == msg || msg == null){
 									msg = "There was an error adding the book review";
@@ -206,7 +208,7 @@
 							$('.ui-dialog-buttonset').css("backgroundImage", "url('')");
 							$('.ui-dialog-buttonset').css("backgroundColor", "#c3c3c3");
 							 $(errorDialog).dialog("open");
-							 window.parent.location.href = 'logout'; 
+							
 				 })
 
 			 }

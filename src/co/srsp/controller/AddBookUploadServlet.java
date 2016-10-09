@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.ImageIcon;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
@@ -33,6 +34,7 @@ import org.apache.tika.mime.MediaType;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.srsp.config.ConfigHandler;
+import co.srsp.exceptions.IllegalFileUploadException;
 import co.srsp.service.BooksAndReviewsService;
 import co.srsp.viewmodel.BookReviewsModel;
 
@@ -74,7 +76,7 @@ public class AddBookUploadServlet extends HttpServlet {
 		 InputStream fileStream = null;
 		 String loc = "";
 		 
-		 try{
+		 
 		 
 			 if(isMultipart){
 				 String userEnteredFileName = "";
@@ -83,7 +85,13 @@ public class AddBookUploadServlet extends HttpServlet {
 	                String fileName = "";
 	                long fileSize = -1;
 				 
-				 List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+	                List<FileItem> items = null;
+	                try{
+	                	items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+					}catch(FileUploadException fue){
+						 throw new ServletException("Error with file upload. please try again.");
+					}
+	                
 			        for (FileItem item : items) {
 			            if (item.isFormField()) {
 			                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
@@ -111,35 +119,32 @@ public class AddBookUploadServlet extends HttpServlet {
 			    			Detector detector = new DefaultDetector(config.getMimeRepository());
 			    			
 			    	
-			    			try{
-			    				TikaInputStream stream = TikaInputStream.get(fileStream);
-			    	
-			    				Metadata metadata = new Metadata();
-			    				//metadata.add(Metadata.RESOURCE_NAME_KEY, ssd.getid());
-			    			    MediaType mediaType = detector.detect(stream, metadata);
-			    			    
-			    			    log.info("media type : "+mediaType.getType());
-			    			    log.info("media base type : "+mediaType.getBaseType());
-			    			    log.info("media sub type : "+mediaType.getSubtype());
-			    			    log.info(detector.detect(stream, metadata).toString());
-			    			    
-			    			    //ssd.setThumbnailLocation(solrService.getMimeTypeToThumbLocationMap().get(mediaType.getSubtype().toLowerCase().trim()));
-			    			    
-			    			}catch(Exception e){
-			    				e.printStackTrace();
-			    				log.error(e.getMessage());
-			    			}
-			                
-			                
-			                
-			               //loc = copyFile(fileStream, fileName);
-			                
+		    				TikaInputStream stream = TikaInputStream.get(fileStream);
+		    	
+		    				Metadata metadata = new Metadata();
+		    				//metadata.add(Metadata.RESOURCE_NAME_KEY, ssd.getid());
+		    			    MediaType mediaType = detector.detect(stream, metadata);
+		    			    
+		    			    log.info("media type : "+mediaType.getType());
+		    			    log.info("media base type : "+mediaType.getBaseType());
+		    			    log.info("media sub type : "+mediaType.getSubtype());
+		    			    log.info(detector.detect(stream, metadata).toString());
+		    			    
+		    			    
+		    			    String mediaTypeStr = mediaType.getType();
+		    			    
+		    			    if(mediaTypeStr == null || (!"image".equalsIgnoreCase(mediaTypeStr) && !mediaTypeStr.toLowerCase().contains("image"))){
+		    			    	log.info("not of image type");
+		    			    	throw new ServletException("file is not of image type");
+		    			    }
+
+			    			
+			                loc = copyFile(fileStream, fileName);
 			            }
 			        }
 			        
 			        if(!"".equals(loc)){ 
 			        	
-				        try{
 	
 							String fileURLPath = (loc.toLowerCase().contains("http")) ? loc : "../webapps/SearchRetailServicesProject/presentationResources/images/"+loc.substring(loc.lastIndexOf("/")+1);
 							log.info( System.getProperty("user.dir"));
@@ -181,10 +186,7 @@ public class AddBookUploadServlet extends HttpServlet {
 							request.getSession().setAttribute("imageHeight", String.valueOf(imgHeight));
 							
 							
-						}catch(Exception e){
-							e.printStackTrace();
-							log.error(e.getMessage());
-						}
+						
 			        }else{
 			        	//add no image available image
 			        	
@@ -247,19 +249,7 @@ public class AddBookUploadServlet extends HttpServlet {
 					ModelAndView modelAndView = new ModelAndView();
 					
 			 }
-			 
-		 }catch(Throwable t){
-			 t.printStackTrace();
-			 System.out.println("");
-		 }finally{
-			 
-			 if(fileStream != null){
-		//		 fileStream.close();
-			 }
-			 
-			 log.info("cleaning up file input stream : "+fileStream);
-		 }
-		 
+
 	}
 	
 	

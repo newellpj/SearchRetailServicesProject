@@ -211,7 +211,7 @@
 	
 	 function formatDocSearchContent(searchData, $log){
 
-		var formattedMarkup =  "<div style='float:left; margin-right:1.5em;' ><img src='"+searchData['thumbnailLocation']+"' /></div>"+
+		var formattedMarkup =  "<div style='float:left; margin-right:1.5em;' ><img alt='book thumb' src='"+searchData['thumbnailLocation']+"' /></div>"+
 		"<b>Title : </b>"+searchData['title']+"<b> Author : </b> "+searchData['author']+" &nbsp; <b> link to doc </b> <a href='file://///"+searchData['id']+"'"+
 		" target="+"'"+"_blank"+"'"+">"+searchData['title']+"</a><p style='font-size:x-small;!important'>"+searchData['extract']+
 		"<i> <a href='#' onclick='displayFullContent();' > ...see more</a></i></p><div class='fullContent' style='color:white; display:none'>"+searchData['largercontent']+"</div>";

@@ -43,6 +43,9 @@
 
 @media screen and (max-width:1040px){
 	 div.add-book-box.responsive{min-width:62%; margin-left:22%;}
+	  input#publisherTextAdd.responsive{min-width:73%; }
+	  input#authorTextAdd.responsive{min-width:74%;}
+	  input#titleTextAdd.responsive{min-width:74%;}
 }
 
 @media screen and (max-width:980px){
@@ -251,8 +254,8 @@ input#publisherTextAdd{
 }
 
 button#addBook{
-	min-width:75%;
-	margin-left:10%;
+	width:68%;
+	margin-left:9%;
 }
 
 div.tagSearches{

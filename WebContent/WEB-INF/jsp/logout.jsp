@@ -23,14 +23,12 @@
 	
 
 	<div id="login-box" class="login-box responsive">
+	<div><h3>Thank you for visiting</h3></div>
 <div class="logoImg2">
-		<img width='426' height='400' src='./presentationResources/images/tornCardboard.png' style='float:right; margin-right:10%; margin-top:3%;' />
+		<img alt="company logo" width='426' height='400' src='./presentationResources/images/tornCardboard.png' style='float:right; margin-right:10%; margin-top:3%;' />
 	</div>
 
-		<h3>Thank you for visiting </h3>
-
-		
-		
+	
 <br/>
 
 <p>
