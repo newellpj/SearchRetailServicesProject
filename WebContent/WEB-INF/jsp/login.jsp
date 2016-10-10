@@ -9,10 +9,15 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/login.css">
+<script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
 
-<link rel="manifest" href="./presentationResources/manifest.json">
+<script type="text/javascript" src="sw.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+<script type="text/javascript" src="main.js"></script>
 
-<script type="text/javascript" src="./presentationResources/js/sw.js"></script>
+<link rel="manifest" href="manifest.json">  
+  
 <title>Login Page</title>
 <style>
 
@@ -29,10 +34,6 @@
 		 
 	    top.location = self.location.href;
 	 }
-	 
-	 $( document ).ready(function() {
-		$(div).matchHeight(byRow);
-	  });
 
 	// window.addEventListener('beforeinstallprompt', function(e) {
 	//	  console.log('beforeinstallprompt Event fired');
@@ -40,17 +41,7 @@
 	//	  return false;
 	//	});
 	 
-	 if ('serviceWorker' in navigator) {
-		  navigator.serviceWorker.register('./presentationResources/js/sw.js').then(function(registration) {
-		    // Registration was successful
-		    alert('rego successful');
-		    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-		  }).catch(function(err) {
-		    // registration failed :(
-		   	 alert('rego failed');
-		   	 console.log('ServiceWorker registration failed: ', err);
-		  });
-		}
+
 
 </script>
 

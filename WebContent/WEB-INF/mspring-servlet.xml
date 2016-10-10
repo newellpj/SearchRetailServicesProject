@@ -24,6 +24,7 @@
 
 
 	<mvc:resources mapping="/presentationResources/**" location="/presentationResources/" />
+	<mvc:resources mapping="/**" location="/" />
 	<mvc:annotation-driven />
 
 </beans>
