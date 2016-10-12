@@ -7,8 +7,8 @@ import co.srsp.hibernate.orm.Books;
 import co.srsp.hibernate.orm.NotificationSubscribers;
 
 public interface NotificationsBusinessObject {
-	public void save(NotificationSubscribers notificatioSubscibers);
-	public void update(NotificationSubscribers notificatioSubscibers);
-	public void delete(NotificationSubscribers notificatioSubscibers);
-	public List<Books> findSubscribers(HashMap<String, String> tagsKeyValues);
+	public void save(NotificationSubscribers notificationSubscibers);
+	public void update(NotificationSubscribers notificationSubscibers);
+	public void delete(NotificationSubscribers notificationSubscibers);
+	public List<NotificationSubscribers> findSubscribers(HashMap<String, String> keysAndValues);
 }

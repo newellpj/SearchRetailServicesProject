@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.srsp.service.NotificationsService;
 import co.srsp.viewmodel.BookReviewsModel;
 
 @Controller
@@ -18,13 +19,19 @@ public class PushNotificationsController {
 	
 	//method for storing 
 	@RequestMapping(value = { "/addSubscription"}, method = RequestMethod.GET)
-	public @ResponseBody BookReviewsModel addSubscription(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody String[] addSubscription(HttpServletRequest request, HttpServletResponse response){
 		log.info("addSubscription !!!!");
 		log.info("statusType :: "+request.getParameter("statusType"));
 		log.info("username :: "+request.getParameter("username"));
 		log.info("endpoint :: "+request.getParameter("endpoint"));
 		log.info("subscriptionId :: "+request.getParameter("subscriptionId"));	
 		log.info("key :: "+request.getParameter("key"));
+		
+		NotificationsService notificationServices = new NotificationsService();
+		notificationServices.save(notificatioSubscibers);
+		
+		String[] returnArray = new Striung[];
+		
 		return null;
 	}
 	
