@@ -114,6 +114,10 @@
 	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
 	   </bean>
 	   
+	     <bean id="notificationsBusinessObject" class="co.srsp.hibernate.NotificationsBusinessObjectImpl">
+	   			<property name="sessionFactory" ref="bookReviewsHibernateSessionFactory"></property>	
+	   </bean>
+	   
 	   
 	   
 </beans>

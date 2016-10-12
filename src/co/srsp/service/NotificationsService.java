@@ -11,7 +11,7 @@ import co.srsp.hibernate.orm.NotificationSubscribers;
 public class NotificationsService {
 	
 	private ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-	private NotificationsBusinessObject pushNotificationsBO = (NotificationsBusinessObject) ctx.getBean("pushNotificationsController");
+	private NotificationsBusinessObject pushNotificationsBO = (NotificationsBusinessObject) ctx.getBean("notificationsBusinessObject");
 	
 	public void save(NotificationSubscribers notificationSubscibers){
 		pushNotificationsBO.save(notificationSubscibers);

@@ -30,13 +30,13 @@ public class PushNotificationsController {
 		
 		NotificationsService notificationServices = new NotificationsService();
 		
-		NotificationSubscribers notificatioSubscibers = new NotificationSubscribers();
+		NotificationSubscribers notificationSubscribers = new NotificationSubscribers();
 		//notificatioSubscibers.setIdnotification_subscribers(idnotification_subscribers);
-		notificatioSubscibers.setEvent_name("ALL");
-		notificatioSubscibers.setSubscriptionID(request.getParameter("subscriptionId"));
-		notificatioSubscibers.setUsername(request.getParameter("username"));
+		notificationSubscribers.setEvent_name("ALL");
+		notificationSubscribers.setSubscriptionID(request.getParameter("endpoint"));
+		notificationSubscribers.setUsername(request.getParameter("username"));
 		
-		notificationServices.save(notificatioSubscibers);
+		notificationServices.save(notificationSubscribers);
 		
 		String[] returnArray = new String[1];
 		returnArray[0] = "You have been successfully subscribed";
