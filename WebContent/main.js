@@ -57,10 +57,11 @@ function subscribe() {
 				//fetch API here
 				
 				console.log("subscription key : "+subscription.getKey('p256dh'));
+				console.log("subscription key : "+subscription.getKey('p256dh'));
 				
 				var endpoint = subscription.endpoint;
 				var key = subscription.getKey('p256dh');
-				updateStatus(endpoint,key,'subscribe');
+				updateStatus(subscription,key,'subscribe');
 				
 			   // return sendSubscriptionToServer(subscription);  
 			  })  
@@ -124,26 +125,26 @@ function subscribe() {
 }
 
 
-function updateStatus(endpoint,key,statusType) {
-    console.log("updateStatus, endpoint: " + endpoint);
+function updateStatus(subscription,key,statusType) {
+    console.log("updateStatus, endpoint: " + subscription);
     console.log("updateStatus, key: " + key);
     
 	  // If we are subscribing to push
 	  if(statusType === 'subscribe' || statusType === 'init') {
 
 
-		sendSubscriptionDetailsToServer('subscribe', null, endpoint, key);
+		sendSubscriptionDetailsToServer('subscribe', null, subscription, key);
 
 	  } else if(statusType === 'unsubscribe') {
 	
-		sendSubscriptionDetailsToServer('unsubscribe', null, endpoint, key);
+		sendSubscriptionDetailsToServer('unsubscribe', null, subscription, key);
 
 	  }
 
 }
 
 
-function sendSubscriptionDetailsToServer(statusType, username, endpoint, key){
+function sendSubscriptionDetailsToServer(statusType, username, subscription, key){
 	
 			$.ajax({
 				url: 'addSubscription',
@@ -151,7 +152,8 @@ function sendSubscriptionDetailsToServer(statusType, username, endpoint, key){
 				data: { 
 					statusType: statusType,
 					username: username,
-					endpoint: endpoint,
+					endpoint: subscription.endpoint,
+					subscriptionId: subscription.subscriptionId,
 					key: key
 				},
 				processData: true,

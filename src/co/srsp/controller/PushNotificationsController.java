@@ -16,12 +16,14 @@ public class PushNotificationsController {
 
 	private final static Logger log = Logger.getLogger(PushNotificationsController.class); 
 	
+	//method for storing 
 	@RequestMapping(value = { "/addSubscription"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel addSubscription(HttpServletRequest request, HttpServletResponse response){
 		log.info("addSubscription !!!!");
 		log.info("statusType :: "+request.getParameter("statusType"));
 		log.info("username :: "+request.getParameter("username"));
 		log.info("endpoint :: "+request.getParameter("endpoint"));
+		log.info("subscriptionId :: "+request.getParameter("subscriptionId"));	
 		log.info("key :: "+request.getParameter("key"));
 		return null;
 	}
