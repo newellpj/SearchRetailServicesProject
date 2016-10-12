@@ -97,12 +97,16 @@ ul.topnav li a {
 
 /* Change background color of links on hover */
 ul.topnav li a:hover {
-	background-color: white ;
-    background-image:url(../images/arrow-right.gif);
-	background-repeat: no-repeat;
+
 	 color: black;
 	border-left: 0.5px solid #c3c3c3;
 	background-position: center left;
+	
+	background: linear-gradient(top, #bbbbbb 0%, #efefef 100%);  
+	background: -moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%); 
+	background: -webkit-linear-gradient(top, #bbbbbb 0%, #efefef 100%); 	
+	border-radius: 10px;
+	
 }
 
 /* Hide the list item that contains the link that should open and close the topnav on small screens */

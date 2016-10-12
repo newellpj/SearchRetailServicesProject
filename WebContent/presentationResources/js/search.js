@@ -77,13 +77,33 @@
 				$log.info(newVal);
 				
 					$scope.genreSelect.selectedOption = $scope.genreSelect.availableOptions[0];
+			});
+			
+			$scope.$watch('authorText', function(newVal, oldVal, scope) {		
+				$log.info(newVal);
 				
+					
+			});
+			
+			$scope.$watch('publisherText', function(newVal, oldVal, scope) {		
+				$log.info(newVal);
+				
+					
+			});
+			
+			$scope.$watch('titleText', function(newVal, oldVal, scope) {		
+				$log.info(newVal);
+				
+					
 			});
 
+			$scope.performPartialBookSearch = function () {
+					
+			}
 
 		});
 	 
-	 
+	
 
 	 
 	//searchBookApp.factory('titleVal', function(){

@@ -25,11 +25,11 @@ public class BooksAndReviewsService {
 	private BookReviewsBusinessObject booksReviewsBO = (BookReviewsBusinessObject) ctx.getBean("booksReviewsBusinessObject");
 	private TagsBusinessObject tagsBO = (TagsBusinessObject) ctx.getBean("tagsBusinessObject");
 	
-	/**
-	 * @param title
-	 * @param author
-	 * @return
-	 */
+	
+	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria){
+		return booksBO.findBookListByPartialMatch(searchCriteria);
+	}
+	
 	public  List<Books> searchBooksByTitleAndOrAuthor(String title, String author){
 		return booksBO.findBooksByTitleAndAuthor(title, author);
 	}

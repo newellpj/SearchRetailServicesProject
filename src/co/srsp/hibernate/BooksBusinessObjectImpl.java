@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
+import co.srsp.hibernate.orm.NotificationSubscribers;
 
 
 @Configuration
@@ -61,6 +62,33 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 		
 		
 		return book;
+	}
+	
+	@Override
+	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria){
+		
+		StringBuffer sqlAppender = new StringBuffer();
+		
+		int count = 0;
+		
+		sqlAppender.append(" from "+NotificationSubscribers.class.getName()+" where ");
+		
+		for(String key : searchCriteria.keySet()){
+
+			if(count > 1){
+				sqlAppender.append(" and ");
+			}
+
+			String value = (String)searchCriteria.get(key);
+			sqlAppender.append(key+" = like(%"+value+"%");
+			count++;
+		}
+		
+		Session session = this.getSessionFactory().openSession();
+		
+		List<Books> list = session.createQuery(sqlAppender.toString()).list();
+		
+		return list;
 	}
 	
 	@Override

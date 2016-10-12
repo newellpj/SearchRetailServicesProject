@@ -90,11 +90,12 @@
 			</div>			
 		</form>
 		
-		
-		<button class="js-push-button" onclick="subscribe();">
-		  Enable Push Messages  
-		</button>
-		
+		<!-- 
+			<button class="js-push-button" onclick="subscribe();">
+		  		Enable Push Messages  
+			</button>
+		 -->
+		 
 	</div>
 
 </body>

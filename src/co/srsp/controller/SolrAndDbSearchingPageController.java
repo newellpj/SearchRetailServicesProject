@@ -308,13 +308,7 @@ public class SolrAndDbSearchingPageController {
 	
 
 	
-	@RequestMapping(value = { "/searchForBook2"}, method = RequestMethod.GET)
-	public @ResponseBody BookReviewsModel searchBook2(HttpServletRequest request, HttpServletResponse response){
-		
-		request.getSession().setAttribute("langText", request.getParameter("langText"));
-		request.getSession().setAttribute("publisherText", request.getParameter("publisherText"));
-		return new BookReviewsModel();
-	}
+
 	
 	
 	@RequestMapping(value = { "/resetSearch"}, method = RequestMethod.GET)
@@ -559,6 +553,20 @@ public class SolrAndDbSearchingPageController {
 		request.getSession().setAttribute("solrSearchListReturned", returnList);		
 		log.info("list to return is : "+returnList.size());
 		return returnArray;
+	}
+	
+	@RequestMapping(value = { "/partialSearchForBook"}, method = RequestMethod.GET)
+	public @ResponseBody BookReviewsModel partialSearchBook(HttpServletRequest request, HttpServletResponse response){
+		
+		log.info("request contain PARTIAL_TEXT ? : "+request.getParameter(SessionConstants.PARTIAL_TEXT));
+		String partialText = request.getParameter(SessionConstants.PARTIAL_TEXT);	
+		String[] keyValuePair = partialText.split("-");
+		HashMap<String, String> searchCriteria = new HashMap<String, String>();
+		searchCriteria.put(keyValuePair[0], keyValuePair[1]);
+		BooksAndReviewsService booksService = new BooksAndReviewsService();
+		List<Books> booksList = new ArrayList<Books>();
+		booksList.addAll(booksService.findBookListByPartialMatch(searchCriteria));
+		return new BookReviewsModel();
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)

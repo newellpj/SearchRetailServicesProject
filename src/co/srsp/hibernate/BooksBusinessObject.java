@@ -1,5 +1,6 @@
 package co.srsp.hibernate;
 
+import java.util.HashMap;
 import java.util.List;
 
 import co.srsp.hibernate.orm.BookReviews;
@@ -19,4 +20,6 @@ public interface BooksBusinessObject {
 	 * @return Books ORM object
 	 */
 	public  List<Books> findBooksByTitleAndAuthor(String title, String author);
+	
+	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria);
 }

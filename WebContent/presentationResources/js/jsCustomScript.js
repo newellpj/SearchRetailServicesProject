@@ -164,8 +164,6 @@ function noBookToReview(){
 		  document.getElementById("activeSel3").style.background="-moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
 		  document.getElementById("activeSel3").style.background="-webkit-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
 		  document.getElementById("activeSel3").style.borderRadius="10px";	
-		
-
 
 				//document.getElementById(idFound).style.backgroundColor="#e9e9e9";
 		parent.document.getElementById("activeSel").style.backgroundImage="";
@@ -203,8 +201,6 @@ function noBookToReview(){
 		//window.localStorage = href;
 		window.localStorage.setItem('itemClick', href);
 		window.localStorage.setItem('clickID', id);
-		
-	
 
 		  document.getElementById(id).style.background="linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
 		  document.getElementById(id).style.background="-moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
