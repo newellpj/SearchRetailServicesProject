@@ -1,0 +1,22 @@
+Push workflow summary
+To summarize, here is what is needed to implement push messaging. You can find more details about specific parts of the demo code in subsequent sections.
+1.	Request permission for web notifications, or anything else you are using that requires permissions.
+
+2.	Register a service worker to control the page by calling ServiceWorkerContainer.register().
+
+3.	Subscribe to the push messaging service using PushManager.subscribe().
+
+4.	Retrieve the endpoint associated with the subscription and generate a client public key (PushSubscription.endpoint and PushSubscription.getKey(). Note that getKey() is currently experimental and Firefox only.)
+
+5.	Send these details to the server so it can send push message when required. This demo uses XMLHttpRequest, but you could use Fetch.
+
+6.	If you are using the Channel Messaging API to comunicate with the service worker, set up a new message channel (MessageChannel.MessageChannel()) and send port2 over to the service worker by calling Worker.postMessage() on the service worker, in order to open up the communication channel. You should also set up a listener to respond to messages sent back from the service worker.
+
+7.	On the server side, store the endpoint and any other required details so they are available when a push message needs to be sent to a push subscriber (we are using a simple text file, but you could use a database or whatever you like). In a production app, make sure you keep these details hidden, so malicious parties can't steal endpoints and spam subscribers with push messages.
+
+8.	To send a push message, you need to send an HTTP POST to the endpoint URL. The request must include a TTL header that limits how long the message should be queued if the user is not online. To include payload data in your request, you must encrypt it (which involves the client public key). In our demo, we are using the web-push module, which handles all the hard work for you.
+
+9.	Over in your service worker, set up a push event handler to respond to push messages being received.
+
+•	If you want to respond by sending a channel message back to the main context (see Step 6) you need to first get a reference to the port2 we sent over to the service worker context (MessagePort). This is available on the MessageEvent object passed to the onmessage handler (ServiceWorkerGlobalScope.onmessage). Specifically, this is found in the ports property, index 0. Once this is done, you can send a message back to port1, using MessagePort.postMessage().
+•	If you want to respond by firing a system notification, you can do this by calling ServiceWorkerRegistration.showNotification(). Note that in our code we have run this inside an ExtendableEvent.waitUntil() method — this extends the lifetime of the event until after the notification has been fired, so we can make sure everything has happened that we want to happen.

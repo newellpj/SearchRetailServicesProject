@@ -29,6 +29,11 @@
      <security:intercept-url pattern="/getPaginatedFeed" access="hasRole('ROLE_USER')" /> 
      <security:intercept-url pattern="/reviewsReviewBookNoneAdded" access="hasRole('ROLE_USER')" /> 
      
+     
+     <!--  this needs to change to has user role--> 
+     <security:intercept-url pattern="addSubscription" access="permitAll" /> 
+     
+     
 	  <security:access-denied-handler error-page="/accessDenied" />
 		
 		

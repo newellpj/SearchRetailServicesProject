@@ -85,10 +85,16 @@
 					
 			</div>	
 			<div >
-		<button name="submit" type="submit" class="loginButton responsive" 
-						value="Login" >	 <span class="glyphicon glyphicon-log-in"></span> &nbsp; Login </button>
+		<button name="submit" type="submit" class="loginButton responsive" value="Login" >	 
+			<span class="glyphicon glyphicon-log-in"></span> &nbsp; Login </button>
 			</div>			
 		</form>
+		
+		
+		<button class="js-push-button" onclick="subscribe();">
+		  Enable Push Messages  
+		</button>
+		
 	</div>
 
 </body>

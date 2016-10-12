@@ -61,8 +61,10 @@
    
    		<bean id="myAuthenticationSuccessHandler"  class="co.srsp.config.SimpleUrlAuthenticationSuccessHandler" />
  
-   
-   		<bean id="solrAndDbSearchController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
+    	<bean id="pushNotificationsController" class="co.srsp.controller.PushNotificationsController">  
+	    </bean>
+ 
+ 		<bean id="solrAndDbSearchController" class="co.srsp.controller.SolrAndDbSearchingPageController">  
 	    </bean>
 	    
 	    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
