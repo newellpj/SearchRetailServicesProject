@@ -22,6 +22,8 @@ public class NotificationsBusinessObjectImpl extends HibernateDaoSupport impleme
 		session.save(notificationSubscibers);
 		session.flush();
 		session.close();
+		
+		
 	}
 
 	@Transactional

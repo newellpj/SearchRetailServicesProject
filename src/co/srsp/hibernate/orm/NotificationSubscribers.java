@@ -2,15 +2,15 @@ package co.srsp.hibernate.orm;
 
 public class NotificationSubscribers {
 
-	private long idnotification_subscribers = -1;
+	private Integer idnotification_subscribers;
 	private String subscriptionID;
 	private String username;
 	private String event_name;
 	
-	public long getIdnotification_subscribers() {
+	public Integer getIdnotification_subscribers() {
 		return idnotification_subscribers;
 	}
-	public void setIdnotification_subscribers(long idnotification_subscribers) {
+	public void setIdnotification_subscribers(Integer idnotification_subscribers) {
 		this.idnotification_subscribers = idnotification_subscribers;
 	}
 	public String getSubscriptionID() {
