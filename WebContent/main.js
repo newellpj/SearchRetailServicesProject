@@ -46,6 +46,8 @@ function subscribe() {
 			  Notification.requestPermission();
 			  console.log('endpoint from push button:', subscription.endpoint);
 			  
+			  
+			  sub = subscription;
 				// The subscription was successful  
 				isPushEnabled = true;  
 				$(pushButton).html('Disable Push Messages');  
@@ -86,9 +88,9 @@ function subscribe() {
 			console.log("in disable");
 			serviceWorkerRegistration.pushManager.getSubscription().then(function(subscription) { 
 		
-			  subscription.unsubscribe().then(function(successful){
+			  sub.unsubscribe().then(function(successful){
 				  
-				console.log('The un-subscription was successful ');
+				console.log('The un-subscription was successful '+sub.endpoint);
 					isPushEnabled = true;  
 					$(pushButton).html('Enable Push Messages');  
 					$(pushButton).prop('disabled', false);
@@ -98,7 +100,9 @@ function subscribe() {
 				// and save it to send a push message at a later date
 				
 				//fetch API here
-					updateStatus(endpoint,key,'unsubscribe');
+				var endpoint = sub.endpoint;
+				
+					updateStatus(sub,sub.getKey('p256dh'),'unsubscribe');
 			   // return sendSubscriptionToServer(subscription);  
 			  })  
 			  .catch(function(e) {  
