@@ -160,7 +160,7 @@ function sendSubscriptionDetailsToServer(statusType, username, subscription, key
 				contentType: 'application/json; charset=utf-8',
 				type: 'GET',
 				success:  function(response) {
-						    console.log('successful ');
+						    console.log('message returned : '+response[0]);
 				 },
 
 			 error: function(e){

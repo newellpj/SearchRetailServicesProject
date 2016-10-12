@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.srsp.hibernate.orm.NotificationSubscribers;
 import co.srsp.service.NotificationsService;
 import co.srsp.viewmodel.BookReviewsModel;
 
@@ -28,11 +29,19 @@ public class PushNotificationsController {
 		log.info("key :: "+request.getParameter("key"));
 		
 		NotificationsService notificationServices = new NotificationsService();
+		
+		NotificationSubscribers notificatioSubscibers = new NotificationSubscribers();
+		//notificatioSubscibers.setIdnotification_subscribers(idnotification_subscribers);
+		notificatioSubscibers.setEvent_name("ALL");
+		notificatioSubscibers.setSubscriptionID(request.getParameter("subscriptionId"));
+		notificatioSubscibers.setUsername(request.getParameter("username"));
+		
 		notificationServices.save(notificatioSubscibers);
 		
-		String[] returnArray = new Striung[];
+		String[] returnArray = new String[1];
+		returnArray[0] = "You have been successfully subscribed";
 		
-		return null;
+		return returnArray;
 	}
 	
 	@RequestMapping(value = { "/removeSub"}, method = RequestMethod.GET)
