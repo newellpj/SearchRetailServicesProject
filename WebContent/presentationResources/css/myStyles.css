@@ -435,7 +435,7 @@ button:hover {
 }
 
 input[type="password"]{
-    border-right: none !important;
+    border-right: none;
   border: solid 1.5px #dcdcdc;
   transition: box-shadow 0.3s, border 0.3s;
  border-radius: 7px 0px 0px 7px;
@@ -444,7 +444,7 @@ input[type="password"]{
 
 
 input[type="text"]{
-  border-right: none !important;
+  border-right: none;
   border: solid 1.5px #dcdcdc;
   transition: box-shadow 0.3s, border 0.3s;
   border-radius: 7px 0px 0px 7px ;
@@ -917,7 +917,7 @@ input[type="password"]{
 
 input[type="text"]{
   padding: 5px;
-  border-right: none !important;
+  border-right: none;
   border: solid 1.5px #dcdcdc;
   transition: box-shadow 0.3s, border 0.3s;
   border-radius: 7px 0px 0px 7px ;
@@ -1094,9 +1094,5 @@ display: inline-block;
     visibility: visible;
     opacity: 1;
 }
-
-
-
-
 
 

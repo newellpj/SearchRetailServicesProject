@@ -82,9 +82,8 @@
 				<tr>
 					<td>
 						<select style="width:40px; height:32px; color:white; background-color: #A2C5D0; border-radius: 0px 0px 0px 0px;" id="searchAllSelect"></select>
-						<input id="searchText" style="width:85%; border-radius: 0px; margin-left: -4px;"  type='text' name='searchText' class="responsive">
-						<button id="searchAllBtn" style="margin-left: -4px; background-color: #A2C5D0; padding-top: 6px; padding-bottom: 11px; 
-						        color: #3D3C3A; border-radius: 0px 7px 7px 0px;" type="button" onclick="getRSSFeed(false, true);" > 
+						<input id="searchText"  type='text' name='searchText' class="responsive">
+						<button id="searchAllBtn" class="responsive" type="button" onclick="getRSSFeed(false, true);" > 
 						<span class="glyphicon glyphicon-search" style="padding-top: 1px !important;"></span></button>
 				
 						

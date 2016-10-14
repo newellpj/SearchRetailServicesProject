@@ -6,7 +6,7 @@
 	var searchBookApp  = angular.module('searchBookPageApp', []);
 
 
-		searchBookApp.controller('searchPageController', function($scope, $log) {
+		searchBookApp.controller('searchPageController', function($scope, $log, $timeout, $http) {
 		 $log.info("11 title text from search page controller : "+$scope.titleText);
 			 
 			 $scope.genreHide = true;
@@ -79,27 +79,45 @@
 					$scope.genreSelect.selectedOption = $scope.genreSelect.availableOptions[0];
 			});
 			
-			$scope.$watch('authorText', function(newVal, oldVal, scope) {		
-				$log.info(newVal);
-				
-					
-			});
 			
-			$scope.$watch('publisherText', function(newVal, oldVal, scope) {		
-				$log.info(newVal);
-				
-					
-			});
+			$scope.$watch('titleText', function (tmpStr)
+{
+			console.log("tmpStr : "+tmpStr);	
 			
-			$scope.$watch('titleText', function(newVal, oldVal, scope) {		
-				$log.info(newVal);
-				
-					
-			});
+			  if (!tmpStr || tmpStr.length == 0) {return 0;}
+			  
+			  
+			   $timeout(function() {
 
-			$scope.performPartialBookSearch = function () {
+				// if searchStr is still the same..
+				// go ahead and retrieve the data
+				if (tmpStr === $scope.titleText)
+				{
 					
-			}
+					console.log("within the title text");
+				  $http.get('//echo.jsontest.com/res/'+ tmpStr).success(function(data) {
+					// update the textarea
+					$scope.responseData = data.res; 
+				  });
+				}
+			  }, 1000);
+			});
+			
+			
+			// This is what you will bind the filter to
+		//	$scope.filterText = '';
+
+			// Instantiate these variables outside the watch
+			//var tempFilterText = '', filterTextTimeout;
+			
+			//$scope.$watch('titleText', function (val) {
+			//	if (filterTextTimeout) $timeout.cancel(filterTextTimeout);
+
+			//	tempFilterText = val;
+			//	filterTextTimeout = $timeout(function() {
+			//		$scope.filterText = tempFilterText;
+			//	}, 250); // delay 250 ms
+			//})
 
 		});
 	 
