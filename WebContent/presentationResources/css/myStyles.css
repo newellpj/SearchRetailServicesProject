@@ -109,6 +109,7 @@ ul.topnav li a:hover {
 	
 }
 
+
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
 ul.topnav li.icon {display: none;}
 
