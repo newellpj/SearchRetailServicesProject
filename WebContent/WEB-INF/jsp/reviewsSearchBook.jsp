@@ -95,16 +95,22 @@ var html = $(".bookRevList").html();
 				<div class="titleAndGenre responsive" >
 					Title:
 					<input ng-model="titleText" id="titleText" placeholder="title text search..."  type='text' name='titleText' style="width:40%;"><span class="glyphicon glyphicon-book iconspan2"></span>
-					<div class="entry" ng-repeat="entry in entries | filter:titleText">
-						<span>{{entry.content}}</span>
-					</div>
+					
 					
 					<input id="genre" type="checkbox"  ng-model="genreCheck" name="genre" value="genre" ng-click="genreHide = !genreHide" />Genre 
 					<select ng-model="genreSelect.selectedOption" class="responsive" ng-hide="genreHide" style="width:30%; margin-left:1.7em; " id="genreSelect" 
 							ng-options="option.name for option in genreSelect.availableOptions track by option.value">
 					
 					</select>
-				</div>		
+					
+						 <ul>
+							<li ng-repeat="d in data">
+							 <span>{{d}}</span>
+							</li>
+						   </ul>
+			
+				</div>	
+            		
 				<div class="authorCategory responsive">
 					Author:
 					<input ng-model="authorText" id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>

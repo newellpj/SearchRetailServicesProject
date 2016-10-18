@@ -75,7 +75,7 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 		
 		int count = 0;
 		
-		String sqlText = "select :key from "+Books.class.getName()+" where ";
+		String sqlText = "select :key from books where ";
 				
 		for(String key : searchCriteria.keySet()){
 
@@ -86,7 +86,7 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 			}
 
 			String value = (String)searchCriteria.get(key);
-			sqlAppender.append(key+" like %"+value+"%");
+			sqlAppender.append(key+" like '%"+value+"%'");
 			count++;
 		}
 		

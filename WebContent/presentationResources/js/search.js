@@ -104,8 +104,10 @@
 									partialSearch: 'title-'+tmpStr
 								}
 							}).success(function(data){
-								$scope.responseData = data.res; 
-							
+								//$scope.responseData = data; 
+								console.log(data);
+							   $scope.data = data;
+							   
 							}).error(function(data, status){
 								
 								console.log('error retrieving data');
