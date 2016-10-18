@@ -82,25 +82,36 @@
 			
 			$scope.$watch('titleText', function (tmpStr)
 {
-			console.log("tmpStr : "+tmpStr);	
-			
-			  if (!tmpStr || tmpStr.length == 0) {return 0;}
+				  console.log("tmpStr : "+tmpStr);	
+				
+				  if (!tmpStr || tmpStr.length == 0) {return 0;}
 			  
 			  
-			   $timeout(function() {
+				  $timeout(function() {
 
-				// if searchStr is still the same..
-				// go ahead and retrieve the data
-				if (tmpStr === $scope.titleText)
-				{
-					
-					console.log("within the title text");
-				  $http.get('//echo.jsontest.com/res/'+ tmpStr).success(function(data) {
-					// update the textarea
-					$scope.responseData = data.res; 
-				  });
-				}
-			  }, 1000);
+					// if searchStr is still the same..
+					// go ahead and retrieve the data
+						if (tmpStr === $scope.titleText){
+							
+							console.log("within the title text "+tmpStr);
+							
+							$http({
+								url : 'partialSearchForBook',
+								method : 'GET',
+								headers: {'Content-Type' : 'application/json'},
+								dataType: "JSON",
+								params: { 
+									partialSearch: 'title-'+tmpStr
+								}
+							}).success(function(data){
+								$scope.responseData = data.res; 
+							
+							}).error(function(data, status){
+								
+								console.log('error retrieving data');
+							})
+						}
+					}, 1000);
 			});
 			
 			

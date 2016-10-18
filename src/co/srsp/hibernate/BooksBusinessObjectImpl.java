@@ -80,7 +80,7 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 			}
 
 			String value = (String)searchCriteria.get(key);
-			sqlAppender.append(key+" = like(%"+value+"%");
+			sqlAppender.append(key+" = like %"+value+"%");
 			count++;
 		}
 		
