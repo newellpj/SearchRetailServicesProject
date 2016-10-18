@@ -556,7 +556,7 @@ public class SolrAndDbSearchingPageController {
 	}
 	
 	@RequestMapping(value = { "/partialSearchForBook"}, method = RequestMethod.GET)
-	public @ResponseBody BookReviewsModel partialSearchBook(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody Object[] partialSearchBook(HttpServletRequest request, HttpServletResponse response){
 		
 		log.info("request contain PARTIAL_TEXT ? : "+request.getParameter(SessionConstants.PARTIAL_TEXT));
 		String partialText = request.getParameter(SessionConstants.PARTIAL_TEXT);	
@@ -564,9 +564,10 @@ public class SolrAndDbSearchingPageController {
 		HashMap<String, String> searchCriteria = new HashMap<String, String>();
 		searchCriteria.put(keyValuePair[0], keyValuePair[1]);
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		List<Books> booksList = new ArrayList<Books>();
-		booksList.addAll(booksService.findBookListByPartialMatch(searchCriteria));
-		return new BookReviewsModel();
+		List<String> returnList = new ArrayList<String>();
+		returnList.addAll(booksService.findBookListByPartialMatch(searchCriteria));
+		
+		return returnList.toArray();
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -14,12 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
 import co.srsp.hibernate.orm.NotificationSubscribers;
+import co.srsp.service.BooksAndReviewsService;
 
 
 @Configuration
 @EnableAspectJAutoProxy
 public class BooksBusinessObjectImpl extends HibernateDaoSupport implements BooksBusinessObject{
 
+	private final static Logger log = Logger.getLogger(BooksBusinessObjectImpl.class); 
+	
 	@Override
 	@Transactional
 	public void save(Books books) {
@@ -65,28 +69,32 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 	}
 	
 	@Override
-	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria){
+	public  List<String> findBookListByPartialMatch(HashMap<String, String> searchCriteria){
 		
 		StringBuffer sqlAppender = new StringBuffer();
 		
 		int count = 0;
 		
-		sqlAppender.append(" from "+NotificationSubscribers.class.getName()+" where ");
-		
+		String sqlText = "select :key from "+Books.class.getName()+" where ";
+				
 		for(String key : searchCriteria.keySet()){
 
+			sqlAppender.append(sqlText.replaceAll(":key", key));
+			
 			if(count > 1){
 				sqlAppender.append(" and ");
 			}
 
 			String value = (String)searchCriteria.get(key);
-			sqlAppender.append(key+" = like %"+value+"%");
+			sqlAppender.append(key+" like %"+value+"%");
 			count++;
 		}
 		
+		log.info("sql to exec : "+sqlAppender.toString());
+		
 		Session session = this.getSessionFactory().openSession();
 		
-		List<Books> list = session.createQuery(sqlAppender.toString()).list();
+		List<String> list = session.createSQLQuery(sqlAppender.toString()).list();
 		
 		return list;
 	}
