@@ -84,7 +84,12 @@
 {
 				  console.log("tmpStr : "+tmpStr);	
 				
-				  if (!tmpStr || tmpStr.length == 0) {return 0;}
+				  if (!tmpStr || tmpStr.length == 0) {
+                     console.log("within the null empty text "+tmpStr);
+					 $scope.data = "";
+					 $(".titleSearchPossibles").css("display", "none");
+					 return 0;
+				  }
 			  
 			  
 				  $timeout(function() {
@@ -107,13 +112,14 @@
 								//$scope.responseData = data; 
 								console.log(data);
 							   $scope.data = data;
+							    $(".titleSearchPossibles").css("display", "table");
 							   
 							}).error(function(data, status){
 								
 								console.log('error retrieving data');
 							})
 						}
-					}, 1000);
+					}, 500);
 			});
 			
 			

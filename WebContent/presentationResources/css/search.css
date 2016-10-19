@@ -162,6 +162,17 @@ div.publisherLang{
 	margin-left: -0.2em;
 }
 
+ul.titleSearchPossibles{
+	z-index: 10;
+	position:absolute;
+	background-color:white;
+	list-style-type:none;
+	text-shadow: none;
+	border: solid 1.5px #dcdcdc;
+	box-shadow: 10px 10px 5px #888888;
+
+}
+
 div.search-box{
 	width: 40%;
 	padding: 1em;
@@ -169,6 +180,7 @@ div.search-box{
 	margin-top:2em;
 	overflow:hidden;
 	background: #fff;
+	overflow: visible;
 	background-color: #ededed;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -240,4 +252,4 @@ button.accordion:after {
 
 button.accordion.active:after {
     content: '\02795'; /* Unicode character for "minus" sign (-) */
-}
+}v

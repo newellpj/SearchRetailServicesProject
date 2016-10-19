@@ -102,12 +102,13 @@ var html = $(".bookRevList").html();
 							ng-options="option.name for option in genreSelect.availableOptions track by option.value">
 					
 					</select>
-					
-						 <ul>
+					    <div style="border-radius:7px;">
+						 <ul class="titleSearchPossibles">
 							<li ng-repeat="d in data">
 							 <span>{{d}}</span>
 							</li>
 						   </ul>
+					</div>	   
 			
 				</div>	
             		
