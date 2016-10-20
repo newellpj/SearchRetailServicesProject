@@ -74,7 +74,7 @@ var html = $(".bookRevList").html();
 
 <div ng-controller="searchPageController" ng-init="titleText=''; authorText=''; publisherText='Harper'" >
 	<div class="logoImg">
-		<img width='300' height='150' src='./presentationResources/images/eyeball.png' style='float:right; margin-right:28%; margin-top:3%;' />
+		<img width='300' height='150' src='./presentationResources/images/eyeball.png' style='position:absolute; margin-left: 56%; margin-top:3%' />
 	</div>
 
 	<div class="search-box responsive" >
@@ -105,7 +105,7 @@ var html = $(".bookRevList").html();
 					    <div style="border-radius:7px;">
 						 <ul class="titleSearchPossibles">
 							<li ng-repeat="d in data">
-							 <span>{{d}}</span>
+							 <span onclick="displayMe()">{{d}}</span>
 							</li>
 						   </ul>
 					</div>	   

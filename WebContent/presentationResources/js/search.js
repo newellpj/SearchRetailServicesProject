@@ -79,6 +79,10 @@
 					$scope.genreSelect.selectedOption = $scope.genreSelect.availableOptions[0];
 			});
 			
+			$scope.displayTextSelected = function () {
+				console.log('hello there');
+			}
+			
 			
 			$scope.$watch('titleText', function (tmpStr)
 {
@@ -141,7 +145,7 @@
 		});
 	 
 	
-
+   
 	 
 	//searchBookApp.factory('titleVal', function(){
 	  //return { titleText: '' };
