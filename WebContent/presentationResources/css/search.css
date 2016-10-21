@@ -162,7 +162,7 @@ div.publisherLang{
 	margin-left: -0.2em;
 }
 
-ul.titleSearchPossibles{
+ul.titleSearchPossibles, ul.authorSearchPossibles, ul.publisherSearchPossibles{
 	z-index: 10;
 	position:absolute;
 	background-color:white;
@@ -178,7 +178,20 @@ ul.titleSearchPossibles li:hover{
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
 	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
 	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
+}
 
+ul.authorSearchPossibles li:hover{
+	z-index: 10;
+	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
+	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
+	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
+}
+
+ul.publisherSearchPossibles li:hover{
+	z-index: 10;
+	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
+	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
+	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
 }
 
 div.search-box{

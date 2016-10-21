@@ -12,6 +12,7 @@
 			 $scope.genreHide = true;
 			 $scope.categoryHide = true;
 			 $scope.languageHide = true;
+			 $scope.lastSelectedTitleItem = '';
 			 
 			
 			$scope.genreSelect = {
@@ -56,7 +57,47 @@
 			};
 			
 			
-   
+			
+			$scope.performInstantSearch = function(tmpStr, objClass){ 
+				
+				if (!tmpStr || tmpStr.length == 0) {
+                     console.log("within the null empty text "+tmpStr);
+					 $scope.data = "";
+					 $(objClass).css("display", "none");
+					 return 0;
+				}
+			
+				
+				$timeout(function() {
+
+					// if searchStr is still the same..
+					// go ahead and retrieve the data
+						if (tmpStr === $scope.titleText && $scope.lastSelectedTitleItem != $scope.titleText){
+							
+							console.log("within the title text "+tmpStr);
+							
+							$http({
+								url : 'partialSearchForBook',
+								method : 'GET',
+								headers: {'Content-Type' : 'application/json'},
+								dataType: "JSON",
+								params: { 
+									partialSearch: 'title-'+tmpStr
+								}
+							}).success(function(data){
+								//$scope.responseData = data; 
+								console.log(data);
+							   $scope.data = data;
+							    $(objClass).css("display", "table");
+							   
+							}).error(function(data, status){
+								
+								console.log('error retrieving data');
+							})
+						}
+					}, 500);
+			}
+			
 			
 			$scope.$watch('catCheck', function(newVal, oldVal, scope) {
 				$log.info("newVal : "+newVal);
@@ -79,68 +120,33 @@
 					$scope.genreSelect.selectedOption = $scope.genreSelect.availableOptions[0];
 			});
 			
-			$scope.displayTextSelected = function () {
-				console.log('hello there');
+			
+					
+			$scope.displayMe = function(data, objClass){
+				console.log('hello there : '+data);
+				$scope.titleText = data;
+				$scope.data = "";
+				$scope.lastSelectedTitleItem = data;
+				 $(objClass).css("display", "none");
+				 
 			}
 			
-			
-			$scope.$watch('titleText', function (tmpStr)
-{
+			$scope.$watch('titleText', function (tmpStr){
 				  console.log("tmpStr : "+tmpStr);	
-				
-				  if (!tmpStr || tmpStr.length == 0) {
-                     console.log("within the null empty text "+tmpStr);
-					 $scope.data = "";
-					 $(".titleSearchPossibles").css("display", "none");
-					 return 0;
-				  }
-			  
-			  
-				  $timeout(function() {
-
-					// if searchStr is still the same..
-					// go ahead and retrieve the data
-						if (tmpStr === $scope.titleText){
-							
-							console.log("within the title text "+tmpStr);
-							
-							$http({
-								url : 'partialSearchForBook',
-								method : 'GET',
-								headers: {'Content-Type' : 'application/json'},
-								dataType: "JSON",
-								params: { 
-									partialSearch: 'title-'+tmpStr
-								}
-							}).success(function(data){
-								//$scope.responseData = data; 
-								console.log(data);
-							   $scope.data = data;
-							    $(".titleSearchPossibles").css("display", "table");
-							   
-							}).error(function(data, status){
-								
-								console.log('error retrieving data');
-							})
-						}
-					}, 500);
+				 $scope.performInstantSearch(tmpStr, '.titleSearchPossibles');
+			});
+			
+			$scope.$watch('authorText', function (tmpStr){
+				  console.log("tmpStr : "+tmpStr);		
+				 $scope.performInstantSearch(tmpStr, '.authorSearchPossibles');
 			});
 			
 			
-			// This is what you will bind the filter to
-		//	$scope.filterText = '';
-
-			// Instantiate these variables outside the watch
-			//var tempFilterText = '', filterTextTimeout;
+			$scope.$watch('p', function (tmpStr){
+				  console.log("tmpStr : "+tmpStr);		
+				 $scope.performInstantSearch(tmpStr, '.publisherSearchPossibles');
+			});
 			
-			//$scope.$watch('titleText', function (val) {
-			//	if (filterTextTimeout) $timeout.cancel(filterTextTimeout);
-
-			//	tempFilterText = val;
-			//	filterTextTimeout = $timeout(function() {
-			//		$scope.filterText = tempFilterText;
-			//	}, 250); // delay 250 ms
-			//})
 
 		});
 	 

@@ -102,36 +102,46 @@ var html = $(".bookRevList").html();
 							ng-options="option.name for option in genreSelect.availableOptions track by option.value">
 					
 					</select>
-					    <div style="border-radius:7px;">
+					   
 						 <ul class="titleSearchPossibles">
 							<li ng-repeat="d in data">
-							 <span onclick="displayMe()">{{d}}</span>
+							 <span ng-click="displayMe(d, '.titleSearchPossibles')">{{d}}</span>
 							</li>
 						   </ul>
-					</div>	   
+						  
 			
 				</div>	
             		
 				<div class="authorCategory responsive">
 					Author:
-					<input ng-model="authorText" id="authorText" style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
+					<input ng-model="authorText" id="authorText" placeholder="author text search..." style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
 					<input id="category" type="checkbox" ng-model="catCheck"  name="category" value="category" ng-click="categoryHide = !categoryHide" />Category
 					<select  ng-model="catSelect.selectedOption" name="catText" ng-hide="categoryHide" class="responsive" style="width:30%; margin-left:0.4em;" id="categorySelect" 
 					    ng-options="option.name for option in catSelect.availableOptions track by option.value" >
 					</select>
+					
+					 <ul class="authorSearchPossibles">
+							<li ng-repeat="d in data">
+							 <span ng-click="displayMe(d, '.authorSearchPossibles')">{{d}}</span>
+							</li>
+					  </ul>
 	
 				</div>	
 				
 				<div class="publisherLang responsive">
 					Publisher:  
-					<input ng-model="publisherText" id="publisherText" style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
+					<input ng-model="publisherText" id="publisherText" placeholder="publisher text search..." style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
 					<input id="language" ng-model="langCheck" type="checkbox" name="language" value="language" ng-click="languageHide = !languageHide" />Language
 					<select ng-model="langSelect.selectedOption" ng-hide="languageHide" name="langText" class="responsive" style="width:30%;" id="languageSelect" 
 							ng-options="option.name for option in langSelect.availableOptions track by option.value" >	
 					</select>
-
+					 <ul class="publisherSearchPossibles">
+							<li ng-repeat="d in data">
+							 <span ng-click="displayMe(d, '.publisherSearchPossibles')">{{d}}</span>
+							</li>
+					  </ul>
 		          </div>	
 			
 			  <div class="tagSearches responsive" ng-controller="searchSubmitter"> 
