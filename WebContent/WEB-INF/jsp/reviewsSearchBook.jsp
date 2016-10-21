@@ -72,7 +72,7 @@ var html = $(".bookRevList").html();
 
 <button class="glyphicon glyphicon-search accordion responsive"> <span style="font-family:Arial;">Show or Hide Search Books </span></button>
 
-<div ng-controller="searchPageController" ng-init="titleText=''; authorText=''; publisherText='Harper'" >
+<div ng-controller="searchPageController" ng-init="titleText=''; authorText=''; publisherText=''" >
 	<div class="logoImg">
 		<img width='300' height='150' src='./presentationResources/images/eyeball.png' style='position:absolute; margin-left: 56%; margin-top:3%' />
 	</div>
@@ -104,8 +104,8 @@ var html = $(".bookRevList").html();
 					</select>
 					   
 						 <ul class="titleSearchPossibles">
-							<li ng-repeat="d in data">
-							 <span ng-click="displayMe(d, '.titleSearchPossibles')">{{d}}</span>
+							<li ng-repeat="d in data track by $index">
+							 <span ng-click="displayTitles(d)">{{d}}</span>
 							</li>
 						   </ul>
 						  
@@ -122,8 +122,8 @@ var html = $(".bookRevList").html();
 					</select>
 					
 					 <ul class="authorSearchPossibles">
-							<li ng-repeat="d in data">
-							 <span ng-click="displayMe(d, '.authorSearchPossibles')">{{d}}</span>
+							<li ng-repeat="d in data track by $index" style="width:100%;">
+							 <span  ng-click="displayAuthors(d)">{{d}}</span>
 							</li>
 					  </ul>
 	
@@ -138,8 +138,8 @@ var html = $(".bookRevList").html();
 							ng-options="option.name for option in langSelect.availableOptions track by option.value" >	
 					</select>
 					 <ul class="publisherSearchPossibles">
-							<li ng-repeat="d in data">
-							 <span ng-click="displayMe(d, '.publisherSearchPossibles')">{{d}}</span>
+							<li ng-repeat="d in data track by $index">
+							 <span ng-click="displayPublishers(d)">{{d}}</span>
 							</li>
 					  </ul>
 		          </div>	

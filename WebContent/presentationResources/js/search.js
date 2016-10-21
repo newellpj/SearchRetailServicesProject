@@ -13,7 +13,8 @@
 			 $scope.categoryHide = true;
 			 $scope.languageHide = true;
 			 $scope.lastSelectedTitleItem = '';
-			 
+			 $scope.lastSelectedAuthorItem = '';
+			 $scope.lastSelectedPublisherItem = '';
 			
 			$scope.genreSelect = {
 				model: null,
@@ -56,9 +57,27 @@
 				 selectedOption: {value: '', name: 'Please select..'} 
 			};
 			
+			$scope.testValue = function(searchType, tmpStr){
+				
+				if(searchType === 'title'){
+					if (tmpStr === $scope.titleText && $scope.lastSelectedTitleItem != $scope.titleText){
+						return true;
+					}
+				}else if(searchType === 'author'){
+					if (tmpStr === $scope.authorText && $scope.lastSelectedAuthorItem != $scope.authorText){
+						return true;
+					}
+				}else if(searchType === 'publisher'){
+					if (tmpStr === $scope.publisherText && $scope.lastSelectedPublisherItem != $scope.publisherText){
+						return true;
+					}
+				}
+				
+				return false;
+				
+			}
 			
-			
-			$scope.performInstantSearch = function(tmpStr, objClass){ 
+			$scope.performInstantSearch = function(tmpStr, objClass, searchType){ 
 				
 				if (!tmpStr || tmpStr.length == 0) {
                      console.log("within the null empty text "+tmpStr);
@@ -72,7 +91,7 @@
 
 					// if searchStr is still the same..
 					// go ahead and retrieve the data
-						if (tmpStr === $scope.titleText && $scope.lastSelectedTitleItem != $scope.titleText){
+						if ($scope.testValue(searchType, tmpStr)){
 							
 							console.log("within the title text "+tmpStr);
 							
@@ -82,7 +101,7 @@
 								headers: {'Content-Type' : 'application/json'},
 								dataType: "JSON",
 								params: { 
-									partialSearch: 'title-'+tmpStr
+									partialSearch: searchType+'-'+tmpStr
 								}
 							}).success(function(data){
 								//$scope.responseData = data; 
@@ -120,31 +139,47 @@
 					$scope.genreSelect.selectedOption = $scope.genreSelect.availableOptions[0];
 			});
 			
+			$scope.displayPublishers = function(data){
+				console.log('hello there : '+data);
+				$scope.publisherText = data;
+				$scope.data = "";
+				$scope.lastSelectedPublisherItem = data;
+				 $('.publisherSearchPossibles').css("display", "none");
+				 
+			}
 			
+			$scope.displayAuthors = function(data){
+				console.log('hello there : '+data);
+				$scope.authorText = data;
+				$scope.data = "";
+				$scope.lastSelectedAuthorItem = data;
+				 $('.authorSearchPossibles').css("display", "none");
+				 
+			}
 					
-			$scope.displayMe = function(data, objClass){
+			$scope.displayTitles = function(data){
 				console.log('hello there : '+data);
 				$scope.titleText = data;
 				$scope.data = "";
 				$scope.lastSelectedTitleItem = data;
-				 $(objClass).css("display", "none");
+				 $('.titleSearchPossibles').css("display", "none");
 				 
 			}
 			
 			$scope.$watch('titleText', function (tmpStr){
 				  console.log("tmpStr : "+tmpStr);	
-				 $scope.performInstantSearch(tmpStr, '.titleSearchPossibles');
+				 $scope.performInstantSearch(tmpStr, '.titleSearchPossibles', 'title');
 			});
 			
 			$scope.$watch('authorText', function (tmpStr){
 				  console.log("tmpStr : "+tmpStr);		
-				 $scope.performInstantSearch(tmpStr, '.authorSearchPossibles');
+				 $scope.performInstantSearch(tmpStr, '.authorSearchPossibles', 'author');
 			});
 			
 			
-			$scope.$watch('p', function (tmpStr){
+			$scope.$watch('publisherText', function (tmpStr){
 				  console.log("tmpStr : "+tmpStr);		
-				 $scope.performInstantSearch(tmpStr, '.publisherSearchPossibles');
+				 $scope.performInstantSearch(tmpStr, '.publisherSearchPossibles', 'publisher');
 			});
 			
 

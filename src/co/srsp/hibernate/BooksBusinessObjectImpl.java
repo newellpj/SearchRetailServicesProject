@@ -75,7 +75,7 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 		
 		int count = 0;
 		
-		String sqlText = "select :key from books where ";
+		String sqlText = "select distinct(:key) from books where ";
 				
 		for(String key : searchCriteria.keySet()){
 
