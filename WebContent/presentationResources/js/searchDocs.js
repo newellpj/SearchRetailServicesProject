@@ -165,6 +165,99 @@
 				})
 
 			 }
+			 
+			 
+			 			
+			$scope.testValue = function(searchType, tmpStr){
+				
+				if(searchType === 'title'){
+					if (tmpStr === $scope.titleText && $scope.lastSelectedTitleItem != $scope.titleText){
+						return true;
+					}
+				}else if(searchType === 'author'){
+					if (tmpStr === $scope.authorText && $scope.lastSelectedAuthorItem != $scope.authorText){
+						return true;
+					}
+				}else if(searchType === 'publisher'){
+					if (tmpStr === $scope.publisherText && $scope.lastSelectedPublisherItem != $scope.publisherText){
+						return true;
+					}
+				}
+				
+				return false;
+				
+			}
+			
+			$scope.performInstantSearch = function(tmpStr, objClass, searchType){ 
+				
+				if (!tmpStr || tmpStr.length == 0) {
+                     console.log("within the null empty text "+tmpStr);
+					 $scope.data = "";
+					 $(objClass).css("display", "none");
+					 return 0;
+				}
+			
+				
+				$timeout(function() {
+
+					// if searchStr is still the same..
+					// go ahead and retrieve the data
+						if ($scope.testValue(searchType, tmpStr)){
+							
+							console.log("within the title text "+tmpStr);
+							
+							$http({
+								url : 'partialSearchForDocs',
+								method : 'GET',
+								headers: {'Content-Type' : 'application/json'},
+								dataType: "JSON",
+								params: { 
+									partialSearch: searchType+'-'+tmpStr
+								}
+							}).success(function(data){
+								//$scope.responseData = data; 
+								console.log(data);
+							   $scope.data = data;
+							    $(objClass).css("display", "table");
+							   
+							}).error(function(data, status){
+								
+								console.log('error retrieving data');
+							})
+						}
+					}, 250);
+			}
+			
+			
+			$scope.displayAuthors = function(data){
+				console.log('hello there : '+data);
+				$scope.authorText = data;
+				$scope.data = "";
+				$scope.lastSelectedAuthorItem = data;
+				 $('.authorSearchPossibles').css("display", "none");
+				 
+			}
+					
+			$scope.displayTitles = function(data){
+				console.log('hello there : '+data);
+				$scope.titleText = data;
+				$scope.data = "";
+				$scope.lastSelectedTitleItem = data;
+				 $('.titleSearchPossibles').css("display", "none");
+				 
+			}
+			
+			$scope.$watch('titleText', function (tmpStr){
+				  console.log("tmpStr : "+tmpStr);	
+				 $scope.performInstantSearch(tmpStr, '.titleSearchPossibles', 'title');
+			});
+			
+			$scope.$watch('authorText', function (tmpStr){
+				  console.log("tmpStr : "+tmpStr);		
+				 $scope.performInstantSearch(tmpStr, '.authorSearchPossibles', 'author');
+			});
+			 
+			 
 
 			});
 	 

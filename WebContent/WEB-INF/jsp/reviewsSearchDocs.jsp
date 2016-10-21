@@ -105,11 +105,25 @@
 						<span style="visibility:hidden;"> hidden text for placeholder hidde text .</span>
 				
 			</div>
+						
+					 <ul class="titleSearchPossibles">
+							<li ng-repeat="d in data track by $index" style="width:100%;   padding-left:-2em !important;">
+							 <span ng-click="displayTitles(d)">{{d}}</span>
+							</li>
+					  </ul>
 			<div class="authorFields">
 					Author:
 					<input ng-model="authorText" id="authorText" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspanSearchDocs"></span>
 					<span style="visibility:hidden;"> hidden text for placeholder hidden text for placeholder</span>
 			</div>
+						
+					 <ul class="authorSearchPossibles">
+							<li ng-repeat="d in data track by $index" style="width:100%;   padding-left:-2em !important;">
+							 <span ng-click="displayAuthors(d)">{{d}}</span>
+							</li>
+					  </ul>
+			
+			
 			<div class="tagFields">	
 					Keywords (comma separated): </br></br>
 					<div id="tags" ><input id="keywordsText" ng-model="keywordsText" type='text' value='' placeholder="Add a tag" name='keywordsText' /><span class="glyphicon glyphicon-tag iconspan2"></span>

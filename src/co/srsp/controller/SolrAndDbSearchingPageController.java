@@ -351,6 +351,11 @@ public class SolrAndDbSearchingPageController {
 	
 	
 	
+	@RequestMapping(value = { "/partialSearchForDocs"}, method = RequestMethod.GET)
+	public @ResponseBody String[] partialSearchForDocs(HttpServletRequest request, HttpServletResponse response){
+		return null;
+	}
+	
 	@RequestMapping(value = { "/searchForDocs"}, method = RequestMethod.GET)
 	public @ResponseBody SolrSearchData[] searchForDocs(HttpServletRequest request, HttpServletResponse response){
 		log.info("searchForDocs keyword text : : "+request.getParameter("keywordText"));

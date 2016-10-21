@@ -243,3 +243,37 @@ button.accordion:after {
 button.accordion.active:after {
     content: '\02795'; /* Unicode character for "minus" sign (-) */
 }
+
+
+ul.titleSearchPossibles li:hover{
+	z-index: 10;
+	border-radius:10px;
+	padding-left:1em;
+	padding-right:1em;
+	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
+	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
+	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
+}
+
+ul.authorSearchPossibles li:hover{
+	z-index: 10;
+	border-radius:10px;
+	padding-left:1em;
+	padding-right:1em;
+	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
+	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
+	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
+}
+
+ul.titleSearchPossibles, ul.authorSearchPossibles {
+	z-index: 10;
+	position:absolute;
+	background-color:white;
+	list-style-type:none;
+	text-shadow: none;
+	padding-right:1em;
+	border: solid 1.5px #dcdcdc;
+	box-shadow: 10px 10px 5px #888888;
+    -webkit-padding-start: 10px;
+
+}
