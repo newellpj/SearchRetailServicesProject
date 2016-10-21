@@ -105,7 +105,7 @@ ul.topnav li a:hover {
 	background: linear-gradient(top, #bbbbbb 0%, #efefef 100%);  
 	background: -moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%); 
 	background: -webkit-linear-gradient(top, #bbbbbb 0%, #efefef 100%); 	
-	border-radius: 10px;
+	border-radius: 15px;
 	
 }
 

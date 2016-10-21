@@ -163,7 +163,7 @@ function noBookToReview(){
 		  document.getElementById("activeSel3").style.background="linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
 		  document.getElementById("activeSel3").style.background="-moz-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
 		  document.getElementById("activeSel3").style.background="-webkit-linear-gradient(top, #bbbbbb 0%, #efefef 100%)";
-		  document.getElementById("activeSel3").style.borderRadius="10px";	
+		  document.getElementById("activeSel3").style.borderRadius="15px";	
 
 				//document.getElementById(idFound).style.backgroundColor="#e9e9e9";
 		parent.document.getElementById("activeSel").style.backgroundImage="";
@@ -208,7 +208,7 @@ function noBookToReview(){
 		  
 		  //document.getElementById("activeSel").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
 		  //document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
-		  document.getElementById(id).style.borderRadius="10px";	
+		  document.getElementById(id).style.borderRadius="15px";	
 		
 
         $('ul.topnav.responsive li').each(function(){

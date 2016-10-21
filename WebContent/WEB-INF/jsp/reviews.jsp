@@ -31,7 +31,7 @@
 	  
 	  //document.getElementById("activeSel").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
       //document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
-	  document.getElementById("activeSel").style.borderRadius="10px";	
+	  document.getElementById("activeSel").style.borderRadius="15px";	
 	
 	
 	  
