@@ -114,7 +114,7 @@
 								console.log('error retrieving data');
 							})
 						}
-					}, 500);
+					}, 250);
 			}
 			
 			

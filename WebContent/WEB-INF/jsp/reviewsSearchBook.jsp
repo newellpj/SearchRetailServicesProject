@@ -122,8 +122,8 @@ var html = $(".bookRevList").html();
 					</select>
 					
 					 <ul class="authorSearchPossibles">
-							<li ng-repeat="d in data track by $index" style="width:100%;">
-							 <span  ng-click="displayAuthors(d)">{{d}}</span>
+							<li ng-repeat="d in data track by $index" style="width:100%;   padding-left:-2em !important;">
+							 <span ng-click="displayAuthors(d)">{{d}}</span>
 							</li>
 					  </ul>
 	
