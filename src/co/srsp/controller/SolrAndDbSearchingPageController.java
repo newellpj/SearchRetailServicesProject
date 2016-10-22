@@ -6,7 +6,9 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -369,11 +371,18 @@ public class SolrAndDbSearchingPageController {
 			returnList = new String[solrDocPartialSearch.size()];
 			log.info("list solrDocListAuthorsSearch is : "+solrDocPartialSearch.size());
 			
-			int count = 0;
+			
+			Set<String> uniqueReturnList = new HashSet<String>();
 			
 			for(SolrDocument solrDoc : solrDocPartialSearch){
 				log.info("field names returned !! "+solrDoc.getFieldNames());
-				returnList[count] = solrDoc.getFieldValue(keyValuePair[0]).toString();
+				uniqueReturnList.add(solrDoc.getFieldValue(keyValuePair[0]).toString());
+			}
+			
+			int count = 0;
+
+			for(String value : uniqueReturnList){
+				returnList[count] = value;
 				count++;
 			}
 			
