@@ -353,7 +353,30 @@ public class SolrAndDbSearchingPageController {
 	
 	@RequestMapping(value = { "/partialSearchForDocs"}, method = RequestMethod.GET)
 	public @ResponseBody String[] partialSearchForDocs(HttpServletRequest request, HttpServletResponse response){
-		return null;
+		
+		SolrSearchData ssd = new SolrSearchData();
+		SolrSearchService solrService = new SolrSearchService();	
+		String partialText = request.getParameter(SessionConstants.PARTIAL_TEXT);	
+		String[] keyValuePair = partialText.split("-");
+		
+		SolrDocumentList solrDocPartialSearch = null;
+		
+		String[] returnList = null;
+		
+		if(!"".equals(partialText)){
+			solrDocPartialSearch =  solrService.performQueryPaginated(keyValuePair[0]+":"+keyValuePair[1], 10, 0);
+			//request.getSession().setAttribute("solrAuthorQuery", "author:"+authorText);
+			
+			log.info("list solrDocListAuthorsSearch is : "+solrDocPartialSearch.size());
+			
+			for(SolrDocument solrDoc : solrDocPartialSearch){
+				log.info("field names returned !! "+solrDoc.getFieldNames());
+				
+			}
+			
+		}
+		
+		return returnList;
 	}
 	
 	@RequestMapping(value = { "/searchForDocs"}, method = RequestMethod.GET)

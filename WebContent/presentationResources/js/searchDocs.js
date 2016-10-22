@@ -7,7 +7,7 @@
 
 
 
-		searchDocsApp.controller('searchDocsController', function($scope, $log, $http) {
+		searchDocsApp.controller('searchDocsController', function($scope, $log, $http, $timeout) {
 		 $log.info("11 title text from search page controller : "+$scope.titleText);
 			 
 			 
@@ -204,7 +204,7 @@
 					// go ahead and retrieve the data
 						if ($scope.testValue(searchType, tmpStr)){
 							
-							console.log("within the title text "+tmpStr);
+							console.log("within the title text ddd "+tmpStr);
 							
 							$http({
 								url : 'partialSearchForDocs',
@@ -218,7 +218,14 @@
 								//$scope.responseData = data; 
 								console.log(data);
 							   $scope.data = data;
-							    $(objClass).css("display", "table");
+							   
+							   if(data.length == 0){
+								   $(objClass).css("display", "none");
+							   }else{
+								   $(objClass).css("display", "table");
+							   }
+							   
+							    
 							   
 							}).error(function(data, status){
 								

@@ -107,7 +107,14 @@
 								//$scope.responseData = data; 
 								console.log(data);
 							   $scope.data = data;
-							    $(objClass).css("display", "table");
+							 //  $(objClass).css("display", "table");
+								
+								if(data.length == 0){
+								   $(objClass).css("display", "none");
+							   }else{
+								   $(objClass).css("display", "table");
+							   }
+								
 							   
 							}).error(function(data, status){
 								
