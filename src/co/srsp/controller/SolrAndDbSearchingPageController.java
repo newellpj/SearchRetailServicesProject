@@ -364,14 +364,17 @@ public class SolrAndDbSearchingPageController {
 		String[] returnList = null;
 		
 		if(!"".equals(partialText)){
-			solrDocPartialSearch =  solrService.performQueryPaginated(keyValuePair[0]+":"+keyValuePair[1], 10, 0);
+			solrDocPartialSearch =  solrService.performQueryPaginated(keyValuePair[0]+":"+keyValuePair[1]+"*", 10, 0);
 			//request.getSession().setAttribute("solrAuthorQuery", "author:"+authorText);
-			
+			returnList = new String[solrDocPartialSearch.size()];
 			log.info("list solrDocListAuthorsSearch is : "+solrDocPartialSearch.size());
+			
+			int count = 0;
 			
 			for(SolrDocument solrDoc : solrDocPartialSearch){
 				log.info("field names returned !! "+solrDoc.getFieldNames());
-				
+				returnList[count] = solrDoc.getFieldValue(keyValuePair[0]).toString();
+				count++;
 			}
 			
 		}

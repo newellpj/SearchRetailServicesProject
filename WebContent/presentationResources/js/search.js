@@ -163,6 +163,11 @@
 				 $('.authorSearchPossibles').css("display", "none");
 				 
 			}
+			
+			$scope.lostFocus = function(objToHide){
+				console.log('lost focus');
+				$("."+objToHide).css('display', 'none');
+			}
 					
 			$scope.displayTitles = function(data){
 				console.log('hello there : '+data);

@@ -178,14 +178,15 @@
 					if (tmpStr === $scope.authorText && $scope.lastSelectedAuthorItem != $scope.authorText){
 						return true;
 					}
-				}else if(searchType === 'publisher'){
-					if (tmpStr === $scope.publisherText && $scope.lastSelectedPublisherItem != $scope.publisherText){
-						return true;
-					}
 				}
 				
 				return false;
 				
+			}
+			
+			$scope.lostFocus = function(objToHide){
+				console.log('lost focus');
+				$("."+objToHide).css('display', 'none');
 			}
 			
 			$scope.performInstantSearch = function(tmpStr, objClass, searchType){ 
@@ -205,6 +206,10 @@
 						if ($scope.testValue(searchType, tmpStr)){
 							
 							console.log("within the title text ddd "+tmpStr);
+							
+							if(searchType == 'title'){
+								searchType = 'id';
+							}
 							
 							$http({
 								url : 'partialSearchForDocs',
@@ -256,11 +261,17 @@
 			
 			$scope.$watch('titleText', function (tmpStr){
 				  console.log("tmpStr : "+tmpStr);	
+				  //close any other instant search list overlay displaying and reset scope data to empty string
+				  $('.authorSearchPossibles').css("display", "none");
+				  $scope.data = "";		  
 				 $scope.performInstantSearch(tmpStr, '.titleSearchPossibles', 'title');
 			});
 			
 			$scope.$watch('authorText', function (tmpStr){
-				  console.log("tmpStr : "+tmpStr);		
+				  console.log("tmpStr : "+tmpStr);	
+				  //close any other instant search list overlay displaying and reset scope data to empty string	
+				  $('.titleSearchPossibles').css("display", "none");
+				  $scope.data = "";
 				 $scope.performInstantSearch(tmpStr, '.authorSearchPossibles', 'author');
 			});
 			 

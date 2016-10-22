@@ -94,7 +94,7 @@ var html = $(".bookRevList").html();
 	
 				<div class="titleAndGenre responsive" >
 					Title:
-					<input ng-model="titleText" id="titleText" placeholder="title search..."  type='text' name='titleText' style="width:40%;"><span class="glyphicon glyphicon-book iconspan2"></span>
+					<input ng-model="titleText" id="titleText" ng-blur="lostFocus('titleSearchPossibles')" placeholder="title search..."  type='text' name='titleText' style="width:40%;"><span class="glyphicon glyphicon-book iconspan2"></span>
 					
 					
 					<input id="genre" type="checkbox"  ng-model="genreCheck" name="genre" value="genre" ng-click="genreHide = !genreHide" />Genre 
@@ -114,7 +114,7 @@ var html = $(".bookRevList").html();
             		
 				<div class="authorCategory responsive">
 					Author:
-					<input ng-model="authorText" id="authorText" placeholder="author search..." style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
+					<input ng-model="authorText" id="authorText" ng-blur="lostFocus('authorSearchPossibles')" placeholder="author search..." style="width:40%;" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspan2"></span>
 					
 					<input id="category" type="checkbox" ng-model="catCheck"  name="category" value="category" ng-click="categoryHide = !categoryHide" />Category
 					<select  ng-model="catSelect.selectedOption" name="catText" ng-hide="categoryHide" class="responsive" style="width:30%; margin-left:0.4em;" id="categorySelect" 
@@ -131,7 +131,7 @@ var html = $(".bookRevList").html();
 				
 				<div class="publisherLang responsive">
 					Publisher:  
-					<input ng-model="publisherText" id="publisherText" placeholder="publisher search..." style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
+					<input ng-model="publisherText" id="publisherText" ng-blur="lostFocus('publisherSearchPossibles')" placeholder="publisher search..." style="width:40%;" type='text' name='publisherText' /><span class="glyphicon glyphicon-barcode iconspan2"></span>
 					
 					<input id="language" ng-model="langCheck" type="checkbox" name="language" value="language" ng-click="languageHide = !languageHide" />Language
 					<select ng-model="langSelect.selectedOption" ng-hide="languageHide" name="langText" class="responsive" style="width:30%;" id="languageSelect" 
