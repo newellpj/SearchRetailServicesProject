@@ -249,6 +249,7 @@ ul.titleSearchPossibles li:hover{
 	z-index: 10;
 	border-radius:10px;
 	padding-left:1em;
+		margin-left:1em !important;
 	padding-right:1em;
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
 	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
@@ -258,6 +259,7 @@ ul.titleSearchPossibles li:hover{
 ul.authorSearchPossibles li:hover{
 	z-index: 10;
 	border-radius:10px;
+	margin-left:1em !important;
 	padding-left:1em;
 	padding-right:1em;
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
@@ -271,12 +273,11 @@ ul.titleSearchPossibles{
 	background-color:white;
 	list-style-type:none;
 	text-shadow: none;
+	padding-left:1em;
 	padding-right:1em;
-	min-width:20%;
 	border: solid 1.5px #dcdcdc;
 	box-shadow: 10px 10px 5px #888888;
     -webkit-padding-start: 10px;
-	margin-left:1%;
 }
 
  ul.authorSearchPossibles {

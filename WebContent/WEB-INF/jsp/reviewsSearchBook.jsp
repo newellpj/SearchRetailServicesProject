@@ -104,7 +104,7 @@ var html = $(".bookRevList").html();
 					</select>
 					   
 						 <ul class="titleSearchPossibles" ng-mouseleave="lostFocus('titleSearchPossibles')">
-							<li ng-repeat="d in data track by $index">
+							<li ng-repeat="d in data track by $index" style="margin-left:2em;">
 							 <span ng-click="displayTitles(d)">{{d}}</span>
 							</li>
 						   </ul>
@@ -122,7 +122,7 @@ var html = $(".bookRevList").html();
 					</select>
 					
 					 <ul class="authorSearchPossibles" ng-mouseleave="lostFocus('authorSearchPossibles')">
-							<li ng-repeat="d in data track by $index" style="width:100%;   padding-left:-2em !important;">
+							<li ng-repeat="d in data track by $index" style="width:100%;   padding-left:-2em !important; margin-left:2em;">
 							 <span ng-click="displayAuthors(d)">{{d}}</span>
 							</li>
 					  </ul>
@@ -138,7 +138,7 @@ var html = $(".bookRevList").html();
 							ng-options="option.name for option in langSelect.availableOptions track by option.value" >	
 					</select>
 					 <ul class="publisherSearchPossibles"  ng-mouseleave="lostFocus('publisherSearchPossibles')">
-							<li ng-repeat="d in data track by $index">
+							<li ng-repeat="d in data track by $index" style="margin-left:2em;">
 							 <span ng-click="displayPublishers(d)">{{d}}</span>
 							</li>
 					  </ul>
