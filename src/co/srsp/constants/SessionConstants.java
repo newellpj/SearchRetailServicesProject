@@ -15,7 +15,7 @@ public interface SessionConstants {
 	public static String TITLE_TEXT = "title";
 	public static String PARTIAL_TEXT = "partialSearch";
 	
-	public static String SEARCH_TYPE_TAG = "searchType";
+	//public static String SEARCH_TYPE_TAG = "searchType";
 	public static String FIND_BY_BOOKS_BY_PUBLISHER_LAZY_LOAD = "findBooksByPublisherLazyLoad";
 	
 	public static String CURRENT_PAGINATION_OFFSET = "currentPaginationOffset";

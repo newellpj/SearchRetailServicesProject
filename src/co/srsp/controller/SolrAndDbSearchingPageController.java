@@ -323,7 +323,7 @@ public class SolrAndDbSearchingPageController {
 		request.getSession().removeAttribute("bookAuthorFound");
 		request.getSession().removeAttribute("bookTitleFound");
 		request.getSession().removeAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET);
-		request.getSession().removeAttribute(SessionConstants.SEARCH_TYPE_TAG);
+		//request.getSession().removeAttribute(SessionConstants.SEARCH_TYPE_TAG);
 		request.getSession().removeAttribute(SessionConstants.TAGS_SEARCH_CRITERIA);
 		request.getSession().removeAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
 		request.getSession().removeAttribute(SessionConstants.PUBLISHER_TEXT);
@@ -338,7 +338,7 @@ public class SolrAndDbSearchingPageController {
 		request.getSession().setAttribute(SessionConstants.GENRE_SELECT, "");
 		request.getSession().setAttribute(SessionConstants.CATEGORY_SELECT, "");
 		request.getSession().setAttribute(SessionConstants.LANGUAGE_SELECT, "");
-		request.getSession().setAttribute(SessionConstants.SEARCH_TYPE_TAG, "");
+		//request.getSession().setAttribute(SessionConstants.SEARCH_TYPE_TAG, "");
 		request.getSession().setAttribute(SessionConstants.TAGS_SEARCH_CRITERIA, null);
 		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, null);
 		
@@ -596,7 +596,7 @@ public class SolrAndDbSearchingPageController {
 	}
 	
 	@RequestMapping(value = { "/partialSearchForBook"}, method = RequestMethod.GET)
-	public @ResponseBody Object[] partialSearchBook(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody BookReviewsModel[] partialSearchBook(HttpServletRequest request, HttpServletResponse response){
 		
 		log.info("request contain PARTIAL_TEXT ? : "+request.getParameter(SessionConstants.PARTIAL_TEXT));
 		String partialText = request.getParameter(SessionConstants.PARTIAL_TEXT);	
@@ -604,10 +604,18 @@ public class SolrAndDbSearchingPageController {
 		HashMap<String, String> searchCriteria = new HashMap<String, String>();
 		searchCriteria.put(keyValuePair[0], keyValuePair[1]);
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		List<String> returnList = new ArrayList<String>();
-		returnList.addAll(booksService.findBookListByPartialMatch(searchCriteria));
+		List<Books> booksFoundList = booksService.findBookListByPartialMatch(searchCriteria);
 		
-		return returnList.toArray();
+		Set<Books> removedDuplicates = new HashSet<Books>();
+		
+		for(Books book : booksFoundList){
+			removedDuplicates.add(book);
+		}
+		
+		booksFoundList.clear(); //remove all elements and add in the set with duplicates removed.
+		booksFoundList.addAll(removedDuplicates);
+		
+		return  buildBooksFoundReturnModel(request, booksFoundList);
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
@@ -674,7 +682,7 @@ public class SolrAndDbSearchingPageController {
 		log.info("just before test !");
 
 		request.getSession().setAttribute(SessionConstants.PUBLISHER_TEXT, publisherText);
-		request.getSession().setAttribute(SessionConstants.SEARCH_TYPE_TAG, SessionConstants.FIND_BY_BOOKS_BY_PUBLISHER_LAZY_LOAD);
+	//	request.getSession().setAttribute(SessionConstants.SEARCH_TYPE_TAG, SessionConstants.FIND_BY_BOOKS_BY_PUBLISHER_LAZY_LOAD);
 		
 		
 		HashMap<String, String> booksSearchCriteria = null;
@@ -720,6 +728,108 @@ public class SolrAndDbSearchingPageController {
 		booksList.addAll(booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, 0, 20));
 
 		ModelAndView modelView = new ModelAndView();
+//		List<String> booksStringViewList = new ArrayList<String>();
+//		
+//		log.info("book list : "+booksList.size());
+//		request.getSession().setAttribute("currentPaginationOffset", 0);
+//		
+//			
+//		if(booksList == null || booksList.size() == 0){
+//			request.getSession().setAttribute("bookAuthorFound", "");
+//			request.getSession().setAttribute("bookTitleFound", "");
+//			request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
+//			log.info("no books found ");
+//			booksStringViewList.add("No books found");
+//		}
+//		
+//		BookReviewsModel[] bookReviewsModelArray = new BookReviewsModel[booksList.size()];
+//		int count = 0;
+//		
+//		BookReviewsModel model = null;
+		
+//		for(Books book : booksList){
+//			log.info("1 book.getThumbnailLocation() : "+book.getThumbnailLocation());	
+//			model = new BookReviewsModel();
+//			model.setAuthorText(book.getAuthor());
+//			model.setTitleText(book.getTitle()); 
+//			model.setExcerpt(book.getExcerpt());
+//			
+//			log.info("EXCERPT : "+model.getExcerpt());
+//			
+//			String loc = (book.getThumbnailLocation() != null && book.getThumbnailLocation().contains("http")) ? 
+//					book.getThumbnailLocation() : "./presentationResources/images/"+book.getThumbnailLocation();
+//			
+//			model.setThumbnnalLocation(loc);
+//			model.setBooksID(book.getIdbooks());
+//			model.setPublisherText(book.getPublisher());
+//			model.setBooksList(book.getTitle()+" - "+book.getAuthor());			
+//			
+//			try{
+//				//file system relative references are different from web application relative references 
+//				String fileURLPath = (loc.toLowerCase().contains("http")) ? loc : ConfigHandler.getInstance().readApplicationProperty("applicationImagesLocation")+book.getThumbnailLocation();
+//				log.info( System.getProperty("user.dir"));
+//				 
+//				File file = new File(fileURLPath);
+//				log.info("location for file is :::: "+fileURLPath);
+//				log.info("does file exist : "+file.exists());
+//				
+//				Image image = new ImageIcon(fileURLPath).getImage();
+//				
+//				int imgWidth = image.getWidth(null);
+//				int imgHeight = image.getHeight(null);
+//				
+//				log.info("imgWidth : "+imgWidth);
+//				log.info("imgHeight : "+imgHeight);
+//				
+//				if(imgWidth > imgHeight){
+//					double result = new Double(imgHeight)/ new Double(imgWidth);
+//					log.info("result : "+result);
+//					imgHeight = (int)(result * new Double(120));
+//					imgWidth = 120;
+//				}else if(imgWidth < imgHeight){
+//					double result = new Double(imgWidth)/ new Double(imgHeight);
+//					imgWidth = (int)(result * new Double(120));
+//					imgHeight = 120;
+//				}else{
+//					imgHeight = 120;
+//					imgWidth  = 120;
+//				}
+//				
+//				model.setImageHeight(String.valueOf(imgHeight));
+//				model.setImageWidth(String.valueOf(imgWidth));
+//				
+//			}catch(Exception e){
+//				e.printStackTrace();
+//				log.error(e.getMessage());
+//			}
+//			
+//			bookReviewsModelArray[count] = model;
+//			count++;
+//		}
+//		
+//		log.info("before testing array length");
+//		
+//		if(bookReviewsModelArray.length == 0){
+//			log.info("after testing array length");
+//			bookReviewsModelArray = new BookReviewsModel[1];
+//			log.info("after testing array length 222");
+//			BookReviewsModel model_ = new BookReviewsModel();
+//			log.info("after testing array length 333");
+//			model_.setBooksList("No Books Found!!");
+//			log.info("after testing array length 444");
+//			bookReviewsModelArray[0] = model_;
+//		}
+//		
+//		log.info("after testing array length 555");
+		
+		modelView.setViewName("reviewsSearchBook");
+		return buildBooksFoundReturnModel(request, booksList);
+
+	}
+	
+	
+	private BookReviewsModel[] buildBooksFoundReturnModel(HttpServletRequest request, List<Books> booksList){
+
 		List<String> booksStringViewList = new ArrayList<String>();
 		
 		log.info("book list : "+booksList.size());
@@ -812,11 +922,7 @@ public class SolrAndDbSearchingPageController {
 			bookReviewsModelArray[0] = model_;
 		}
 		
-		log.info("after testing array length 555");
-		
-		modelView.setViewName("reviewsSearchBook");
 		return bookReviewsModelArray;
-
 	}
 	
 	public static void main(String args[]){

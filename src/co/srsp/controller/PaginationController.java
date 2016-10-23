@@ -137,8 +137,7 @@ public class PaginationController {
 		
 		int latestOffset = Integer.parseInt(currentOffsetInSession)+20;
 		
-		String searchType = request.getSession().getAttribute("searchType").toString();
-		log.info("search type : "+searchType);
+
 		int paginationOffset = Integer.parseInt(request.getSession().getAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET).toString());
 		log.info("paginationOffset: "+paginationOffset);
 		List<Books> booksList = new ArrayList<Books>();
@@ -165,21 +164,28 @@ public class PaginationController {
 		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, (paginationOffset +20));
 		booksList = booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, paginationOffset+20, 20);
 		
-		log.info("size of booksList list returned : "+booksList.size());
+		
+		if(booksList != null){
+			log.info("size of booksList list returned : "+booksList.size());
+		}else{
+			log.info("no books returned");
+		}
 		//log.info("size of booksList2 list returned : "+booksLists2.size());
 		List<String> booksLists2 = new ArrayList<String>();
 
 		ArrayList<String> list = new ArrayList<String>();
 		
-		for(Books book : booksList){	
-			booksLists2.add(formattedSearchListItem(book, book.getTitle()+" - "+book.getAuthor()));
+		if(booksList != null){
+			for(Books book : booksList){	
+				booksLists2.add(formattedSearchListItem(book, book.getTitle()+" - "+book.getAuthor()));
+			}
 		}
 		
 		log.info("books List 2 size ::: "+booksLists2.size());
 		
 		ModelAndView model = new ModelAndView();	
 		//model.addObject("bookReviewsModel", bookReviewsModel);
-		model.addObject("booksLists2", booksLists2);
+		model.addObject("booksLists2", new ArrayList<String>());
 		model.setViewName("searchPaginationPage"); //reviewsPaginationPage
 		return model;
 	}

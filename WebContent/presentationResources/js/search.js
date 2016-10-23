@@ -5,8 +5,61 @@
 
 	var searchBookApp  = angular.module('searchBookPageApp', []);
 
+		var searchedDataSet;
+	
+	searchBookApp.service('searchDisplayInitService', function($log){
 
-		searchBookApp.controller('searchPageController', function($scope, $log, $timeout, $http) {
+		this.searchDisplayInit = function(){
+				var html = document.getElementById("bookRevList").html;
+				var innerHTML = document.getElementById("bookRevList").innerHTML;
+				
+				
+				$log.info("results section");
+				
+				document.getElementById("resultsSection").style.visibility = "visible";	
+				document.getElementById("bookRevList").innerHTML = ""; //this is the original search results div that gets displayed
+				
+				$log.info("inner html of  book rev list : "+document.getElementById("bookRevList").innerHTML);
+				
+				if(document.getElementById("bookRevList2") != null && document.getElementById("bookRevList2") != 'undefined'){
+					
+					document.getElementById("bookRevList2").innerHTML = "";
+					
+					 $( ".bookRevList2" ).each(function( ) { //these are the search result divs that get added upon pagination of search results
+							this.innerHTML = "";
+					  });
+						
+					$( ".searchSegment" ).remove();
+				}
+		}
+			
+	});
+	
+	
+		searchBookApp.service('formatSearchService', function($log, searchDisplayInitService) {
+			
+			
+			
+			this.formatContent = function(dataToFormat){
+				
+				searchDisplayInitService.searchDisplayInit();
+				
+				document.getElementById("search").style.display = "inline";
+				var formattedContent = "<div class='searchSegment'>"+formatBooksSearchContent(dataToFormat, $log)+"</div>"
+				
+				$log.info("formatted content : "+formattedContent);
+				
+				$('.bookRevList').append(formattedContent);
+
+				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+											
+				$('.resultsSection').jscroll({		  
+					loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+				});			
+			}
+		});
+	
+		searchBookApp.controller('searchPageController', function($scope, $log, $timeout, $http, formatSearchService) {
 		 $log.info("11 title text from search page controller : "+$scope.titleText);
 			 
 			 $scope.genreHide = true;
@@ -106,7 +159,9 @@
 							}).success(function(data){
 								//$scope.responseData = data; 
 								console.log(data);
+								
 							   $scope.data = data;
+							   searchedDataSet = data;
 							 //  $(objClass).css("display", "table");
 								
 								if(data.length == 0){
@@ -148,20 +203,20 @@
 			
 			$scope.displayPublishers = function(data){
 				console.log('hello there : '+data);
-				$scope.publisherText = data;
+				$scope.publisherText = data.publisherText;
 				$scope.data = "";
 				$scope.lastSelectedPublisherItem = data;
 				 $('.publisherSearchPossibles').css("display", "none");
-				 
+				  formatSearchService.formatContent(data);
 			}
 			
 			$scope.displayAuthors = function(data){
 				console.log('hello there : '+data);
-				$scope.authorText = data;
+				$scope.authorText = data.authorText;
 				$scope.data = "";
 				$scope.lastSelectedAuthorItem = data;
 				 $('.authorSearchPossibles').css("display", "none");
-				 
+				  formatSearchService.formatContent(data);
 			}
 			
 			$scope.lostFocus = function(objToHide){
@@ -171,10 +226,12 @@
 					
 			$scope.displayTitles = function(data){
 				console.log('hello there : '+data);
-				$scope.titleText = data;
-				$scope.data = "";
-				$scope.lastSelectedTitleItem = data;
+				$scope.titleText = data.titleText;
+				//$scope.data = "";
+				$scope.lastSelectedTitleItem = data.titleText;
 				 $('.titleSearchPossibles').css("display", "none");
+				 
+				 formatSearchService.formatContent(data);
 				 
 			}
 			
@@ -196,6 +253,11 @@
 			
 
 		});
+		
+		
+
+		
+
 	 
 	
    
