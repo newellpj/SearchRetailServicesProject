@@ -604,7 +604,7 @@ public class SolrAndDbSearchingPageController {
 		HashMap<String, String> searchCriteria = new HashMap<String, String>();
 		searchCriteria.put(keyValuePair[0], keyValuePair[1]);
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		List<Books> booksFoundList = booksService.findBookListByPartialMatch(searchCriteria);
+		List<Books> booksFoundList = booksService.findBookListByPartialMatch(searchCriteria, 0, 10);
 		
 		Set<Books> removedDuplicates = new HashSet<Books>();
 		
@@ -612,16 +612,36 @@ public class SolrAndDbSearchingPageController {
 			removedDuplicates.add(book);
 		}
 		
+		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
+		
 		booksFoundList.clear(); //remove all elements and add in the set with duplicates removed.
 		booksFoundList.addAll(removedDuplicates);
 		
 		return  buildBooksFoundReturnModel(request, booksFoundList);
 	}
 	
+	@RequestMapping(value = { "/updateSearchCriteriaAndPaginationOffset"}, method = RequestMethod.POST)
+	public void updateSearchCriteriaAndPaginationOffset(HttpServletRequest request, HttpServletResponse response){	
+		String searchCriteriaUpdate = request.getParameter(SessionConstants.SEARCH_CRITERIA_UPDATE);
+		String currentNumberDisplayed = request.getParameter(SessionConstants.CURRENT_INSTANT_SEARCH_NUMBER_DISPLAYED);
+	
+		log.info("currentNumberDisplayed :::::::::::: "+currentNumberDisplayed);
+		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, currentNumberDisplayed);
+			
+		String[] searchPair = searchCriteriaUpdate.split("-");		
+	
+		HashMap<String, String> booksSearchCriteria = new HashMap<String, String>();
+		booksSearchCriteria.put(searchPair[0], searchPair[1]);
+		
+		log.info("searchPair[0] :::::::::::: "+searchPair[0]);
+		log.info("searchPair[1] :::::::::::: "+searchPair[1]);
+		
+		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA , booksSearchCriteria);
+	}
+	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel[] searchBook(HttpServletRequest request, HttpServletResponse response){
-		
-		
+			
 		log.info("request.getSession() : "+request.getSession());
 		
 		if(request.getSession() == null){

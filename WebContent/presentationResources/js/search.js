@@ -6,7 +6,35 @@
 	var searchBookApp  = angular.module('searchBookPageApp', []);
 
 		var searchedDataSet;
-	
+		
+		
+  searchBookApp.filter('unique', function() {
+   // we will return a function which will take in a collection
+   // and a keyname
+	   return function(collection, keyname) {
+		  // we define our output and keys array;
+		  var output = [], 
+			  keys = [];
+
+		  // we utilize angular's foreach function
+		  // this takes in our original collection and an iterator function
+		  angular.forEach(collection, function(item) {
+			  // we check to see whether our object exists
+			  var key = item[keyname];
+			  // if it's not already part of our keys array
+			  if(keys.indexOf(key) === -1) {
+				  // add it to our keys array
+				  keys.push(key); 
+				  // push this item to our final output array
+				  output.push(item);
+			  }
+		  });
+		  // return our array which should be devoid of
+		  // any duplicates
+		  return output;
+	   };
+	});	
+		
 	searchBookApp.service('searchDisplayInitService', function($log){
 
 		this.searchDisplayInit = function(){
@@ -45,11 +73,13 @@
 				searchDisplayInitService.searchDisplayInit();
 				
 				document.getElementById("search").style.display = "inline";
-				var formattedContent = "<div class='searchSegment'>"+formatBooksSearchContent(dataToFormat, $log)+"</div>"
 				
-				$log.info("formatted content : "+formattedContent);
-				
-				$('.bookRevList').append(formattedContent);
+				for(var i = 0; i < dataToFormat.length; i++){				
+					var formattedContent = "<div class='searchSegment'>"+formatBooksSearchContent(dataToFormat[i], $log)+"</div>"
+					$('.bookRevList').append(formattedContent);
+				}
+								
+	
 
 				$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
 											
@@ -204,10 +234,43 @@
 			$scope.displayPublishers = function(data){
 				console.log('hello there : '+data);
 				$scope.publisherText = data.publisherText;
-				$scope.data = "";
+				
+				var displayItems = [];
+				
+				var matchedCount = 0;
+						
+				
+				for(var i = 0; i < $scope.data.length; i++){
+					if($scope.data[i]['publisherText'] == data.publisherText){
+						displayItems[matchedCount] = $scope.data[i];
+						matchedCount++;
+					}
+				}
+				
+				console.log('hello display items there : '+displayItems[3]['titleText']);
+				
 				$scope.lastSelectedPublisherItem = data;
-				 $('.publisherSearchPossibles').css("display", "none");
-				  formatSearchService.formatContent(data);
+				$('.publisherSearchPossibles').css("display", "none");
+
+				  var searchCriteriaUpdate =  "publisher"+"-"+data.publisherText;
+
+					$http({
+							url : 'updateSearchCriteriaAndPaginationOffset',
+							method : 'POST',
+							headers: {'Content-Type' : 'application/json'},
+							dataType: "JSON",
+							params: { 
+								searchCriteriaUpdate: searchCriteriaUpdate,
+								currentInstantSearchNumberDisplayed: matchedCount
+							}
+						}).success(function(bookReviewsModelArray){
+						    console.log("success update");	
+						}).error(function(){
+							console.log("error update");	
+						})
+						
+				 formatSearchService.formatContent(displayItems);	
+				 	$scope.data = "";
 			}
 			
 			$scope.displayAuthors = function(data){
@@ -255,13 +318,6 @@
 		});
 		
 		
-
-		
-
-	 
-	
-   
-	 
 	//searchBookApp.factory('titleVal', function(){
 	  //return { titleText: '' };
 	//});

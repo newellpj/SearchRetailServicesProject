@@ -145,11 +145,14 @@ public class PaginationController {
 		
 		HashMap<String, String> booksMap = (HashMap)request.getSession().getAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
 		
+		log.info("booksMap: "+booksMap);
+		
 		HashMap<String, String> tagsAndValueMap = (HashMap)request.getSession().getAttribute(SessionConstants.TAGS_SEARCH_CRITERIA);
 		
 		HashMap<String, HashMap<String, String>> searchCriteria = new HashMap<String, HashMap<String, String>>();
 		
 		if(booksMap != null && booksMap.size() > 0){
+			log.info("booksMap: "+booksMap.size());
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
 		}else{
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
@@ -161,8 +164,8 @@ public class PaginationController {
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, new HashMap<String, String>());
 		}
 		
-		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, (paginationOffset +20));
-		booksList = booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, paginationOffset+20, 20);
+		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, (paginationOffset +10));
+		booksList = booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, paginationOffset+10, 10);
 		
 		
 		if(booksList != null){
@@ -185,7 +188,13 @@ public class PaginationController {
 		
 		ModelAndView model = new ModelAndView();	
 		//model.addObject("bookReviewsModel", bookReviewsModel);
-		model.addObject("booksLists2", new ArrayList<String>());
+		
+		if(booksList != null){
+			model.addObject("booksLists2", booksLists2);
+		}else{
+			model.addObject("booksLists2", new ArrayList<String>());
+		}
+			
 		model.setViewName("searchPaginationPage"); //reviewsPaginationPage
 		return model;
 	}

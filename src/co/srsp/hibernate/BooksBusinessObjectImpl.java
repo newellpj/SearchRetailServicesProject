@@ -69,7 +69,7 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 	}
 	
 	@Override
-	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria){
+	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria, int offset, int numberOfRecords){
 		
 		StringBuffer sqlAppender = new StringBuffer();
 		
@@ -94,7 +94,7 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 		
 		Session session = this.getSessionFactory().openSession();
 		
-		List<Books> list = session.createQuery(sqlAppender.toString()).list();
+		List<Books> list = session.createQuery(sqlAppender.toString()).setFirstResult(offset).setMaxResults(numberOfRecords).list();
 		
 		return list;
 	}

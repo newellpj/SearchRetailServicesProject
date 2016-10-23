@@ -26,8 +26,8 @@ public class BooksAndReviewsService {
 	private TagsBusinessObject tagsBO = (TagsBusinessObject) ctx.getBean("tagsBusinessObject");
 	
 	
-	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria){
-		return booksBO.findBookListByPartialMatch(searchCriteria);
+	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria,  int offset, int numberOfRecords){
+		return booksBO.findBookListByPartialMatch(searchCriteria, offset, numberOfRecords);
 	}
 	
 	public  List<Books> searchBooksByTitleAndOrAuthor(String title, String author){

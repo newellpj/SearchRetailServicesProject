@@ -1,6 +1,10 @@
 package co.srsp.constants;
 
 public interface SessionConstants {
+	
+	public static String SEARCH_CRITERIA_UPDATE = "searchCriteriaUpdate";
+	public static String CURRENT_INSTANT_SEARCH_NUMBER_DISPLAYED = "currentInstantSearchNumberDisplayed";
+	
 	public static String BOOK_TITLE_FOUND = "bookTitleFound";
 	public static String BOOK_AUTHOR_FOUND = "bookAuthorFound";
 	

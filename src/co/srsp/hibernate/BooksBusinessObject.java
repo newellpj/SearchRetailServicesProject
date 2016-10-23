@@ -21,5 +21,5 @@ public interface BooksBusinessObject {
 	 */
 	public  List<Books> findBooksByTitleAndAuthor(String title, String author);
 	
-	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria);
+	public  List<Books> findBookListByPartialMatch(HashMap<String, String> searchCriteria,  int offset, int numberOfRecords);
 }
