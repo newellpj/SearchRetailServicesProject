@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import co.srsp.config.ConfigHandler;
 import co.srsp.constants.SessionConstants;
 import co.srsp.hibernate.orm.BookReviews;
 import co.srsp.hibernate.orm.Books;
@@ -135,9 +136,10 @@ public class PaginationController {
 		
 		log.info("currentOffset : "+currentOffsetInSession);
 		
-		int latestOffset = Integer.parseInt(currentOffsetInSession)+20;
+		int offset = Integer.parseInt(ConfigHandler.getInstance().readApplicationProperty("paginationValue"));
 		
-
+		int latestOffset = Integer.parseInt(currentOffsetInSession) + offset;
+		
 		int paginationOffset = Integer.parseInt(request.getSession().getAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET).toString());
 		log.info("paginationOffset: "+paginationOffset);
 		List<Books> booksList = new ArrayList<Books>();
@@ -164,8 +166,9 @@ public class PaginationController {
 			searchCriteria.put(SessionConstants.TAGS_SEARCH_CRITERIA, new HashMap<String, String>());
 		}
 		
-		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, (paginationOffset +10));
-		booksList = booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, paginationOffset+10, 10);
+		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, paginationOffset + offset);
+		
+		booksList = booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, paginationOffset+offset, offset);
 		
 		
 		if(booksList != null){

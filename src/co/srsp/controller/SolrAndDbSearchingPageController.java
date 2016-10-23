@@ -366,7 +366,9 @@ public class SolrAndDbSearchingPageController {
 		String[] returnList = null;
 		
 		if(!"".equals(partialText)){
-			solrDocPartialSearch =  solrService.performQueryPaginated(keyValuePair[0]+":"+keyValuePair[1]+"*", 10, 0);
+			solrDocPartialSearch =  solrService.performQueryPaginated
+				(keyValuePair[0]+":"+keyValuePair[1]+"*", Integer.parseInt
+						(ConfigHandler.getInstance().readApplicationProperty("paginationValue")), 0);
 			//request.getSession().setAttribute("solrAuthorQuery", "author:"+authorText);
 			returnList = new String[solrDocPartialSearch.size()];
 			log.info("list solrDocListAuthorsSearch is : "+solrDocPartialSearch.size());
@@ -604,7 +606,8 @@ public class SolrAndDbSearchingPageController {
 		HashMap<String, String> searchCriteria = new HashMap<String, String>();
 		searchCriteria.put(keyValuePair[0], keyValuePair[1]);
 		BooksAndReviewsService booksService = new BooksAndReviewsService();
-		List<Books> booksFoundList = booksService.findBookListByPartialMatch(searchCriteria, 0, 10);
+		List<Books> booksFoundList = booksService.findBookListByPartialMatch(searchCriteria, 0, 
+				Integer.parseInt(ConfigHandler.getInstance().readApplicationProperty("paginationValue")));
 		
 		Set<Books> removedDuplicates = new HashSet<Books>();
 		
@@ -626,7 +629,18 @@ public class SolrAndDbSearchingPageController {
 		String currentNumberDisplayed = request.getParameter(SessionConstants.CURRENT_INSTANT_SEARCH_NUMBER_DISPLAYED);
 	
 		log.info("currentNumberDisplayed :::::::::::: "+currentNumberDisplayed);
-		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, currentNumberDisplayed);
+		
+		int numberReturned = Integer.parseInt(currentNumberDisplayed);
+		
+		//for example - if only 3 returned after users keyup instant search we tkae that 3 and minus the current pgaintation value which is currently 10
+		//that gives us a value minus 7 which will have 10 added to it when any pagination occurs so the database query will start at record 3 and select maximum of 10 records from the offset of record 3 onwards
+		
+		//TODO = maybe not in need of the above scenario - possible lack of understanding of Database query offsets
+		
+		int offset = Integer.parseInt(ConfigHandler.getInstance().readApplicationProperty("paginationValue"));
+		
+        //offset less than current pagination number (which is 10 at date of 24/10/2016)	
+		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, String.valueOf(offset));
 			
 		String[] searchPair = searchCriteriaUpdate.split("-");		
 	
@@ -745,7 +759,7 @@ public class SolrAndDbSearchingPageController {
 		}
 		
 		
-		booksList.addAll(booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, 0, 20));
+		booksList.addAll(booksService.findBooksByAnyCriteriaLazyLoad(searchCriteria, 0, Integer.parseInt(ConfigHandler.getInstance().readApplicationProperty("paginationValue"))));
 
 		ModelAndView modelView = new ModelAndView();
 //		List<String> booksStringViewList = new ArrayList<String>();

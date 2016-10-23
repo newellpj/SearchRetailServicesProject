@@ -34,6 +34,47 @@
 		  return output;
 	   };
 	});	
+	
+
+	searchBookApp.service('constructInstantSearchService', function($log, $http){
+		
+			this.runInstantSearch = function(valueArrayKey, searchValueKey, valueSelected, allDataReturned){		
+				var displayItems = [];
+				
+				var matchedCount = 0;
+						
+				
+				for(var i = 0; i < allDataReturned.length; i++){
+					if(allDataReturned[i][valueArrayKey] == valueSelected){
+						displayItems[matchedCount] = allDataReturned[i];
+						matchedCount++;
+					}
+				}
+				
+				console.log('hello display items there : '+displayItems[0][valueArrayKey]);
+				
+				 $('.'+searchValueKey+'SearchPossibles').css("display", "none");
+
+				  var searchCriteriaUpdate =  searchValueKey+"-"+valueSelected;
+
+					$http({
+							url : 'updateSearchCriteriaAndPaginationOffset',
+							method : 'POST',
+							headers: {'Content-Type' : 'application/json'},
+							dataType: "JSON",
+							params: { 
+								searchCriteriaUpdate: searchCriteriaUpdate,
+								currentInstantSearchNumberDisplayed: matchedCount
+							}
+						}).success(function(bookReviewsModelArray){
+						    console.log("success update");	
+						}).error(function(){
+							console.log("error update");	
+						})
+						
+				 return displayItems;
+			}	
+	});
 		
 	searchBookApp.service('searchDisplayInitService', function($log){
 
@@ -89,7 +130,7 @@
 			}
 		});
 	
-		searchBookApp.controller('searchPageController', function($scope, $log, $timeout, $http, formatSearchService) {
+		searchBookApp.controller('searchPageController', function($scope, $log, $timeout, $http, formatSearchService, constructInstantSearchService) {
 		 $log.info("11 title text from search page controller : "+$scope.titleText);
 			 
 			 $scope.genreHide = true;
@@ -188,7 +229,7 @@
 								}
 							}).success(function(data){
 								//$scope.responseData = data; 
-								console.log(data);
+								console.log("data returned "+data);
 								
 							   $scope.data = data;
 							   searchedDataSet = data;
@@ -219,67 +260,32 @@
 			});
 			
 			$scope.$watch('langCheck', function(newVal, oldVal, scope) {
-				$log.info(newVal);
+				$log.info("new val lang : "+newVal);
 				
 					$scope.langSelect.selectedOption = $scope.langSelect.availableOptions[0];
 				
 			});
 			
 			$scope.$watch('genreCheck', function(newVal, oldVal, scope) {		
-				$log.info(newVal);
+				$log.info("new value for genre check :: "+newVal);
 				
 					$scope.genreSelect.selectedOption = $scope.genreSelect.availableOptions[0];
 			});
 			
 			$scope.displayPublishers = function(data){
 				console.log('hello there : '+data);
-				$scope.publisherText = data.publisherText;
-				
-				var displayItems = [];
-				
-				var matchedCount = 0;
-						
-				
-				for(var i = 0; i < $scope.data.length; i++){
-					if($scope.data[i]['publisherText'] == data.publisherText){
-						displayItems[matchedCount] = $scope.data[i];
-						matchedCount++;
-					}
-				}
-				
-				console.log('hello display items there : '+displayItems[3]['titleText']);
-				
-				$scope.lastSelectedPublisherItem = data;
-				$('.publisherSearchPossibles').css("display", "none");
-
-				  var searchCriteriaUpdate =  "publisher"+"-"+data.publisherText;
-
-					$http({
-							url : 'updateSearchCriteriaAndPaginationOffset',
-							method : 'POST',
-							headers: {'Content-Type' : 'application/json'},
-							dataType: "JSON",
-							params: { 
-								searchCriteriaUpdate: searchCriteriaUpdate,
-								currentInstantSearchNumberDisplayed: matchedCount
-							}
-						}).success(function(bookReviewsModelArray){
-						    console.log("success update");	
-						}).error(function(){
-							console.log("error update");	
-						})
-						
-				 formatSearchService.formatContent(displayItems);	
-				 	$scope.data = "";
+				$scope.publisherText = data.publisherText;			
+				formatSearchService.formatContent(constructInstantSearchService.runInstantSearch("publisherText", "publisher", data.publisherText, $scope.data));
+				//formatSearchService.formatContent(displayItems);	
+				$scope.data = "";			
 			}
 			
 			$scope.displayAuthors = function(data){
 				console.log('hello there : '+data);
 				$scope.authorText = data.authorText;
-				$scope.data = "";
 				$scope.lastSelectedAuthorItem = data;
-				 $('.authorSearchPossibles').css("display", "none");
-				  formatSearchService.formatContent(data);
+				formatSearchService.formatContent(constructInstantSearchService.runInstantSearch("authorText", "author", data.authorText, $scope.data));
+				$scope.data = "";
 			}
 			
 			$scope.lostFocus = function(objToHide){
@@ -292,9 +298,10 @@
 				$scope.titleText = data.titleText;
 				//$scope.data = "";
 				$scope.lastSelectedTitleItem = data.titleText;
-				 $('.titleSearchPossibles').css("display", "none");
-				 
+				 $('.titleSearchPossibles').css("display", "none");			 
 				 formatSearchService.formatContent(data);
+				 
+				 
 				 
 			}
 			
@@ -353,9 +360,6 @@
 				//remove all searchSegments - they will be re-added by javascript or the controllers dynamically 
 				//anyway so no damage is done
 				
-				
-				
-			 
 				$log.info("we are titleVal 323 : "+$scope.titleText);	
 				
 					var titleText = $scope.titleText;
