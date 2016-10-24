@@ -147,14 +147,14 @@ public class PaginationController {
 		
 		HashMap<String, String> booksMap = (HashMap)request.getSession().getAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
 		
-		log.info("booksMap: "+booksMap);
+		log.info("session booksMap : "+booksMap.size());
 		
 		HashMap<String, String> tagsAndValueMap = (HashMap)request.getSession().getAttribute(SessionConstants.TAGS_SEARCH_CRITERIA);
 		
 		HashMap<String, HashMap<String, String>> searchCriteria = new HashMap<String, HashMap<String, String>>();
 		
 		if(booksMap != null && booksMap.size() > 0){
-			log.info("booksMap: "+booksMap.size());
+			log.info("booksMap size : "+booksMap.size());
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, booksMap);
 		}else{
 			searchCriteria.put(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());

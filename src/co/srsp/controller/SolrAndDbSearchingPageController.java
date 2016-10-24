@@ -619,7 +619,7 @@ public class SolrAndDbSearchingPageController {
 		}
 		
 		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
-		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
+		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, searchCriteria);
 		
 		booksFoundList.clear(); //remove all elements and add in the set with duplicates removed.
 		booksFoundList.addAll(removedDuplicates);
@@ -645,7 +645,10 @@ public class SolrAndDbSearchingPageController {
 		
 		int offset = Integer.parseInt(ConfigHandler.getInstance().readApplicationProperty("paginationValue"));
 		
-        //offset less than current pagination number (which is 10 at date of 24/10/2016)	
+        //offset less than current pagination number (which is 10 at date of 24/10/2016)
+		
+		log.info("offset is : "+offset);
+		
 		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, String.valueOf(offset));
 			
 		String[] searchPair = searchCriteriaUpdate.split("-");		
@@ -657,6 +660,13 @@ public class SolrAndDbSearchingPageController {
 		log.info("searchPair[1] :::::::::::: "+searchPair[1]);
 		
 		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA , booksSearchCriteria);
+		
+		HashMap<String, String> criteria = (HashMap<String, String>)request.getSession().getAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA);
+		
+		log.info("criteria being set in session "+criteria.size());
+		
+		
+		
 	}
 	
 	@RequestMapping(value = { "/searchForBook"}, method = RequestMethod.GET)
