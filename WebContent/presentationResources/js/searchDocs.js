@@ -184,7 +184,7 @@
 				
 			}
 			
-			$scope.lostFocus = function(objToHide){
+			$scope.mouseLeave = function(objToHide){
 				console.log('lost focus');
 				$("."+objToHide).css('display', 'none');
 			}
@@ -251,7 +251,7 @@
 			}
 					
 			$scope.displayTitles = function(data){
-				console.log('hello there : '+data);
+				console.log('titles hello there : '+data);
 				$scope.titleText = data;
 				$scope.data = "";
 				$scope.lastSelectedTitleItem = data;
@@ -260,7 +260,7 @@
 			}
 			
 			$scope.$watch('titleText', function (tmpStr){
-				  console.log("tmpStr : "+tmpStr);	
+			
 				  //close any other instant search list overlay displaying and reset scope data to empty string
 				  $('.authorSearchPossibles').css("display", "none");
 				  $scope.data = "";		  

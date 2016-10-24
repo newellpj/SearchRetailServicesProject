@@ -245,23 +245,25 @@ button.accordion.active:after {
 }
 
 
-ul.titleSearchPossibles li:hover{
+ul.titleSearchPossibles li span:hover{
 	z-index: 10;
+	margin-left:-1em !important;
 	border-radius:10px;
+	cursor:pointer;
 	padding-left:1em;
-		margin-left:1em !important;
-	padding-right:1em;
+	padding-right:3em;
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
 	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
 	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
 }
 
-ul.authorSearchPossibles li:hover{
+ul.authorSearchPossibles li span:hover{
 	z-index: 10;
+	margin-left:-1em !important;
 	border-radius:10px;
-	margin-left:1em !important;
+	cursor:pointer;
 	padding-left:1em;
-	padding-right:1em;
+	padding-right:3em;
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
 	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
 	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	

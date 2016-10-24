@@ -103,9 +103,9 @@
 					Title:
 					<input ng-model="titleText" id="titleText" ng-blur="lostFocus('titleSearchPossibles')"  type='text' name='titleText'><span class="glyphicon glyphicon-book iconspanSearchDocs"></span>		
 						<span style="visibility:hidden;"> hidden text for placeholder hidde text .</span>
-				<ul class="titleSearchPossibles" ng-mouseleave="lostFocus('titleSearchPossibles')">
+				<ul class="titleSearchPossibles" ng-mouseleave="mouseLeave('titleSearchPossibles')">
 							<li ng-repeat="d in data track by $index" style="margin-left:2em;">
-							 <span ng-click="displayTitles(d)">{{d}}</span>
+							 <span ng-mousedown="displayTitles(d)">{{d}}</span>
 							</li>
 					  </ul>
 			</div>
@@ -115,9 +115,9 @@
 					Author:
 					<input ng-model="authorText"   id="authorText" type='text' name='authorText' /><span class="glyphicon glyphicon-pencil iconspanSearchDocs"></span>
 					<span style="visibility:hidden;"> hidden text for placeholder hidden text .</span>
-				<ul class="authorSearchPossibles"  ng-mouseleave="lostFocus('authorSearchPossibles')">
+				<ul class="authorSearchPossibles"  ng-mouseleave="mouseLeave('authorSearchPossibles')">
 							<li ng-repeat="d in data track by $index" style="width:100%;  margin-left:2em;">
-							 <span ng-click="displayAuthors(d)">{{d}}</span>
+							 <span ng-mousedown="displayAuthors(d)">{{d}}</span>
 							</li>
 					  </ul>
 			</div>

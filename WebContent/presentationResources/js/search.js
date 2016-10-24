@@ -294,7 +294,8 @@
 				$scope.data = "";
 			}
 			
-			$scope.lostFocus = function(objToHide){
+			//this has to be after the onclock 
+			$scope.mouseLeave = function(objToHide){
 				console.log('lost focus');
 				$("."+objToHide).css('display', 'none');
 			}

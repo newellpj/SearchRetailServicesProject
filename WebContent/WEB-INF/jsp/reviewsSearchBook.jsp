@@ -103,9 +103,9 @@ var html = $(".bookRevList").html();
 					
 					</select>
 					   
-						 <ul class="titleSearchPossibles" ng-mouseleave="lostFocus('titleSearchPossibles')">
+						 <ul class="titleSearchPossibles" ng-mouseleave="mouseLeave('titleSearchPossibles')">
 							<li ng-repeat="d in data | filter: titleText track by $index" style="margin-left:2em;">
-							 <span ng-click="displayTitles(d)">{{d.titleText}}</span>
+							 <span ng-mousedown="displayTitles(d)">{{d.titleText}}</span>
 							</li>
 						   </ul>
 						  
@@ -121,9 +121,9 @@ var html = $(".bookRevList").html();
 					    ng-options="option.name for option in catSelect.availableOptions track by option.value" >
 					</select>
 					
-					 <ul class="authorSearchPossibles" ng-mouseleave="lostFocus('authorSearchPossibles')">
+					 <ul class="authorSearchPossibles" ng-mouseleave="mouseLeave('authorSearchPossibles')">
 							<li ng-repeat="d in data | unique: authorText" style="width:100%;   padding-left:-2em !important; margin-left:2em;">
-							 <span ng-click="displayAuthors(d)">{{d.authorText}}</span>
+							 <span ng-mousedown="displayAuthors(d)">{{d.authorText}}</span>
 							</li>
 					  </ul>
 	
@@ -137,9 +137,9 @@ var html = $(".bookRevList").html();
 					<select ng-model="langSelect.selectedOption" ng-hide="languageHide" name="langText" class="responsive" style="width:30%;" id="languageSelect" 
 							ng-options="option.name for option in langSelect.availableOptions track by option.value" >	
 					</select>
-					 <ul class="publisherSearchPossibles"  ng-mouseleave="lostFocus('publisherSearchPossibles')">
+					 <ul class="publisherSearchPossibles"  ng-mouseleave="mouseLeave('publisherSearchPossibles')">
 							<li ng-repeat="d in data | unique: publisherText " style="margin-left:2em;">
-							 <span ng-click="displayPublishers(d)">{{d.publisherText}}</span>
+							 <span ng-mousedown="displayPublishers(d)">{{d.publisherText}}</span>
 							</li>
 					  </ul>
 		          </div>	
