@@ -177,34 +177,37 @@ ul.titleSearchPossibles, ul.authorSearchPossibles, ul.publisherSearchPossibles{
 
 
 
-ul.titleSearchPossibles li:hover{
+ul.titleSearchPossibles li span:hover{
 	z-index: 10;
-	margin-left:1em !important;
+	margin-left:-1em !important;
 	padding-left:1em;
+	cursor:pointer;
 	border-radius:10px;
-	padding-right:1em;
+	padding-right:3em;
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
 	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
 	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
 }
 
-ul.authorSearchPossibles li:hover{
+ul.authorSearchPossibles li span:hover{
 	z-index: 10;
-	margin-left:1em !important;
+	margin-left:-1em !important;
 	border-radius:10px;
+	cursor:pointer;
 	padding-left:1em;
-	padding-right:1em;
+	padding-right:3em;
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
 	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
 	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
 }
 
-ul.publisherSearchPossibles li:hover{
+ul.publisherSearchPossibles li span:hover{
 	z-index: 10;
-	margin-left:1em !important;
+	margin-left:-1em !important;
 	border-radius:10px;
 	padding-left:1em;
-	padding-right:1em;
+	padding-right:3em;
+	cursor:pointer;
 	background: linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%);  
 	background: -moz-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 
 	background: -webkit-linear-gradient(top, #dfdfdf 0%, #d7d7d7 100%); 	
