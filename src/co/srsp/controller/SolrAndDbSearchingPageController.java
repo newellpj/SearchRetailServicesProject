@@ -611,14 +611,20 @@ public class SolrAndDbSearchingPageController {
 		
 		Set<Books> removedDuplicates = new HashSet<Books>();
 		
+		log.info("books found list "+booksFoundList.size());
+		
 		for(Books book : booksFoundList){
+			log.info("books found list in loop - title : "+book.getTitle());
 			removedDuplicates.add(book);
 		}
 		
 		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
+		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, new HashMap<String, String>());
 		
 		booksFoundList.clear(); //remove all elements and add in the set with duplicates removed.
 		booksFoundList.addAll(removedDuplicates);
+		
+		log.info("books found list 2222222222 "+booksFoundList.size());
 		
 		return  buildBooksFoundReturnModel(request, booksFoundList);
 	}

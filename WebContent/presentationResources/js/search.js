@@ -115,6 +115,8 @@
 				
 				document.getElementById("search").style.display = "inline";
 				
+				$log.info("data to format length :::: "+dataToFormat.length);
+				
 				for(var i = 0; i < dataToFormat.length; i++){				
 					var formattedContent = "<div class='searchSegment'>"+formatBooksSearchContent(dataToFormat[i], $log)+"</div>"
 					$('.bookRevList').append(formattedContent);
@@ -229,21 +231,25 @@
 								}
 							}).success(function(data){
 								//$scope.responseData = data; 
-								console.log("data returned "+data);
+								console.log("data returned "+data[0]['titleText']);
+								console.log("data length returned "+data.length);
+								
 								
 							   $scope.data = data;
 							   searchedDataSet = data;
 							 //  $(objClass).css("display", "table");
 								
-								if(data.length == 0){
+								if(data.length == 0 || data[0]['titleText'] == null){
 								   $(objClass).css("display", "none");
+								    $scope.data = "";
+									searchedDataSet = "";
 							   }else{
 								   $(objClass).css("display", "table");
 							   }
 								
 							   
 							}).error(function(data, status){
-								
+								 $(objClass).css("display", "none");
 								console.log('error retrieving data');
 							})
 						}
@@ -283,7 +289,7 @@
 			$scope.displayAuthors = function(data){
 				console.log('hello there : '+data);
 				$scope.authorText = data.authorText;
-				$scope.lastSelectedAuthorItem = data;
+				$scope.lastSelectedAuthorItem = data.authorText;
 				formatSearchService.formatContent(constructInstantSearchService.runInstantSearch("authorText", "author", data.authorText, $scope.data));
 				$scope.data = "";
 			}
@@ -298,10 +304,10 @@
 				$scope.titleText = data.titleText;
 				//$scope.data = "";
 				$scope.lastSelectedTitleItem = data.titleText;
-				 $('.titleSearchPossibles').css("display", "none");			 
-				 formatSearchService.formatContent(data);
-				 
-				 
+				 $('.titleSearchPossibles').css("display", "none");		
+				var dataToFormat = [];
+				dataToFormat[0] = data;
+				 formatSearchService.formatContent(dataToFormat);
 				 
 			}
 			
