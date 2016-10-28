@@ -119,6 +119,7 @@ ul.topnav li.icon {display: none;}
 
 
 
+
 .row::after {
     content: "";
     clear: both;
@@ -1096,4 +1097,30 @@ display: inline-block;
     opacity: 1;
 }
 
+.ripple{
+	position:relative;
+	overflow:hidden
+}
+
+.ripple:after{
+	content:"";background:rgba(255,255,255,0.3);
+	display:block;
+	position:absolute;
+	border-radius:50%;
+	padding-top:240%;
+	padding-left:240%; /* best values 240% */
+	margin-top:-90%; /* best values 120% positive and negative */
+	margin-left:-90%;
+	opacity:0;
+	transition:all 1s;
+}
+
+.ripple:active:after{
+	padding-top:0;
+	padding-left:0;
+	margin-top:0;
+	margin-left:0;
+	opacity:1;
+	transition:0s;
+}
 

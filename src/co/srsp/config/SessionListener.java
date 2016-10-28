@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
 
-import co.srsp.controller.PaginationController;
+import co.srsp.constants.SessionConstants;
 
 public class SessionListener implements HttpSessionListener  {
 	
@@ -15,7 +15,9 @@ public class SessionListener implements HttpSessionListener  {
     public void sessionCreated(HttpSessionEvent event) {
 		log.info("==== Session is created ==== "+event.getSession().getServletContext().getServerInfo());
 
-        event.getSession().setMaxInactiveInterval(30*60);
+		int sessionTimeout = Integer.parseInt(ConfigHandler.getInstance().readApplicationProperty(SessionConstants.SESSION_TIMEOUT));
+		
+        event.getSession().setMaxInactiveInterval(sessionTimeout*60);
         log.info("event source obj : "+event.getSource().getClass());
 
     }

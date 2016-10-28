@@ -31,11 +31,7 @@
 	  
 	  //document.getElementById("activeSel").style.backgroundImage="url(./presentationResources/images/arrow-up.gif)";
       //document.getElementById("activeSel").style.backgroundRepeat="no-repeat";
-	  document.getElementById("activeSel").style.borderRadius="15px";	
-	
-	
-	  
-	  
+	  document.getElementById("activeSel").style.borderRadius="15px";	  
 
 	  $("#theI_Frame").attr("src", window.localStorage.getItem('itemClick'));
 	  switchActiveWithID(window.localStorage.getItem('clickID'))
@@ -76,11 +72,11 @@
 		
 		<ul class="topnav responsive">
 		
-		  <li id="activeSel"  onclick="switchActive($(this));"><a href="reviewsSearchBook" target="theI_Frame">&nbsp; Search Book </a></li>
-		  <li id="activeSel0"  onclick="switchActive($(this));"><a href="reviewsSearchDocs" target="theI_Frame"> Search Docs &nbsp;</a></li>
-		  <li id="activeSel1"  onclick="switchActive($(this));"><a href="searchNASA" target="theI_Frame">Search Feeds &nbsp;</a></li>
-		  <li id="activeSel2" onclick="switchActive($(this));"><a href="reviewsAddBook" target="theI_Frame"> &nbsp; Add a book &nbsp;&nbsp;</a></li>
-		  <li id="activeSel3" onclick="switchActiveOnParentForReviews();" ><a href="reviewsReviewBookNoneAdded" target="theI_Frame">Review book &nbsp;</a></li>
+		  <li id="activeSel"  onclick="switchActive($(this));"><a class="ripple" href="reviewsSearchBook" target="theI_Frame">&nbsp; Search Book </a></li>
+		  <li id="activeSel0"  onclick="switchActive($(this));"><a class="ripple" href="reviewsSearchDocs" target="theI_Frame"> Search Docs &nbsp;</a></li>
+		  <li id="activeSel1"  onclick="switchActive($(this));"><a class="ripple" href="searchNASA" target="theI_Frame">Search Feeds &nbsp;</a></li>
+		  <li id="activeSel2" onclick="switchActive($(this));"><a class="ripple" href="reviewsAddBook" target="theI_Frame"> &nbsp; Add a book &nbsp;&nbsp;</a></li>
+		  <li id="activeSel3" onclick="switchActiveOnParentForReviews();" ><a class="ripple" href="reviewsReviewBookNoneAdded" target="theI_Frame">Review book &nbsp;</a></li>
 		  <li id="logout"><a onclick="setLandingPageToDefault();" href="logout"> &nbsp;&nbsp;Logout <span style="color:transparent; text-shadow:none;">.......... </span></a></li>
 		 </ul>			 
 		 	</div>
