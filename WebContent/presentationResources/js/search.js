@@ -412,44 +412,52 @@
 					}).success(function(bookReviewsModelArray){
 						
 						$log.info("we are here : "+bookReviewsModelArray.length);	
+						$log.info("we are here : "+bookReviewsModelArray);
 						
+						$log.info("index of ::: "+bookReviewsModelArray.indexOf("html"));
 						
-						document.getElementById("search").style.display = "inline";
-			
-					
-					    $scope.formattedSearchData = '';
-					
-						var testFirstElement = bookReviewsModelArray[0]['booksList'];
-					
-						$log.info('testFirstElement : '+testFirstElement);
-						$log.info('bookReviewsModelArray : '+bookReviewsModelArray.length);
-					
-						if("No Books Found!!" != testFirstElement){
-							$log.info("we here again");
-							for(var i = 0; i < bookReviewsModelArray.length; i++){
-							
-								//$log.info("first book in array : "+$('.bookRevList').html());
-								
-								//$('.bookRevList').append("<div class='searchSegment'>");
-								
-								var formattedContent = "<div class='searchSegment'>"+formatBooksSearchContent(bookReviewsModelArray[i], $log)+"</div>"
-								
-								$('.bookRevList').append(formattedContent);
-							//	$('.bookRevList').append("</div>");
-		
-							}
-							
-							$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
-							
-							$('.resultsSection').jscroll({		  
-								loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
-							});
-							
+						if( bookReviewsModelArray.indexOf("html") > -1 && bookReviewsModelArray.indexOf("body") >  -1){
+							$(dlg).dialog("close");
+							window.parent.location.href = 'logout'; 
 						}else{
-							$('.bookRevList').append("<span style='text-shadow: 0.5px 0.5px #a8a8a8; '>No Books Found!! </span>");
-						}
 						
-						$(dlg).dialog("close");
+								document.getElementById("search").style.display = "inline";
+					
+							
+								$scope.formattedSearchData = '';
+							
+								var testFirstElement = bookReviewsModelArray[0]['booksList'];
+							
+								$log.info('testFirstElement : '+testFirstElement);
+								$log.info('bookReviewsModelArray : '+bookReviewsModelArray.length);
+							
+								if("No Books Found!!" != testFirstElement){
+									$log.info("we here again");
+									for(var i = 0; i < bookReviewsModelArray.length; i++){
+									
+										//$log.info("first book in array : "+$('.bookRevList').html());
+										
+										//$('.bookRevList').append("<div class='searchSegment'>");
+										
+										var formattedContent = "<div class='searchSegment'>"+formatBooksSearchContent(bookReviewsModelArray[i], $log)+"</div>"
+										
+										$('.bookRevList').append(formattedContent);
+									//	$('.bookRevList').append("</div>");
+				
+									}
+									
+									$(".search").append("<div class='next'><a href='retrieveNextSearchSegment'>"+""+"</a> </div>");
+									
+									$('.resultsSection').jscroll({		  
+										loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+									});
+									
+								}else{
+									$('.bookRevList').append("<span style='text-shadow: 0.5px 0.5px #a8a8a8; '>No Books Found!! </span>");
+								}
+								
+								$(dlg).dialog("close");
+						 }
 					
 					}).error(function(data, status){
 						$log.error("we errored here");

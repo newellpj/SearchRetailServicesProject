@@ -94,39 +94,44 @@
 						
 						document.getElementById("search").style.display = "inline";
 
-						if(returnList.length == 0){
-							$('.bookRevList').append("<div style='font-style: italic; font-size:15px;'> No documents found </div>");	
-								
+						if( returnList.indexOf("html") > -1 && returnList.indexOf("body") >  -1){
+							$(dlg).dialog("close");
+							window.parent.location.href = 'logout'; 
 						}else{
 						
-							for(var i = 0; i < returnList.length ;i++){
-
+							if(returnList.length == 0){
+								$('.bookRevList').append("<div style='font-style: italic; font-size:15px;'> No documents found </div>");	
+									
+							}else{
+							
+								for(var i = 0; i < returnList.length ;i++){
+	
+									
+									$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
+									$('.bookRevList').append("</div>");
+									
+									var ID = '#item'+i;
+									
+									//$log.info("return  list !!@!@ "+returnList[i]['largercontent']);
+									
+									$(ID).html(formatDocSearchContent(returnList[i], $log));	
+									//toggleReadMoreSearchResults(ID);
+								}
 								
-								$('.bookRevList').append("<div class='docsSearchSegment' id='"+"item"+i+"' >");	
-								$('.bookRevList').append("</div>");
+								$(".search").append("<div class='next'><a href='retrieveNextSearchDocsSegment'>"+""+"</a> </div>");
+							
+								$('.resultsSectionDocs').jscroll({		  
+									loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
+								});
 								
-								var ID = '#item'+i;
+								$('a').click( function(e) {
+									e.preventDefault();
+								});
 								
-								//$log.info("return  list !!@!@ "+returnList[i]['largercontent']);
-								
-								$(ID).html(formatDocSearchContent(returnList[i], $log));	
-								//toggleReadMoreSearchResults(ID);
 							}
 							
-							$(".search").append("<div class='next'><a href='retrieveNextSearchDocsSegment'>"+""+"</a> </div>");
-						
-							$('.resultsSectionDocs').jscroll({		  
-								loadingHtml: "<center><div class='ajax-loader-2'> </div></center>"     
-							});
-							
-							$('a').click( function(e) {
-								e.preventDefault();
-							});
-							
+							$(dlg).dialog("close");
 						}
-						
-						$(dlg).dialog("close");
-					
 					}).error(function(data, status){
 									$(dlg).dialog("close");
 

@@ -12,6 +12,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
@@ -600,6 +601,13 @@ public class SolrAndDbSearchingPageController {
 	@RequestMapping(value = { "/partialSearchForBook"}, method = RequestMethod.GET)
 	public @ResponseBody BookReviewsModel[] partialSearchBook(HttpServletRequest request, HttpServletResponse response){
 		
+		HttpSession session  = request.getSession();
+		
+		if(session == null || session.isNew()){
+			log.info("$$$$$$$$$$$$$$$ESSION NULL %%%%%%%%%%%%%%%%%%%%%");
+			return null;
+		}
+		
 		log.info("request contain PARTIAL_TEXT ? : "+request.getParameter(SessionConstants.PARTIAL_TEXT));
 		String partialText = request.getParameter(SessionConstants.PARTIAL_TEXT);	
 		String[] keyValuePair = partialText.split("-");
@@ -609,8 +617,7 @@ public class SolrAndDbSearchingPageController {
 		List<Books> booksFoundList = booksService.findBookListByPartialMatch(searchCriteria, 0, 
 				Integer.parseInt(ConfigHandler.getInstance().readApplicationProperty("paginationValue")));
 		
-		Set<Books> removedDuplicates = new HashSet<Books>();
-		
+		Set<Books> removedDuplicates = new HashSet<Books>();		
 		log.info("books found list "+booksFoundList.size());
 		
 		for(Books book : booksFoundList){
@@ -619,13 +626,10 @@ public class SolrAndDbSearchingPageController {
 		}
 		
 		request.getSession().setAttribute(SessionConstants.CURRENT_PAGINATION_OFFSET, 0);
-		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, searchCriteria);
-		
+		request.getSession().setAttribute(SessionConstants.BOOKS_SEARCH_CRITERIA, searchCriteria);	
 		booksFoundList.clear(); //remove all elements and add in the set with duplicates removed.
-		booksFoundList.addAll(removedDuplicates);
-		
+		booksFoundList.addAll(removedDuplicates);	
 		log.info("books found list 2222222222 "+booksFoundList.size());
-		
 		return  buildBooksFoundReturnModel(request, booksFoundList);
 	}
 	
