@@ -74,9 +74,15 @@
 						}
 					}).success(function(bookReviewsModelArray){
 					
-						$log.info("success");
-						$(dlg).dialog("close");
-						window.location.href = 'reviewsReviewBook';
+						if( bookReviewsModelArray.indexOf("html") > -1 && bookReviewsModelArray.indexOf("body") >  -1){
+							$(dlg).dialog("close");
+							window.parent.location.href = 'logout'; 
+						}else{
+						
+							$log.info("success");
+							$(dlg).dialog("close");
+							window.location.href = 'reviewsReviewBook';
+						}
 						
 					 }).error(function(e){
 						

@@ -159,12 +159,17 @@
 				
 				
 				$http.post('addNewBook', data, config).success(function(bookReviewsModelArray){
-					
-						$log.info("success for adding book");
-						$(dlg).dialog("close");
-						$('#activeSel3', parent.document).click();
-						window.location.href = 'reviewsReviewBook';
+
+						if( bookReviewsModelArray.indexOf("html") > -1 && bookReviewsModelArray.indexOf("body") >  -1){
+							$(dlg).dialog("close");
+							window.parent.location.href = 'logout'; 
+						}else{
 						
+							$log.info("success for adding book");
+							$(dlg).dialog("close");
+							$('#activeSel3', parent.document).click();
+							window.location.href = 'reviewsReviewBook';
+						}	
 						
 					 }).error(function(error, status){
 						
