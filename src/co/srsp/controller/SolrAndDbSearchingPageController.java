@@ -258,7 +258,7 @@ public class SolrAndDbSearchingPageController {
 	
 	
 	@RequestMapping(value = { "/addBookReview"}, method = RequestMethod.GET)
-	public @ResponseBody BookReviewsModel addBookReview(HttpServletRequest request, HttpServletResponse response){
+	public @ResponseBody String[] addBookReview(HttpServletRequest request, HttpServletResponse response){
 		
 		if(request.getSession() == null){
 			return null;
@@ -303,10 +303,11 @@ public class SolrAndDbSearchingPageController {
 		request.getSession().setAttribute("bookAuthorFound", request.getParameter("authorText"));
 		//request.getSession().setAttribute("bookReviewText", request.getParameter("reviewText"));
 		
-	
+	    String[] strResponse = new String[1];
+	    strResponse[0] = "Successfully added book review";
 		//modelAndView.setViewName("reviews");
 	//	modelAndView.addObject("bookReviewsModel", bookReviewsModel);
-		return bookReviewsModel;
+		return strResponse;
 	}
 	
 

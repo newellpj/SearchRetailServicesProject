@@ -74,6 +74,8 @@
 						}
 					}).success(function(bookReviewsModelArray){
 					
+						$log.info("bookReviewsModelArray text : "+bookReviewsModelArray);
+					
 						if( bookReviewsModelArray.indexOf("html") > -1 && bookReviewsModelArray.indexOf("body") >  -1){
 							$(dlg).dialog("close");
 							window.parent.location.href = 'logout'; 
