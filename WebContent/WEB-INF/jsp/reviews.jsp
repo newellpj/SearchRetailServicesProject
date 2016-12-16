@@ -70,7 +70,8 @@
 	
 	<div class="col-12" >
 		
-		<ul class="topnav responsive">
+    <div class="menu-icon responsive"></div>
+		<ul class="topnav responsive">  <!-- class="glyphicon glyphicon-menu-hamburger"   $('.nav').affix({offset: {top: 150} }); -->
 		
 		  <li id="activeSel"  onclick="switchActive($(this));"><a class="ripple" href="reviewsSearchBook" target="theI_Frame">&nbsp; Search Book </a></li>
 		  <li id="activeSel0"  onclick="switchActive($(this));"><a class="ripple" href="reviewsSearchDocs" target="theI_Frame"> Search Docs &nbsp;</a></li>
@@ -79,7 +80,7 @@
 		  <li id="activeSel3" onclick="switchActiveOnParentForReviews();" ><a class="ripple" href="reviewsReviewBookNoneAdded" target="theI_Frame">Review book &nbsp;</a></li>
 		  <li id="logout"><a onclick="setLandingPageToDefault();" href="logout"> &nbsp;&nbsp;Logout <span style="color:transparent; text-shadow:none;">.......... </span></a></li>
 		 </ul>			 
-		 	</div>
+     </div>
 		 
 	
 	

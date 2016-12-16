@@ -54,6 +54,12 @@ ul.topnav li {float: left; color: black; width:20%; display:inline-block;}
     top: 0;
 
   }
+
+   div.menu-icon.responsive{
+     display:inline; 
+   }
+
+  
   ul.topnav.responsive li {
     float: none;
     display: inline;
@@ -108,6 +114,12 @@ ul.topnav li a:hover {
 	border-radius: 15px;
 	
 }
+
+div.menu-icon {
+    display:none; /*hide menu icon initially*/
+}
+/*styles for mobile*/
+
 
 
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
