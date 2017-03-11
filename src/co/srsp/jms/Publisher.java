@@ -1,17 +1,18 @@
 package co.srsp.jms;
 
 	import javax.jms.Connection;
-	import javax.jms.ConnectionFactory;
-	import javax.jms.JMSException;
-	import javax.jms.MessageProducer;
-	import javax.jms.Session;
-	import javax.jms.TextMessage;
-	import javax.jms.Topic;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.jms.Topic;
 
-	import org.apache.activemq.ActiveMQConnection;
-	import org.apache.activemq.ActiveMQConnectionFactory;
-	import org.slf4j.Logger;
-	import org.slf4j.LoggerFactory;
+import org.apache.activemq.ActiveMQConnection;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 	public class Publisher {
 
@@ -22,26 +23,43 @@ package co.srsp.jms;
 	    private Connection connection;
 	    private Session session;
 	    private MessageProducer messageProducer;
-
-	    public void create(String clientId, String topicName) throws JMSException {
+	    
+	    public Publisher(String clientId, String topicName) {
 	        this.clientId = clientId;
 
 	        // create a Connection Factory
-	        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-	                ActiveMQConnection.DEFAULT_BROKER_URL);
+	     
 
 	        // create a Connection
-	        connection = connectionFactory.createConnection();
-	        connection.setClientID(clientId);
+	        try{
+	        	
+	           ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
+	   	                ActiveMQConnection.DEFAULT_BROKER_URL);
+	        	
+		        connection = connectionFactory.createConnection();
+		        
+		        String clientID = connection.getClientID();
+		        
+		        //see if client ID already exists
+		        
+		        if(clientID == null || !clientID.equalsIgnoreCase(clientId)){
+		        	connection.setClientID(clientId);
+		        }
+		        
+		        // create a Session
+		        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-	        // create a Session
-	        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+		        // create the Topic to which messages will be sent
+		        Topic topic = session.createTopic(topicName);
 
-	        // create the Topic to which messages will be sent
-	        Topic topic = session.createTopic(topicName);
+		        // create a MessageProducer for sending messages
+		        messageProducer = session.createProducer(topic);
+		        
+	        }catch(JMSException jmse){
+	        	LOGGER.error(jmse.getMessage());
+	        	jmse.printStackTrace();
+	        }
 
-	        // create a MessageProducer for sending messages
-	        messageProducer = session.createProducer(topic);
 	    }
 
 	    public void closeConnection() throws JMSException {
@@ -56,7 +74,7 @@ package co.srsp.jms;
 
 	        // send the message to the topic destination
 	        messageProducer.send(textMessage);
-
+	        System.out.println(clientId + ": sent message with text='{}' "+text);
 	        LOGGER.info(clientId + ": sent message with text='{}'", text);
 	    }
 }

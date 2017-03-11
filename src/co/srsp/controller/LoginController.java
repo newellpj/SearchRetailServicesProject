@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import co.srsp.activemq.server.CamelActiveMqAsyncExample;
+import co.srsp.jms.Publisher;
+import co.srsp.solr.SolrSearchManager;
 
 @Controller
 public class LoginController implements AuthenticationSuccessHandler, AuthenticationFailureHandler{
@@ -40,14 +43,28 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 	
 	@RequestMapping(value = { "/sendJMS"}, method = RequestMethod.GET)
 	public ModelAndView sendJMS() {
-		
-		CamelActiveMqAsyncExample camelActiveMqAsyncExample = new CamelActiveMqAsyncExample();
-		
+		Publisher topicPubliserBean = null;
 		try{
-			camelActiveMqAsyncExample.kickoff();
+			ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+			log.info("here 1");
+			topicPubliserBean = (Publisher) ctx.getBean("topicPublisherBean");
+			log.info("here 2");
+			topicPubliserBean.sendName("I am the great Cornholio ", " I need teepees for my bunghole");
+			log.info("here 3");
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			log.error("found error : "+e.getMessage());
+			log.error("found error : "+e.getStackTrace());
+			if(topicPubliserBean != null){
+				try{
+					topicPubliserBean.closeConnection();
+				}catch(Exception ee ){
+					ee.printStackTrace();
+					log.error("found error 2 : "+ee.getMessage());
+					
+				}
+			}
 		}
 		
 		ModelAndView model = new ModelAndView();		

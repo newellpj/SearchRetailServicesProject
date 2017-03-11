@@ -6,6 +6,7 @@ import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
@@ -15,7 +16,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DurableSubscriber {
+public class DurableSubscriber implements Runnable, MessageListener{
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(DurableSubscriber.class);
@@ -29,8 +30,7 @@ public class DurableSubscriber {
 
     private String subscriptionName;
 
-    public void create(String clientId, String topicName,
-            String subscriptionName) throws JMSException {
+    public DurableSubscriber(String clientId, String topicName, String subscriptionName) throws JMSException {
         this.clientId = clientId;
         this.subscriptionName = subscriptionName;
 
@@ -86,8 +86,43 @@ public class DurableSubscriber {
         } else {
             LOGGER.debug(clientId + ": no message received");
         }
-
+        System.out.println("greeting={} "+greeting);
         LOGGER.info("greeting={}", greeting);
         return greeting;
     }
+
+	@Override
+	public void onMessage(Message message) {
+		// TODO Auto-generated method stub
+		//Message message = messageConsumer.receive(1000);
+		  System.out.println("onMessage ");
+		try{
+			String msgTxt = "";
+	        // check if a message was received
+	        if (message != null) {
+	            // cast the message to the correct type
+	            TextMessage textMessage = (TextMessage) message;
+	
+	            // retrieve the message content
+	            String text = textMessage.getText();
+	            LOGGER.info(clientId + ":  received message with text='{}'", text);
+	            System.out.println(clientId + ":  received message with text='{}' : "+text);
+	            // create greeting
+	            msgTxt = "Message Text is : " + text + "!";
+	        } else {
+	            LOGGER.info(clientId + ": no message received");
+	        }
+	        System.out.println("greeting={} : "+msgTxt);
+	        LOGGER.info("greeting={}", msgTxt);
+		}catch(Exception e){
+			e.printStackTrace();
+			LOGGER.error("error here : "+e.getMessage());
+		}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 }

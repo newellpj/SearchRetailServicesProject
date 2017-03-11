@@ -90,6 +90,17 @@
   	 	<bean id="transactionManagerHibernate" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
 	    </bean>
+	    
+	    <bean id="topicPublisherBean" class="co.srsp.jms.Publisher">  
+		   <constructor-arg index="0" value="WebappPublisher"></constructor-arg>
+		   <constructor-arg index="1" value="AllWebAppsNotifier"></constructor-arg>
+	    </bean>
+	    
+	    <bean id="topicSubscriberSRSPBean" class="co.srsp.jms.DurableSubscriber">  
+		   <constructor-arg index="0" value="topicSubscriberSRSP"></constructor-arg>
+		   <constructor-arg index="1" value="AllWebAppsNotifier"></constructor-arg>
+		   <constructor-arg index="2" value="topicSubscriberSRSPSubscriber1"></constructor-arg>
+	    </bean>
    
   
 		<bean id="loginController" class="co.srsp.controller.LoginController">  
