@@ -3,9 +3,6 @@ package co.srsp.markup.handlers;
 import java.awt.Image;
 import java.net.URL;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
@@ -19,37 +16,18 @@ import com.rometools.rome.io.XmlReader;
 
 import co.srsp.rss.model.FeedMessage;
 
-public class RSSHandlerImpl implements RSSHandlerInterface {
+public class SearcherThread implements Callable{
 
-	private final static Logger log = Logger.getLogger(RSSHandlerImpl.class); 
-
-
+	private final static Logger log = Logger.getLogger(SearcherThread.class); 
 	
 	@Override
-	public FeedMessage[] readRSSFeedPaginatedSync(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter){
-
-//		 ExecutorService executor = Executors.newFixedThreadPool(5);
-//         Callable<String> callable = new SearcherThread();
-//         Future future = executor.submit(callable);   
-//         
-//         try{
-//        	 
-//        	 return (FeedMessage[])future.get();
-//         }catch(Exception e){
-//        	 e.printStackTrace();
-//        	 log.error("failure to get value returned from feeds thread invocation :: "+e.getMessage());
-//         }
-//         
-//        
-//         return null;
-         
-        return readRSSFeedPaginated2(feedUrl, session, newSearch, paginateForward, searchFilter);
-		
+	public FeedMessage[] call() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	
 
-	public FeedMessage[] readRSSFeedPaginated2(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter){
+	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter){
 		SyndFeedInput input = new SyndFeedInput();
 		FeedMessage[] feedArr = null;
 		FeedMessage feedMsg = null;		
@@ -213,43 +191,5 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 		log.info("returning search for feed url : "+feedUrl);
 		return feedArr = new FeedMessage[0];
 	}
-	
-	
-	public FeedMessage[] readRSSFeed(String feedUrl) {
-		return null;//readRSSFeedPaginated(feedUrl, null, true, true, null);
-	}
 
-	@Override
-	public FeedMessage[] readRSSFeed() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	public static void main(String[] args) {
-        boolean ok = false;
-     
-        try {
-            URL feedUrl = new URL("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss");
-
-            SyndFeedInput input = new SyndFeedInput();
-            SyndFeed feed = input.build(new XmlReader(feedUrl));
-
-            System.out.println("The feed is "+feed);
-            System.out.println("The feed is "+feed.getEntries().size());
-            ok = true;
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("ERROR: "+ex.getMessage());
-        }
-        
-
-        if (!ok) {
-            System.out.println();
-            System.out.println("FeedReader reads and prints any RSS/Atom feed type.");
-            System.out.println("The first parameter must be the URL of the feed to read.");
-            System.out.println();
-        }
-    }
 }

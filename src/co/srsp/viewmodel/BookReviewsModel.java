@@ -1,11 +1,11 @@
 package co.srsp.viewmodel;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class BookReviewsModel {
+public class BookReviewsModel implements Serializable{
 	
 	private String booksList;
 	

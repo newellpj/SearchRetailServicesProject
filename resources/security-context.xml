@@ -12,6 +12,7 @@
    <security:http auto-config="true" use-expressions="true" create-session="always">
     <security:intercept-url pattern="/login" access="permitAll" />
     <security:intercept-url pattern="/compTest" access="permitAll" />
+    <security:intercept-url pattern="/sendJMS" access="permitAll" />
 	 <security:intercept-url pattern="/addAdmin" access="hasRole('ROLE_ADMIN')" />
 	 <security:intercept-url pattern="/reviews" access="hasRole('ROLE_USER')" />
 	 <security:intercept-url pattern="/reviewsSearchBook" access="hasRole('ROLE_USER')" />
@@ -24,6 +25,8 @@
      <security:intercept-url pattern="/addNewBook" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/searchForDocs" access="hasRole('ROLE_USER')" />
      <security:intercept-url pattern="/getFeeds" access="hasRole('ROLE_USER')" />
+     
+     
      <security:intercept-url pattern="/searchNASA" access="hasRole('ROLE_USER')" />    
      <security:intercept-url pattern="/partialSearchForBook" access="hasRole('ROLE_USER')" />   
      

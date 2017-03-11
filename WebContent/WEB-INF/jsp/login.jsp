@@ -89,6 +89,8 @@
 			<span class="glyphicon glyphicon-log-in"></span> &nbsp; Login </button>
 			</div>			
 		</form>
+		
+		<a href='sendJMS'>send jms here</a>
 
 		
 

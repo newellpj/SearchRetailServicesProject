@@ -151,14 +151,11 @@
     <version>1.9.5</version>
 </dependency>
 
-
 <dependency>
     <groupId>com.textmagic.sdk</groupId>
     <artifactId>textmagic-java-sdk</artifactId>
     <version>1.2.0</version>
 </dependency>
-
-
 <dependency>
     <groupId>commons-fileupload</groupId>
     <artifactId>commons-fileupload</artifactId>
@@ -217,6 +214,66 @@
     <version>2.2.10</version>
 </dependency>
 
+
+<dependency>
+    <groupId>org.apache.camel</groupId>
+    <artifactId>camel-jaxb</artifactId>
+    <version>2.18.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.camel/camel-cxf -->
+
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>2.15.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+			<version>2.15.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>2.15.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-camel</artifactId>
+			<version>5.11.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>5.11.1</version>
+		</dependency>	
+		
+		<dependency>
+    		<groupId>org.apache.activemq</groupId>
+    		<artifactId>activemq-core</artifactId>
+    		<version>5.7.0</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.1.5.RELEASE</version>
+		</dependency>
+		
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-activemq -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-activemq</artifactId>
+    <version>1.4.0.RELEASE</version>
+</dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>5.11.1</version>
+        </dependency>
+		
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter</artifactId>
@@ -472,6 +529,36 @@
   </dependencies>
   
 
-  
+    <profiles>
+    <profile>
+      <id>CamelServer</id>
+      <properties>
+        <!-- we use Camel spring Main class as the server got all what it needs to start in the camel-server.xml file -->
+        <target.main.class>org.apache.camel.spring.Main</target.main.class>
+        <target.cmd.args>-ac META-INF/spring/camel-server.xml</target.cmd.args>
+      </properties>
+    </profile>
+    <profile>
+      <id>CamelClient</id>
+      <properties>
+        <!-- we start using our own class to control what we do in the main -->
+        <target.main.class>org.apache.camel.example.client.CamelClient</target.main.class>
+      </properties>
+    </profile>
+    <profile>
+      <id>CamelClientRemoting</id>
+      <properties>
+        <!-- we start using our own class to control what we do in the main -->
+        <target.main.class>org.apache.camel.example.client.CamelClientRemoting</target.main.class>
+      </properties>
+    </profile>
+    <profile>
+      <id>CamelClientEndpoint</id>
+      <properties>
+        <!-- we start using our own class to control what we do in the main -->
+        <target.main.class>org.apache.camel.example.client.CamelClientEndpoint</target.main.class>
+      </properties>
+    </profile>
+  </profiles>
   
 </project>

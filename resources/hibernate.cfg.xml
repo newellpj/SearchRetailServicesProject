@@ -3,10 +3,10 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password">fdg78DSA78</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sakila</property>
-        <property name="hibernate.connection.username">root</property>
+    <session-factory>       
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <property name="url" value="jdbc:mysql://localhost:3306/sakila"/>
+	    <property name="username" value="root"/>
+	    <property name="password" value="fdg78DSA78"/> 
     </session-factory>
 </hibernate-configuration>

@@ -92,6 +92,9 @@ var html = $(".bookRevList").html();
 			<form:form id="searchForm" name="searchForm"  commandName="bookReviewsModel">
 	
 	
+	<a href='sendJMS'>send jms here</a>
+	
+	
 				<div class="titleAndGenre responsive" >
 					Title:
 					<input ng-model="titleText" id="titleText"  placeholder="title search..."  type='text' name='titleText' style="width:40%;"><span class="glyphicon glyphicon-book iconspan2"></span>

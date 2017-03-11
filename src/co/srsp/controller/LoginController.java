@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.srsp.activemq.server.CamelActiveMqAsyncExample;
+
 @Controller
 public class LoginController implements AuthenticationSuccessHandler, AuthenticationFailureHandler{
 
@@ -34,6 +36,23 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 		model.setViewName("login");
 		return model;
 
+	}
+	
+	@RequestMapping(value = { "/sendJMS"}, method = RequestMethod.GET)
+	public ModelAndView sendJMS() {
+		
+		CamelActiveMqAsyncExample camelActiveMqAsyncExample = new CamelActiveMqAsyncExample();
+		
+		try{
+			camelActiveMqAsyncExample.kickoff();
+		}catch(Exception e){
+			e.printStackTrace();
+			log.error("found error : "+e.getMessage());
+		}
+		
+		ModelAndView model = new ModelAndView();		
+		model.setViewName("login");
+		return model;
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
