@@ -38,7 +38,7 @@
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="pooledConnectionFactory" />
     </bean>
-    <camelContext xmlns="http://camel.apache.org/schema/spring">
+    <!-- <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
             <from uri="timer:foo?period=1s" />
             <transform>
@@ -56,7 +56,7 @@
             <log message="Print the message from out to console"/>
             <to uri="stream:out" />
         </route>
-    </camelContext>
+    </camelContext> -->
 	   
 	   <bean id="bookReviewsHibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 	   		<property name="dataSource" ref="dataSource" />
@@ -91,17 +91,6 @@
 		  <property name="sessionFactory" ref="bookReviewsHibernateSessionFactory" />
 	    </bean>
 	    
-	    <bean id="topicPublisherBean" class="co.srsp.jms.Publisher">  
-		   <constructor-arg index="0" value="WebappPublisher"></constructor-arg>
-		   <constructor-arg index="1" value="AllWebAppsNotifier"></constructor-arg>
-	    </bean>
-	    
-	    <bean id="topicSubscriberSRSPBean" class="co.srsp.jms.DurableSubscriber">  
-		   <constructor-arg index="0" value="topicSubscriberSRSP"></constructor-arg>
-		   <constructor-arg index="1" value="AllWebAppsNotifier"></constructor-arg>
-		   <constructor-arg index="2" value="topicSubscriberSRSPSubscriber1"></constructor-arg>
-	    </bean>
-   
   
 		<bean id="loginController" class="co.srsp.controller.LoginController">  
 		    <property name="defaultTargetUrl" value="/reviews" />

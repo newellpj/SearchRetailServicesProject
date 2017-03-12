@@ -19,19 +19,19 @@ public class DurableSubscriberTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        publisherPublishSubscribe = new Publisher("publisher-publishsubscribe",
+        publisherPublishSubscribe = Publisher.getInstance("publisher-publishsubscribe",
                 "publishsubscribe.t");
 
-        publisherDurableSubscriber = new Publisher("publisher-durablesubscriber",
+        publisherDurableSubscriber = Publisher.getInstance("publisher-durablesubscriber",
                 "durablesubscriber.t");
 
-        subscriberPublishSubscribe = new DurableSubscriber("subscriber-publishsubscribe",
+        subscriberPublishSubscribe = DurableSubscriber.getInstance("subscriber-publishsubscribe",
                 "publishsubscribe.t", "publishsubscribe");
 
-        subscriber1DurableSubscriber = new DurableSubscriber("subscriber1-durablesubscriber",
+        subscriber1DurableSubscriber = DurableSubscriber.getInstance("subscriber1-durablesubscriber",
                 "durablesubscriber.t", "durablesubscriber1");
 
-        subscriber2DurableSubscriber = new DurableSubscriber("subscriber2-durablesubscriber",
+        subscriber2DurableSubscriber = DurableSubscriber.getInstance("subscriber2-durablesubscriber",
                 "durablesubscriber.t", "durablesubscriber2");
     }
 
@@ -55,10 +55,10 @@ public class DurableSubscriberTest {
         try {
             publisherPublishSubscribe.sendName("Peregrin", "Took");
 
-            String greeting1 = subscriberPublishSubscribe.getGreeting(1000);
+            String greeting1 = subscriberPublishSubscribe.receiveMessage(1000);
             assertEquals("Hello Peregrin Took!", greeting1);
 
-            String greeting2 = subscriberPublishSubscribe.getGreeting(1000);
+            String greeting2 = subscriberPublishSubscribe.receiveMessage(1000);
             assertEquals("no greeting", greeting2);
 
         } catch (JMSException e) {
@@ -76,20 +76,20 @@ public class DurableSubscriberTest {
             publisherDurableSubscriber.sendName("Bilbo", "Baggins");
 
             // recreate a connection for the durable subscription
-            subscriber2DurableSubscriber = new DurableSubscriber(
+            subscriber2DurableSubscriber = DurableSubscriber.getInstance(
                     "subscriber2-durablesubscriber", "durablesubscriber.t",
                     "durablesubscriber2");
 
             publisherDurableSubscriber.sendName("Frodo", "Baggins");
 
-            String greeting1 = subscriber1DurableSubscriber.getGreeting(1000);
+            String greeting1 = subscriber1DurableSubscriber.receiveMessage(1000);
             assertEquals("Hello Bilbo Baggins!", greeting1);
-            String greeting2 = subscriber2DurableSubscriber.getGreeting(1000);
+            String greeting2 = subscriber2DurableSubscriber.receiveMessage(1000);
             assertEquals("Hello Bilbo Baggins!", greeting2);
 
-            String greeting3 = subscriber1DurableSubscriber.getGreeting(1000);
+            String greeting3 = subscriber1DurableSubscriber.receiveMessage(1000);
             assertEquals("Hello Frodo Baggins!", greeting3);
-            String greeting4 = subscriber2DurableSubscriber.getGreeting(1000);
+            String greeting4 = subscriber2DurableSubscriber.receiveMessage(1000);
             assertEquals("Hello Frodo Baggins!", greeting4);
 
         } catch (JMSException e) {

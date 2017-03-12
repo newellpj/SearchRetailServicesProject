@@ -20,13 +20,13 @@ public class PubSubTester {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        publisherPublishSubscribe = new Publisher("publisher-publishsubscribe",
+        publisherPublishSubscribe = Publisher.getInstance("publisher-publishsubscribe",
                 "publishsubscribe.t");
 
-        publisherMultipleConsumers = new Publisher("publisher-multipleconsumers",
+        publisherMultipleConsumers = Publisher.getInstance("publisher-multipleconsumers",
                 "multipleconsumers.t");
 
-        publisherNonDurableSubscriber = new Publisher("publisher-nondurablesubscriber",
+        publisherNonDurableSubscriber = Publisher.getInstance("publisher-nondurablesubscriber",
                 "nondurablesubscriber.t");
 
         subscriberPublishSubscribe = new Subscriber();

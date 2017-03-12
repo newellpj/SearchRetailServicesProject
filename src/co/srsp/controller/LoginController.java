@@ -2,13 +2,14 @@ package co.srsp.controller;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.jms.JMSException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.srsp.jms.DurableSubscriber;
 import co.srsp.jms.Publisher;
-import co.srsp.solr.SolrSearchManager;
 
 @Controller
 public class LoginController implements AuthenticationSuccessHandler, AuthenticationFailureHandler{
@@ -30,6 +31,27 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 	
 	private String defaultTargetUrl;
 
+	@PostConstruct/*
+	public void init() {
+		try{
+			DurableSubscriber.getInstance("webAppSubscriber", "webAppPreferencesNotifier", "webAppSubscriberDurable");
+		}catch(JMSException je){
+			je.printStackTrace();
+			log.error("failed to instantiate durable subscriber post construct : "+je.getMessage());
+		}
+	}
+	
+	@PreDestroy
+	public void destroy(){
+		try{
+			DurableSubscriber ds = DurableSubscriber.getInstance("webAppSubscriber", "webAppPreferencesNotifier", "webAppSubscriberDurable");
+			ds.removeDurableSubscriber();
+			ds.closeConnection();
+		}catch(JMSException je){
+			log.error("error when closing connections : "+je.getMessage());
+			je.printStackTrace();
+		}
+	}*/
 
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
@@ -45,12 +67,19 @@ public class LoginController implements AuthenticationSuccessHandler, Authentica
 	public ModelAndView sendJMS() {
 		Publisher topicPubliserBean = null;
 		try{
-			ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+			
 			log.info("here 1");
-			topicPubliserBean = (Publisher) ctx.getBean("topicPublisherBean");
+			topicPubliserBean = Publisher.getInstance("publisher", "webAppPreferencesNotifier");
 			log.info("here 2");
 			topicPubliserBean.sendName("I am the great Cornholio ", " I need teepees for my bunghole");
 			log.info("here 3");
+			
+			//DurableSubscriber ds = DurableSubscriber.getInstance("webAppSubscriber", "webAppPreferencesNotifier", "webAppSubscriberDurable");
+			
+			//log.info("greeting retrieved :::: "+ds.receiveMessage(1000));
+			
+			topicPubliserBean.sendName("BUTT", " CHEESE");
+			//log.info("2222222222222 greeting retrieved :::: "+ds.receiveMessage(1000));
 			
 		}catch(Exception e){
 			e.printStackTrace();

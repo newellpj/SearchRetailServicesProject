@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 	public class Publisher {
 
-	    private static final Logger LOGGER = LoggerFactory
+	    private static final Logger log = LoggerFactory
 	            .getLogger(Publisher.class);
 
 	    private String clientId;
@@ -24,7 +24,18 @@ import org.slf4j.LoggerFactory;
 	    private Session session;
 	    private MessageProducer messageProducer;
 	    
-	    public Publisher(String clientId, String topicName) {
+	    private static Publisher instance = null;
+	    
+	    public static Publisher getInstance(String clientId, String topicName){
+	    	if(instance == null){
+	    		instance = new Publisher(clientId, topicName);
+	    	}
+	    	
+	    	return instance;
+	    }
+	    
+	    
+	    private Publisher(String clientId, String topicName) {
 	        this.clientId = clientId;
 
 	        // create a Connection Factory
@@ -50,13 +61,15 @@ import org.slf4j.LoggerFactory;
 		        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
 		        // create the Topic to which messages will be sent
+		        
+		        log.info("before create topic");
 		        Topic topic = session.createTopic(topicName);
-
+		        log.info("after create topic");
 		        // create a MessageProducer for sending messages
 		        messageProducer = session.createProducer(topic);
 		        
 	        }catch(JMSException jmse){
-	        	LOGGER.error(jmse.getMessage());
+	        	log.error(jmse.getMessage());
 	        	jmse.printStackTrace();
 	        }
 
@@ -75,7 +88,7 @@ import org.slf4j.LoggerFactory;
 	        // send the message to the topic destination
 	        messageProducer.send(textMessage);
 	        System.out.println(clientId + ": sent message with text='{}' "+text);
-	        LOGGER.info(clientId + ": sent message with text='{}'", text);
+	        log.info(clientId + ": sent message with text='{}'", text);
 	    }
 }
 

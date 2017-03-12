@@ -40,7 +40,7 @@
     <!-- END SNIPPET: e1 -->
   </camel:camelContext>
 
-  <!-- Camel JMSProducer to be able to send messages to a remote Active MQ server -->
+  <!-- Camel JMSProducer to be able to send messages to a remote Active MQ server
   <bean id="jms" class="org.apache.activemq.camel.component.ActiveMQComponent">
     <property name="connectionFactory">
       <bean class="org.apache.activemq.spring.ActiveMQConnectionFactory">
@@ -48,6 +48,6 @@
         <property name="trustAllPackages" value="true"/>
       </bean>
     </property>
-  </bean>
+  </bean> -->
 
 </beans>
