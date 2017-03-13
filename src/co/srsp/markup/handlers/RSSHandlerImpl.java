@@ -26,24 +26,26 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 
 	
 	@Override
-	public FeedMessage[] readRSSFeedPaginatedSync(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter){
+	public FeedMessage[] readRSSFeedPaginatedSync(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter, int count){
 
-//		 ExecutorService executor = Executors.newFixedThreadPool(5);
-//         Callable<String> callable = new SearcherThread();
-//         Future future = executor.submit(callable);   
-//         
-//         try{
-//        	 
-//        	 return (FeedMessage[])future.get();
-//         }catch(Exception e){
-//        	 e.printStackTrace();
-//        	 log.error("failure to get value returned from feeds thread invocation :: "+e.getMessage());
-//         }
-//         
-//        
-//         return null;
+		 ExecutorService executor = Executors.newFixedThreadPool(5);
+         Callable<String> callable = new SearcherThread(feedUrl, session, newSearch, paginateForward, searchFilter, count);
+         Future future = executor.submit(callable);   
+         System.out.println("submitting");
+         try{	 
+        	 FeedMessage[] fm = (FeedMessage[])future.get();
+        	 executor.shutdown();
+        	 return fm;
+         }catch(Exception e){
+        	 e.printStackTrace();
+        	 log.error("failure to get value returned from feeds thread invocation :: "+e.getMessage());
+        	 System.out.println("failure to get value returned from feeds thread invocation :: "+e.getMessage());
+         }
          
-        return readRSSFeedPaginated2(feedUrl, session, newSearch, paginateForward, searchFilter);
+        
+         return null;
+         
+      //  return readRSSFeedPaginated2(feedUrl, session, newSearch, paginateForward, searchFilter);
 		
 	}
 	
@@ -228,10 +230,95 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
 	
 	public static void main(String[] args) {
         boolean ok = false;
-     
+
+        
+    	Thread t = new Thread(new Runnable(){
+    			
+	
+    		RSSHandlerImpl impl = new RSSHandlerImpl();		
+    		   int count = 1;	
+    		public void run(){
+
+    				System.out.println("sending : "+count);
+
+    					impl.readRSSFeedPaginatedSync
+    					("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss,"
+    							+ "http://www.nasa.gov/rss/dyn/chandra_images.rss,"
+    							+ "https://www.nasa.gov/rss/dyn/solar_system.rss,"
+    							+ "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", null, true, true, null, count);
+
+    		}
+    	});
+
+    	t.start();
+    	
+    	Thread t2 = new Thread(new Runnable(){
+    			
+    		
+    		RSSHandlerImpl impl = new RSSHandlerImpl();		
+    		   int count = 2;	
+    		public void run(){
+    	
+    				System.out.println("sending : "+count);
+    			
+    				impl.readRSSFeedPaginatedSync
+    					("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", null, true, true, null, count);
+
+    		}
+    	});
+
+    	t2.start();
+    	
+         
+    	Thread t3 = new Thread(new Runnable(){
+    			
+    		
+    		RSSHandlerImpl impl = new RSSHandlerImpl();		
+    		   int count = 3;	
+    		public void run(){
+    				System.out.println("sending : "+count);			
+    				impl.readRSSFeedPaginatedSync("http://www.nasa.gov/rss/dyn/chandra_images.rss,"
+    							+ "https://www.nasa.gov/rss/dyn/solar_system.rss,", null, true, true, null, count);
+
+    		}
+    	});
+
+    	t3.start();
+    	
+    	Thread t4 = new Thread(new Runnable(){
+    			
+    		
+    		RSSHandlerImpl impl = new RSSHandlerImpl();		
+    		   int count = 4;	
+    		public void run(){
+    		  
+    		//	while(count < 5){
+    				System.out.println("sending : "+count);
+    			//	if(count % 3 == 0){
+    		//			impl.readRSSFeedPaginatedSync
+    		//			("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", null, true, true, null, count);
+    		//		}else{ 					
+    					impl.readRSSFeedPaginatedSync("http://www.nasa.gov/rss/dyn/chandra_images.rss,"
+    							+ "https://www.nasa.gov/rss/dyn/solar_system.rss,"
+    							+ "https://www.nasa.gov/rss/dyn/solar_system.rss", null, true, true, null, count);
+    		//		}
+    				
+    			//}
+    		}
+    	});
+
+    	t4.start();
+    	
+
+    	
+    	/*
         try {
             URL feedUrl = new URL("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss");
 
+          //  impl.readRSSFeedPaginatedSync("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", null, true, true, null);
+          //  impl.readRSSFeedPaginatedSync("gfhttps://www.nasa.gov/rss/dyn/shuttle_station.rss", null, true, true, null);
+            
+            
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed feed = input.build(new XmlReader(feedUrl));
 
@@ -250,6 +337,6 @@ public class RSSHandlerImpl implements RSSHandlerInterface {
             System.out.println("FeedReader reads and prints any RSS/Atom feed type.");
             System.out.println("The first parameter must be the URL of the feed to read.");
             System.out.println();
-        }
+        }*/
     }
 }

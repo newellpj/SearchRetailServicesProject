@@ -29,9 +29,9 @@ public class FeedsController {
 		if(searchCriteria != null && !"".equals(searchCriteria)){		
 			log.info("in here for search criteria value: "+searchCriteria);
 			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);
-			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), true, true, searchFilter);
+			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), true, true, searchFilter, -1);
 		}else{
-			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), true, true, null);
+			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), true, true, null, -1);
 		}
 		
 		
@@ -48,9 +48,9 @@ public class FeedsController {
 		if(searchCriteria != null && !"".equals(searchCriteria)){
 			log.info("in here for search criteria value: "+searchCriteria);
 			SearchFilter searchFilter = new SearchFilter(searchCriteria, SearchFilter.SEARCH_TYPE_FEEDS);		
-			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward, searchFilter);
+			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward, searchFilter, -1);
 		}else{
-			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward, null);
+			return rssHandler.readRSSFeedPaginatedSync(request.getParameter("rssFeedURL"), request.getSession(), false, paginateForward, null, -1);
 		}
 		
 		

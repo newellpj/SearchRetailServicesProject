@@ -20,14 +20,34 @@ public class SearcherThread implements Callable{
 
 	private final static Logger log = Logger.getLogger(SearcherThread.class); 
 	
+	private String feedUrl;
+	private HttpSession session;
+	private boolean newSearch;
+	private boolean paginateForward;
+	private SearchFilter searchFilter;
+	private int count;
+	
+	public SearcherThread(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter, int count){
+		this.feedUrl = feedUrl;
+		this.session = session;
+		this.newSearch = newSearch;
+		this.paginateForward = paginateForward;
+		this.searchFilter = searchFilter;
+		this.count  = count;
+	}
+	
 	@Override
 	public FeedMessage[] call() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return readRSSFeedPaginated();
 	}
 	
 
-	public FeedMessage[] readRSSFeedPaginated(String feedUrl, HttpSession session, boolean newSearch, boolean paginateForward, SearchFilter searchFilter){
+	public FeedMessage[] readRSSFeedPaginated(){
+		
+		
+		log.info("calling seacher thread readRSSFeedPaginated");
+		System.out.println("calling seacher thread readRSSFeedPaginated");
 		SyndFeedInput input = new SyndFeedInput();
 		FeedMessage[] feedArr = null;
 		FeedMessage feedMsg = null;		
@@ -114,6 +134,7 @@ public class SearcherThread implements Callable{
 					
 					log.info("imgWidth : "+imgWidth);
 					log.info("imgHeight : "+imgHeight);
+				
 					
 					if(imgWidth > imgHeight){
 						double result = new Double(imgHeight)/ new Double(imgWidth);
@@ -131,6 +152,8 @@ public class SearcherThread implements Callable{
 
 					log.info("imgWidth 2 : "+imgWidth);
 					log.info("imgHeight 2: "+imgHeight);
+					System.out.println("imgWidth : "+imgWidth);
+					System.out.println("imgHeight : "+imgHeight);
 					
 					log.info("feed entries size ::: "+feed.getEntries().size());
 					
@@ -179,16 +202,21 @@ public class SearcherThread implements Callable{
 				feedMessageArrayToReturn = feedArr;
 			}
 			
-			session.setAttribute("rssPaginationOffset", rssPaginationOffset+overallCount);
-			session.setAttribute("feed", feed);
+			if(session != null){
+				session.setAttribute("rssPaginationOffset", rssPaginationOffset+overallCount);
+				session.setAttribute("feed", feed);
+			}else{
+				log.error("session attributes of feed and pagination offset not set as session null!!!!!%%%%%$$!!!!!!");
+			}
 			log.info("returning feed array");
+			System.out.println("returning feed array : "+count);
 			return feedMessageArrayToReturn;
 			
 		}catch(Exception e){
 			e.printStackTrace();
 			log.error(e.getMessage());
 		}
-		log.info("returning search for feed url : "+feedUrl);
+		System.out.println(count+" : returning search for feed url : "+feedUrl);
 		return feedArr = new FeedMessage[0];
 	}
 
